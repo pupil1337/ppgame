@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/__pycache__": true,
+			"**/.sconsign.dblite": true,
+			"**/*.dll": true,
+			"**/*.exe": true,
+			"**/*.exp": true,
+			"**/*.ilk": true,
+			"**/*.lib": true,
+			"**/*.obj": true,
+			"**/*.pdb": true
+		},
+		"C_Cpp.intelliSenseEngineFallback": "enabled",
+		"files.eol": "\n",
+		"files.encoding": "utf8",
+		"editor.insertSpaces": false
+	}
+}

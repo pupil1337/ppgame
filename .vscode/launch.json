@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "run ppgame editor [debug]",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/godot/bin/godot.windows.editor.dev.x86_64.exe",
+            "args": [
+                "--path", "${workspaceFolder}/ppgame/project",
+                "--editor"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "internalConsole",
+            "preLaunchTask": "ppgame editor [debug]"
+        },
+        {
+            "name": "attach ppgame editor [debug]",
+            "type": "cppvsdbg",
+            "request": "attach",
+            "processId":"${command:pickProcess}"
+        }
+    ]
+}
