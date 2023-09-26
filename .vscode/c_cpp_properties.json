@@ -3,9 +3,18 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/godot-cpp/gdextension",
-                "${workspaceFolder}/godot-cpp/gen/include",
-                "${workspaceFolder}/godot-cpp/include",
+                "${workspaceFolder}/godot/*",
+                "${workspaceFolder}/godot/core/**",
+                "${workspaceFolder}/godot/drivers/**",
+                "${workspaceFolder}/godot/editor/**",
+                "${workspaceFolder}/godot/main/**",
+                "${workspaceFolder}/godot/misc/**",
+                "${workspaceFolder}/godot/modules/**",
+                "${workspaceFolder}/godot/platform/windows/**",
+                "${workspaceFolder}/godot/scene/**",
+                "${workspaceFolder}/godot/servers/**",
+                "${workspaceFolder}/godot/tests/**",
+                "${workspaceFolder}/godot/thirdparty/**",
                 "${workspaceFolder}/ppgame/src"
             ],
             "defines": [

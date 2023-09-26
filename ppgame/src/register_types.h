@@ -1,7 +1,9 @@
-#ifndef EXAMPLE_REGISTER_TYPES_H
-#define EXAMPLE_REGISTER_TYPES_H
+#ifndef PPGAME_REGISTER_TYPES_H
+#define PPGAME_REGISTER_TYPES_H
 
-void initialize_gdextension_types();
-void uninitialize_gdextension_types();
+#include <modules/register_module_types.h>
 
-#endif // EXAMPLE_REGISTER_TYPES_H
+void initialize_src_module(ModuleInitializationLevel p_level);
+void uninitialize_src_module(ModuleInitializationLevel p_level);
+
+#endif // PPGAME_REGISTER_TYPES_H

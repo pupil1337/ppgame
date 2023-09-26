@@ -8,6 +8,13 @@
 		"files.exclude": {
 			"**/__pycache__": true,
 			"**/.sconsign.dblite": true,
+			"**/.sconf_temp": true,
+			"**/.scons_env.json": true,
+			"**/.scons_node_count": true,
+			"**/.sconsign5.dblite": true,
+			"**/.github": true,
+			"**/bin": true,
+			"**/*.log": true,
 			"**/*.dll": true,
 			"**/*.exe": true,
 			"**/*.exp": true,
@@ -16,9 +23,15 @@
 			"**/*.obj": true,
 			"**/*.pdb": true
 		},
-		"C_Cpp.intelliSenseEngineFallback": "enabled",
 		"files.eol": "\n",
 		"files.encoding": "utf8",
-		"editor.insertSpaces": false
+		"editor.insertSpaces": false,
+		"C_Cpp.intelliSenseMemoryLimit": 16384,
+		"C_Cpp.inlayHints.referenceOperator.enabled": true,
+		"C_Cpp.inlayHints.autoDeclarationTypes.enabled": true,
+		"files.associations": {
+			"*.rh": "cpp",
+			"atomic": "cpp"
+		}
 	}
 }

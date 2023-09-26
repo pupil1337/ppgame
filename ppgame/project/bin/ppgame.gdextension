@@ -1,8 +1,0 @@
-[configuration]
-
-entry_symbol = "ppgame_library_init"
-compatibility_minimum = "4.1"
-
-[libraries]
-
-windows.debug.x86_64 = "res://bin/ppgame.windows.editor.dev.x86_64.dll"

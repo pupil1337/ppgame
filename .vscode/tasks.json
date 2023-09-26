@@ -3,9 +3,8 @@
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        // godot
         {
-            "label": "godot editor [debug]",
+            "label": "debug editor",
             "options": {
                 "cwd": "${workspaceFolder}/godot"
             },
@@ -15,30 +14,12 @@
                 "platform=windows",
                 "bits=64",
                 "target=editor",
+                "custom_modules=../ppgame",
                 "dev_build=yes",
                 "debug_symbols=yes"
             ],
             "group": "build",
             "problemMatcher": "$msCompile"
         },
-
-        // ppgame
-        {
-            "label": "ppgame editor [debug]",
-            "options": {
-                "cwd": "${workspaceFolder}/ppgame/src"
-            },
-            "type": "shell",
-            "command": "scons",
-            "args": [
-                "platform=windows",
-                "bits=64",
-                "target=editor",
-                "dev_build=yes",
-                "debug_symbols=yes"
-            ],
-            "group": "build",
-            "problemMatcher": "$msCompile"
-        }
     ]
 }

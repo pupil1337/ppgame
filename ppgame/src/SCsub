@@ -2,7 +2,7 @@
 import os
 import sys
 
-env = SConscript("../../godot-cpp/SConstruct")
+Import('env')
 
 # 添加供编译器查看的包含目录
 env.Append(CPPPATH=["."])
@@ -12,11 +12,7 @@ sources = []
 for root, dirs, files in os.walk('.'):
     for f in files:
         if f.endswith('.cpp'):
+            # print(root + '/' + f)
             sources.append(root + '/' + f)
 
-library = env.SharedLibrary(
-    "../project/bin/{}{}{}".format("ppgame", env["suffix"], env["SHLIBSUFFIX"]),
-    source=sources,
-)
-
-Default(library)
+env.add_source_files(env.modules_sources, sources)

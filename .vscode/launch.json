@@ -1,26 +1,47 @@
 {
     "version": "0.2.0",
     "configurations": [
+        // debug game
         {
-            "name": "run ppgame editor [debug]",
+            "name": "debug game",
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/godot/bin/godot.windows.editor.dev.x86_64.exe",
             "args": [
-                "--path", "${workspaceFolder}/ppgame/project",
-                "--editor"
+                "--path", "${workspaceFolder}/ppgame/project"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "console": "internalConsole",
-            "preLaunchTask": "ppgame editor [debug]"
+            "visualizerFile": "${workspaceFolder}/godot/platform/windows/godot.natvis",
+            "preLaunchTask": "debug editor"
         },
+
+        // attach
         {
-            "name": "attach ppgame editor [debug]",
+            "name": "attach",
             "type": "cppvsdbg",
             "request": "attach",
-            "processId":"${command:pickProcess}"
-        }
+            "processId": "${command:pickProcess}"
+        },
+
+        // debug editor
+        {
+            "name": "debug editor",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/godot/bin/godot.windows.editor.dev.x86_64.exe",
+            "args": [
+                "--editor",
+                "--path", "${workspaceFolder}/ppgame/project"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "internalConsole",
+            "visualizerFile": "${workspaceFolder}/godot/platform/windows/godot.natvis",
+            "preLaunchTask": "debug editor"
+        },
     ]
 }

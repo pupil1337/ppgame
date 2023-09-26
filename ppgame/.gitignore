@@ -57,5 +57,9 @@
 .scons_env.json
 .scons_node_count
 
+# Python generated
+__pycache__/
+*.pyc
+
 # Copy End
 # ---------------------------------------------------------------------------------
