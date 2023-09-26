@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0f1wdl45uqer"]
+
+[ext_resource type="Texture2D" uid="uid://cvg3kuho4fa2" path="res://icon.svg" id="1_8yn6f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lltk"]
+size = Vector2(42, 68)
+
+[node name="Player" type="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0lltk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.5)
+texture = ExtResource("1_8yn6f")
+
+[node name="FiniteStateMachine" type="FiniteStateMachine" parent="."]
+
+[node name="Idle" type="State" parent="FiniteStateMachine"]

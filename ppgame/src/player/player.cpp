@@ -1,4 +1,4 @@
-#include "player/player.h"
+#include "player.h"
 
 using namespace godot;
 

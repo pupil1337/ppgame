@@ -7,6 +7,8 @@
 using namespace godot;
 
 #include "player/player.h"
+#include "player/finiteStateMachine.h"
+#include "player/state.h"
 
 void initialize_gdextension_types(ModuleInitializationLevel p_level)
 {
@@ -14,6 +16,8 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 		return;
 	}
 	ClassDB::register_class<Player>();
+	ClassDB::register_class<FiniteStateMachine>();
+	ClassDB::register_class<State>();
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {
