@@ -1,1 +1,0 @@
-scons compiledb=yes compile_commands.json
