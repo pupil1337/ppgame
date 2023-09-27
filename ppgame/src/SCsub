@@ -4,8 +4,10 @@ import sys
 
 Import('env')
 
+env_pp = env.Clone()
+
 # 添加供编译器查看的包含目录
-env.Append(CPPPATH=["."])
+env_pp.Append(CPPPATH=["."])
 
 # 添加'src'目录下所有.cpp文件
 sources = []
@@ -15,4 +17,4 @@ for root, dirs, files in os.walk('.'):
             # print(root + '/' + f)
             sources.append(root + '/' + f)
 
-env.add_source_files(env.modules_sources, sources)
+env_pp.add_source_files(env.modules_sources, sources)
