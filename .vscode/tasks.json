@@ -16,7 +16,8 @@
                 "target=editor",
                 "custom_modules=../ppgame",
                 "dev_build=yes",
-                "debug_symbols=yes"
+                "debug_symbols=yes",
+                "vsproj=yes"
             ],
             "group": "build",
             "problemMatcher": "$msCompile"
