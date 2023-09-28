@@ -1,9 +1,10 @@
 # Godot 4+ specific ignores
 .godot/
 
+# vscode
 
 # ??? not in godot/.gitignore
-*.exp
+.vc.db/
 
 # ---------------------------------------------------------------------------------
 # Copy From godot/.gitignore
