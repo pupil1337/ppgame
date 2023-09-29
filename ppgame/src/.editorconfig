@@ -6,6 +6,13 @@ end_of_line = lf
 indent_style = tab
 insert_final_newline = true
 
+# ReSharper properties
+resharper_cpp_case_block_braces = end_of_line
+resharper_cpp_invocable_declaration_braces = end_of_line
+resharper_cpp_other_braces = end_of_line
+resharper_cpp_type_declaration_braces = end_of_line
+resharper_namespace_declaration_braces = end_of_line
+
 [*.{cpp,hpp,c,h,mm}]
 trim_trailing_whitespace = true
 
