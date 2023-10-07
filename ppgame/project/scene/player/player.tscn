@@ -1,14 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://bc3cep7uon283"]
+[gd_scene load_steps=4 format=3 uid="uid://fmi4ovjd7kln"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dhvi3"]
+[ext_resource type="Texture2D" uid="uid://cvg3kuho4fa2" path="res://icon.svg" id="1_4muhl"]
 
-[node name="Player" type="Player"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_offyh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7y0do"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4muhl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="Player" node_paths=PackedStringArray("finite_state_machine")]
+finite_state_machine = NodePath("FiniteStateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_dhvi3")
+shape = SubResource("RectangleShape2D_offyh")
 
-[node name="FiniteStateMachine" type="FiniteStateMachine" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_7y0do")
+
+[node name="FiniteStateMachine" type="FiniteStateMachine" parent="." node_paths=PackedStringArray("curr_state", "animated_sprite")]
+curr_state = NodePath("Ground/Idle")
+animated_sprite = NodePath("../AnimatedSprite2D")
 
 [node name="Ground" type="Node" parent="FiniteStateMachine"]
 
 [node name="Idle" type="PlayerIdleState" parent="FiniteStateMachine/Ground"]
+
+[node name="Run" type="PlayerRunState" parent="FiniteStateMachine/Ground"]
+
+[node name="Air" type="Node" parent="FiniteStateMachine"]
