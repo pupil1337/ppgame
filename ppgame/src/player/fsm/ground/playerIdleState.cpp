@@ -1,6 +1,14 @@
 #include "playerIdleState.h"
 
+#include <scene/2d/animated_sprite_2d.h>
+#include "finiteStateMachine/finiteStateMachine.h"
+
 void PlayerIdleState::enter() {
+	if (fsm) {
+		if (fsm->info.anim_sprite) {
+			fsm->info.anim_sprite->play("Idle");
+		}
+	}
 }
 
 void PlayerIdleState::exit() {

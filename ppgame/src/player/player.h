@@ -14,9 +14,8 @@ public:
 
 protected:
 	static void _bind_methods();
-
 	void _notification(int p_notification);
-
+	
 	virtual void unhandled_input(const Ref<InputEvent> &p_event);
 
 //~Begin This Class
@@ -28,9 +27,12 @@ private:
 	// setting
 	void set_finite_state_machine(FiniteStateMachine* p_fsm);
 	FiniteStateMachine* get_finite_state_machine() const;
+	void set_anim_sprite(AnimatedSprite2D* p_animSprite);
+	AnimatedSprite2D* get_anim_sprite() const;
 
 	// nodes
 	FiniteStateMachine* fsm = nullptr;
+	AnimatedSprite2D* anim_sprite = nullptr;
 };
 
 #endif // PLAYER_H

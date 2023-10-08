@@ -23,9 +23,8 @@ public:
 
 	virtual StringName on_physics_process(float deltaTime) = 0;
 
-private:
+protected:
 	FiniteStateMachine* fsm = nullptr;
-	AnimatedSprite2D* anim_sprite = nullptr;
 };
 
 #endif // STATE_H
