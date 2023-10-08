@@ -3,13 +3,13 @@
 
 #include <scene/main/node.h>
 
-class FiniteStateMachine;
+class FiniteStateMachineComponent;
 class AnimatedSprite2D;
 
 class State : public Node {
 	GDCLASS(State, Node)
 
-	friend FiniteStateMachine;
+	friend FiniteStateMachineComponent;
 
 //~Begin This Class
 public:
@@ -24,7 +24,7 @@ public:
 	virtual StringName on_physics_process(float deltaTime) = 0;
 
 protected:
-	FiniteStateMachine* fsm = nullptr;
+	FiniteStateMachineComponent* fsm = nullptr;
 };
 
 #endif // STATE_H

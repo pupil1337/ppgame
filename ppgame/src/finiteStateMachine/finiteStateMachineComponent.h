@@ -1,5 +1,5 @@
-#ifndef FINITESTATEMACHINE_H
-#define FINITESTATEMACHINE_H
+#ifndef FINITESTATEMACHINECOMPONENT_H
+#define FINITESTATEMACHINECOMPONENT_H
 
 #include <scene/main/node.h>
 
@@ -7,8 +7,9 @@ class StringName;
 class State;
 class AnimatedSprite2D;
 
-class FiniteStateMachine : public Node {
-	GDCLASS(FiniteStateMachine, Node)
+
+class FiniteStateMachineComponent : public Node {
+	GDCLASS(FiniteStateMachineComponent, Node)
 
 protected:
 	static void _bind_methods();
@@ -21,14 +22,15 @@ private:
 
 public:
 	// call from owner
-	void on_ready();
+	void on_owner_ready();
 	void on_input(const Ref<InputEvent> &p_event);
 	void on_process(float deltaTime);
 	void on_physics_process(float deltaTime);
 
-	struct Info {
+	struct Data {
 		Node* owner = nullptr;
 		AnimatedSprite2D* anim_sprite = nullptr;
+		Node* movement_component = nullptr;
 	} info;
 
 private:
@@ -40,4 +42,4 @@ private:
 	HashMap<StringName, State*> states;// className2state
 };
 
-#endif // FINITESTATEMACHINE_H
+#endif // FINITESTATEMACHINECOMPONENT_H

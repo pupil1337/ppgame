@@ -1,7 +1,7 @@
 #include "playerRunState.h"
 
 #include <scene/2d/animated_sprite_2d.h>
-#include "finiteStateMachine/finiteStateMachine.h"
+#include "finiteStateMachine/finiteStateMachineComponent.h"
 
 void PlayerRunState::enter() {
 	if (fsm) {
@@ -19,7 +19,7 @@ StringName PlayerRunState::on_input(const Ref<InputEvent> &p_event) {
 
 	return StringName();
 }
- 
+
 StringName PlayerRunState::on_process(float deltaTime) {
 	PlayerGroundBaseState::on_process(deltaTime);
 
@@ -28,7 +28,7 @@ StringName PlayerRunState::on_process(float deltaTime) {
 
 StringName PlayerRunState::on_physics_process(float deltaTime) {
 	PlayerGroundBaseState::on_physics_process(deltaTime);
-	
+
 	return StringName();
 }
 

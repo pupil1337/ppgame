@@ -1,7 +1,7 @@
 #include "playerIdleState.h"
 
 #include <scene/2d/animated_sprite_2d.h>
-#include "finiteStateMachine/finiteStateMachine.h"
+#include "finiteStateMachine/finiteStateMachineComponent.h"
 
 void PlayerIdleState::enter() {
 	if (fsm) {
@@ -28,7 +28,7 @@ StringName PlayerIdleState::on_process(float deltaTime) {
 
 StringName PlayerIdleState::on_physics_process(float deltaTime) {
 	PlayerGroundBaseState::on_physics_process(deltaTime);
-	
+
 	return StringName();
 }
 
