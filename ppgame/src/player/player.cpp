@@ -32,15 +32,21 @@ void Player::_notification(int p_notification) {
 			set_physics_process(true);
 			set_process_unhandled_input(true);
 
-			_ready();
+			if (!Engine::get_singleton()->is_editor_hint()) {
+				_ready();
+			}
 		} break;
 
 		case NOTIFICATION_PROCESS: {
-			_process(get_process_delta_time());
+			if (!Engine::get_singleton()->is_editor_hint()) {
+				_process(get_process_delta_time());
+			}
 		} break;
 
 		case NOTIFICATION_PHYSICS_PROCESS: {
-			_physics_process(get_physics_process_delta_time());
+			if (!Engine::get_singleton()->is_editor_hint()) {
+				_physics_process(get_physics_process_delta_time());
+			}
 		} break;
 	}
 }

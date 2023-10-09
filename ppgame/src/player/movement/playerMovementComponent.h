@@ -3,20 +3,33 @@
 
 #include <scene/main/node.h>
 
+class Player;
+
 class PlayerMovementComponent : public Node {
 	GDCLASS(PlayerMovementComponent, Node)
 
 protected:
 	static void _bind_methods();
+	void _notification(int p_notification);
 
 //~Begin This Class
+public:
+	// call from other
+	void move();
+	void apply_gravity(float deltaTime);
+	void accelerate_horizontally(Vector2 dir, float deltaTime);
+	void decelerate_horizontally(float deltaTime);
+
 private:
 	// setting
 	void set_max_run_speed(real_t p_speed);
 	real_t get_max_run_speed() const;
 
 	// run
-	real_t max_run_speed = 16.0f;
+	real_t max_run_speed = 8.0f * 16.0f;
+
+	Player* player = nullptr;
+	Vector2 velocity = Vector2(0.0f, 0.0f);
 };
 
 #endif // PLAYERMOVEMENTCOMPONENT
