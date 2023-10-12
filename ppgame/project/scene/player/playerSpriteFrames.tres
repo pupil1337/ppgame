@@ -5,6 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://f5o16g0hixpm" path="res://art/FREE-2D Pixel Art Character Asset Pack/Asset Packs 1-3 (final)/Asset Pack-V1/Sprite Sheets/run cycle 48x48.png" id="2_k0cu7"]
 [ext_resource type="Texture2D" uid="uid://dgc8me3xv562j" path="res://art/FREE-2D Pixel Art Character Asset Pack/Asset Packs 1-3 (final)/Asset Pack-V1/Sprite Sheets/player jump 48x48.png" id="3_0sas0"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwcgk"]
+atlas = ExtResource("3_0sas0")
+region = Rect2(96, 0, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_14vwb"]
 atlas = ExtResource("1_lut0u")
 region = Rect2(0, 0, 48, 48)
@@ -45,6 +49,14 @@ region = Rect2(384, 0, 48, 48)
 atlas = ExtResource("1_lut0u")
 region = Rect2(432, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mm8ck"]
+atlas = ExtResource("3_0sas0")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42660"]
+atlas = ExtResource("3_0sas0")
+region = Rect2(48, 0, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5yxq"]
 atlas = ExtResource("2_def3d")
 region = Rect2(0, 0, 48, 48)
@@ -80,18 +92,6 @@ region = Rect2(336, 0, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ug6xm"]
 atlas = ExtResource("2_def3d")
 region = Rect2(384, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mm8ck"]
-atlas = ExtResource("3_0sas0")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_42660"]
-atlas = ExtResource("3_0sas0")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uwcgk"]
-atlas = ExtResource("3_0sas0")
-region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trx2i"]
 atlas = ExtResource("2_k0cu7")
@@ -129,6 +129,14 @@ region = Rect2(336, 0, 48, 48)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_uwcgk")
+}],
+"loop": false,
+"name": &"Fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_14vwb")
 }, {
 "duration": 1.0,
@@ -164,6 +172,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_mm8ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42660")
+}],
+"loop": false,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_q5yxq")
 }, {
 "duration": 1.0,
@@ -191,22 +210,8 @@ animations = [{
 "texture": SubResource("AtlasTexture_ug6xm")
 }],
 "loop": false,
-"name": &"JumpLand",
+"name": &"Land",
 "speed": 14.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mm8ck")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_42660")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uwcgk")
-}],
-"loop": false,
-"name": &"JumpUp",
-"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,

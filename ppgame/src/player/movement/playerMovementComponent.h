@@ -19,6 +19,11 @@ public:
 	void apply_gravity(float deltaTime);
 	void accelerate_horizontally(Vector2 dir, float deltaTime);
 	void decelerate_horizontally(float deltaTime);
+	void jump();
+	bool is_falling() const;
+
+	// getter
+	_FORCE_INLINE_ Vector2 get_facing_dir() const { return facing_dir; }
 
 private:
 	// setting
@@ -30,6 +35,7 @@ private:
 
 	Player* player = nullptr;
 	Vector2 velocity = Vector2(0.0f, 0.0f);
+	Vector2 facing_dir = Vector2(1.0f, 0.0f);
 };
 
 #endif // PLAYERMOVEMENTCOMPONENT

@@ -12,6 +12,8 @@
     // fsm.states
 #include "player/fsm/ground/playerIdleState.h"
 #include "player/fsm/ground/playerRunState.h"
+#include "player/fsm/air/playerJumpState.h"
+#include "player/fsm/air/playerFallState.h"
 
 void initialize_src_module(ModuleInitializationLevel p_level) {
     if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
@@ -28,7 +30,8 @@ void initialize_src_module(ModuleInitializationLevel p_level) {
         // fsm.states
     ClassDB::register_class<PlayerIdleState>();
 	ClassDB::register_class<PlayerRunState>();
-
+	ClassDB::register_class<PlayerJumpState>();
+	ClassDB::register_class<PlayerFallState>();
 }
 
 void uninitialize_src_module(ModuleInitializationLevel p_level) {

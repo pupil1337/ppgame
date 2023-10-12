@@ -25,15 +25,24 @@ void PlayerMovementComponent::move() {
 }
 
 void PlayerMovementComponent::apply_gravity(float deltaTime) {
-	velocity.y += 9.80f * 16.0f * deltaTime;
+	velocity.y += 9.80f * 2.0f * 16.0f * deltaTime;
 }
 
 void PlayerMovementComponent::accelerate_horizontally(Vector2 dir, float deltaTime) {
 	velocity.x = dir.x > 0.0f ? max_run_speed : -max_run_speed;
+	facing_dir = dir;
 }
 
 void PlayerMovementComponent::decelerate_horizontally(float deltaTime) {
 	velocity.x = 0.0f;
+}
+
+void PlayerMovementComponent::jump() {
+	velocity.y = -120.0f;
+}
+
+bool PlayerMovementComponent::is_falling() const {
+	return !player->is_on_floor() && velocity.y > 0.0f;
 }
 
 // setting --------------------------------------------------------------------

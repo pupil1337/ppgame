@@ -20,7 +20,6 @@ shape = SubResource("RectangleShape2D_offyh")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_mempu")
 animation = &"Idle"
-frame_progress = 0.149995
 
 [node name="PlayerMovementComponent" type="PlayerMovementComponent" parent="."]
 
@@ -32,3 +31,9 @@ curr_state = NodePath("Ground/Idle")
 [node name="Idle" type="PlayerIdleState" parent="FiniteStateMachineComponent/Ground"]
 
 [node name="Run" type="PlayerRunState" parent="FiniteStateMachineComponent/Ground"]
+
+[node name="Air" type="Node" parent="FiniteStateMachineComponent"]
+
+[node name="Jump" type="PlayerJumpState" parent="FiniteStateMachineComponent/Air"]
+
+[node name="Fall" type="PlayerFallState" parent="FiniteStateMachineComponent/Air"]

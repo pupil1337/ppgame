@@ -52,28 +52,23 @@ void Player::_notification(int p_notification) {
 }
 
 void Player::_ready() {
-	ERR_FAIL_NULL_EDMSG(fsm, String(get_name()) + " fsm is not set in editor");
 	fsm->on_owner_ready();
 }
 
 void Player::unhandled_input(const Ref<InputEvent> &p_event) {
 	CharacterBody2D::unhandled_input(p_event);
 
-	if (fsm) {
-		fsm->on_input(p_event);
-	}
+	fsm->on_input(p_event);
 }
 
 void Player::_process(float deltaTime) {
-	if (fsm) {
-		fsm->on_process(deltaTime);
-	}
+	fsm->on_process(deltaTime);
+
+	anim_sprite->set_flip_h(movement_component->get_facing_dir().x < 0.0f);
 }
 
 void Player::_physics_process(float deltaTime) {
-	if (fsm) {
-		fsm->on_physics_process(deltaTime);
-	}
+	fsm->on_physics_process(deltaTime);
 }
 
 // setting --------------------------------------------------------------------

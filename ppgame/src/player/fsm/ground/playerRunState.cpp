@@ -5,6 +5,8 @@
 #include "player/movement/playerMovementComponent.h"
 
 void PlayerRunState::enter() {
+	PlayerGroundBaseState::enter();
+
 	if (fsm) {
 		if (fsm->info.anim_sprite) {
 			fsm->info.anim_sprite->play("Run");
@@ -13,6 +15,7 @@ void PlayerRunState::enter() {
 }
 
 void PlayerRunState::exit() {
+	PlayerGroundBaseState::exit();
 }
 
 StringName PlayerRunState::on_input(const Ref<InputEvent> &p_event) {
@@ -41,6 +44,11 @@ StringName PlayerRunState::on_physics_process(float deltaTime) {
 				movement->move();
 			}
 		}
+	}
+
+	Input* input = Input::get_singleton();
+	if (input->is_action_just_pressed(SNAME("jump"))) {
+		return StringName("PlayerJumpState");
 	}
 
 	return StringName();

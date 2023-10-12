@@ -6,6 +6,8 @@
 #include "player/player.h"
 
 void PlayerIdleState::enter() {
+	PlayerGroundBaseState::enter();
+
 	if (fsm) {
 		if (fsm->info.anim_sprite) {
 			fsm->info.anim_sprite->play("Idle");
@@ -14,6 +16,7 @@ void PlayerIdleState::enter() {
 }
 
 void PlayerIdleState::exit() {
+	PlayerGroundBaseState::exit();
 }
 
 StringName PlayerIdleState::on_input(const Ref<InputEvent> &p_event) {
@@ -38,9 +41,14 @@ StringName PlayerIdleState::on_physics_process(float deltaTime) {
 
 		if (Player* player = Object::cast_to<Player>(fsm->info.owner)) {
 			if (player->is_on_floor() && !Math::is_zero_approx(input_dir.x)) {
-				return String("PlayerRunState");
+				return StringName("PlayerRunState");
 			}
 		}
+	}
+
+	Input* input = Input::get_singleton();
+	if (input->is_action_just_pressed(SNAME("jump"))) {
+		return StringName("PlayerJumpState");
 	}
 
 	return StringName();
