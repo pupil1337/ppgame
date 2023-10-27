@@ -3,7 +3,9 @@
 
 #include <scene/2d/physics_body_2d.h>
 
-class AnimatedSprite2D;
+#include "pp.h"
+
+class AnimationPlayer;
 class FiniteStateMachineComponent;
 class PlayerMovementComponent;
 
@@ -25,18 +27,15 @@ private:
 	void _process(float deltaTime);
 	void _physics_process(float deltaTime);
 
-	// setting
-	void set_finite_state_machine(FiniteStateMachineComponent* p_fsm);
-	FiniteStateMachineComponent* get_finite_state_machine() const;
-	void set_anim_sprite(AnimatedSprite2D* p_animSprite);
-	AnimatedSprite2D* get_anim_sprite() const;
-	void set_movement_component(PlayerMovementComponent* p_movement);
-	PlayerMovementComponent* get_movement_component() const;
-
 	// nodes
-	FiniteStateMachineComponent* fsm = nullptr;
-	AnimatedSprite2D* anim_sprite = nullptr;
-	PlayerMovementComponent* movement_component = nullptr;
+	PP_PROPERTY(AnimationPlayer*, back_arm, nullptr);
+	PP_PROPERTY(AnimationPlayer*, leg, nullptr);
+	PP_PROPERTY(AnimationPlayer*, torso, nullptr);
+	PP_PROPERTY(AnimationPlayer*, head, nullptr);
+	PP_PROPERTY(AnimationPlayer*, front_arm, nullptr);
+
+	PP_PROPERTY(FiniteStateMachineComponent*, fsm, nullptr);
+	PP_PROPERTY(PlayerMovementComponent*, movement_component, nullptr);
 };
 
 #endif // PLAYER_H

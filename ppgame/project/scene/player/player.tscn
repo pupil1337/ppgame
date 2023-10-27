@@ -1,38 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://fmi4ovjd7kln"]
+[gd_scene load_steps=3 format=3 uid="uid://2p84kx6qoppy"]
 
-[ext_resource type="SpriteFrames" uid="uid://dw0gqmvwqae2n" path="res://scene/player/playerSpriteFrames.tres" id="1_mempu"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0mek"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_offyh"]
-size = Vector2(30, 48)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_51ac4"]
 
-[node name="Player" type="Player" node_paths=PackedStringArray("finite_state_machine", "animated_sprite", "movement_component")]
-finite_state_machine = NodePath("FiniteStateMachineComponent")
-animated_sprite = NodePath("AnimatedSprite2D")
-movement_component = NodePath("PlayerMovementComponent")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-visible = false
+[node name="Player" type="Player" node_paths=PackedStringArray("back_arm", "leg", "torso", "head", "front_arm")]
+back_arm = NodePath("Back Arm")
+leg = NodePath("Leg")
+torso = NodePath("Torso")
+head = NodePath("Head")
+front_arm = NodePath("Front Arm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_offyh")
+shape = SubResource("RectangleShape2D_i0mek")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("1_mempu")
-animation = &"Idle"
+[node name="Back Arm" type="AnimationPlayer" parent="."]
 
-[node name="PlayerMovementComponent" type="PlayerMovementComponent" parent="."]
+[node name="Leg" type="AnimationPlayer" parent="."]
 
-[node name="FiniteStateMachineComponent" type="FiniteStateMachineComponent" parent="." node_paths=PackedStringArray("curr_state")]
-curr_state = NodePath("Ground/Idle")
+[node name="Torso" type="AnimationPlayer" parent="."]
 
-[node name="Ground" type="Node" parent="FiniteStateMachineComponent"]
+[node name="Head" type="AnimationPlayer" parent="."]
 
-[node name="Idle" type="PlayerIdleState" parent="FiniteStateMachineComponent/Ground"]
-
-[node name="Run" type="PlayerRunState" parent="FiniteStateMachineComponent/Ground"]
-
-[node name="Air" type="Node" parent="FiniteStateMachineComponent"]
-
-[node name="Jump" type="PlayerJumpState" parent="FiniteStateMachineComponent/Air"]
-
-[node name="Fall" type="PlayerFallState" parent="FiniteStateMachineComponent/Air"]
+[node name="Front Arm" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_51ac4")
+}

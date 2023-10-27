@@ -2,36 +2,20 @@
 
 #include <core/object/class_db.h>
 
-// Common
-#include "finiteStateMachine/finiteStateMachineComponent.h"
-
 // Player
 #include "player/player.h"
-    // components
 #include "player/movement/playerMovementComponent.h"
-    // fsm.states
-#include "player/fsm/ground/playerIdleState.h"
-#include "player/fsm/ground/playerRunState.h"
-#include "player/fsm/air/playerJumpState.h"
-#include "player/fsm/air/playerFallState.h"
+#include "player/movement/fsm/playerMovementFSMComponent.h"
 
 void initialize_src_module(ModuleInitializationLevel p_level) {
     if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
             return;
     }
 
-    // Common
-    ClassDB::register_class<FiniteStateMachineComponent>();
-
     // Player
     ClassDB::register_class<Player>();
-        // components
     ClassDB::register_class<PlayerMovementComponent>();
-        // fsm.states
-    ClassDB::register_class<PlayerIdleState>();
-	ClassDB::register_class<PlayerRunState>();
-	ClassDB::register_class<PlayerJumpState>();
-	ClassDB::register_class<PlayerFallState>();
+	ClassDB::register_class<PlayerMovementFSMComponent>();
 }
 
 void uninitialize_src_module(ModuleInitializationLevel p_level) {
