@@ -1,15 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://2p84kx6qoppy"]
+[gd_scene load_steps=5 format=3 uid="uid://2p84kx6qoppy"]
+
+[ext_resource type="Texture2D" uid="uid://cyrdhh8qr254l" path="res://art/player/player.png" id="1_02a52"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0mek"]
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iqvq7"]
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_51ac4"]
 
-[node name="Player" type="Player" node_paths=PackedStringArray("back_arm", "leg", "torso", "head", "front_arm")]
+[node name="Player" type="Player" node_paths=PackedStringArray("back_arm", "leg", "torso", "head", "front_arm", "movement_fsm_component", "movement_component")]
 back_arm = NodePath("Back Arm")
 leg = NodePath("Leg")
 torso = NodePath("Torso")
 head = NodePath("Head")
 front_arm = NodePath("Front Arm")
+movement_fsm_component = NodePath("MovementFSM")
+movement_component = NodePath("Movement")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("1_02a52")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i0mek")
@@ -19,6 +31,9 @@ shape = SubResource("RectangleShape2D_i0mek")
 [node name="Leg" type="AnimationPlayer" parent="."]
 
 [node name="Torso" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_iqvq7")
+}
 
 [node name="Head" type="AnimationPlayer" parent="."]
 
@@ -26,3 +41,19 @@ shape = SubResource("RectangleShape2D_i0mek")
 libraries = {
 "": SubResource("AnimationLibrary_51ac4")
 }
+
+[node name="Movement" type="PlayerMovementComponent" parent="."]
+
+[node name="MovementFSM" type="PlayerMovementFSMComponent" parent="."]
+
+[node name="Ground" type="Node" parent="MovementFSM"]
+
+[node name="Run" type="PlayerRunState" parent="MovementFSM/Ground"]
+
+[node name="Idle" type="PlayerIdleState" parent="MovementFSM/Ground"]
+
+[node name="Air" type="Node" parent="MovementFSM"]
+
+[node name="Jump" type="PlayerJumpState" parent="MovementFSM/Air"]
+
+[node name="Fall" type="PlayerFallState" parent="MovementFSM/Air"]

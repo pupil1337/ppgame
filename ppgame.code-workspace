@@ -31,5 +31,15 @@
 		"C_Cpp.inlayHints.referenceOperator.enabled": true,
 		"C_Cpp.inlayHints.autoDeclarationTypes.enabled": true,
 		"C_Cpp.default.browse.databaseFilename": "${workspaceFolder}/.vscode/.vc.db/",
+		"files.associations": {
+			"*.rh": "cpp",
+			"atomic": "cpp",
+			"chrono": "cpp",
+			"filesystem": "cpp",
+			"memory": "cpp",
+			"stop_token": "cpp",
+			"system_error": "cpp",
+			"xhash": "cpp"
+		},
 	}
 }
