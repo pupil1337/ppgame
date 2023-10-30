@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://dbinf5tsesp7l"]
 
-[node name="MenuMain" type="MenuMain" node_paths=PackedStringArray("start_button")]
+[node name="MenuMain" type="MenuMain" node_paths=PackedStringArray("start_button", "join_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-start_button = NodePath("Button")
+start_button = NodePath("Start")
+join_button = NodePath("Join")
 
-[node name="Button" type="Button" parent="."]
+[node name="Start" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -22,3 +23,14 @@ offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Start"
+
+[node name="Join" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.574
+anchor_right = 0.5
+anchor_bottom = 0.574
+grow_horizontal = 2
+grow_vertical = 2
+text = "Join"

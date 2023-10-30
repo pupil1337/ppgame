@@ -2,6 +2,9 @@
 
 #include <core/object/class_db.h>
 
+// Entry
+#include "scene/entry.h"
+
 // Player
 #include "scene/player/player.h"
 #include "scene/player/movement/playerMovementComponent.h"
@@ -14,10 +17,16 @@
 // UI
 #include "scene/gui/menu/menu_main.h"
 
+// System
+#include "system/multiplayerSystem.h"
+
 void initialize_src_module(ModuleInitializationLevel p_level) {
     if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
             return;
     }
+
+    // Entry
+    ClassDB::register_class<Entry>();
 
     // Player
     ClassDB::register_class<Player>();
@@ -30,6 +39,9 @@ void initialize_src_module(ModuleInitializationLevel p_level) {
 
 	// UI
 	ClassDB::register_class<MenuMain>();
+
+    // System
+    ClassDB::register_class<MultiplayerSystem>();
 }
 
 void uninitialize_src_module(ModuleInitializationLevel p_level) {
