@@ -3,6 +3,7 @@
 #include <scene/gui/button.h>
 #include <scene/resources/packed_scene.h>
 #include <scene/main/window.h>
+#include "system/multiplayerSystem.h"
 
 void MenuMain::_bind_methods() {
 	PP_ADD_PROPERTY(Variant::OBJECT, start_button, PROPERTY_HINT_NODE_TYPE, "Button")
@@ -32,11 +33,8 @@ void MenuMain::_ready() {
 void MenuMain::_on_start_button_pressed() {
 	print_line("start_button pressed!");
 
-	Ref<PackedScene> Map = ResourceLoader::load("res://scene/level/main.tscn", "PackedScene");
-	if (Map.is_valid()) {
-		get_tree()->get_root()->add_child(Map->instantiate());
-		hide();
-	}
+	MultiplayerSystem::get_singleton()->HostGame();
+	queue_free();
 }
 
 void MenuMain::_on_join_button_pressed() {
