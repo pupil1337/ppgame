@@ -5,6 +5,7 @@
 
 # ??? not in godot/.gitignore
 .vc.db/
+*.exp
 
 # ---------------------------------------------------------------------------------
 # Copy From godot/.gitignore
