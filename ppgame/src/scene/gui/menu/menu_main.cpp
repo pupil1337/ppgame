@@ -39,4 +39,7 @@ void MenuMain::_on_start_button_pressed() {
 
 void MenuMain::_on_join_button_pressed() {
 	print_line("join_button pressed!");
+
+	MultiplayerSystem::get_singleton()->JoinGame();
+	queue_free();
 }

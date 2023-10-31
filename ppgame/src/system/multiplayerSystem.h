@@ -21,12 +21,19 @@ protected:
 	void _notification(int p_notification);
 
 //~Begin This Class
+private:
+	void _enter_tree();
+
 public:
 	void HostGame();
 	void JoinGame();
 
 private:
-	void _enter_tree();
+	void peer_connected(int id);
+	void peer_disconnected(int id);
+	void connected_to_server();
+	void connection_failed();
+	void server_disconnected();
 
 	Ref<ENetMultiplayerPeer> peer;
 };

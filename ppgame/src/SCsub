@@ -17,4 +17,6 @@ for root, dirs, files in os.walk('.'):
             # print(root + '/' + f)
             sources.append(root + '/' + f)
 
+env_pp.Prepend(CPPPATH=["#thirdparty/enet"])
+
 env_pp.add_source_files(env.modules_sources, sources)
