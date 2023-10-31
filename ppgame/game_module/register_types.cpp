@@ -20,7 +20,7 @@
 // System
 #include "system/multiplayerSystem.h"
 
-void initialize_src_module(ModuleInitializationLevel p_level) {
+void initialize_game_module_module(ModuleInitializationLevel p_level) {
     if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
             return;
     }
@@ -44,7 +44,7 @@ void initialize_src_module(ModuleInitializationLevel p_level) {
     ClassDB::register_class<MultiplayerSystem>();
 }
 
-void uninitialize_src_module(ModuleInitializationLevel p_level) {
+void uninitialize_game_module_module(ModuleInitializationLevel p_level) {
     if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
             return;
     }

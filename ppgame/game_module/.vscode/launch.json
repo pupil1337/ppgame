@@ -3,19 +3,19 @@
     "configurations": [
         // debug game
         {
-            "name": "debug game",
+            "name": "game [debug]",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/godot/bin/godot.windows.editor.dev.x86_64.exe",
+            "program": "${workspaceFolder}/../../godot/bin/godot.windows.editor.dev.x86_64.exe",
             "args": [
-                "--path", "${workspaceFolder}/ppgame/project"
+                "--path", "${workspaceFolder}/../project"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "console": "internalConsole",
-            "visualizerFile": "${workspaceFolder}/godot/platform/windows/godot.natvis",
-            "preLaunchTask": "debug editor"
+            "visualizerFile": "${workspaceFolder}/../../godot/platform/windows/godot.natvis",
+            "preLaunchTask": "editor [debug]"
         },
 
         // attach
@@ -28,20 +28,20 @@
 
         // debug editor
         {
-            "name": "debug editor",
+            "name": "editor [debug]",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/godot/bin/godot.windows.editor.dev.x86_64.exe",
+            "program": "${workspaceFolder}/../../godot/bin/godot.windows.editor.dev.x86_64.exe",
             "args": [
                 "--editor",
-                "--path", "${workspaceFolder}/ppgame/project"
+                "--path", "${workspaceFolder}/../project"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "console": "internalConsole",
-            "visualizerFile": "${workspaceFolder}/godot/platform/windows/godot.natvis",
-            "preLaunchTask": "debug editor"
+            "visualizerFile": "${workspaceFolder}/../../godot/platform/windows/godot.natvis",
+            "preLaunchTask": "editor [debug]"
         },
     ]
 }

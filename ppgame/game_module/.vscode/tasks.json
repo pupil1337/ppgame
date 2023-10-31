@@ -4,9 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "debug editor",
+            "label": "editor [debug]",
             "options": {
-                "cwd": "${workspaceFolder}/godot"
+                "cwd": "${workspaceFolder}/../../godot"
             },
             "type": "shell",
             "command": "scons",
@@ -14,11 +14,9 @@
                 "platform=windows",
                 "bits=64",
                 "target=editor",
-                "custom_modules=../ppgame",
+                "custom_modules=../ppgame/game_module",
                 "dev_build=yes",
-                "debug_symbols=yes",
-                "vsproj=yes",
-                "compiledb=yes",
+                "debug_symbols=yes"
             ],
             "group": "build",
             "problemMatcher": "$msCompile"
