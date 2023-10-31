@@ -8,12 +8,13 @@
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_51ac4"]
 
-[node name="Player" type="Player" node_paths=PackedStringArray("back_arm", "leg", "torso", "head", "front_arm", "movement_component")]
+[node name="Player" type="Player" node_paths=PackedStringArray("back_arm", "leg", "torso", "head", "front_arm", "movement_fsm_component", "movement_component")]
 back_arm = NodePath("Back Arm")
 leg = NodePath("Leg")
 torso = NodePath("Torso")
 head = NodePath("Head")
 front_arm = NodePath("Front Arm")
+movement_fsm_component = NodePath("MovementFSM")
 movement_component = NodePath("Movement")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -42,3 +43,17 @@ libraries = {
 }
 
 [node name="Movement" type="PlayerMovementComponent" parent="."]
+
+[node name="MovementFSM" type="PlayerMovementFSMComponent" parent="."]
+
+[node name="Ground" type="Node" parent="MovementFSM"]
+
+[node name="Idle" type="PlayerIdleState" parent="MovementFSM/Ground"]
+
+[node name="Run" type="PlayerRunState" parent="MovementFSM/Ground"]
+
+[node name="Air" type="Node" parent="MovementFSM"]
+
+[node name="Jump" type="PlayerJumpState" parent="MovementFSM/Air"]
+
+[node name="Fall" type="PlayerFallState" parent="MovementFSM/Air"]

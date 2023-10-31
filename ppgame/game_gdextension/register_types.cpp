@@ -36,10 +36,14 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
     // Player
     ClassDB::register_class<Player>();
     ClassDB::register_class<PlayerMovementComponent>();
-	// TODO 这些引擎不可见??
+	ClassDB::register_class<FiniteStateMachineComponent>();
 	ClassDB::register_class<PlayerMovementFSMComponent>();
+	ClassDB::register_class<State>();
+	ClassDB::register_class<PlayerMovementStateBase>();
+	ClassDB::register_class<PlayerGroundBaseState>();
 	ClassDB::register_class<PlayerIdleState>();
 	ClassDB::register_class<PlayerRunState>();
+	ClassDB::register_class<PlayerAirBaseState>();
 	ClassDB::register_class<PlayerJumpState>();
 	ClassDB::register_class<PlayerFallState>();
 

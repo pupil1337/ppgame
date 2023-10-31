@@ -11,8 +11,8 @@ void FiniteStateMachineComponent::_add_state_nodes(Node* node) {
 	for (int i = 0; i < node->get_child_count(true); ++i) {
 		Node* child = node->get_child(i, true);
 		if (State* state = Object::cast_to<State>(child)) {
-			ERR_FAIL_COND_EDMSG(states.has(child->get_name()), "状态机中状态有相同的名称");
-			states[child->get_name()] = state;
+			ERR_FAIL_COND_EDMSG(states.has(child->get_class()), "fsm has same name state");
+			states[child->get_class()] = state;
 		} else {
 			_add_state_nodes(child);
 		}
@@ -22,14 +22,14 @@ void FiniteStateMachineComponent::_add_state_nodes(Node* node) {
 void FiniteStateMachineComponent::on_owner_ready() {
 	pre_owner_ready();
 
-	ERR_FAIL_NULL_EDMSG(curr_state, "状态机未在pre_owner_ready()中设置默认状态");
-	StringName start_state_name = curr_state->get_name();
+	ERR_FAIL_NULL_EDMSG(curr_state, "fsm not set default state in pre_owner_ready()");
+	StringName start_state_name = curr_state->get_class();
 	curr_state = nullptr;
 	_change_state(start_state_name);
 }
 
 void FiniteStateMachineComponent::_change_state(const StringName& new_state_name) {
-	ERR_FAIL_COND_EDMSG(!states.has(new_state_name), String("状态机中没有此状态: ") + String(new_state_name));
+	ERR_FAIL_COND_EDMSG(!states.has(new_state_name), String("fsm not has this state: ") + String(new_state_name));
 
 	if (curr_state) {
 		curr_state->exit();
