@@ -4,5 +4,3 @@
 
 [node name="Entry" type="Entry"]
 scene_menu_main = ExtResource("1_sc28r")
-
-[node name="Playertest" type="Playertest" parent="."]

@@ -1,0 +1,47 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools",
+			"EditorConfig.EditorConfig",
+			"Gruntfuggly.todo-tree"
+		]
+	},
+
+	"settings": {
+		"files.exclude": {
+			"**/__pycache__": true,
+			"**/.sconsign.dblite": true,
+			"**/.sconf_temp": true,
+			"**/.scons_env.json": true,
+			"**/.scons_node_count": true,
+			"**/.sconsign5.dblite": true,
+			"**/.github": true,
+			"**/.vc.db": true,
+			"**/*.log": true,
+			"**/*.dll": true,
+			"**/*.exe": true,
+			"**/*.exp": true,
+			"**/*.ilk": true,
+			"**/*.lib": true,
+			"**/*.obj": true,
+			"**/*.pdb": true
+		},
+		"C_Cpp.default.browse.databaseFilename": "${workspaceFolder}/.vscode/.vc.db/",
+		"C_Cpp.intelliSenseMemoryLimit": 16384,
+		"C_Cpp.default.intelliSenseMode": "windows-msvc-x64",
+		"C_Cpp.inlayHints.autoDeclarationTypes.showOnLeft": true,
+		"C_Cpp.inlayHints.referenceOperator.enabled": true,
+		"files.associations": {
+			"iosfwd": "cpp",
+			"xlocbuf": "cpp",
+			"state.h": "c"
+		},
+
+	}
+}

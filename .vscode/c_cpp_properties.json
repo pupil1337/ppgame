@@ -1,0 +1,40 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                // godot
+                "${workspaceFolder}/godot/*",
+                "${workspaceFolder}/godot/core/**",
+                "${workspaceFolder}/godot/drivers/**",
+                "${workspaceFolder}/godot/editor/**",
+                "${workspaceFolder}/godot/main/**",
+                "${workspaceFolder}/godot/misc/**",
+                "${workspaceFolder}/godot/modules/**",
+                "${workspaceFolder}/godot/platform/windows/**",
+                "${workspaceFolder}/godot/scene/**",
+                "${workspaceFolder}/godot/servers/**",
+                "${workspaceFolder}/godot/tests/**",
+                "${workspaceFolder}/godot/thirdparty/**",
+                "${workspaceFolder}/ppgame/game_module",
+                
+                // game
+				"${workspaceFolder}/godot-cpp/gdextension",
+				"${workspaceFolder}/godot-cpp/gen/include",
+                "${workspaceFolder}/godot-cpp/include",
+				"${workspaceFolder}/ppgame/game_gdextension"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.17134.0",
+            "compilerPath": "cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}

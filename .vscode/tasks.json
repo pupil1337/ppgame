@@ -1,0 +1,50 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+		{
+			"label": "editor [debug]",
+			"options": {
+				"cwd": "${workspaceFolder}/godot"
+			},
+			"type": "shell",
+			"command": "scons",
+			"args": [
+				"platform=windows",
+				"bits=64",
+				"target=editor",
+				"custom_modules=../ppgame/game_module",
+				"dev_build=yes",
+				"debug_symbols=yes"
+			],
+			"group": "build",
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "game [debug]",
+			"options": {
+				"cwd": "${workspaceFolder}/ppgame/game_gdextension"
+			},
+			"type": "shell",
+			"command": "scons",
+			"args": [
+				"platform=windows",
+				"bits=64",
+				"target=editor",
+				"dev_build=yes",
+				"debug_symbols=yes"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "editor&game [debug]",
+			"dependsOn": [
+				"editor [debug]",
+				"game [debug]"
+			]
+		}
+	]
+}
