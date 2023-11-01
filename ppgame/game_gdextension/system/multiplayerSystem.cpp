@@ -1,12 +1,5 @@
 #include "multiplayerSystem.h"
 
-#include <godot_cpp/classes/multiplayer_api.hpp>
-#include <godot_cpp/classes/e_net_connection.hpp>
-#include <godot_cpp/classes/resource_loader.hpp>
-#include <godot_cpp/classes/packed_scene.hpp>
-#include <godot_cpp/classes/scene_tree.hpp>
-#include <godot_cpp/classes/window.hpp>
-
 MultiplayerSystem* MultiplayerSystem::singleton = nullptr;
 
 MultiplayerSystem::MultiplayerSystem() {
@@ -23,7 +16,7 @@ MultiplayerSystem *MultiplayerSystem::get_singleton() {
 }
 
 void MultiplayerSystem::_enter_tree() {
-	PP_CONTINUE_IF_GAME;
+	PP_CONTINUE_IF_GAME
 	peer.instantiate();
 
 	Ref<MultiplayerAPI> multiplayerAPI = get_multiplayer();

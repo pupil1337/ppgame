@@ -1,9 +1,9 @@
 #ifndef PLAYERRUNSTATE_H
 #define PLAYERRUNSTATE_H
 
-#include "playerGroundBaseState.h"
+using namespace godot;
 
-#include "pp.h"
+#include "playerGroundBaseState.h"
 
 class PlayerRunState : public PlayerGroundBaseState {
 	GDCLASS(PlayerRunState, PlayerGroundBaseState)

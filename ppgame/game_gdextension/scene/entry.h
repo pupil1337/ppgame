@@ -1,11 +1,6 @@
 #ifndef ENTRY_H
 #define ENTRY_H
 
-#include <godot_cpp/classes/node.hpp>
-#include <godot_cpp/classes/packed_scene.hpp>
-
-#include "pp.h"
-
 using namespace godot;
 
 class Entry : public Node {

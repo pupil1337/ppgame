@@ -3,7 +3,7 @@
 #include "state.h"
 
 void FiniteStateMachineComponent::_ready() {
-	PP_CONTINUE_IF_GAME;
+	PP_CONTINUE_IF_GAME
 	_add_state_nodes(this);
 }
 

@@ -4,8 +4,11 @@ import sys
 
 env = SConscript("../../godot-cpp/SConstruct")
 
+env_pp = env.Clone()
 # 添加供编译器查看的包含目录
-env.Append(CPPPATH=["."])
+env_pp.Append(CPPPATH=["."])
+# 预编译头文件
+env_pp.Append(CXXFLAGS=['/FI"pp.h"'])
 
 # 添加'src'目录下所有.cpp文件
 sources = []
@@ -14,7 +17,7 @@ for root, dirs, files in os.walk('.'):
         if f.endswith('.cpp'):
             sources.append(root + '/' + f)
 
-library = env.SharedLibrary(
+library = env_pp.SharedLibrary(
     "../project/bin/{}{}{}".format("game_gdextension", env["suffix"], env["SHLIBSUFFIX"]),
     source=sources,
 )

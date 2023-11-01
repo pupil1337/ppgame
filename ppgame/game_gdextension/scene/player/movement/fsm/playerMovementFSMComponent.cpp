@@ -1,7 +1,5 @@
 #include "playerMovementFSMComponent.h"
 
-#include <godot_cpp/classes/input.hpp>
-
 #include "scene/player/player.h"
 #include "scene/player/movement/fsm/playerMovementStateBase.h"
 

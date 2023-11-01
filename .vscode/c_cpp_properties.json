@@ -24,6 +24,10 @@
                 "${workspaceFolder}/godot-cpp/include",
 				"${workspaceFolder}/ppgame/game_gdextension"
             ],
+			"forcedInclude": [
+				// game pch
+				"${workspaceFolder}/ppgame/game_gdextension/pp.h"
+			],
             "defines": [
                 "_DEBUG",
                 "UNICODE",

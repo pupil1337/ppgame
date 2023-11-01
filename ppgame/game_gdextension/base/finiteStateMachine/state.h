@@ -1,10 +1,6 @@
 #ifndef STATE_H
 #define STATE_H
 
-#include <godot_cpp/classes/node.hpp>
-
-#include "pp.h"
-
 using namespace godot;
 
 class State : public Node {

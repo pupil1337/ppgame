@@ -1,10 +1,6 @@
 #ifndef PLAYERMOVEMENTCOMPONENT
 #define PLAYERMOVEMENTCOMPONENT
 
-#include <godot_cpp/classes/node.hpp>
-
-#include "pp.h"
-
 using namespace godot;
 
 class Player;

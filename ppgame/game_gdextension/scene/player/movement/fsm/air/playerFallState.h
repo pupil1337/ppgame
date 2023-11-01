@@ -1,6 +1,8 @@
 #ifndef PLAYERFALLSTATE
 #define PLAYERFALLSTATE
 
+using namespace godot;
+
 #include "playerAirBaseState.h"
 
 class PlayerFallState : public PlayerAirBaseState {

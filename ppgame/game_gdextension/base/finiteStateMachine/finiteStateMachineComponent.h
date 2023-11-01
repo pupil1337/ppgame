@@ -1,10 +1,6 @@
 #ifndef FINITESTATEMACHINECOMPONENT_H
 #define FINITESTATEMACHINECOMPONENT_H
 
-#include <godot_cpp/classes/node.hpp>
-
-#include "pp.h"
-
 using namespace godot;
 
 class State;

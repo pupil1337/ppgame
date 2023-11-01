@@ -11,7 +11,7 @@ void PlayerMovementComponent::_bind_methods() {
 }
 
 void PlayerMovementComponent::_ready() {
-	PP_CONTINUE_IF_GAME;
+	PP_CONTINUE_IF_GAME
 	player = Object::cast_to<Player>(get_parent());
 }
 

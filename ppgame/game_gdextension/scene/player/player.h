@@ -1,10 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <godot_cpp/classes/character_body2d.hpp>
-#include <godot_cpp/classes/animation_player.hpp>
-#include "pp.h"
-
 using namespace godot;
 
 class PlayerMovementFSMComponent;

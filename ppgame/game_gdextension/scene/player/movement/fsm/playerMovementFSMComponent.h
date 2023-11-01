@@ -1,19 +1,14 @@
 #ifndef PLAYERMOVEMENTFSMCOMPONENT_H
 #define PLAYERMOVEMENTFSMCOMPONENT_H
 
-#include "base/finiteStateMachine/finiteStateMachineComponent.h"
-
-#include "pp.h"
-
 using namespace godot;
+
+#include "base/finiteStateMachine/finiteStateMachineComponent.h"
 
 class Player;
 
 class PlayerMovementFSMComponent : public FiniteStateMachineComponent {
 	GDCLASS(PlayerMovementFSMComponent, FiniteStateMachineComponent);
-
-protected:
-	static void _bind_methods() {}
 
 protected:
 	virtual void pre_owner_ready() override;

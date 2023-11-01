@@ -1,15 +1,13 @@
 #ifndef MULTIPLAYERSYSTEM_H
 #define MULTIPLAYERSYSTEM_H
 
-#include <godot_cpp/classes/node.hpp>
-#include <godot_cpp/classes/e_net_multiplayer_peer.hpp>
-
-#include "pp.h"
-
 using namespace godot;
 
 class MultiplayerSystem : public Node {
 	GDCLASS(MultiplayerSystem, Node);
+
+protected:
+	static void _bind_methods() {}
 
 	static MultiplayerSystem* singleton;
 
@@ -17,9 +15,6 @@ public:
 	MultiplayerSystem();
 	~MultiplayerSystem();
 	static MultiplayerSystem* get_singleton();
-
-protected:
-	static void _bind_methods() {}
 
 public:
 	virtual void _enter_tree() override;

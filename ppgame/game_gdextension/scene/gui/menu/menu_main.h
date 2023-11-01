@@ -1,11 +1,6 @@
 #ifndef MENU_MAIN_H
 #define MENU_MAIN_H
 
-#include <godot_cpp/classes/control.hpp>
-#include <godot_cpp/classes/button.hpp>
-
-#include "pp.h"
-
 using namespace godot;
 
 class MenuMain : public Control {
