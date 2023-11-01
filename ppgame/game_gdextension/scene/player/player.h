@@ -24,14 +24,14 @@ public:
 //~Begin This Class
 public:
 	// nodes
-	PP_PROPERTY(AnimationPlayer*, back_arm, nullptr);
-	PP_PROPERTY(AnimationPlayer*, leg, nullptr);
-	PP_PROPERTY(AnimationPlayer*, torso, nullptr);
-	PP_PROPERTY(AnimationPlayer*, head, nullptr);
-	PP_PROPERTY(AnimationPlayer*, front_arm, nullptr);
+	PP_PROPERTY(AnimationPlayer*, back_arm) = nullptr;
+	PP_PROPERTY(AnimationPlayer*, leg) = nullptr;
+	PP_PROPERTY(AnimationPlayer*, torso) = nullptr;
+	PP_PROPERTY(AnimationPlayer*, head) = nullptr;
+	PP_PROPERTY(AnimationPlayer*, front_arm) = nullptr;
 
-	PP_PROPERTY(PlayerMovementFSMComponent*, movement_fsm_component, nullptr);
-	PP_PROPERTY(PlayerMovementComponent*, movement_component, nullptr);
+	PP_PROPERTY(PlayerMovementFSMComponent*, movement_fsm_component) = nullptr;
+	PP_PROPERTY(PlayerMovementComponent*, movement_component) = nullptr;
 };
 
 #endif // PLAYER_H

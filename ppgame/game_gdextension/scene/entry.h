@@ -17,7 +17,7 @@ private:
 	void initialize_system();
 	void open_menu_main();
 
-	PP_PROPERTY(Ref<PackedScene>, scene_menu_main, {})
+	PP_PROPERTY(Ref<PackedScene>, scene_menu_main) = Ref<PackedScene>();
 };
 
 #endif // ENTRY_H

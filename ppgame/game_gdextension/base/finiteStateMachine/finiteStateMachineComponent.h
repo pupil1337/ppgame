@@ -20,9 +20,9 @@ private:
 	void _change_state(const StringName& new_state_name);
 
 protected:
-	virtual void pre_owner_ready() { };
-	virtual void pre_process(float deltaTime) { };
-	virtual void pre_physics_process(float deltaTime) { };
+	virtual void pre_owner_ready() {};
+	virtual void pre_process(float deltaTime) {};
+	virtual void pre_physics_process(float deltaTime) {};
 
 public:
 	// call from owner

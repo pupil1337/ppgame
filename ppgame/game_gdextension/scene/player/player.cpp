@@ -20,6 +20,7 @@ void Player::_bind_methods() {
 
 void Player::_ready() {
 	PP_CONTINUE_IF_GAME
+
 	if (movement_fsm_component) {
 		movement_fsm_component->on_owner_ready();
 	}
@@ -27,6 +28,7 @@ void Player::_ready() {
 
 void Player::_process(double delta) {
 	PP_CONTINUE_IF_GAME
+
 	if (movement_fsm_component) {
 		movement_fsm_component->on_process(delta);
 		// anim_sprite->set_flip_h(movement_component->get_facing_dir().x < 0.0f); TODO
@@ -35,14 +37,15 @@ void Player::_process(double delta) {
 
 void Player::_physics_process(double delta) {
 	PP_CONTINUE_IF_GAME
+
 	if (movement_fsm_component) {
 		movement_fsm_component->on_physics_process(delta);
 	}
-
 }
 
 void Player::_unhandled_input(const Ref<InputEvent> &p_event) {
 	PP_CONTINUE_IF_GAME
+
 	if (movement_fsm_component) {
 		movement_fsm_component->on_input(p_event);
 	}

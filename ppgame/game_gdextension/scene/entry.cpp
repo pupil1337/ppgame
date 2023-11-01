@@ -9,6 +9,7 @@ void Entry::_bind_methods() {
 
 void Entry::_enter_tree() {
 	PP_CONTINUE_IF_GAME
+
 	initialize_system();
 	open_menu_main();
 }

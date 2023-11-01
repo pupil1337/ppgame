@@ -9,6 +9,7 @@ void MenuMain::_bind_methods() {
 
 void MenuMain::_ready() {
 	PP_CONTINUE_IF_GAME
+
 	if (start_button) {
 		start_button->connect("pressed", callable_mp(this, &MenuMain::_on_start_button_pressed));
 	}
