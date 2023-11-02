@@ -19,11 +19,11 @@ void MenuMain::_ready() {
 }
 
 void MenuMain::_on_start_button_pressed() {
-	MultiplayerSystem::get_singleton()->HostGame();
+	MultiplayerSystem::get_singleton()->hostGame();
 	queue_free();
 }
 
 void MenuMain::_on_join_button_pressed() {
-	MultiplayerSystem::get_singleton()->JoinGame();
+	MultiplayerSystem::get_singleton()->joinGame();
 	queue_free();
 }

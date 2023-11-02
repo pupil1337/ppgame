@@ -20,6 +20,7 @@
 #include <godot_cpp/classes/input.hpp>
 #include <godot_cpp/classes/input_event.hpp>
 #include <godot_cpp/classes/multiplayer_api.hpp>
+#include <godot_cpp/classes/multiplayer_peer.hpp>
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/packed_scene.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
@@ -37,6 +38,7 @@
 #include <godot_cpp/core/class_db.hpp>
 	// - templates
 #include <godot_cpp/templates/hash_map.hpp>
+#include <godot_cpp/templates/vector.hpp>
 	// - variant
 
 
