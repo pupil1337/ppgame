@@ -14,9 +14,6 @@ public:
 
 //~Begin This Class
 private:
-	void _on_start_button_pressed();
-	void _on_join_button_pressed();
-
 	PP_PROPERTY(Button*, start_button) = nullptr;
 	PP_PROPERTY(Button*, join_button) = nullptr;
 };

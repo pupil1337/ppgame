@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://dbinf5tsesp7l"]
 
 [node name="MenuMain" type="MenuMain" node_paths=PackedStringArray("start_button", "join_button")]
+start_button = NodePath("Start")
+join_button = NodePath("Join")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-start_button = NodePath("Start")
-join_button = NodePath("Join")
 
 [node name="Start" type="Button" parent="."]
 layout_mode = 1

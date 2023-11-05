@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhb2i0okn73eu"]
+
+[ext_resource type="TileSet" uid="uid://2j3syn2grphb" path="res://scene/level/map_tile_set.tres" id="1_8i6bh"]
+
+[node name="World" type="World"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_8i6bh")
+format = 2
+layer_0/tile_data = PackedInt32Array(196602, 65536, 3, 196603, 65536, 3, 196604, 65536, 3, 196605, 65536, 3, 196606, 65536, 3, 196607, 65536, 3, 131072, 65536, 3, 131073, 65536, 3, 131074, 65536, 3, 131075, 65536, 3, 131076, 65536, 3, 131077, 65536, 3, 131078, 65536, 3, 131079, 65536, 3, 131080, 65536, 3, 196590, 65536, 3, 196591, 65536, 3, 196592, 65536, 3, 196593, 65536, 3, 196594, 65536, 3, 196595, 65536, 3, 196596, 65536, 3, 196597, 65536, 3, 196598, 65536, 3, 196599, 65536, 3, 196600, 65536, 3, 196601, 65536, 3, 131081, 65536, 3, 131082, 65536, 3, 131083, 65536, 3, 131084, 65536, 3, 131085, 65536, 3, 131086, 65536, 3, 131087, 65536, 3, 131088, 65536, 3, 131089, 65536, 3, 131090, 65536, 3, 131091, 65536, 3, 131092, 65536, 3, 131093, 65536, 3, 131094, 65536, 3)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scene/player/player.tscn")
+spawn_path = NodePath("..")

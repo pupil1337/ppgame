@@ -16,6 +16,8 @@ void Player::_bind_methods() {
 	PP_ADD_PROPERTY(Variant::OBJECT, front_arm, PROPERTY_HINT_NODE_TYPE, "AnimationPlayer");
 	PP_ADD_PROPERTY(Variant::OBJECT, movement_fsm_component, PROPERTY_HINT_NODE_TYPE, "FiniteStateMachineComponent");
 	PP_ADD_PROPERTY(Variant::OBJECT, movement_component, PROPERTY_HINT_NODE_TYPE, "PlayerMovementComponent");
+
+	PP_ADD_PROPERTY(Variant::INT, uid, PROPERTY_HINT_NONE);
 }
 
 void Player::_ready() {
@@ -38,8 +40,10 @@ void Player::_process(double delta) {
 void Player::_physics_process(double delta) {
 	PP_CONTINUE_IF_GAME
 
-	if (movement_fsm_component) {
-		movement_fsm_component->on_physics_process(delta);
+	if (get_multiplayer()->get_unique_id() == uid) {
+		if (movement_fsm_component) {
+			movement_fsm_component->on_physics_process(delta);
+		}
 	}
 }
 

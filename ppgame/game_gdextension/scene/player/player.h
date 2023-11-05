@@ -32,6 +32,8 @@ public:
 
 	PP_PROPERTY(PlayerMovementFSMComponent*, movement_fsm_component) = nullptr;
 	PP_PROPERTY(PlayerMovementComponent*, movement_component) = nullptr;
+
+	PP_PROPERTY(int32_t, uid) = 0;
 };
 
 #endif // PLAYER_H

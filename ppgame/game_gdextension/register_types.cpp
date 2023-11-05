@@ -2,8 +2,9 @@
 
 using namespace godot;
 
-// Entry
-#include "scene/entry.h"
+// Game
+#include "scene/game.h"
+#include "scene/world.h"
 
 // Player
 #include "scene/player/player.h"
@@ -25,8 +26,9 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 		return;
 	}
 
-	// Entry
-    ClassDB::register_class<Entry>();
+	// Game
+    ClassDB::register_class<Game>();
+	ClassDB::register_class<World>();
 
     // Player
     ClassDB::register_class<Player>();

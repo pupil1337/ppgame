@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqmuooqvyixa4"]
+
+[ext_resource type="PackedScene" uid="uid://dhb2i0okn73eu" path="res://scene/level/world.tscn" id="1_ngi5t"]
+[ext_resource type="PackedScene" uid="uid://dbinf5tsesp7l" path="res://scene/gui/menu/menu_main.tscn" id="1_vlkny"]
+
+[node name="Game" type="Game" node_paths=PackedStringArray("menu_main")]
+menu_main = NodePath("MenuMain")
+packed_scene_world = ExtResource("1_ngi5t")
+
+[node name="MenuMain" parent="." instance=ExtResource("1_vlkny")]
+
+[node name="MultiplayerSystem" type="MultiplayerSystem" parent="."]
