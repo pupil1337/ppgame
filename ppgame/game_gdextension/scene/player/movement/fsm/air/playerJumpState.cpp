@@ -1,8 +1,8 @@
 #include "playerJumpState.h"
 
 #include "scene/player/movement/fsm/playerMovementFSMComponent.h"
-#include "scene/player/player.h"
 #include "scene/player/movement/playerMovementComponent.h"
+#include "scene/player/player.h"
 
 void PlayerJumpState::enter() {
 	PlayerAirBaseState::enter();

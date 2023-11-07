@@ -19,7 +19,7 @@ public:
 public:
 	virtual void _enter_tree() override;
 
-//~Begin This Class
+	//~Begin This Class
 public:
 	void hostGame();
 	void joinGame();

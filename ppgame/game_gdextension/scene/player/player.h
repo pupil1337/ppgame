@@ -7,7 +7,7 @@ class PlayerMovementFSMComponent;
 class PlayerMovementComponent;
 
 class Player : public CharacterBody2D {
-    GDCLASS(Player, CharacterBody2D);
+	GDCLASS(Player, CharacterBody2D);
 
 public:
 	Player();
@@ -19,9 +19,9 @@ public:
 	virtual void _ready() override;
 	virtual void _process(double delta) override;
 	virtual void _physics_process(double delta) override;
-	virtual void _unhandled_input(const Ref<InputEvent> &event) override;
+	virtual void _unhandled_input(const Ref<InputEvent>& event) override;
 
-//~Begin This Class
+	//~Begin This Class
 public:
 	// nodes
 	PP_PROPERTY(AnimationPlayer*, back_arm) = nullptr;

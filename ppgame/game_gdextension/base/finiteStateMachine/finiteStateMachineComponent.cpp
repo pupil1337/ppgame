@@ -39,7 +39,7 @@ void FiniteStateMachineComponent::_change_state(const StringName& new_state_name
 	curr_state->enter();
 }
 
-void FiniteStateMachineComponent::on_input(const Ref<InputEvent> &p_event) {
+void FiniteStateMachineComponent::on_input(const Ref<InputEvent>& p_event) {
 	if (curr_state) {
 		String new_state_name = curr_state->on_input(p_event);
 		if (!new_state_name.is_empty()) {
@@ -59,7 +59,6 @@ void FiniteStateMachineComponent::on_process(float deltaTime) {
 	}
 }
 
-
 void FiniteStateMachineComponent::on_physics_process(float deltaTime) {
 	pre_physics_process(deltaTime);
 
@@ -70,4 +69,3 @@ void FiniteStateMachineComponent::on_physics_process(float deltaTime) {
 		}
 	}
 }
-

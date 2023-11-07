@@ -1,8 +1,8 @@
 #include "playerRunState.h"
 
 #include "scene/player/movement/fsm/playerMovementFSMComponent.h"
-#include "scene/player/player.h"
 #include "scene/player/movement/playerMovementComponent.h"
+#include "scene/player/player.h"
 
 void PlayerRunState::enter() {
 	PlayerGroundBaseState::enter();
@@ -34,4 +34,3 @@ StringName PlayerRunState::on_physics_process(float deltaTime) {
 
 	return StringName();
 }
-

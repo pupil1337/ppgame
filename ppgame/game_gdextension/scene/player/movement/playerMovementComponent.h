@@ -14,7 +14,7 @@ protected:
 public:
 	virtual void _ready() override;
 
-//~Begin This Class
+	//~Begin This Class
 public:
 	void move();
 	void apply_gravity(float deltaTime);

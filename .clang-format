@@ -120,7 +120,7 @@ KeepEmptyLinesAtTheStartOfBlocks: false
 # PenaltyExcessCharacter: 1000000
 # PenaltyReturnTypeOnItsOwnLine: 60
 # PenaltyIndentedWhitespace: 0
-# PointerAlignment: Right
+PointerAlignment: Left
 # PPIndentWidth:   -1
 # ReferenceAlignment: Pointer
 # ReflowComments:  true
@@ -197,3 +197,5 @@ Language:        Java
 # BreakAfterJavaFieldAnnotations: false
 JavaImportGroups: ['org.godotengine', 'android', 'androidx', 'com.android', 'com.google', 'java', 'javax']
 ...
+
+# copy from godot. diff: 1.PointerAlignment

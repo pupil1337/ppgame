@@ -11,7 +11,7 @@ class Game : public Node {
 protected:
 	static void _bind_methods();
 
-//~Begin This Class
+	//~Begin This Class
 public:
 	void _on_start_button_pressed();
 	void _on_join_button_pressed();

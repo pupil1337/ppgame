@@ -3,14 +3,14 @@
 MultiplayerSystem* MultiplayerSystem::singleton = nullptr;
 
 MultiplayerSystem::MultiplayerSystem() {
-    singleton = this;
+	singleton = this;
 }
 
 MultiplayerSystem::~MultiplayerSystem() {
 	singleton = nullptr;
 }
 
-MultiplayerSystem *MultiplayerSystem::get_singleton() {
+MultiplayerSystem* MultiplayerSystem::get_singleton() {
 	return singleton;
 }
 

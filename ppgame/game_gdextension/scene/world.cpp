@@ -12,7 +12,7 @@ void World::_enter_tree() {
 }
 
 void World::_ready() {
-    PP_CONTINUE_IF_GAME
+	PP_CONTINUE_IF_GAME
 
 	if (get_multiplayer()->is_server()) {
 		_add_player(1);
@@ -38,5 +38,4 @@ void World::_add_player(int32_t uid) {
 }
 
 void World::_del_player(int32_t uid) {
-
 }

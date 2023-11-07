@@ -14,7 +14,7 @@ protected:
 	virtual void pre_owner_ready() override;
 	virtual void pre_physics_process(float deltaTime) override;
 
-//~Begin This Class
+	//~Begin This Class
 public:
 	Player* player = nullptr;
 	Vector2 input_dir = Vector2(0.0f, 0.0f);

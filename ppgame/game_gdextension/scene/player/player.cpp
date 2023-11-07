@@ -4,7 +4,6 @@
 #include "scene/player/movement/playerMovementComponent.h"
 
 Player::Player() {
-
 }
 
 void Player::_bind_methods() {
@@ -47,7 +46,7 @@ void Player::_physics_process(double delta) {
 	}
 }
 
-void Player::_unhandled_input(const Ref<InputEvent> &p_event) {
+void Player::_unhandled_input(const Ref<InputEvent>& p_event) {
 	PP_CONTINUE_IF_GAME
 
 	if (movement_fsm_component) {

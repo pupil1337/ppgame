@@ -12,7 +12,7 @@ protected:
 public:
 	virtual void _ready() override;
 
-//~Begin This Class
+	//~Begin This Class
 private:
 	PP_PROPERTY(Button*, start_button) = nullptr;
 	PP_PROPERTY(Button*, join_button) = nullptr;

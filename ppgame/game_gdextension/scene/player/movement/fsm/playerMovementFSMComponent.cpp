@@ -1,7 +1,7 @@
 #include "playerMovementFSMComponent.h"
 
-#include "scene/player/player.h"
 #include "scene/player/movement/fsm/playerMovementStateBase.h"
+#include "scene/player/player.h"
 
 void PlayerMovementFSMComponent::pre_owner_ready() {
 	FiniteStateMachineComponent::pre_owner_ready();
