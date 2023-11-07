@@ -4,7 +4,6 @@
 			"path": "."
 		}
 	],
-
 	"extensions": {
 		"recommendations": [
 			"ms-vscode.cpptools",
@@ -13,7 +12,6 @@
 			"xaver.clang-format"
 		]
 	},
-
 	"settings": {
 		"files.exclude": {
 			"**/__pycache__": true,
@@ -38,16 +36,14 @@
 		"C_Cpp.default.intelliSenseMode": "windows-msvc-x64",
 		"C_Cpp.inlayHints.autoDeclarationTypes.showOnLeft": true,
 		"C_Cpp.inlayHints.referenceOperator.enabled": true,
-
 		// clang-format
 		"clang-format.executable": "clang-format",
 		"editor.formatOnSave": true,
-
 		"files.associations": {
 			"iosfwd": "cpp",
 			"xlocbuf": "cpp",
-			"state.h": "c"
+			"state.h": "c",
+			"random": "cpp"
 		},
-
 	}
 }

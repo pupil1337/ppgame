@@ -2,6 +2,10 @@
 
 using namespace godot;
 
+// Base
+#include "base/finiteStateMachine/finiteStateMachineComponent.h"
+#include "base/finiteStateMachine/state.h"
+
 // Game
 #include "scene/game.h"
 #include "scene/world.h"
@@ -14,6 +18,7 @@ using namespace godot;
 #include "scene/player/movement/fsm/playerMovementFSMComponent.h"
 #include "scene/player/movement/playerMovementComponent.h"
 #include "scene/player/player.h"
+#include "scene/player/playerControllerComponent.h"
 
 // UI
 #include "scene/gui/menu/menu_main.h"
@@ -26,6 +31,10 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 		return;
 	}
 
+	// Base
+	ClassDB::register_class<FiniteStateMachineComponent>();
+	ClassDB::register_class<State>();
+
 	// Game
 	ClassDB::register_class<Game>();
 	ClassDB::register_class<World>();
@@ -33,9 +42,7 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	// Player
 	ClassDB::register_class<Player>();
 	ClassDB::register_class<PlayerMovementComponent>();
-	ClassDB::register_class<FiniteStateMachineComponent>();
 	ClassDB::register_class<PlayerMovementFSMComponent>();
-	ClassDB::register_class<State>();
 	ClassDB::register_class<PlayerMovementStateBase>();
 	ClassDB::register_class<PlayerGroundBaseState>();
 	ClassDB::register_class<PlayerIdleState>();
@@ -43,6 +50,7 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<PlayerAirBaseState>();
 	ClassDB::register_class<PlayerJumpState>();
 	ClassDB::register_class<PlayerFallState>();
+	ClassDB::register_class<PlayerControllerComponent>();
 
 	// UI
 	ClassDB::register_class<MenuMain>();

@@ -19,12 +19,12 @@ StringName PlayerRunState::on_physics_process(float deltaTime) {
 	PlayerGroundBaseState::on_physics_process(deltaTime);
 
 	if (Math::is_zero_approx(fsm->input_dir.x)) {
-		fsm->player->movement_component->decelerate_horizontally(deltaTime);
-		fsm->player->movement_component->move();
+		fsm->player->movement->decelerate_horizontally(deltaTime);
+		fsm->player->movement->move();
 		return StringName("PlayerIdleState");
 	} else {
-		fsm->player->movement_component->accelerate_horizontally(fsm->input_dir, deltaTime);
-		fsm->player->movement_component->move();
+		fsm->player->movement->accelerate_horizontally(fsm->input_dir, deltaTime);
+		fsm->player->movement->move();
 	}
 
 	Input* input = Input::get_singleton();

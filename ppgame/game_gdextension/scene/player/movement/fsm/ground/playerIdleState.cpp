@@ -18,7 +18,7 @@ void PlayerIdleState::enter() {
 StringName PlayerIdleState::on_physics_process(float deltaTime) {
 	PlayerGroundBaseState::on_physics_process(deltaTime);
 
-	fsm->player->movement_component->move();
+	fsm->player->movement->move();
 
 	if (fsm->player->is_on_floor() && !Math::is_zero_approx(fsm->input_dir.x)) {
 		return StringName("PlayerRunState");

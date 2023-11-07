@@ -8,7 +8,7 @@ StringName PlayerGroundBaseState::on_physics_process(float deltaTime) {
 	PlayerMovementStateBase::on_physics_process(deltaTime);
 
 	if (!fsm->player->is_on_floor()) {
-		fsm->player->movement_component->apply_gravity(deltaTime);
+		fsm->player->movement->apply_gravity(deltaTime);
 	}
 
 	return StringName();

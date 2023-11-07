@@ -5,6 +5,7 @@ using namespace godot;
 
 class PlayerMovementFSMComponent;
 class PlayerMovementComponent;
+class PlayerControllerComponent;
 
 class Player : public CharacterBody2D {
 	GDCLASS(Player, CharacterBody2D);
@@ -23,17 +24,31 @@ public:
 
 	//~Begin This Class
 public:
+	_FORCE_INLINE_ PlayerMovementFSMComponent* get_movement_fsm() const { return movement_fsm; }
+	_FORCE_INLINE_ PlayerMovementComponent* get_movement() const { return movement; }
+	_FORCE_INLINE_ PlayerControllerComponent* get_controller() const { return controller; }
+	_FORCE_INLINE_ int32_t get_uid() const { return uid; }
+
+	void set_movement_fsm(PlayerMovementFSMComponent* p_movement_fsm);
+	void set_movement(PlayerMovementComponent* p_movement);
+	void set_controller(PlayerControllerComponent* p_controller);
+	void set_uid(int32_t p_uid);
+
+public:
 	// nodes
-	PP_PROPERTY(AnimationPlayer*, back_arm) = nullptr;
-	PP_PROPERTY(AnimationPlayer*, leg) = nullptr;
-	PP_PROPERTY(AnimationPlayer*, torso) = nullptr;
-	PP_PROPERTY(AnimationPlayer*, head) = nullptr;
-	PP_PROPERTY(AnimationPlayer*, front_arm) = nullptr;
+	AnimationPlayer* back_arm = nullptr;
+	AnimationPlayer* leg = nullptr;
+	AnimationPlayer* torso = nullptr;
+	AnimationPlayer* head = nullptr;
+	AnimationPlayer* front_arm = nullptr;
 
-	PP_PROPERTY(PlayerMovementFSMComponent*, movement_fsm_component) = nullptr;
-	PP_PROPERTY(PlayerMovementComponent*, movement_component) = nullptr;
+	PlayerMovementFSMComponent* movement_fsm = nullptr;
+	PlayerMovementComponent* movement = nullptr;
+	PlayerControllerComponent* controller = nullptr;
 
-	PP_PROPERTY(int32_t, uid) = 0;
+private:
+	// replicates
+	int32_t uid;
 };
 
 #endif // PLAYER_H

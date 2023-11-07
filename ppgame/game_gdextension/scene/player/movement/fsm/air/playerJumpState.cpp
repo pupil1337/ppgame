@@ -7,7 +7,7 @@
 void PlayerJumpState::enter() {
 	PlayerAirBaseState::enter();
 
-	fsm->player->movement_component->jump();
+	fsm->player->movement->jump();
 	// todo
 	// if (fsm) {
 	// 	if (fsm->info.anim_sprite) {
@@ -19,9 +19,9 @@ void PlayerJumpState::enter() {
 StringName PlayerJumpState::on_physics_process(float deltaTime) {
 	PlayerAirBaseState::on_physics_process(deltaTime);
 
-	fsm->player->movement_component->move();
+	fsm->player->movement->move();
 
-	if (fsm->player->movement_component->is_falling()) {
+	if (fsm->player->movement->is_falling()) {
 		return StringName("PlayerFallState");
 	}
 

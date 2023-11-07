@@ -18,10 +18,10 @@ void PlayerFallState::enter() {
 StringName PlayerFallState::on_physics_process(float deltaTime) {
 	PlayerAirBaseState::on_physics_process(deltaTime);
 
-	fsm->player->movement_component->move();
+	fsm->player->movement->move();
 
 	if (fsm->player->is_on_floor()) {
-		fsm->player->movement_component->decelerate_horizontally(deltaTime);
+		fsm->player->movement->decelerate_horizontally(deltaTime);
 		if (Math::is_zero_approx(fsm->input_dir.x)) {
 			return StringName("PlayerIdleState");
 		} else {

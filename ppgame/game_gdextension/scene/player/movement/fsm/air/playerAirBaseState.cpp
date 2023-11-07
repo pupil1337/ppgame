@@ -7,7 +7,7 @@
 StringName PlayerAirBaseState::on_physics_process(float deltaTime) {
 	PlayerMovementStateBase::on_physics_process(deltaTime);
 
-	fsm->player->movement_component->apply_gravity(deltaTime);
+	fsm->player->movement->apply_gravity(deltaTime);
 
 	return StringName();
 }

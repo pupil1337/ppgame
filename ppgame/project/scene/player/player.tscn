@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://2p84kx6qoppy"]
+[gd_scene load_steps=7 format=3 uid="uid://2p84kx6qoppy"]
 
 [ext_resource type="Texture2D" uid="uid://cyrdhh8qr254l" path="res://art/player/player.png" id="1_02a52"]
 
@@ -8,22 +8,23 @@
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_51ac4"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_e5nqd"]
+properties/0/path = NodePath(".:input_dir")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ewwl3"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 properties/1/path = NodePath(".:uid")
 properties/1/spawn = true
-properties/1/replication_mode = 1
+properties/1/replication_mode = 0
 
-[node name="Player" type="Player" node_paths=PackedStringArray("back_arm", "leg", "torso", "head", "front_arm", "movement_fsm_component", "movement_component")]
-back_arm = NodePath("Back Arm")
-leg = NodePath("Leg")
-torso = NodePath("Torso")
-head = NodePath("Head")
-front_arm = NodePath("Front Arm")
-movement_fsm_component = NodePath("MovementFSM")
-movement_component = NodePath("Movement")
+[node name="Player" type="Player" node_paths=PackedStringArray("movement_fsm", "movement", "controller")]
+movement_fsm = NodePath("MovementFSM")
+movement = NodePath("Movement")
+controller = NodePath("Controller")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -66,5 +67,10 @@ libraries = {
 
 [node name="Fall" type="PlayerFallState" parent="MovementFSM/Air"]
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="Controller" type="PlayerControllerComponent" parent="."]
+
+[node name="ControllerSynchronizer" type="MultiplayerSynchronizer" parent="Controller"]
+replication_config = SubResource("SceneReplicationConfig_e5nqd")
+
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ewwl3")
