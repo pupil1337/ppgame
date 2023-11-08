@@ -14,6 +14,8 @@ MultiplayerSystem* MultiplayerSystem::get_singleton() {
 	return singleton;
 }
 
+// ----------------------------------------------------------------------------
+
 void MultiplayerSystem::_enter_tree() {
 	PP_CONTINUE_IF_GAME
 	peer.instantiate();

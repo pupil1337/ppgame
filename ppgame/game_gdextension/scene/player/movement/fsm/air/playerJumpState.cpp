@@ -7,7 +7,13 @@
 void PlayerJumpState::enter() {
 	PlayerAirBaseState::enter();
 
-	fsm->player->movement->jump();
+	ERR_FAIL_NULL(fsm);
+	Player* player = fsm->get_player();
+	ERR_FAIL_NULL(player);
+	PlayerMovementComponent* movement = player->get_movement();
+	ERR_FAIL_NULL(movement);
+
+	movement->jump();
 	// todo
 	// if (fsm) {
 	// 	if (fsm->info.anim_sprite) {
@@ -19,9 +25,15 @@ void PlayerJumpState::enter() {
 StringName PlayerJumpState::on_physics_process(float deltaTime) {
 	PlayerAirBaseState::on_physics_process(deltaTime);
 
-	fsm->player->movement->move();
+	ERR_FAIL_NULL_V(fsm, StringName());
+	Player* player = fsm->get_player();
+	ERR_FAIL_NULL_V(player, StringName());
+	PlayerMovementComponent* movement = player->get_movement();
+	ERR_FAIL_NULL_V(movement, StringName());
 
-	if (fsm->player->movement->is_falling()) {
+	movement->move();
+
+	if (movement->is_falling()) {
 		return StringName("PlayerFallState");
 	}
 

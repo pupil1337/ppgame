@@ -3,6 +3,7 @@
 #include "scene/player/movement/fsm/playerMovementFSMComponent.h"
 #include "scene/player/movement/playerMovementComponent.h"
 #include "scene/player/player.h"
+#include "scene/player/playerControllerComponent.h"
 
 void PlayerIdleState::enter() {
 	PlayerGroundBaseState::enter();
@@ -18,9 +19,17 @@ void PlayerIdleState::enter() {
 StringName PlayerIdleState::on_physics_process(float deltaTime) {
 	PlayerGroundBaseState::on_physics_process(deltaTime);
 
-	fsm->player->movement->move();
+	ERR_FAIL_NULL_V(fsm, StringName());
+	Player* player = fsm->get_player();
+	ERR_FAIL_NULL_V(player, StringName());
+	PlayerControllerComponent* controller = player->get_controller();
+	ERR_FAIL_NULL_V(controller, StringName());
+	PlayerMovementComponent* movement = player->get_movement();
+	ERR_FAIL_NULL_V(movement, StringName());
 
-	if (fsm->player->is_on_floor() && !Math::is_zero_approx(fsm->input_dir.x)) {
+	movement->move();
+
+	if (player->is_on_floor() && !Math::is_zero_approx(controller->get_input_dir().x)) {
 		return StringName("PlayerRunState");
 	}
 

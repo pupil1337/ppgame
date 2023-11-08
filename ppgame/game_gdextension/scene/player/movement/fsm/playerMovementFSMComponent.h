@@ -11,13 +11,19 @@ class PlayerMovementFSMComponent : public FiniteStateMachineComponent {
 	GDCLASS(PlayerMovementFSMComponent, FiniteStateMachineComponent);
 
 protected:
-	virtual void pre_owner_ready() override;
-	virtual void pre_physics_process(float deltaTime) override;
+	static void _bind_methods();
 
-	//~Begin This Class
-public:
+private:
 	Player* player = nullptr;
-	Vector2 input_dir = Vector2(0.0f, 0.0f);
+
+public:
+	_FORCE_INLINE_ Player* get_player() const { return player; }
+	void set_player(Player* p_player);
+
+	// ------------------------------------------
+
+protected:
+	virtual void pre_owner_ready() override;
 };
 
 #endif // PLAYERMOVEMENTFSMCOMPONENT_H

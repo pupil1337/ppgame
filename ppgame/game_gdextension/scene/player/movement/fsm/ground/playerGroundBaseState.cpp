@@ -7,8 +7,14 @@
 StringName PlayerGroundBaseState::on_physics_process(float deltaTime) {
 	PlayerMovementStateBase::on_physics_process(deltaTime);
 
-	if (!fsm->player->is_on_floor()) {
-		fsm->player->movement->apply_gravity(deltaTime);
+	ERR_FAIL_NULL_V(fsm, StringName());
+	Player* player = fsm->get_player();
+	ERR_FAIL_NULL_V(player, StringName());
+	PlayerMovementComponent* movement = player->get_movement();
+	ERR_FAIL_NULL_V(movement, StringName());
+
+	if (!player->is_on_floor()) {
+		movement->apply_gravity(deltaTime);
 	}
 
 	return StringName();

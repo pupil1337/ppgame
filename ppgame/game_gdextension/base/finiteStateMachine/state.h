@@ -9,7 +9,8 @@ class State : public Node {
 protected:
 	static void _bind_methods() {}
 
-	//~Begin This Class
+	// ------------------------------------------
+
 public:
 	virtual void enter(){};
 	virtual void exit(){};

@@ -3,6 +3,19 @@
 #include "scene/player/movement/fsm/playerMovementStateBase.h"
 #include "scene/player/player.h"
 
+void PlayerMovementFSMComponent::_bind_methods() {
+	// player
+	ClassDB::bind_method(D_METHOD(_STR(set_player), _STR(player)), &self_type::set_player);
+	ClassDB::bind_method(D_METHOD(_STR(get_player)), &self_type::get_player);
+	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, _STR(player), PROPERTY_HINT_NODE_TYPE, "Player"), _STR(set_player), _STR(get_player));
+}
+
+void PlayerMovementFSMComponent::set_player(Player* p_player) {
+	player = p_player;
+}
+
+// ----------------------------------------------------------------------------
+
 void PlayerMovementFSMComponent::pre_owner_ready() {
 	FiniteStateMachineComponent::pre_owner_ready();
 
@@ -13,12 +26,4 @@ void PlayerMovementFSMComponent::pre_owner_ready() {
 			state->fsm = this;
 		}
 	}
-
-	player = Object::cast_to<Player>(get_parent());
-}
-
-void PlayerMovementFSMComponent::pre_physics_process(float deltaTime) {
-	FiniteStateMachineComponent::pre_physics_process(deltaTime);
-
-	input_dir = Input::get_singleton()->get_vector("left", "right", "up", "down");
 }

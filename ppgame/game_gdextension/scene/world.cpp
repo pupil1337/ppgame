@@ -32,10 +32,12 @@ void World::_add_player(int32_t uid) {
 	Ref<PackedScene> player_packed_scene = ResourceLoader::get_singleton()->load("res://scene/player/player.tscn", "PackedScene");
 	ERR_FAIL_NULL_EDMSG(player_packed_scene.ptr(), "player PackedScene path is wrong!");
 	Player* player = cast_to<Player>(player_packed_scene.ptr()->instantiate());
+	ERR_FAIL_NULL(player);
 	player->set_uid(uid);
 	player->set_name("player" + itos(uid));
 	add_child(player, true);
 }
 
 void World::_del_player(int32_t uid) {
+	// TODO
 }

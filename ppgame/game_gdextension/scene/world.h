@@ -9,12 +9,13 @@ class World : public Node {
 protected:
 	static void _bind_methods() {}
 
+	// ------------------------------------------
+
 public:
 	virtual void _enter_tree() override;
 	virtual void _ready() override;
 	virtual void _exit_tree() override;
 
-	//~Begin This Class
 private:
 	void _add_player(int32_t uid);
 	void _del_player(int32_t uid);

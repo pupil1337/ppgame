@@ -21,7 +21,8 @@ properties/1/path = NodePath(".:uid")
 properties/1/spawn = true
 properties/1/replication_mode = 0
 
-[node name="Player" type="Player" node_paths=PackedStringArray("movement_fsm", "movement", "controller")]
+[node name="Player" type="Player" node_paths=PackedStringArray("camera", "movement_fsm", "movement", "controller")]
+camera = NodePath("Camera2D")
 movement_fsm = NodePath("MovementFSM")
 movement = NodePath("Movement")
 controller = NodePath("Controller")
@@ -51,9 +52,11 @@ libraries = {
 "": SubResource("AnimationLibrary_51ac4")
 }
 
-[node name="Movement" type="PlayerMovementComponent" parent="."]
+[node name="Movement" type="PlayerMovementComponent" parent="." node_paths=PackedStringArray("player")]
+player = NodePath("..")
 
-[node name="MovementFSM" type="PlayerMovementFSMComponent" parent="."]
+[node name="MovementFSM" type="PlayerMovementFSMComponent" parent="." node_paths=PackedStringArray("player")]
+player = NodePath("..")
 
 [node name="Ground" type="Node" parent="MovementFSM"]
 
@@ -67,10 +70,12 @@ libraries = {
 
 [node name="Fall" type="PlayerFallState" parent="MovementFSM/Air"]
 
-[node name="Controller" type="PlayerControllerComponent" parent="."]
+[node name="Controller" type="PlayerControllerComponent" parent="." node_paths=PackedStringArray("synchronizer")]
+synchronizer = NodePath("ControllerSynchronizer")
 
 [node name="ControllerSynchronizer" type="MultiplayerSynchronizer" parent="Controller"]
 replication_config = SubResource("SceneReplicationConfig_e5nqd")
+public_visibility = false
 
 [node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ewwl3")

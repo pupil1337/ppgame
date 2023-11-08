@@ -43,7 +43,8 @@
 			"iosfwd": "cpp",
 			"xlocbuf": "cpp",
 			"state.h": "c",
-			"random": "cpp"
+			"random": "cpp",
+			"filesystem": "cpp"
 		},
 	}
 }

@@ -9,16 +9,26 @@ class PlayerControllerComponent : public Node {
 protected:
 	static void _bind_methods();
 
+private:
+	MultiplayerSynchronizer* synchronizer = nullptr;
+
+	// replicates
+	Vector2 input_dir;
+
+public:
+	_FORCE_INLINE_ MultiplayerSynchronizer* get_synchronizer() const { return synchronizer; }
+	void set_synchronizer(MultiplayerSynchronizer* p_synchronizer);
+
+public:
+	_FORCE_INLINE_ Vector2 get_input_dir() const { return input_dir; }
+	void set_input_dir(const Vector2& p_input_dir);
+
+	// ------------------------------------------
+
 public:
 	virtual void _enter_tree() override;
 	virtual void _ready() override;
-	virtual void _process(double delta) override;
 	virtual void _physics_process(double delta) override;
-	virtual void _exit_tree() override;
-
-	//~Begin This Class
-public:
-	PP_PROPERTY(Vector2, input_dir);
 };
 
 #endif // PLAYERCONTROLLERCOMPONENT_H

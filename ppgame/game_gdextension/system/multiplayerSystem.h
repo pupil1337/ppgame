@@ -6,9 +6,6 @@ using namespace godot;
 class MultiplayerSystem : public Node {
 	GDCLASS(MultiplayerSystem, Node);
 
-protected:
-	static void _bind_methods() {}
-
 	static MultiplayerSystem* singleton;
 
 public:
@@ -16,14 +13,19 @@ public:
 	~MultiplayerSystem();
 	static MultiplayerSystem* get_singleton();
 
+protected:
+	static void _bind_methods() {}
+
+	// ------------------------------------------
+
 public:
 	virtual void _enter_tree() override;
 
-	//~Begin This Class
 public:
 	void hostGame();
 	void joinGame();
 
+private:
 	Ref<ENetMultiplayerPeer> peer;
 	Vector<int32_t> player_uids;
 };
