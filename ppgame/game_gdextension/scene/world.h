@@ -3,6 +3,8 @@
 
 using namespace godot;
 
+class Player;
+
 class World : public Node {
 	GDCLASS(World, Node)
 
@@ -19,6 +21,8 @@ public:
 private:
 	void _add_player(int32_t uid);
 	void _del_player(int32_t uid);
+
+	HashMap<int32_t, Player*> players;
 };
 
 #endif // WORLD_H

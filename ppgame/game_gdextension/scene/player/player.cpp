@@ -52,9 +52,10 @@ void Player::set_controller(PlayerControllerComponent* p_controller) {
 }
 
 void Player::set_uid(int32_t p_uid) {
-	if (p_uid > 0) {
-		uid = p_uid;
+	uid = p_uid;
 
+	PP_CONTINUE_IF_GAME;
+	if (p_uid > 0) {
 		if (controller) {
 			controller->set_multiplayer_authority(p_uid);
 		}

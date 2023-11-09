@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://2p84kx6qoppy"]
+[gd_scene load_steps=7 format=3 uid="uid://2p84kx6qoppy"]
 
 [ext_resource type="Texture2D" uid="uid://cyrdhh8qr254l" path="res://art/player/player.png" id="1_02a52"]
 
@@ -8,20 +8,21 @@
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_51ac4"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ewwl3"]
-properties/0/path = NodePath(".:position")
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jnttr"]
+properties/0/path = NodePath(".:location")
 properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:uid")
-properties/1/spawn = true
-properties/1/replication_mode = 0
+properties/0/replication_mode = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ewwl3"]
+properties/0/path = NodePath(".:uid")
+properties/0/spawn = true
+properties/0/replication_mode = 0
 
 [node name="Player" type="Player" node_paths=PackedStringArray("camera", "movement_fsm", "movement", "controller")]
 camera = NodePath("Camera2D")
 movement_fsm = NodePath("MovementFSM")
 movement = NodePath("Movement")
 controller = NodePath("Controller")
-uid = 0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -50,6 +51,9 @@ libraries = {
 
 [node name="Movement" type="PlayerMovementComponent" parent="." node_paths=PackedStringArray("player")]
 player = NodePath("..")
+
+[node name="MovementSynchronizer" type="MultiplayerSynchronizer" parent="Movement"]
+replication_config = SubResource("SceneReplicationConfig_jnttr")
 
 [node name="MovementFSM" type="PlayerMovementFSMComponent" parent="." node_paths=PackedStringArray("player")]
 player = NodePath("..")
