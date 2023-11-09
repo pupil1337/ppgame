@@ -10,41 +10,67 @@ MultiplayerSystem::~MultiplayerSystem() {
 	singleton = nullptr;
 }
 
-MultiplayerSystem* MultiplayerSystem::get_singleton() {
-	return singleton;
-}
-
 // ----------------------------------------------------------------------------
 
-void MultiplayerSystem::_enter_tree() {
-	PP_CONTINUE_IF_GAME
-	peer.instantiate();
-}
-
 void MultiplayerSystem::hostGame() {
-	ERR_FAIL_NULL(peer.ptr());
-	Error error = peer.ptr()->create_server(9527); // TODO
-	ERR_FAIL_COND_EDMSG(error != Error::OK, "peer->create_server error:" + error);
+	Ref<ENetMultiplayerPeer> peer;
+	peer.instantiate();
 
-	Ref<ENetConnection> host = peer->get_host();
-	ERR_FAIL_NULL(host.ptr());
+	Error error = peer.ptr()->create_server(9527); // TODO
+	ERR_FAIL_COND(error != Error::OK);
+
+	Ref<ENetConnection> host = peer.ptr()->get_host();
+	ERR_FAIL_NULL(host);
 	host.ptr()->compress(ENetConnection::CompressionMode::COMPRESS_RANGE_CODER);
-	Ref<MultiplayerAPI> multiplayerAPI = get_multiplayer();
-	ERR_FAIL_NULL(multiplayerAPI.ptr());
-	multiplayerAPI->set_multiplayer_peer(peer);
+
+	Ref<MultiplayerAPI> multiplayerAPI = _get_multiplayer();
+	ERR_FAIL_NULL(multiplayerAPI);
+	multiplayerAPI.ptr()->set_multiplayer_peer(peer);
 	UtilityFunctions::print("host success!");
 }
 
 void MultiplayerSystem::joinGame() {
-	ERR_FAIL_NULL(peer.ptr());
-	Error error = peer->create_client("127.0.0.1", 9527); // TODO
-	ERR_FAIL_COND_EDMSG(error != Error::OK, "peer->create_client error:" + error);
+	Ref<ENetMultiplayerPeer> peer;
+	peer.instantiate();
 
-	Ref<ENetConnection> host = peer->get_host();
-	ERR_FAIL_NULL(host.ptr());
+	Error error = peer.ptr()->create_client("127.0.0.1", 9527); // TODO
+	ERR_FAIL_COND(error != Error::OK);
+
+	Ref<ENetConnection> host = peer.ptr()->get_host();
+	ERR_FAIL_NULL(host);
 	host.ptr()->compress(ENetConnection::CompressionMode::COMPRESS_RANGE_CODER);
-	Ref<MultiplayerAPI> multiplayerAPI = get_multiplayer();
-	ERR_FAIL_NULL(multiplayerAPI.ptr());
-	multiplayerAPI->set_multiplayer_peer(peer);
+
+	Ref<MultiplayerAPI> multiplayerAPI = _get_multiplayer();
+	ERR_FAIL_NULL(multiplayerAPI);
+	multiplayerAPI.ptr()->set_multiplayer_peer(peer);
 	UtilityFunctions::print("join success");
+}
+
+void MultiplayerSystem::connect(const StringName& signal, const Callable& callable, uint32_t flags) {
+	const Ref<MultiplayerAPI>& multiplayerAPI = _get_multiplayer();
+	ERR_FAIL_NULL(multiplayerAPI);
+	multiplayerAPI.ptr()->connect(signal, callable, flags);
+}
+
+void MultiplayerSystem::disconnect(const StringName& signal, const Callable& callable) {
+	const Ref<MultiplayerAPI>& multiplayerAPI = _get_multiplayer();
+	ERR_FAIL_NULL(multiplayerAPI);
+	multiplayerAPI.ptr()->disconnect(signal, callable);
+}
+
+int32_t MultiplayerSystem::get_unique_id() {
+	const Ref<MultiplayerAPI>& multiplayerAPI = _get_multiplayer();
+	ERR_FAIL_NULL_V(multiplayerAPI, 0);
+	return multiplayerAPI.ptr()->get_unique_id();
+}
+
+bool MultiplayerSystem::is_server() {
+	const Ref<MultiplayerAPI>& multiplayerAPI = _get_multiplayer();
+	ERR_FAIL_NULL_V(multiplayerAPI, false);
+	return multiplayerAPI.ptr()->is_server();
+}
+
+Ref<MultiplayerAPI> MultiplayerSystem::_get_multiplayer() {
+	ERR_FAIL_NULL_V(singleton, nullptr);
+	return singleton->get_multiplayer();
 }

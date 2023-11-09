@@ -3,6 +3,7 @@
 #include "scene/player/movement/fsm/playerMovementFSMComponent.h"
 #include "scene/player/movement/playerMovementComponent.h"
 #include "scene/player/playerControllerComponent.h"
+#include "system/multiplayerSystem.h"
 
 Player::Player() {
 }
@@ -57,6 +58,9 @@ void Player::set_uid(int32_t p_uid) {
 		if (controller) {
 			controller->set_multiplayer_authority(p_uid);
 		}
+		if (movement) {
+			movement->set_multiplayer_authority(p_uid);
+		}
 	}
 }
 
@@ -65,13 +69,13 @@ void Player::set_uid(int32_t p_uid) {
 void Player::_ready() {
 	PP_CONTINUE_IF_GAME
 
-	if (movement_fsm) {
-		movement_fsm->on_owner_ready();
-	}
-
-	if (get_multiplayer()->get_unique_id() == uid) {
+	if (MultiplayerSystem::get_unique_id() == uid) {
 		if (camera) {
 			camera->make_current();
+		}
+
+		if (movement_fsm) {
+			movement_fsm->on_owner_ready();
 		}
 	}
 }
@@ -88,7 +92,7 @@ void Player::_process(double delta) {
 void Player::_physics_process(double delta) {
 	PP_CONTINUE_IF_GAME
 
-	if (get_multiplayer()->is_server()) { // TODO
+	if (MultiplayerSystem::get_unique_id() == uid) {
 		if (movement_fsm) {
 			movement_fsm->on_physics_process(delta);
 		}

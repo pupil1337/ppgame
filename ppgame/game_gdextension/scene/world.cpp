@@ -1,20 +1,21 @@
 #include "world.h"
 
 #include "scene/player/player.h"
+#include "system/multiplayerSystem.h"
 
 void World::_enter_tree() {
 	PP_CONTINUE_IF_GAME
 
-	if (get_multiplayer()->is_server()) {
-		get_multiplayer()->connect("peer_connected", callable_mp(this, &World::_add_player));
-		get_multiplayer()->connect("peer_disconnected", callable_mp(this, &World::_del_player));
+	if (MultiplayerSystem::is_server()) {
+		MultiplayerSystem::connect("peer_connected", callable_mp(this, &World::_add_player));
+		MultiplayerSystem::connect("peer_disconnected", callable_mp(this, &World::_del_player));
 	}
 }
 
 void World::_ready() {
 	PP_CONTINUE_IF_GAME
 
-	if (get_multiplayer()->is_server()) {
+	if (MultiplayerSystem::is_server()) {
 		_add_player(1);
 	}
 }
@@ -22,9 +23,9 @@ void World::_ready() {
 void World::_exit_tree() {
 	PP_CONTINUE_IF_GAME
 
-	if (get_multiplayer()->is_server()) {
-		get_multiplayer()->disconnect("peer_connected", callable_mp(this, &World::_add_player));
-		get_multiplayer()->disconnect("peer_disconnected", callable_mp(this, &World::_del_player));
+	if (MultiplayerSystem::is_server()) {
+		MultiplayerSystem::disconnect("peer_connected", callable_mp(this, &World::_add_player));
+		MultiplayerSystem::disconnect("peer_disconnected", callable_mp(this, &World::_del_player));
 	}
 }
 

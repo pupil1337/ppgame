@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://2p84kx6qoppy"]
+[gd_scene load_steps=6 format=3 uid="uid://2p84kx6qoppy"]
 
 [ext_resource type="Texture2D" uid="uid://cyrdhh8qr254l" path="res://art/player/player.png" id="1_02a52"]
 
@@ -7,11 +7,6 @@
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iqvq7"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_51ac4"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_e5nqd"]
-properties/0/path = NodePath(".:input_dir")
-properties/0/spawn = true
-properties/0/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ewwl3"]
 properties/0/path = NodePath(".:position")
@@ -26,6 +21,7 @@ camera = NodePath("Camera2D")
 movement_fsm = NodePath("MovementFSM")
 movement = NodePath("Movement")
 controller = NodePath("Controller")
+uid = 0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -70,12 +66,7 @@ player = NodePath("..")
 
 [node name="Fall" type="PlayerFallState" parent="MovementFSM/Air"]
 
-[node name="Controller" type="PlayerControllerComponent" parent="." node_paths=PackedStringArray("synchronizer")]
-synchronizer = NodePath("ControllerSynchronizer")
-
-[node name="ControllerSynchronizer" type="MultiplayerSynchronizer" parent="Controller"]
-replication_config = SubResource("SceneReplicationConfig_e5nqd")
-public_visibility = false
+[node name="Controller" type="PlayerControllerComponent" parent="."]
 
 [node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ewwl3")

@@ -16,11 +16,16 @@ private:
 
 	float max_run_speed = 8.0f * 16.0f;
 
+	// replicates
+	Vector2 location;
+
 public:
 	_FORCE_INLINE_ Player* get_player() const { return player; }
 	_FORCE_INLINE_ float get_max_run_speed() const { return max_run_speed; }
+	_FORCE_INLINE_ const Vector2& get_location() const { return location; }
 	void set_player(Player* p_player);
 	void set_max_run_speed(float p_max_run_speed);
+	void set_location(const Vector2& p_location);
 
 	// ------------------------------------------
 

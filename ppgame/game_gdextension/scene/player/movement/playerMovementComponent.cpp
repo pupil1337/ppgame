@@ -22,6 +22,13 @@ void PlayerMovementComponent::set_max_run_speed(float p_max_run_speed) {
 	max_run_speed = p_max_run_speed;
 }
 
+void PlayerMovementComponent::set_location(const Vector2& p_location) {
+	location = p_location; // TODO
+	if (is_inside_tree()) {
+		// TODO
+	}
+}
+
 // ----------------------------------------------------------------------------
 
 void PlayerMovementComponent::move() {

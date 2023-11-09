@@ -46,5 +46,6 @@
 			"random": "cpp",
 			"filesystem": "cpp"
 		},
+		"dotnet.defaultSolution": "disable",
 	}
 }

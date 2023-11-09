@@ -11,7 +11,6 @@ class MultiplayerSystem : public Node {
 public:
 	MultiplayerSystem();
 	~MultiplayerSystem();
-	static MultiplayerSystem* get_singleton();
 
 protected:
 	static void _bind_methods() {}
@@ -19,15 +18,17 @@ protected:
 	// ------------------------------------------
 
 public:
-	virtual void _enter_tree() override;
+	static void hostGame();
+	static void joinGame();
 
-public:
-	void hostGame();
-	void joinGame();
+	static void connect(const StringName& signal, const Callable& callable, uint32_t flags = 0U);
+	static void disconnect(const StringName& signal, const Callable& callable);
+
+	static int32_t get_unique_id();
+	static bool is_server();
 
 private:
-	Ref<ENetMultiplayerPeer> peer;
-	Vector<int32_t> player_uids;
+	static Ref<MultiplayerAPI> _get_multiplayer();
 };
 
 #endif // MULTIPLAYERSYSTEM_H
