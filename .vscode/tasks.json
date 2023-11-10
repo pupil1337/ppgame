@@ -1,6 +1,7 @@
 {
     "version": "2.0.0",
     "tasks": [
+		// editor
 		{
 			"label": "editor [debug]",
 			"options": {
@@ -19,6 +20,25 @@
 			"group": "build",
 			"problemMatcher": "$msCompile"
 		},
+		// godot-cpp
+		{
+			"label": "godot-cpp",
+			"options": {
+				"cwd": "${workspaceFolder}/godot-cpp"
+			},
+			"type": "shell",
+			"command": "scons",
+			"args": [
+				"platform=windows",
+				"bits=64",
+				"target=editor",
+				"dev_build=yes",
+				"debug_symbols=yes"
+			],
+			"group": "build",
+			"problemMatcher": "$msCompile"
+		},
+		// game
 		{
 			"label": "game [debug]",
 			"options": {
@@ -39,10 +59,13 @@
 			},
 			"problemMatcher": "$msCompile"
 		},
+		// editor && game
 		{
 			"label": "editor&game [debug]",
+			"dependsOrder": "sequence",
 			"dependsOn": [
 				"editor [debug]",
+				"godot-cpp",
 				"game [debug]"
 			]
 		}
