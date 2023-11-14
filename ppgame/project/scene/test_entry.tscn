@@ -3,6 +3,10 @@
 [sub_resource type="GDScript" id="GDScript_gt2xv"]
 script/source = "extends Control
 
+func _ready():
+	DirAccess.copy_absolute(\"res://bin/steam_appid.txt\", \"res://../../godot/bin/steam_appid.txt\")
+
+
 func _on_button_pressed():
 	var entry = load(\"res://scene/game.tscn\").instantiate()
 	get_tree().root.add_child(entry)

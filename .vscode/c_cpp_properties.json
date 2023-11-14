@@ -22,7 +22,8 @@
 				"${workspaceFolder}/godot-cpp/gdextension",
 				"${workspaceFolder}/godot-cpp/gen/include",
                 "${workspaceFolder}/godot-cpp/include",
-				"${workspaceFolder}/ppgame/game_gdextension"
+				"${workspaceFolder}/ppgame/game_gdextension",
+				"${workspaceFolder}/ppgame/thirdparty/steamworks"
             ],
 			"forcedInclude": [
 				// game pch

@@ -4,5 +4,7 @@ entry_symbol = "game_gdextension_library_init"
 compatibility_minimum = "4.1"
 
 [libraries]
-
 windows.debug.x86_64 = "res://bin/game_gdextension.windows.editor.dev.x86_64.dll"
+
+[dependencies]
+windows.debug.x86_64 = { "res://bin/steam_api64.dll": "" }

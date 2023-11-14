@@ -15,9 +15,21 @@ public:
 protected:
 	static void _bind_methods() {}
 
+public:
+	virtual void _enter_tree() override;
+	virtual void _exit_tree() override;
+
 	// ------------------------------------------
 
+	// Matchmaking
+	CCallResult<MultiplayerSystem, LobbyCreated_t> callResultCreateLobby;
+	void lobby_created(LobbyCreated_t* call_data, bool io_failure);
+	CCallResult<MultiplayerSystem, LobbyMatchList_t> callResultLobbyList;
+	void lobby_match_list(LobbyMatchList_t* call_data, bool io_failure);
+
 public:
+	void create_lobby();
+
 	static void hostGame();
 	static void joinGame();
 

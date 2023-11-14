@@ -17,6 +17,12 @@ for root, dirs, files in os.walk('.'):
         if f.endswith('.cpp'):
             sources.append(root + '/' + f)
 
+# thirdpart - steam
+env_pp.Append(CPPPATH=["../thirdparty/steamworks"])
+env_pp.Append(LIBPATH=["../project/bin"])
+env_pp.Append(LIBS=["steam_api64"])
+
+# out
 library = env_pp.SharedLibrary(
     "../project/bin/{}{}{}".format("game_gdextension", env["suffix"], env["SHLIBSUFFIX"]),
     source=sources,
