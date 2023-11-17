@@ -15,8 +15,6 @@
 #include <godot_cpp/classes/camera2d.hpp>
 #include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/control.hpp>
-#include <godot_cpp/classes/e_net_connection.hpp>
-#include <godot_cpp/classes/e_net_multiplayer_peer.hpp>
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/input.hpp>
 #include <godot_cpp/classes/input_event.hpp>

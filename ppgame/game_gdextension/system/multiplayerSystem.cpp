@@ -1,6 +1,6 @@
 #include "multiplayerSystem.h"
 
-#include "steam/steam_api.h"
+#include "base/steam/steam_multiplayer_peer.h"
 
 MultiplayerSystem* MultiplayerSystem::singleton = nullptr;
 
@@ -12,6 +12,10 @@ MultiplayerSystem::~MultiplayerSystem() {
 	singleton = nullptr;
 }
 
+MultiplayerSystem* MultiplayerSystem::get_singleton() {
+	return singleton;
+}
+
 // ----------------------------------------------------------------------------
 
 void MultiplayerSystem::_enter_tree() {
@@ -19,6 +23,12 @@ void MultiplayerSystem::_enter_tree() {
 
 	SteamAPI_RestartAppIfNecessary(2113080);
 	SteamAPI_Init();
+
+	SteamNetworkingUtils()->InitRelayNetworkAccess();
+}
+
+void MultiplayerSystem::_process(double delta) {
+	SteamAPI_RunCallbacks();
 }
 
 void MultiplayerSystem::_exit_tree() {
@@ -28,51 +38,72 @@ void MultiplayerSystem::_exit_tree() {
 }
 
 void MultiplayerSystem::lobby_created(LobbyCreated_t* call_data, bool io_failure) {
+	ERR_FAIL_COND(io_failure);
+
+	CSteamID lobby_id = call_data->m_ulSteamIDLobby;
+	uint64_t lobby = lobby_id.ConvertToUint64();
+	UtilityFunctions::print("Create Lobby Success! lobby id: " + uitos(lobby));
+
+	Ref<SteamMultiplayerPeer> peer;
+	peer.instantiate();
+
+	Error err = peer->create_host(0, {});
+	UtilityFunctions::print("create_host err?(0:OK): " + itos(err));
+	_get_multiplayer()->set_multiplayer_peer(peer);
 }
 
 void MultiplayerSystem::lobby_match_list(LobbyMatchList_t* call_data, bool io_failure) {
+	ERR_FAIL_COND(io_failure);
+
+	int lobby_count = call_data->m_nLobbiesMatching;
+	for (int i = 0; i < lobby_count; ++i) {
+		CSteamID lobby_id = SteamMatchmaking()->GetLobbyByIndex(i);
+		uint64_t lobby = lobby_id.ConvertToUint64();
+		UtilityFunctions::print("Find Lobby id: " + uitos(lobby));
+
+		if (i == 0) {
+			SteamAPICall_t api_call = SteamMatchmaking()->JoinLobby(lobby_id);
+			callResultJoinLobby.Set(api_call, this, &MultiplayerSystem::lobby_enter);
+		}
+	}
+}
+
+void MultiplayerSystem::lobby_enter(LobbyEnter_t* call_data, bool io_failure) {
+	ERR_FAIL_COND(io_failure);
+
+	UtilityFunctions::print("Lobby Enter");
+
+	CSteamID id = SteamMatchmaking()->GetLobbyOwner(call_data->m_ulSteamIDLobby);
+
+	Ref<SteamMultiplayerPeer> peer;
+	peer.instantiate();
+
+	Error err = peer.ptr()->create_client(id.ConvertToUint64(), 0, {});
+	UtilityFunctions::print("create_client err?(0:OK): " + itos(err));
+
+	_get_multiplayer()->set_multiplayer_peer(peer);
 }
 
 void MultiplayerSystem::create_lobby() {
 	if (SteamMatchmaking() != nullptr) {
-		SteamAPICall_t api_call = SteamMatchmaking()->CreateLobby(ELobbyType::k_ELobbyTypePublic, 4);
+		SteamAPICall_t api_call = SteamMatchmaking()->CreateLobby(ELobbyType::k_ELobbyTypePublic, 8);
 		callResultCreateLobby.Set(api_call, this, &MultiplayerSystem::lobby_created);
 	}
 }
 
+void MultiplayerSystem::request_lobby_list() {
+	if (SteamMatchmaking() != nullptr) {
+		SteamAPICall_t api_call = SteamMatchmaking()->RequestLobbyList();
+		callResultLobbyList.Set(api_call, this, &MultiplayerSystem::lobby_match_list);
+	}
+}
+
 void MultiplayerSystem::hostGame() {
-	singleton->create_lobby();
-	// Ref<ENetMultiplayerPeer> peer;
-	// peer.instantiate();
-
-	// Error error = peer.ptr()->create_server(9527); // TODO
-	// ERR_FAIL_COND(error != Error::OK);
-
-	// Ref<ENetConnection> host = peer.ptr()->get_host();
-	// ERR_FAIL_NULL(host);
-	// host.ptr()->compress(ENetConnection::CompressionMode::COMPRESS_RANGE_CODER);
-
-	// Ref<MultiplayerAPI> multiplayerAPI = _get_multiplayer();
-	// ERR_FAIL_NULL(multiplayerAPI);
-	// multiplayerAPI.ptr()->set_multiplayer_peer(peer);
-	// UtilityFunctions::print("host success!");
+	create_lobby();
 }
 
 void MultiplayerSystem::joinGame() {
-	Ref<ENetMultiplayerPeer> peer;
-	peer.instantiate();
-
-	Error error = peer.ptr()->create_client("127.0.0.1", 9527); // TODO
-	ERR_FAIL_COND(error != Error::OK);
-
-	Ref<ENetConnection> host = peer.ptr()->get_host();
-	ERR_FAIL_NULL(host);
-	host.ptr()->compress(ENetConnection::CompressionMode::COMPRESS_RANGE_CODER);
-
-	Ref<MultiplayerAPI> multiplayerAPI = _get_multiplayer();
-	ERR_FAIL_NULL(multiplayerAPI);
-	multiplayerAPI.ptr()->set_multiplayer_peer(peer);
-	UtilityFunctions::print("join success");
+	request_lobby_list();
 }
 
 void MultiplayerSystem::connect(const StringName& signal, const Callable& callable, uint32_t flags) {

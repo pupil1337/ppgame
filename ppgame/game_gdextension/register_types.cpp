@@ -24,6 +24,9 @@ using namespace godot;
 #include "scene/gui/menu/menu_main.h"
 
 // System
+#include "base/steam/steam_connection.h"
+#include "base/steam/steam_multiplayer_peer.h"
+#include "base/steam/steam_packet_peer.h"
 #include "system/multiplayerSystem.h"
 
 void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
@@ -57,6 +60,9 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 
 	// System
 	ClassDB::register_class<MultiplayerSystem>();
+	ClassDB::register_class<SteamPacketPeer>();
+	ClassDB::register_class<SteamConnection>();
+	ClassDB::register_class<SteamMultiplayerPeer>();
 }
 
 void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {

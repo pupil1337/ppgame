@@ -39,13 +39,6 @@
 		// clang-format
 		"clang-format.executable": "clang-format",
 		"editor.formatOnSave": true,
-		"files.associations": {
-			"iosfwd": "cpp",
-			"xlocbuf": "cpp",
-			"state.h": "c",
-			"random": "cpp",
-			"filesystem": "cpp"
-		},
 		"dotnet.defaultSolution": "disable",
 	}
 }

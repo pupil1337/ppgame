@@ -27,7 +27,7 @@ void Game::set_packed_scene_world(const Ref<PackedScene>& p_packed_scene_world) 
 // ----------------------------------------------------------------------------
 
 void Game::_on_start_button_pressed() {
-	MultiplayerSystem::hostGame();
+	MultiplayerSystem::get_singleton()->hostGame();
 
 	ERR_FAIL_NULL_EDMSG(packed_scene_world.ptr(), "not set packed_scene world");
 	World* world = Object::cast_to<World>(packed_scene_world.ptr()->instantiate());
@@ -38,7 +38,7 @@ void Game::_on_start_button_pressed() {
 }
 
 void Game::_on_join_button_pressed() {
-	MultiplayerSystem::joinGame();
+	MultiplayerSystem::get_singleton()->joinGame();
 
 	ERR_FAIL_NULL_EDMSG(packed_scene_world.ptr(), "not set packed_scene world");
 	World* world = Object::cast_to<World>(packed_scene_world.ptr()->instantiate());
