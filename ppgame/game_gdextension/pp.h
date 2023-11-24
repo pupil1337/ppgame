@@ -23,6 +23,7 @@
 #include <godot_cpp/classes/multiplayer_peer_extension.hpp>
 #include <godot_cpp/classes/multiplayer_synchronizer.hpp>
 #include <godot_cpp/classes/node.hpp>
+#include <godot_cpp/classes/os.hpp>
 #include <godot_cpp/classes/packed_scene.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/scene_tree.hpp>

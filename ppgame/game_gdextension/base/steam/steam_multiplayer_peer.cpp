@@ -210,10 +210,10 @@ bool SteamMultiplayerPeer::close_listen_socket() {
 
 Error SteamMultiplayerPeer::create_host(int n_local_virtual_port, Array options) {
 	ERR_FAIL_COND_V_MSG(_is_active(), ERR_ALREADY_IN_USE, "The multiplayer instance is already active.");
-	if (SteamNetworkingSockets() == NULL) {
+	if (SteamNetworkingSockets() == nullptr) {
 		return Error::ERR_CANT_CREATE;
 	}
-	// SteamNetworkingUtils()->InitRelayNetworkAccess(); TODO
+	// SteamNetworkingUtils()->InitRelayNetworkAccess();
 	const SteamNetworkingConfigValue_t* these_options = convert_options_array(options);
 	listen_socket = SteamNetworkingSockets()->CreateListenSocketP2P(n_local_virtual_port, options.size(), these_options);
 	delete[] these_options;
@@ -232,7 +232,7 @@ Error SteamMultiplayerPeer::create_client(uint64_t identity_remote, int n_remote
 		return Error::ERR_CANT_CONNECT;
 	}
 	unique_id = generate_unique_id();
-	// SteamNetworkingUtils()->InitRelayNetworkAccess(); TODO
+	// SteamNetworkingUtils()->InitRelayNetworkAccess();
 	const SteamNetworkingConfigValue_t* these_options = convert_options_array(options);
 	SteamNetworkingIdentity p_remote_id;
 	p_remote_id.SetSteamID64(identity_remote);

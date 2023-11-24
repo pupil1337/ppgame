@@ -23,6 +23,7 @@ camera = NodePath("Camera2D")
 movement_fsm = NodePath("MovementFSM")
 movement = NodePath("Movement")
 controller = NodePath("Controller")
+uid = -16774656
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

@@ -4,7 +4,9 @@
 
 MultiplayerSystem* MultiplayerSystem::singleton = nullptr;
 
-MultiplayerSystem::MultiplayerSystem() {
+MultiplayerSystem::MultiplayerSystem()
+// :callbackRelayNetworkStatus(this, &self_type::relay_network_status)
+{
 	singleton = this;
 }
 
@@ -16,20 +18,51 @@ MultiplayerSystem* MultiplayerSystem::get_singleton() {
 	return singleton;
 }
 
+void MultiplayerSystem::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("get_steam_networking_availability"), &self_type::_get_steam_networking_availability);
+}
+
 // ----------------------------------------------------------------------------
+
+extern "C" void __cdecl SteamAPIDebugTextHook(int nSeverity, const char* pchDebugText) {
+	UtilityFunctions::print(pchDebugText);
+}
 
 void MultiplayerSystem::_enter_tree() {
 	PP_CONTINUE_IF_GAME
 
-	SteamAPI_RestartAppIfNecessary(2113080);
-	SteamAPI_Init();
+	if (SteamAPI_RestartAppIfNecessary(2113080)) {
+		OS::get_singleton()->alert(
+				"Not run by Steam! will run it then start game.\n"
+				"https://partner.steamgames.com/doc/api/steam_api#SteamAPI_RestartAppIfNecessary",
+				"SteamAPI_RestartAppIfNecessary()");
+		get_tree()->quit();
+		return;
+	}
+
+	if (!SteamAPI_Init()) {
+		OS::get_singleton()->alert(
+				"Steam Not Running?\n"
+				"https://partner.steamgames.com/doc/api/steam_api#SteamAPI_Init",
+				"!SteamAPI_Init()");
+		get_tree()->quit();
+		return;
+	}
+
+	SteamUtils()->SetWarningMessageHook(&SteamAPIDebugTextHook);
 
 	SteamNetworkingUtils()->InitRelayNetworkAccess();
 }
 
 void MultiplayerSystem::_process(double delta) {
+	PP_CONTINUE_IF_GAME
+
 	SteamAPI_RunCallbacks();
 }
+
+// void MultiplayerSystem::relay_network_status(SteamRelayNetworkStatus_t* call_data) {
+// 	UtilityFunctions::print("relay_network_status: " + _get_steam_networking_availability_name(call_data->m_eAvail));
+// }
 
 void MultiplayerSystem::_exit_tree() {
 	PP_CONTINUE_IF_GAME
@@ -133,4 +166,37 @@ bool MultiplayerSystem::is_server() {
 Ref<MultiplayerAPI> MultiplayerSystem::_get_multiplayer() {
 	ERR_FAIL_NULL_V(singleton, nullptr);
 	return singleton->get_multiplayer();
+}
+
+ESteamNetworkingAvailability MultiplayerSystem::_get_steam_networking_availability() const {
+	if (SteamNetworkingUtils() == nullptr) {
+		return ESteamNetworkingAvailability::k_ESteamNetworkingAvailability_Unknown;
+	}
+	return SteamNetworkingUtils()->GetRelayNetworkStatus(nullptr);
+}
+
+String MultiplayerSystem::_get_steam_networking_availability_name(ESteamNetworkingAvailability type) const {
+	switch (type) {
+		case k_ESteamNetworkingAvailability_CannotTry:
+			return "CannotTry";
+		case k_ESteamNetworkingAvailability_Failed:
+			return "Failed";
+		case k_ESteamNetworkingAvailability_Previously:
+			return "Previously";
+		case k_ESteamNetworkingAvailability_Retrying:
+			return "Retrying";
+		case k_ESteamNetworkingAvailability_NeverTried:
+			return "NeverTried";
+		case k_ESteamNetworkingAvailability_Waiting:
+			return "Waiting";
+		case k_ESteamNetworkingAvailability_Attempting:
+			return "Attempting";
+		case k_ESteamNetworkingAvailability_Current:
+			return "Current";
+		case k_ESteamNetworkingAvailability_Unknown:
+			return "Unknown";
+		case k_ESteamNetworkingAvailability__Force32bit:
+			return "Force32bit";
+	}
+	return "Not this type";
 }

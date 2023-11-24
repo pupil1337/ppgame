@@ -20,7 +20,7 @@ public:
 	static MultiplayerSystem* get_singleton();
 
 protected:
-	static void _bind_methods() {}
+	static void _bind_methods();
 
 public:
 	virtual void _enter_tree() override;
@@ -37,6 +37,9 @@ public:
 	CCallResult<MultiplayerSystem, LobbyEnter_t> callResultJoinLobby;
 	void lobby_enter(LobbyEnter_t* call_data, bool io_failure);
 
+	// Steam Callback
+	// STEAM_CALLBACK(MultiplayerSystem, relay_network_status, SteamRelayNetworkStatus_t, callbackRelayNetworkStatus);
+
 public:
 	void create_lobby();
 	void request_lobby_list();
@@ -52,6 +55,11 @@ public:
 
 private:
 	static Ref<MultiplayerAPI> _get_multiplayer();
+
+	ESteamNetworkingAvailability _get_steam_networking_availability() const;
+	String _get_steam_networking_availability_name(ESteamNetworkingAvailability type) const;
 };
+
+VARIANT_ENUM_CAST(ESteamNetworkingAvailability)
 
 #endif // MULTIPLAYERSYSTEM_H
