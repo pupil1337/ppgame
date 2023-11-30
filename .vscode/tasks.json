@@ -15,7 +15,8 @@
 				"target=editor",
 				"custom_modules=../ppgame/game_module",
 				"dev_build=yes",
-				"debug_symbols=yes"
+				"debug_symbols=yes",
+				"compiledb=yes"
 			],
 			"group": "build",
 			"problemMatcher": "$msCompile"
@@ -33,7 +34,8 @@
 				"bits=64",
 				"target=editor",
 				"dev_build=yes",
-				"debug_symbols=yes"
+				"debug_symbols=yes",
+				"compiledb=yes"
 			],
 			"group": {
 				"kind": "build",

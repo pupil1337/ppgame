@@ -4,8 +4,9 @@
 # vscode
 
 # ??? not in godot/.gitignore
-.vc.db/
 *.exp
+compile_commands.json
+.cache/
 
 # ---------------------------------------------------------------------------------
 # Copy From godot/.gitignore

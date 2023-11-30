@@ -2,31 +2,8 @@
     "configurations": [
         {
             "name": "Win32",
-            "includePath": [
-                // godot
-                "${workspaceFolder}/godot/*",
-                "${workspaceFolder}/godot/core/**",
-                "${workspaceFolder}/godot/drivers/**",
-                "${workspaceFolder}/godot/editor/**",
-                "${workspaceFolder}/godot/main/**",
-                "${workspaceFolder}/godot/misc/**",
-                "${workspaceFolder}/godot/modules/**",
-                "${workspaceFolder}/godot/platform/windows/**",
-                "${workspaceFolder}/godot/scene/**",
-                "${workspaceFolder}/godot/servers/**",
-                "${workspaceFolder}/godot/tests/**",
-                "${workspaceFolder}/godot/thirdparty/**",
-                "${workspaceFolder}/ppgame/game_module",
-                
-                // game
-				"${workspaceFolder}/godot-cpp/gdextension",
-				"${workspaceFolder}/godot-cpp/gen/include",
-                "${workspaceFolder}/godot-cpp/include",
-				"${workspaceFolder}/ppgame/game_gdextension",
-				"${workspaceFolder}/ppgame/thirdparty/steamworks"
-            ],
+			"compileCommands": "${workspaceFolder}/compile_commands.json",
 			"forcedInclude": [
-				// game pch
 				"${workspaceFolder}/ppgame/game_gdextension/pp.h"
 			],
             "defines": [

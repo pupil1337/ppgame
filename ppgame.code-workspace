@@ -7,8 +7,9 @@
 	"extensions": {
 		"recommendations": [
 			"ms-vscode.cpptools",
-			"EditorConfig.EditorConfig",
-			"Gruntfuggly.todo-tree",
+			"llvm-vs-code-extensions.vscode-clangd",
+			"editorconfig.editorconfig",
+			"gruntfuggly.todo-tree",
 			"xaver.clang-format"
 		]
 	},
@@ -31,14 +32,12 @@
 			"**/*.obj": true,
 			"**/*.pdb": true
 		},
-		// "C_Cpp.default.browse.databaseFilename": "${workspaceFolder}/.vscode/.vc.db/",
-		"C_Cpp.intelliSenseMemoryLimit": 16384,
-		"C_Cpp.default.intelliSenseMode": "windows-msvc-x64",
-		"C_Cpp.inlayHints.autoDeclarationTypes.showOnLeft": true,
-		"C_Cpp.inlayHints.referenceOperator.enabled": true,
 		// clang-format
 		"clang-format.executable": "clang-format",
 		"editor.formatOnSave": true,
+		// clangd
+		"C_Cpp.autocomplete": "disabled",
+		// donet
 		"dotnet.defaultSolution": "disable",
 	}
 }

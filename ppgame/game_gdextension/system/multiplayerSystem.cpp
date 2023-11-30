@@ -4,9 +4,7 @@
 
 MultiplayerSystem* MultiplayerSystem::singleton = nullptr;
 
-MultiplayerSystem::MultiplayerSystem()
-// :callbackRelayNetworkStatus(this, &self_type::relay_network_status)
-{
+MultiplayerSystem::MultiplayerSystem() {
 	singleton = this;
 }
 
@@ -59,10 +57,6 @@ void MultiplayerSystem::_process(double delta) {
 
 	SteamAPI_RunCallbacks();
 }
-
-// void MultiplayerSystem::relay_network_status(SteamRelayNetworkStatus_t* call_data) {
-// 	UtilityFunctions::print("relay_network_status: " + _get_steam_networking_availability_name(call_data->m_eAvail));
-// }
 
 void MultiplayerSystem::_exit_tree() {
 	PP_CONTINUE_IF_GAME
@@ -173,30 +167,4 @@ ESteamNetworkingAvailability MultiplayerSystem::_get_steam_networking_availabili
 		return ESteamNetworkingAvailability::k_ESteamNetworkingAvailability_Unknown;
 	}
 	return SteamNetworkingUtils()->GetRelayNetworkStatus(nullptr);
-}
-
-String MultiplayerSystem::_get_steam_networking_availability_name(ESteamNetworkingAvailability type) const {
-	switch (type) {
-		case k_ESteamNetworkingAvailability_CannotTry:
-			return "CannotTry";
-		case k_ESteamNetworkingAvailability_Failed:
-			return "Failed";
-		case k_ESteamNetworkingAvailability_Previously:
-			return "Previously";
-		case k_ESteamNetworkingAvailability_Retrying:
-			return "Retrying";
-		case k_ESteamNetworkingAvailability_NeverTried:
-			return "NeverTried";
-		case k_ESteamNetworkingAvailability_Waiting:
-			return "Waiting";
-		case k_ESteamNetworkingAvailability_Attempting:
-			return "Attempting";
-		case k_ESteamNetworkingAvailability_Current:
-			return "Current";
-		case k_ESteamNetworkingAvailability_Unknown:
-			return "Unknown";
-		case k_ESteamNetworkingAvailability__Force32bit:
-			return "Force32bit";
-	}
-	return "Not this type";
 }
