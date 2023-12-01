@@ -30,7 +30,10 @@
 			"**/*.ilk": true,
 			"**/*.lib": true,
 			"**/*.obj": true,
-			"**/*.pdb": true
+			"**/*.pdb": true,
+			"**/.cache/": true,
+			"**/compile_commands.json": true,
+			"**/*.lnk": true
 		},
 		// clang-format
 		"clang-format.executable": "clang-format",

@@ -24,7 +24,7 @@ env_pp.Append(LIBS=["steam_api64"])
 
 # out
 library = env_pp.SharedLibrary(
-    "../project/bin/{}{}{}".format("game_gdextension", env["suffix"], env["SHLIBSUFFIX"]),
+    "../project/bin/{}{}{}".format("game_gdextension", env_pp["suffix"], env_pp["SHLIBSUFFIX"]),
     source=sources,
 )
 
