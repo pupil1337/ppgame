@@ -6,16 +6,14 @@
 #include <godot_cpp/godot.hpp>
 using namespace godot;
 
-// Demo
-#include "demo.h"
+#include "player/player.h"
 
 void initialize_game_gdextension_types(godot::ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
 
-	// Demo
-	ClassDB::register_class<Demo>();
+	ClassDB::register_class<Player>();
 }
 
 void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {

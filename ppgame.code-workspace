@@ -33,7 +33,9 @@
 			"**/*.pdb": true,
 			"**/.cache/": true,
 			"**/compile_commands.json": true,
-			"**/*.lnk": true
+			"**/*.lnk": true,
+			"ppgame/game_gdextension/bin": true,
+			"ppgame/project/bin/windows": true
 		},
 		// clang-format
 		"clang-format.executable": "clang-format",
