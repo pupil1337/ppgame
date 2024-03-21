@@ -44,6 +44,7 @@
 		"C_Cpp.autocomplete": "disabled",
 		// donet
 		"dotnet.defaultSolution": "disable",
+		// UnRecommended plugins setting
 		"commentTranslate.hover.enabled": false,
 	}
 }
