@@ -14,6 +14,8 @@
 		]
 	},
 	"settings": {
+		// editor
+		"editor.fontSize": 20,
 		"files.exclude": {
 			"**/__pycache__": true,
 			"**/.sconsign.dblite": true,
@@ -36,11 +38,13 @@
 			"ppgame/project/bin/windows": true
 		},
 		// clang-format
-		"clang-format.executable": "clang-format",
 		"editor.formatOnSave": true,
+		"clang-format.executable": "clang-format",
 		// clangd
 		"C_Cpp.autocomplete": "disabled",
-		// donet
-		"dotnet.defaultSolution": "disable",
+		"C_Cpp.intelliSenseEngine": "disabled",
+		"[cpp]": {
+			"editor.defaultFormatter": "xaver.clang-format"
+		},
 	}
 }

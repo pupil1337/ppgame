@@ -1,5 +1,5 @@
 {
-    "version": "0.2.0",
+	"version": "0.2.0",
 	"configurations": [
 		// editor
 		{
@@ -8,7 +8,8 @@
 			"request": "launch",
 			"program": "${workspaceFolder}/godot/bin/godot.windows.editor.dev.x86_64.exe",
 			"args": [
-				"--path", "${workspaceFolder}/ppgame/project",
+				"--path",
+				"${workspaceFolder}/ppgame/project",
 				"--editor"
 			],
 			"stopAtEntry": false,
@@ -25,7 +26,8 @@
 			"request": "launch",
 			"program": "${workspaceFolder}/godot/bin/godot.windows.editor.dev.x86_64.exe",
 			"args": [
-				"--path", "${workspaceFolder}/ppgame/project"
+				"--path",
+				"${workspaceFolder}/ppgame/project"
 			],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
@@ -39,7 +41,7 @@
 			"name": "attach",
 			"type": "cppvsdbg",
 			"request": "attach",
-			"processId":"${command:pickProcess}",
+			"processId": "${command:pickProcess}",
 			"visualizerFile": "${workspaceFolder}/godot/platform/windows/godot.natvis"
 		}
 	]
