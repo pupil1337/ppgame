@@ -3,20 +3,15 @@
 #include <gdextension_interface.h>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
-#include <godot_cpp/godot.hpp>
 using namespace godot;
-
-#include "player/player.h"
 
 void initialize_game_gdextension_types(godot::ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
-
-	ClassDB::register_class<Player>();
 }
 
-void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {
+void uninitialize_game_gdextension_types(godot::ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
