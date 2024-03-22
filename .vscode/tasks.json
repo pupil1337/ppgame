@@ -54,7 +54,10 @@
 				"\"add\"",
 				"godot/compile_commands.json",
 				"ppgame/game_gdextension/compile_commands.json",
-				">",
+				"|",
+				"Out-File",
+				"-Encoding",
+				"ascii",
 				"compile_commands.json"
 			],
 			"hide": true,
