@@ -8,14 +8,12 @@
 		"recommendations": [
 			"ms-vscode.cpptools",
 			"llvm-vs-code-extensions.vscode-clangd",
+			"xaver.clang-format",
 			"editorconfig.editorconfig",
-			"gruntfuggly.todo-tree",
-			"xaver.clang-format"
+			"gruntfuggly.todo-tree"
 		]
 	},
 	"settings": {
-		// editor
-		"editor.fontSize": 20,
 		"files.exclude": {
 			"**/__pycache__": true,
 			"**/.sconsign.dblite": true,
@@ -40,11 +38,12 @@
 		// clang-format
 		"editor.formatOnSave": true,
 		"clang-format.executable": "clang-format",
+		"editor.defaultFormatter": "xaver.clang-format",
 		// clangd
 		"C_Cpp.autocomplete": "disabled",
 		"C_Cpp.intelliSenseEngine": "disabled",
-		"[cpp]": {
-			"editor.defaultFormatter": "xaver.clang-format"
-		},
+		"clangd.arguments": [
+			"--compile-commands-dir=${workspaceFolder}"
+		]
 	}
 }
