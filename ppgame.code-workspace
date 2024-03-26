@@ -37,10 +37,8 @@
 		},
 		// clang-format
 		"editor.formatOnSave": true,
-		"clang-format.executable": "clang-format",
 		"editor.defaultFormatter": "xaver.clang-format",
 		// clangd
-		"C_Cpp.autocomplete": "disabled",
 		"C_Cpp.intelliSenseEngine": "disabled",
 		"clangd.arguments": [
 			"--compile-commands-dir=${workspaceFolder}"

@@ -5,10 +5,14 @@
 #include <godot_cpp/core/defs.hpp>
 using namespace godot;
 
+#include "character/player.h"
+
 void initialize_game_gdextension_types(godot::ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
+
+	ClassDB::register_class<Player>();
 }
 
 void uninitialize_game_gdextension_types(godot::ModuleInitializationLevel p_level) {
