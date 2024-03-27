@@ -5,17 +5,37 @@
 #include <godot_cpp/core/defs.hpp>
 using namespace godot;
 
-#include "character/player.h"
+#include "fsm/finite_state_machine_component.h"
+#include "fsm/state.h"
 
-void initialize_game_gdextension_types(godot::ModuleInitializationLevel p_level) {
+#include "character/player/fsm/motion/air/player_fall_state.h"
+#include "character/player/fsm/motion/air/player_jump_state.h"
+#include "character/player/fsm/motion/ground/player_idle_state.h"
+#include "character/player/fsm/motion/ground/player_run_state.h"
+#include "character/player/fsm/player_finite_state_machine_component.h"
+#include "character/player/player.h"
+#include "character/player/player_movement_component.h"
+
+void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
 
-	ClassDB::register_class<Player>();
+	GDREGISTER_ABSTRACT_CLASS(FiniteStateMachineComponent);
+	GDREGISTER_ABSTRACT_CLASS(State);
+
+	GDREGISTER_CLASS(Player);
+	GDREGISTER_CLASS(PlayerMovementComponent);
+	GDREGISTER_CLASS(PlayerFiniteStateMachineComponent);
+	GDREGISTER_ABSTRACT_CLASS(PlayerGroundBaseState);
+	GDREGISTER_CLASS(PlayerIdleState);
+	GDREGISTER_CLASS(PlayerRunState);
+	GDREGISTER_ABSTRACT_CLASS(PlayerAirBaseState);
+	GDREGISTER_CLASS(PlayerJumpState);
+	GDREGISTER_CLASS(PlayerFallState);
 }
 
-void uninitialize_game_gdextension_types(godot::ModuleInitializationLevel p_level) {
+void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
