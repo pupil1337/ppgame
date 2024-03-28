@@ -10,5 +10,17 @@ void Player::_ready() {
 	player_finite_state_machine_component = get_node<PlayerFiniteStateMachineComponent>("PlayerFiniteStateMachineComponent");
 }
 
+void Player::_input(const Ref<InputEvent>& event) {
+}
+
+// void Player::_shortcut_input(const Ref<InputEvent>& event) {
+// }
+
+// void Player::_unhandled_input(const Ref<InputEvent>& event) {
+// }
+
+// void Player::_unhandled_key_input(const Ref<InputEvent>& event) {
+// }
+
 void Player::_bind_methods() {
 }

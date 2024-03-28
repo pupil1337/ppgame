@@ -42,7 +42,9 @@
 		"C_Cpp.intelliSenseEngine": "disabled",
 		"clangd.arguments": [
 			"--compile-commands-dir=${workspaceFolder}",
-			"--header-insertion=never"
+			"--background-index",
+			"--clang-tidy",
+			"--header-insertion=iwyu"
 		]
 	}
 }

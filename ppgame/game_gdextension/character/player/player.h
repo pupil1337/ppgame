@@ -19,6 +19,10 @@ public:
 	PlayerFiniteStateMachineComponent* player_finite_state_machine_component = nullptr;
 
 	virtual void _ready() override;
+	virtual void _input(const Ref<InputEvent>& event) override;
+	// virtual void _shortcut_input(const Ref<InputEvent>& event) override;
+	// virtual void _unhandled_input(const Ref<InputEvent>& event) override;
+	// virtual void _unhandled_key_input(const Ref<InputEvent>& event) override;
 
 protected:
 	static void _bind_methods();
