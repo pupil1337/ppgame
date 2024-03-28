@@ -2,6 +2,8 @@
 #define PLAYER_H
 
 #include <godot_cpp/classes/character_body2d.hpp>
+#include <godot_cpp/classes/input_event.hpp>
+#include <godot_cpp/classes/ref.hpp>
 using namespace godot;
 
 namespace godot {

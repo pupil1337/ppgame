@@ -1,8 +1,11 @@
 #ifndef FINITE_STATE_MACHINE_COMPONENT_H
 #define FINITE_STATE_MACHINE_COMPONENT_H
 
+#include <godot_cpp/classes/input_event.hpp>
 #include <godot_cpp/classes/node.hpp>
+#include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/templates/hash_map.hpp>
+#include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
 
 class State;

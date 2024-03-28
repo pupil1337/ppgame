@@ -1,4 +1,0 @@
-CompileFlags:
-	Add: [
-		 --system-header-prefix=godot-cpp/gen/include, # ??
-	]

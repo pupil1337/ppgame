@@ -1,7 +1,13 @@
 #include "finite_state_machine_component.h"
 
-#include "fsm/state.h"
 #include <functional>
+#include <godot_cpp/classes/input_event.hpp>
+#include <godot_cpp/classes/node.hpp>
+#include <godot_cpp/classes/object.hpp>
+#include <godot_cpp/classes/ref.hpp>
+#include <godot_cpp/variant/string_name.hpp>
+
+#include "fsm/state.h"
 
 void FiniteStateMachineComponent::_ready() {
 	std::function<void(Node*)> _add_state_nodes;

@@ -10,6 +10,7 @@
 			"llvm-vs-code-extensions.vscode-clangd",
 			"xaver.clang-format",
 			"editorconfig.editorconfig",
+			"ms-python.python",
 			"gruntfuggly.todo-tree"
 		]
 	},
