@@ -8,8 +8,10 @@
 #include "fsm/finite_state_machine_component.h"
 #include "fsm/state.h"
 
+#include "character/player/fsm/motion/air/player_air_base_state.h"
 #include "character/player/fsm/motion/air/player_fall_state.h"
 #include "character/player/fsm/motion/air/player_jump_state.h"
+#include "character/player/fsm/motion/ground/player_ground_base_state.h"
 #include "character/player/fsm/motion/ground/player_idle_state.h"
 #include "character/player/fsm/motion/ground/player_run_state.h"
 #include "character/player/fsm/player_finite_state_machine_component.h"

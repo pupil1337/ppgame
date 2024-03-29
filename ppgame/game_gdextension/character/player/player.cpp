@@ -1,6 +1,5 @@
 #include "player.h"
 
-#include <godot_cpp/classes/animated_sprite2d.hpp>
 #include <godot_cpp/classes/input_event.hpp>
 #include <godot_cpp/classes/ref.hpp>
 
