@@ -5,6 +5,7 @@
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/classes/ref.hpp>
+#include <godot_cpp/core/error_macros.hpp>
 #include <godot_cpp/variant/string_name.hpp>
 
 #include "fsm/state.h"
@@ -25,11 +26,23 @@ void FiniteStateMachineComponent::_ready() {
 	_add_state_nodes(this);
 }
 
+void FiniteStateMachineComponent::InitializeComponent() {
+}
+
+void FiniteStateMachineComponent::on_start(const StringName& p_start_state) {
+	ERR_FAIL_COND_EDMSG(curr_state, "FSM has stared, dont twice");
+
+	_change_state(p_start_state);
+
+	ERR_FAIL_COND_EDMSG(!curr_state, "FSM start state: " + p_start_state + " failed");
+}
+
 void FiniteStateMachineComponent::_change_state(const StringName& p_new_state_name) {
 	if (curr_state) {
 		curr_state->exit();
 	}
 
+	ERR_FAIL_COND_EDMSG(!states.has(p_new_state_name), "FSM not has this state: " + p_new_state_name);
 	curr_state = states.get(p_new_state_name);
 	curr_state->enter();
 }
