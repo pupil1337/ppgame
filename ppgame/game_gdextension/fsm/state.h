@@ -12,11 +12,11 @@ class State : public Node {
 	GDCLASS(State, Node)
 
 public:
-	virtual void enter(){};
-	virtual StringName on_input(const Ref<InputEvent>& p_event) { return StringName(); }
-	virtual StringName on_process(double delta) { return StringName(); };
-	virtual StringName on_physics_process(double delta) { return StringName(); };
-	virtual void exit(){};
+	virtual void enter() = 0;
+	virtual StringName on_input(const Ref<InputEvent>& p_event) = 0;
+	virtual StringName on_process(double delta) = 0;
+	virtual StringName on_physics_process(double delta) = 0;
+	virtual void exit() = 0;
 
 	// ------------------------------------------
 

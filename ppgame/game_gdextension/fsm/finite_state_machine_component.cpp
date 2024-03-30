@@ -26,9 +26,6 @@ void FiniteStateMachineComponent::_ready() {
 	_add_state_nodes(this);
 }
 
-void FiniteStateMachineComponent::InitializeComponent() {
-}
-
 void FiniteStateMachineComponent::on_start(const StringName& p_start_state) {
 	ERR_FAIL_COND_EDMSG(curr_state, "FSM has stared, dont twice");
 

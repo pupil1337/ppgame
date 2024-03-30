@@ -5,9 +5,6 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "fsm/finite_state_machine_component.h"
-#include "fsm/state.h"
-
 #include "character/player/fsm/motion/air/player_air_base_state.h"
 #include "character/player/fsm/motion/air/player_fall_state.h"
 #include "character/player/fsm/motion/air/player_jump_state.h"
@@ -17,15 +14,23 @@
 #include "character/player/fsm/player_finite_state_machine_component.h"
 #include "character/player/player.h"
 #include "character/player/player_movement_component.h"
+#include "framework/component.h"
+#include "fsm/finite_state_machine_component.h"
+#include "fsm/state.h"
 
 void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
 
+	// framework
+	GDREGISTER_ABSTRACT_CLASS(Component);
+
+	// fsm
 	GDREGISTER_ABSTRACT_CLASS(FiniteStateMachineComponent);
 	GDREGISTER_ABSTRACT_CLASS(State);
 
+	// player
 	GDREGISTER_CLASS(Player);
 	GDREGISTER_CLASS(PlayerMovementComponent);
 	GDREGISTER_CLASS(PlayerFiniteStateMachineComponent);

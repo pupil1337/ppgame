@@ -2,7 +2,6 @@
 #define FINITE_STATE_MACHINE_COMPONENT_H
 
 #include <godot_cpp/classes/input_event.hpp>
-#include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 #include <godot_cpp/templates/hash_map.hpp>
@@ -13,8 +12,8 @@ using namespace godot;
 
 class State;
 
-class FiniteStateMachineComponent : public Node, public Component {
-	GDCLASS(FiniteStateMachineComponent, Node)
+class FiniteStateMachineComponent : public Component {
+	GDCLASS(FiniteStateMachineComponent, Component)
 
 public:
 	void on_start(const StringName& p_start_state);
@@ -27,9 +26,6 @@ private:
 
 	State* curr_state = nullptr;
 	HashMap<StringName, State*> states;
-
-public:
-	virtual void InitializeComponent() override;
 
 	// ------------------------------------------
 
