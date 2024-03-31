@@ -10,7 +10,7 @@ class PlayerMovementComponent : public Component {
 	GDCLASS(PlayerMovementComponent, Component)
 
 public:
-	virtual void InitializeComponent() override;
+	virtual void initialize_component() override;
 
 	// ------------------------------------------
 
