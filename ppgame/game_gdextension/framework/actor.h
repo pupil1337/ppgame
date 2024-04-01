@@ -3,11 +3,11 @@
 
 #include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/templates/hash_map.hpp>
-#include <godot_cpp/variant/node_path.hpp>
-#include <godot_cpp/variant/string.hpp>
-#include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
 
+namespace godot {
+class StringName;
+}
 class Component;
 
 class Actor {

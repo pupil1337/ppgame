@@ -1,8 +1,6 @@
 #include "actor.h"
 
-#include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/templates/hash_map.hpp>
-#include <godot_cpp/variant/node_path.hpp>
 #include <godot_cpp/variant/string.hpp>
 
 #include "framework/component.h"

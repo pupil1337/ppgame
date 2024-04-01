@@ -31,15 +31,15 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_ABSTRACT_CLASS(State);
 
 	// player
-	GDREGISTER_CLASS(Player);
-	GDREGISTER_CLASS(PlayerMovementComponent);
-	GDREGISTER_CLASS(PlayerFiniteStateMachineComponent);
+	GDREGISTER_RUNTIME_CLASS(Player);
+	GDREGISTER_RUNTIME_CLASS(PlayerMovementComponent);
+	GDREGISTER_RUNTIME_CLASS(PlayerFiniteStateMachineComponent);
 	GDREGISTER_ABSTRACT_CLASS(PlayerGroundBaseState);
-	GDREGISTER_CLASS(PlayerIdleState);
-	GDREGISTER_CLASS(PlayerRunState);
+	GDREGISTER_RUNTIME_CLASS(PlayerIdleState);
+	GDREGISTER_RUNTIME_CLASS(PlayerRunState);
 	GDREGISTER_ABSTRACT_CLASS(PlayerAirBaseState);
-	GDREGISTER_CLASS(PlayerJumpState);
-	GDREGISTER_CLASS(PlayerFallState);
+	GDREGISTER_RUNTIME_CLASS(PlayerJumpState);
+	GDREGISTER_RUNTIME_CLASS(PlayerFallState);
 }
 
 void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {

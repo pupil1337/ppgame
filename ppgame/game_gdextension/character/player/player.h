@@ -3,7 +3,6 @@
 
 #include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/input_event.hpp>
-#include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 using namespace godot;

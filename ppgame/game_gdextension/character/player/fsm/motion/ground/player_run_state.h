@@ -4,10 +4,13 @@
 #include <godot_cpp/classes/input_event.hpp>
 #include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
-#include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
 
 #include "character/player/fsm/motion/ground/player_ground_base_state.h"
+
+namespace godot {
+class StringName;
+}
 
 class PlayerRunState : public PlayerGroundBaseState {
 	GDCLASS(PlayerRunState, PlayerGroundBaseState)

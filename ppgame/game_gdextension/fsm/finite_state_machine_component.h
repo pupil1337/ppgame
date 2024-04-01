@@ -5,11 +5,13 @@
 #include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 #include <godot_cpp/templates/hash_map.hpp>
-#include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
 
 #include "framework/component.h"
 
+namespace godot {
+class StringName;
+}
 class State;
 
 class FiniteStateMachineComponent : public Component {
