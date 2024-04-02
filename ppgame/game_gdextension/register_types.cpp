@@ -14,6 +14,7 @@
 #include "character/player/fsm/player_finite_state_machine_component.h"
 #include "character/player/player.h"
 #include "character/player/player_movement_component.h"
+#include "controller/controller.h"
 #include "framework/component.h"
 #include "fsm/finite_state_machine_component.h"
 #include "fsm/state.h"
@@ -29,6 +30,9 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	// fsm
 	GDREGISTER_ABSTRACT_CLASS(FiniteStateMachineComponent);
 	GDREGISTER_ABSTRACT_CLASS(State);
+
+	// controller
+	GDREGISTER_RUNTIME_CLASS(Controller);
 
 	// player
 	GDREGISTER_RUNTIME_CLASS(Player);

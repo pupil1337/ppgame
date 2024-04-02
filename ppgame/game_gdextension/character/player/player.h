@@ -16,7 +16,6 @@ class Player : public CharacterBody2D, public Actor {
 
 public:
 	virtual void _ready() override;
-	virtual void _unhandled_key_input(const Ref<InputEvent>& p_event) override;
 
 protected:
 	static void _bind_methods();
