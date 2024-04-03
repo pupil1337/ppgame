@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <cstdint>
 #include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/input_event.hpp>
 #include <godot_cpp/classes/ref.hpp>
@@ -16,6 +17,11 @@ class Player : public CharacterBody2D, public Actor {
 
 public:
 	virtual void _ready() override;
+
+	void set_id(uint32_t p_id);
+	uint32_t get_id() const;
+
+	uint32_t id = 55;
 
 protected:
 	static void _bind_methods();
