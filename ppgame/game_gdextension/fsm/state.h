@@ -5,11 +5,10 @@
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
+#include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
 
-namespace godot {
-class StringName;
-}
+class FiniteStateMachineComponent;
 
 class State : public Node {
 	GDCLASS(State, Node)
@@ -22,6 +21,9 @@ public:
 	virtual void exit() = 0;
 
 	// ------------------------------------------
+
+public:
+	virtual void _enter_tree() override;
 
 protected:
 	static void _bind_methods() {}

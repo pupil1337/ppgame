@@ -10,12 +10,12 @@ class PlayerFiniteStateMachineComponent : public FiniteStateMachineComponent {
 	GDCLASS(PlayerFiniteStateMachineComponent, FiniteStateMachineComponent)
 
 public:
-	virtual void initialize_component() override;
+	virtual void _ready() override;
 
 	// ------------------------------------------
 
 protected:
-	static void _bind_methods();
+	static void _bind_methods() {}
 };
 
 #endif // PLAYER_FINITE_STATE_MACHINE_COMPONENT_H

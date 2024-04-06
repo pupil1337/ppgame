@@ -6,23 +6,21 @@
 #include "framework/actor.h"
 
 void Component::_enter_tree() {
-	std::function<Actor*(Node * p_node)> _get_owner_actor;
-	_get_owner_actor = [&_get_owner_actor](Node* p_node) -> Actor* {
+	std::function<void(Node * p_node)> _register_component;
+	_register_component = [&_register_component, this](Node* p_node) -> void {
 		if (p_node) {
 			if (Node* parent = p_node->get_parent()) {
 				if (parent != p_node) {
-					if (Actor* actor = dynamic_cast<Actor*>(parent)) {
-						return actor;
+					actor = dynamic_cast<Actor*>(parent);
+					if (actor) {
+						actor->add_component(this);
+					} else {
+						_register_component(parent);
 					}
-					return _get_owner_actor(parent);
 				}
 			}
 		}
-
-		return nullptr;
 	};
 
-	if (Actor* actor = _get_owner_actor(this)) {
-		actor->add_component(this);
-	}
+	_register_component(this);
 }

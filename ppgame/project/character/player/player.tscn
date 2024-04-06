@@ -29,16 +29,4 @@ shape = SubResource("RectangleShape2D_6oi2g")
 
 [node name="PlayerFiniteStateMachineComponent" type="PlayerFiniteStateMachineComponent" parent="."]
 
-[node name="Motion" type="Node" parent="PlayerFiniteStateMachineComponent"]
-
-[node name="Ground" type="Node" parent="PlayerFiniteStateMachineComponent/Motion"]
-
-[node name="PlayerIdleState" type="PlayerIdleState" parent="PlayerFiniteStateMachineComponent/Motion/Ground"]
-
-[node name="PlayerRunState" type="PlayerRunState" parent="PlayerFiniteStateMachineComponent/Motion/Ground"]
-
-[node name="Air" type="Node" parent="PlayerFiniteStateMachineComponent/Motion"]
-
-[node name="PlayerJumpState" type="PlayerJumpState" parent="PlayerFiniteStateMachineComponent/Motion/Air"]
-
-[node name="PlayerRunState" type="PlayerRunState" parent="PlayerFiniteStateMachineComponent/Motion/Air"]
+[node name="PlayerInputComponent" type="PlayerInputComponent" parent="."]

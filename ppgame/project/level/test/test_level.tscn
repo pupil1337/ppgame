@@ -4,6 +4,4 @@
 
 [node name="test_level" type="Node2D"]
 
-[node name="Controller" type="Controller" parent="."]
-
 [node name="Player" parent="." instance=ExtResource("1_wve50")]
