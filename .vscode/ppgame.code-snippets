@@ -40,11 +40,11 @@
 		"prefix": "pp define property func",
 		"body": [
 			"void $1::set_$3($2 p_$3) {",
-			"	$3 = p_$3;",
+			"\t$3 = p_$3;",
 			"}",
 			"",
 			"$2 $1::get_$3() {",
-			"	return $3;",
+			"\treturn $3;",
 			"}"
 		],
 		"description": "定义property setter/getter func"
