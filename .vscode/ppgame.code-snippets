@@ -26,6 +26,29 @@
 		],
 		"description": "Log output to console"
 	},
+	"declare property func": {
+		"scope": "cpp",
+		"prefix": "pp declare property func",
+		"body": [
+			"void set_$2($1 p_$2);",
+			"$1 get_$2();"
+		],
+		"description": "申明property setter/getter func"
+	},
+	"define property func": {
+		"scope": "cpp",
+		"prefix": "pp define property func",
+		"body": [
+			"void $1::set_$3($2 p_$3) {",
+			"	$3 = p_$3;",
+			"}",
+			"",
+			"$2 $1::get_$3() {",
+			"	return $3;",
+			"}"
+		],
+		"description": "定义property setter/getter func"
+	},
 	"Comment 分割 .h": {
 		"scope": "cpp",
 		"prefix": "pp comment",
