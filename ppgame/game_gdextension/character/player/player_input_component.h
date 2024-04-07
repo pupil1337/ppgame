@@ -9,12 +9,11 @@ using namespace godot;
 
 #include "framework/component.h"
 
-class PlayerMovementComponent;
-
 class PlayerInputComponent : public Component {
 	GDCLASS(PlayerInputComponent, Component)
 
-	friend PlayerMovementComponent;
+public:
+	Vector2 get_motion();
 
 private:
 	Vector2 motion;

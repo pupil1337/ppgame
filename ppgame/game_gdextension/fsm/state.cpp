@@ -1,8 +1,10 @@
 #include "state.h"
-#include "fsm/finite_state_machine_component.h"
-#include "godot_cpp/classes/node.hpp"
-#include "godot_cpp/classes/object.hpp"
+
 #include <functional>
+#include <godot_cpp/classes/node.hpp>
+#include <godot_cpp/classes/object.hpp>
+
+#include "fsm/finite_state_machine_component.h"
 
 void State::_enter_tree() {
 	std::function<void(Node * p_node)> _register_state;

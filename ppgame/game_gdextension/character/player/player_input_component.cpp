@@ -1,5 +1,4 @@
 #include "player_input_component.h"
-#include "godot_cpp/variant/utility_functions.hpp"
 
 #include <godot_cpp/classes/input.hpp>
 #include <godot_cpp/classes/input_event.hpp>
@@ -11,7 +10,6 @@ void PlayerInputComponent::_ready() {
 
 void PlayerInputComponent::_process(double delta) {
 	motion = Input::get_singleton()->get_vector("Left", "Right", "Up", "Down");
-	UtilityFunctions::print("input::", motion);
 }
 
 void PlayerInputComponent::_unhandled_input(const Ref<InputEvent>& p_event) {
@@ -22,4 +20,8 @@ void PlayerInputComponent::_unhandled_input(const Ref<InputEvent>& p_event) {
 		} else /* if (p_event->is_released()) */ {
 		}
 	}
+}
+
+Vector2 PlayerInputComponent::get_motion() {
+	return motion;
 }
