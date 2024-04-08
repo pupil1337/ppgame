@@ -41,31 +41,31 @@ private:
 
 	// walk
 	real_t desired_walk_velocity;
-	real_t walk_speed_change;
 
 	// fall
-	bool pressed_jump;
-	bool desired_jump;
+	bool pressed_jump = false;
+	bool desired_jump = false;
 	uint8_t air_jump_time;
-	real_t gravity_multiplier;
 
 	// common
 	Vector2i direct;
 	Vector2 velocity;
+	real_t gravity;
 	MovementMode movement_mode = MovementMode::Walk;
 
 	// walk setting
 	struct walk_setting {
-		uint32_t max_speed = 1000;
-		uint32_t acceleration = 500;
-		uint32_t deceleration = 2000;
-		uint32_t turn_speed = 2500;
+		uint32_t max_speed = 400;
+		uint32_t acceleration = 600;
+		uint32_t deceleration = 5000;
+		uint32_t turn_speed = 1200;
 	} walk_setting;
 
 	// jump setting
 	struct jump_setting {
-		uint32_t height = 1000;
-		real_t duration = 1.0;
+		uint32_t height = 96;
+		real_t duration = 0.3;
+		real_t fall_gravity_multiplier = 2.0;
 		uint8_t air_jump_time = 0;
 	} jump_setting;
 
@@ -88,6 +88,18 @@ private:
 
 	void set_walk_turn_speed(uint32_t p_turn_speed);
 	uint32_t get_walk_turn_speed();
+
+	void set_jump_height(uint32_t p_height);
+	uint32_t get_jump_height();
+
+	void set_jump_duration(real_t p_duration);
+	real_t get_jump_duration();
+
+	void set_jump_fall_gravity_multiplier(real_t p_fall_gravity_multiplier);
+	real_t get_jump_fall_gravity_multiplier();
+
+	void set_jump_air_jump_time(uint8_t p_air_jump_time);
+	uint8_t get_jump_air_jump_time();
 
 protected:
 	static void _bind_methods();

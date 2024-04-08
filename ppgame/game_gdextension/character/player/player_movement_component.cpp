@@ -6,6 +6,7 @@
 #include <godot_cpp/core/math.hpp>
 #include <godot_cpp/core/object.hpp>
 #include <godot_cpp/core/property_info.hpp>
+#include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/variant/variant.hpp>
 
 #include "character/player/player.h"
@@ -34,6 +35,7 @@ void PlayerMovementComponent::_process(double delta) {
 			desired_jump = true;
 			movement_mode = MovementMode::Fall;
 		}
+		pressed_jump = false;
 	}
 
 	// etc...
@@ -62,6 +64,7 @@ void PlayerMovementComponent::_physics_process(double delta) {
 		} else if (movement_mode == MovementMode::Fall) {
 			if (player->is_on_floor()) {
 				movement_mode = MovementMode::Walk;
+				air_jump_time = 0;
 			}
 		}
 	}
@@ -71,6 +74,7 @@ void PlayerMovementComponent::_physics_process(double delta) {
 // walk
 // ----------------------------------------------------------------------------
 void PlayerMovementComponent::physics_walk(double delta) {
+	real_t walk_speed_change = 0.0;
 	if (direct.x != 0) {
 		if (Math::sign(direct.x) != Math::sign(velocity.x)) {
 			walk_speed_change = (real_t)walk_setting.turn_speed * delta;
@@ -97,30 +101,46 @@ void PlayerMovementComponent::stop_jumping() {
 
 bool PlayerMovementComponent::_can_jump() {
 	if (player) {
-		return player->is_on_floor();
+		if (player->is_on_floor() || air_jump_time < jump_setting.air_jump_time) {
+			UtilityFunctions::print("can jump");
+			return true;
+		}
 	}
+
+	UtilityFunctions::print("dont jump");
 
 	return false;
 }
 
 void PlayerMovementComponent::_do_jump() {
 	desired_jump = false;
+	if (player && !player->is_on_floor()) {
+		++air_jump_time;
+		UtilityFunctions::print("do air jump");
+	} else {
+		UtilityFunctions::print("do ground jump");
+	}
 
-	velocity.y += 30 * -9.8;
-}
+	real_t jump_speed = -2.0 * jump_setting.height / jump_setting.duration;
 
-void PlayerMovementComponent::_calculate_gravity() {
-	gravity_multiplier = 1.0;
+	velocity.y = jump_speed;
 }
 
 void PlayerMovementComponent::physics_fall(double delta) {
+	// jump
 	if (desired_jump) {
 		_do_jump();
+		return;
 	}
 
-	_calculate_gravity();
+	gravity = 2.0 * jump_setting.height / (jump_setting.duration * jump_setting.duration);
 
-	velocity.y += gravity_multiplier * 9.8;
+	// falling
+	if (velocity.y > 0.01 && player && !player->is_on_floor()) {
+		gravity *= jump_setting.fall_gravity_multiplier;
+	}
+
+	velocity.y += gravity * delta;
 }
 
 // ----------------------------------------------------------------------------
@@ -168,7 +188,40 @@ uint32_t PlayerMovementComponent::get_walk_turn_speed() {
 	return walk_setting.turn_speed;
 }
 
+void PlayerMovementComponent::set_jump_height(uint32_t p_height) {
+	jump_setting.height = p_height;
+}
+
+uint32_t PlayerMovementComponent::get_jump_height() {
+	return jump_setting.height;
+}
+
+void PlayerMovementComponent::set_jump_duration(real_t p_duration) {
+	jump_setting.duration = p_duration;
+}
+
+real_t PlayerMovementComponent::get_jump_duration() {
+	return jump_setting.duration;
+}
+
+void PlayerMovementComponent::set_jump_fall_gravity_multiplier(real_t p_fall_gravity_multiplier) {
+	jump_setting.fall_gravity_multiplier = p_fall_gravity_multiplier;
+}
+
+real_t PlayerMovementComponent::get_jump_fall_gravity_multiplier() {
+	return jump_setting.fall_gravity_multiplier;
+}
+
+void PlayerMovementComponent::set_jump_air_jump_time(uint8_t p_air_jump_time) {
+	jump_setting.air_jump_time = p_air_jump_time;
+}
+
+uint8_t PlayerMovementComponent::get_jump_air_jump_time() {
+	return jump_setting.air_jump_time;
+}
+
 void PlayerMovementComponent::_bind_methods() {
+	ADD_GROUP("Walk", "");
 	// max_speed
 	ClassDB::bind_method(D_METHOD(_STR(set_walk_max_speed), _STR(max_speed)), &self_type::set_walk_max_speed);
 	ClassDB::bind_method(D_METHOD(_STR(get_walk_max_speed)), &self_type::get_walk_max_speed);
@@ -188,4 +241,25 @@ void PlayerMovementComponent::_bind_methods() {
 	ClassDB::bind_method(D_METHOD(_STR(set_walk_turn_speed), _STR(turn_speed)), &self_type::set_walk_turn_speed);
 	ClassDB::bind_method(D_METHOD(_STR(get_walk_turn_speed)), &self_type::get_walk_turn_speed);
 	ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(turn_speed)), _STR(set_walk_turn_speed), _STR(get_walk_turn_speed));
+
+	ADD_GROUP("Jump", "");
+	// height
+	ClassDB::bind_method(D_METHOD(_STR(set_jump_height), _STR(height)), &self_type::set_jump_height);
+	ClassDB::bind_method(D_METHOD(_STR(get_jump_height)), &self_type::get_jump_height);
+	ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(jump_height)), _STR(set_jump_height), _STR(get_jump_height));
+
+	// duration
+	ClassDB::bind_method(D_METHOD(_STR(set_jump_duration), _STR(duration)), &self_type::set_jump_duration);
+	ClassDB::bind_method(D_METHOD(_STR(get_jump_duration)), &self_type::get_jump_duration);
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, _STR(jump_duration)), _STR(set_jump_duration), _STR(get_jump_duration));
+
+	// fall_gravity_multiplier
+	ClassDB::bind_method(D_METHOD(_STR(set_jump_fall_gravity_multiplier), _STR(fall_gravity_multiplier)), &self_type::set_jump_fall_gravity_multiplier);
+	ClassDB::bind_method(D_METHOD(_STR(get_jump_fall_gravity_multiplier)), &self_type::get_jump_fall_gravity_multiplier);
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, _STR(jump_fall_gravity_multiplier)), _STR(set_jump_fall_gravity_multiplier), _STR(get_jump_fall_gravity_multiplier));
+
+	// air_jump_time
+	ClassDB::bind_method(D_METHOD(_STR(set_jump_air_jump_time), _STR(air_jump_time)), &self_type::set_jump_air_jump_time);
+	ClassDB::bind_method(D_METHOD(_STR(get_jump_air_jump_time)), &self_type::get_jump_air_jump_time);
+	ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(jump_air_jump_time)), _STR(set_jump_air_jump_time), _STR(get_jump_air_jump_time));
 }
