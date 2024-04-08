@@ -9,6 +9,8 @@ using namespace godot;
 
 #include "framework/component.h"
 
+class PlayerMovementComponent;
+
 class PlayerInputComponent : public Component {
 	GDCLASS(PlayerInputComponent, Component)
 
@@ -16,6 +18,7 @@ public:
 	Vector2 get_motion();
 
 private:
+	PlayerMovementComponent* player_movement_component = nullptr;
 	Vector2 motion;
 
 	// ------------------------------------------

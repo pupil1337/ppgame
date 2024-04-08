@@ -21,33 +21,111 @@ void PlayerMovementComponent::_ready() {
 
 void PlayerMovementComponent::_process(double delta) {
 	if (player_input_component) {
-		direct_x = _get_direct(player_input_component->get_motion().x);
+		direct.x = _get_direct(player_input_component->get_motion().x);
+		direct.y = _get_direct(player_input_component->get_motion().y);
 	}
 
-	desired_velocity.x = (real_t)direct_x * max_speed;
+	// walk input
+	desired_walk_velocity = (real_t)direct.x * walk_setting.max_speed;
+
+	// jump input
+	if (pressed_jump) {
+		if (_can_jump()) {
+			desired_jump = true;
+			movement_mode = MovementMode::Fall;
+		}
+	}
+
+	// etc...
 }
 
 void PlayerMovementComponent::_physics_process(double delta) {
 	if (player) {
 		velocity = player->get_velocity();
 
-		if (direct_x != 0) {
-			if (Math::sign(direct_x) != Math::sign(velocity.x)) {
-				speed_change = (real_t)turn_speed * delta;
-			} else {
-				speed_change = (real_t)acceleration * delta;
-			}
-		} else {
-			speed_change = (real_t)deceleration * delta;
+		// physics calculate
+		if (movement_mode == MovementMode::Walk) {
+			physics_walk(delta);
+		} else if (movement_mode == MovementMode::Fall) {
+			physics_fall(delta);
 		}
 
-		velocity.x = Math::move_toward(velocity.x, desired_velocity.x, speed_change);
-
+		// move
 		player->set_velocity(velocity);
 		player->move_and_slide();
+
+		// update movement mode
+		if (movement_mode == MovementMode::Walk) {
+			if (!player->is_on_floor()) {
+				movement_mode = MovementMode::Fall;
+			}
+		} else if (movement_mode == MovementMode::Fall) {
+			if (player->is_on_floor()) {
+				movement_mode = MovementMode::Walk;
+			}
+		}
 	}
 }
 
+// ----------------------------------------------------------------------------
+// walk
+// ----------------------------------------------------------------------------
+void PlayerMovementComponent::physics_walk(double delta) {
+	if (direct.x != 0) {
+		if (Math::sign(direct.x) != Math::sign(velocity.x)) {
+			walk_speed_change = (real_t)walk_setting.turn_speed * delta;
+		} else {
+			walk_speed_change = (real_t)walk_setting.acceleration * delta;
+		}
+	} else {
+		walk_speed_change = (real_t)walk_setting.deceleration * delta;
+	}
+
+	velocity.x = Math::move_toward(velocity.x, desired_walk_velocity, walk_speed_change);
+}
+
+// ----------------------------------------------------------------------------
+// fall
+// ----------------------------------------------------------------------------
+void PlayerMovementComponent::jump() {
+	pressed_jump = true;
+}
+
+void PlayerMovementComponent::stop_jumping() {
+	pressed_jump = false;
+}
+
+bool PlayerMovementComponent::_can_jump() {
+	if (player) {
+		return player->is_on_floor();
+	}
+
+	return false;
+}
+
+void PlayerMovementComponent::_do_jump() {
+	desired_jump = false;
+
+	velocity.y += 30 * -9.8;
+}
+
+void PlayerMovementComponent::_calculate_gravity() {
+	gravity_multiplier = 1.0;
+}
+
+void PlayerMovementComponent::physics_fall(double delta) {
+	if (desired_jump) {
+		_do_jump();
+	}
+
+	_calculate_gravity();
+
+	velocity.y += gravity_multiplier * 9.8;
+}
+
+// ----------------------------------------------------------------------------
+// utils
+// ----------------------------------------------------------------------------
 int8_t PlayerMovementComponent::_get_direct(real_t p_axis) {
 	if (p_axis == 0) {
 		return 0;
@@ -58,56 +136,56 @@ int8_t PlayerMovementComponent::_get_direct(real_t p_axis) {
 	}
 }
 
-void PlayerMovementComponent::set_max_speed(uint32_t p_max_speed) {
-	max_speed = p_max_speed;
+void PlayerMovementComponent::set_walk_max_speed(uint32_t p_max_speed) {
+	walk_setting.max_speed = p_max_speed;
 }
 
-uint32_t PlayerMovementComponent::get_max_speed() {
-	return max_speed;
+uint32_t PlayerMovementComponent::get_walk_max_speed() {
+	return walk_setting.max_speed;
 }
 
-void PlayerMovementComponent::set_acceleration(uint32_t p_acceleration) {
-	acceleration = p_acceleration;
+void PlayerMovementComponent::set_walk_acceleration(uint32_t p_acceleration) {
+	walk_setting.acceleration = p_acceleration;
 }
 
-uint32_t PlayerMovementComponent::get_acceleration() {
-	return acceleration;
+uint32_t PlayerMovementComponent::get_walk_acceleration() {
+	return walk_setting.acceleration;
 }
 
-void PlayerMovementComponent::set_deceleration(uint32_t p_deceleration) {
-	deceleration = p_deceleration;
+void PlayerMovementComponent::set_walk_deceleration(uint32_t p_deceleration) {
+	walk_setting.deceleration = p_deceleration;
 }
 
-uint32_t PlayerMovementComponent::get_deceleration() {
-	return deceleration;
+uint32_t PlayerMovementComponent::get_walk_deceleration() {
+	return walk_setting.deceleration;
 }
 
-void PlayerMovementComponent::set_turn_speed(uint32_t p_turn_speed) {
-	turn_speed = p_turn_speed;
+void PlayerMovementComponent::set_walk_turn_speed(uint32_t p_turn_speed) {
+	walk_setting.turn_speed = p_turn_speed;
 }
 
-uint32_t PlayerMovementComponent::get_turn_speed() {
-	return turn_speed;
+uint32_t PlayerMovementComponent::get_walk_turn_speed() {
+	return walk_setting.turn_speed;
 }
 
 void PlayerMovementComponent::_bind_methods() {
 	// max_speed
-	ClassDB::bind_method(D_METHOD(_STR(set_max_speed), _STR(max_speed)), &self_type::set_max_speed);
-	ClassDB::bind_method(D_METHOD(_STR(get_max_speed)), &self_type::get_max_speed);
-	ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(max_speed)), _STR(set_max_speed), _STR(get_max_speed));
+	ClassDB::bind_method(D_METHOD(_STR(set_walk_max_speed), _STR(max_speed)), &self_type::set_walk_max_speed);
+	ClassDB::bind_method(D_METHOD(_STR(get_walk_max_speed)), &self_type::get_walk_max_speed);
+	ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(max_speed)), _STR(set_walk_max_speed), _STR(get_walk_max_speed));
 
 	// acceleration
-	ClassDB::bind_method(D_METHOD(_STR(set_acceleration), _STR(acceleration)), &self_type::set_acceleration);
-	ClassDB::bind_method(D_METHOD(_STR(get_acceleration)), &self_type::get_acceleration);
-	ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(acceleration)), _STR(set_acceleration), _STR(get_acceleration));
+	ClassDB::bind_method(D_METHOD(_STR(set_walk_acceleration), _STR(acceleration)), &self_type::set_walk_acceleration);
+	ClassDB::bind_method(D_METHOD(_STR(get_walk_acceleration)), &self_type::get_walk_acceleration);
+	ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(acceleration)), _STR(set_walk_acceleration), _STR(get_walk_acceleration));
 
 	// deceleration
-	ClassDB::bind_method(D_METHOD(_STR(set_deceleration), _STR(deceleration)), &self_type::set_deceleration);
-	ClassDB::bind_method(D_METHOD(_STR(get_deceleration)), &self_type::get_deceleration);
-	ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(deceleration)), _STR(set_deceleration), _STR(get_deceleration));
+	ClassDB::bind_method(D_METHOD(_STR(set_walk_deceleration), _STR(deceleration)), &self_type::set_walk_deceleration);
+	ClassDB::bind_method(D_METHOD(_STR(get_walk_deceleration)), &self_type::get_walk_deceleration);
+	ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(deceleration)), _STR(set_walk_deceleration), _STR(get_walk_deceleration));
 
 	// turn_speed
-	ClassDB::bind_method(D_METHOD(_STR(set_turn_speed), _STR(turn_speed)), &self_type::set_turn_speed);
-	ClassDB::bind_method(D_METHOD(_STR(get_turn_speed)), &self_type::get_turn_speed);
-	ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(turn_speed)), _STR(set_turn_speed), _STR(get_turn_speed));
+	ClassDB::bind_method(D_METHOD(_STR(set_walk_turn_speed), _STR(turn_speed)), &self_type::set_walk_turn_speed);
+	ClassDB::bind_method(D_METHOD(_STR(get_walk_turn_speed)), &self_type::get_walk_turn_speed);
+	ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(turn_speed)), _STR(set_walk_turn_speed), _STR(get_walk_turn_speed));
 }
