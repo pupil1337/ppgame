@@ -9,6 +9,12 @@
 #include "character/player/player_finite_state_machine_component.h"
 #include "character/player/player_input_component.h"
 #include "character/player/player_movement_component.h"
+#include "character/player/state/air/player_air_fall_state.h"
+#include "character/player/state/air/player_air_jump_state.h"
+#include "character/player/state/air/player_air_state.h"
+#include "character/player/state/ground/player_ground_idle_state.h"
+#include "character/player/state/ground/player_ground_run_state.h"
+#include "character/player/state/ground/player_ground_state.h"
 #include "framework/component.h"
 #include "fsm/finite_state_machine_component.h"
 #include "fsm/state.h"
@@ -30,6 +36,12 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_RUNTIME_CLASS(PlayerMovementComponent);
 	GDREGISTER_RUNTIME_CLASS(PlayerFiniteStateMachineComponent);
 	GDREGISTER_RUNTIME_CLASS(PlayerInputComponent);
+	GDREGISTER_ABSTRACT_CLASS(PlayerGroundState)
+	GDREGISTER_RUNTIME_CLASS(PlayerGroundIdleState)
+	GDREGISTER_RUNTIME_CLASS(PlayerGroundRunState)
+	GDREGISTER_ABSTRACT_CLASS(PlayerAirState)
+	GDREGISTER_RUNTIME_CLASS(PlayerAirJumpState)
+	GDREGISTER_RUNTIME_CLASS(PlayerAirFallState)
 }
 
 void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {

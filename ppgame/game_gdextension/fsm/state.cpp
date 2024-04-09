@@ -7,6 +7,8 @@
 #include "fsm/finite_state_machine_component.h"
 
 void State::_enter_tree() {
+	Node::_enter_tree();
+
 	std::function<void(Node * p_node)> _register_state;
 	_register_state = [&_register_state, this](Node* p_node) -> void {
 		if (p_node) {

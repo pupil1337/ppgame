@@ -12,8 +12,19 @@
 #include "character/player/player.h"
 #include "character/player/player_input_component.h"
 #include "framework/actor.h"
+#include "framework/component.h"
+
+void PlayerMovementComponent::move_x(double delta) {
+}
+
+void PlayerMovementComponent::move_y(double delta) {
+}
+
+// TODO 删除以下
 
 void PlayerMovementComponent::_ready() {
+	Component::_ready();
+
 	if (actor) {
 		player = static_cast<Player*>(actor);
 		player_input_component = actor->get_component<PlayerInputComponent>();
@@ -21,6 +32,8 @@ void PlayerMovementComponent::_ready() {
 }
 
 void PlayerMovementComponent::_process(double delta) {
+	Component::_process(delta);
+
 	if (player_input_component) {
 		direct.x = _get_direct(player_input_component->get_motion().x);
 		direct.y = _get_direct(player_input_component->get_motion().y);
@@ -42,6 +55,8 @@ void PlayerMovementComponent::_process(double delta) {
 }
 
 void PlayerMovementComponent::_physics_process(double delta) {
+	Component::_physics_process(delta);
+
 	if (player) {
 		velocity = player->get_velocity();
 

@@ -17,6 +17,12 @@ class PlayerMovementComponent : public Component {
 	GDCLASS(PlayerMovementComponent, Component)
 
 public:
+	void move_x(double delta);
+	void move_y(double delta);
+
+	// TODO 删除以下
+
+public:
 	void jump();
 	void stop_jumping();
 
