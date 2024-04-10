@@ -5,6 +5,10 @@
 void PlayerAirState::enter() {
 }
 
+StringName PlayerAirState::on_process(double delta) {
+	return StringName();
+}
+
 StringName PlayerAirState::on_physics_process(double delta) {
 	return StringName();
 }
