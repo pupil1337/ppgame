@@ -5,29 +5,26 @@
 #include <godot_cpp/core/defs.hpp>
 using namespace godot;
 
+#include "character/player/state/player_state_condition.h"
 #include "fsm/finite_state_machine_component.h"
 
 class Player;
-struct PlayerStateCondition;
+class PlayerInputComponent;
 
 class PlayerFiniteStateMachineComponent : public FiniteStateMachineComponent {
 	GDCLASS(PlayerFiniteStateMachineComponent, FiniteStateMachineComponent)
 
-public:
-	virtual void on_process(double p_delta) override;
-
-public:
-	PlayerFiniteStateMachineComponent();
-	~PlayerFiniteStateMachineComponent();
-
 private:
 	Player* player = nullptr;
-	PlayerStateCondition* condition = nullptr;
+	PlayerInputComponent* player_input_component = nullptr;
+
+	PlayerStateCondition condition;
 
 	// ------------------------------------------
 
 public:
 	virtual void _ready() override;
+	virtual void _process(double p_delta) override;
 
 protected:
 	static void _bind_methods() {}

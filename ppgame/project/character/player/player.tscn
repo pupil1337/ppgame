@@ -25,8 +25,18 @@ sprite_frames = SubResource("SpriteFrames_p3f68")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6oi2g")
 
-[node name="PlayerMovementComponent" type="PlayerMovementComponent" parent="."]
-
 [node name="PlayerFiniteStateMachineComponent" type="PlayerFiniteStateMachineComponent" parent="."]
+
+[node name="Ground" type="Node" parent="PlayerFiniteStateMachineComponent"]
+
+[node name="PlayerGroundIdleState" type="PlayerGroundIdleState" parent="PlayerFiniteStateMachineComponent/Ground"]
+
+[node name="PlayerGroundRunState" type="PlayerGroundRunState" parent="PlayerFiniteStateMachineComponent/Ground"]
+
+[node name="Air" type="Node" parent="PlayerFiniteStateMachineComponent"]
+
+[node name="PlayerAirJumpState" type="PlayerAirJumpState" parent="PlayerFiniteStateMachineComponent/Air"]
+
+[node name="PlayerAirFallState" type="PlayerAirFallState" parent="PlayerFiniteStateMachineComponent/Air"]
 
 [node name="PlayerInputComponent" type="PlayerInputComponent" parent="."]

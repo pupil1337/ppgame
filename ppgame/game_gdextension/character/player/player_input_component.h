@@ -14,18 +14,10 @@ class PlayerInputComponent : public Component {
 	GDCLASS(PlayerInputComponent, Component)
 
 public:
-	_FORCE_INLINE_ Vector2 get_motion() { return motion; }
-	_FORCE_INLINE_ bool get_pressed_jump() { return pressed_jump; }
-
-private:
-	Vector2 motion;
-	bool pressed_jump = false;
+	Vector2 get_motion();
+	bool get_just_pressed_jump();
 
 	// ------------------------------------------
-
-public:
-	virtual void _process(double delta) override;
-	virtual void _unhandled_input(const Ref<InputEvent>& p_event) override;
 
 protected:
 	static void _bind_methods() {}

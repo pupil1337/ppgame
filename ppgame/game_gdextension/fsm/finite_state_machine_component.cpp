@@ -13,12 +13,12 @@ void FiniteStateMachineComponent::add_state(State* p_state) {
 	states.insert(p_state->get_class(), p_state);
 }
 
-void FiniteStateMachineComponent::on_start(const StringName& p_start_state) {
+void FiniteStateMachineComponent::on_start() {
 	ERR_FAIL_COND_EDMSG(curr_state, "FSM has stared, dont twice");
 
-	_change_state(p_start_state);
+	_change_state(start_state_name);
 
-	ERR_FAIL_COND_EDMSG(!curr_state, "FSM start state: " + p_start_state + " failed");
+	ERR_FAIL_COND_EDMSG(!curr_state, "FSM start state: " + start_state_name + " failed");
 }
 
 void FiniteStateMachineComponent::_change_state(const StringName& p_new_state_name) {
@@ -33,18 +33,18 @@ void FiniteStateMachineComponent::_change_state(const StringName& p_new_state_na
 
 void FiniteStateMachineComponent::on_process(double p_delta) {
 	if (curr_state) {
-		// StringName new_state_name = curr_state->on_process(p_delta);
-		// if (!new_state_name.is_empty()) {
-		// 	_change_state(new_state_name);
-		// }
+		StringName new_state_name = curr_state->on_process(p_delta);
+		if (!new_state_name.is_empty()) {
+			_change_state(new_state_name);
+		}
 	}
 }
 
 void FiniteStateMachineComponent::on_physics_process(double p_delta) {
 	if (curr_state) {
-		// StringName new_state_name = curr_state->on_physics_process(p_delta);
-		// if (!new_state_name.is_empty()) {
-		// 	_change_state(new_state_name);
-		// }
+		StringName new_state_name = curr_state->on_physics_process(p_delta);
+		if (!new_state_name.is_empty()) {
+			_change_state(new_state_name);
+		}
 	}
 }

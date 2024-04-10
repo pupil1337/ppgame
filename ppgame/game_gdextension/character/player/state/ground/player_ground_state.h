@@ -11,6 +11,7 @@ class PlayerGroundState : public PlayerState {
 	GDCLASS(PlayerGroundState, PlayerState)
 
 public:
+	virtual StringName on_process(double delta) override;
 	virtual StringName on_physics_process(double delta) override;
 
 	// ------------------------------------------

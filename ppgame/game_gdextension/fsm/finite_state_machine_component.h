@@ -18,15 +18,16 @@ class FiniteStateMachineComponent : public Component {
 	friend State;
 
 public:
-	void on_start(const StringName& p_start_state);
+	void on_start();
 	virtual void on_process(double p_delta);
-	void on_physics_process(double p_delta);
+	virtual void on_physics_process(double p_delta);
 
 private:
 	void add_state(State* p_state);
 	void _change_state(const StringName& p_new_state_name);
 
 protected:
+	StringName start_state_name;
 	State* curr_state = nullptr;
 	HashMap<StringName, State*> states;
 

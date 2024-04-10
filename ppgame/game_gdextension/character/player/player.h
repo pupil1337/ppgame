@@ -15,6 +15,7 @@ class Player : public CharacterBody2D, public Actor {
 public:
 	virtual void _ready() override;
 	virtual void _process(double delta) override;
+	virtual void _physics_process(double delta) override;
 
 protected:
 	static void _bind_methods() {}
