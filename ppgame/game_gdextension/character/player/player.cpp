@@ -1,7 +1,8 @@
 #include "player.h"
-#include "character/player/player_finite_state_machine_component.h"
 
 #include <godot_cpp/classes/character_body2d.hpp>
+
+#include "character/player/player_finite_state_machine_component.h"
 
 void Player::_ready() {
 	if (PlayerFiniteStateMachineComponent* player_fsm = get_component<PlayerFiniteStateMachineComponent>()) {

@@ -1,8 +1,10 @@
 #include "player_finite_state_machine_component.h"
 
 #include <godot_cpp/classes/object.hpp>
+#include <godot_cpp/core/math.hpp>
 #include <godot_cpp/templates/hash_map.hpp>
 #include <godot_cpp/variant/string_name.hpp>
+#include <godot_cpp/variant/vector2.hpp>
 
 #include "character/player/player.h"
 #include "character/player/player_input_component.h"
@@ -11,8 +13,6 @@
 #include "character/player/state/player_state_condition.h"
 #include "fsm/finite_state_machine_component.h"
 #include "fsm/state.h"
-#include "godot_cpp/core/math.hpp"
-#include "godot_cpp/variant/vector2.hpp"
 
 void PlayerFiniteStateMachineComponent::_ready() {
 	start_state_name = PlayerGroundIdleState::get_class_static();
@@ -31,14 +31,28 @@ void PlayerFiniteStateMachineComponent::_ready() {
 }
 
 void PlayerFiniteStateMachineComponent::on_process(double p_delta) {
+	_update_logic_condition();
+	FiniteStateMachineComponent::on_process(p_delta);
+}
+
+void PlayerFiniteStateMachineComponent::on_physics_process(double p_delta) {
+	_update_physics_condition();
+	FiniteStateMachineComponent::on_physics_process(p_delta);
+	_update_physics_condition();
+}
+
+void PlayerFiniteStateMachineComponent::_update_logic_condition() {
 	if (player && player_input_component) {
 		Vector2 input_motion = player_input_component->get_motion();
 		condition.input_sign_x = Math::sign(player_input_component->get_motion().x);
-		condition.juest_pressed_jump = player_input_component->get_just_pressed_jump();
+		condition.just_pressed_jump = player_input_component->get_just_pressed_jump();
+	}
+}
+
+void PlayerFiniteStateMachineComponent::_update_physics_condition() {
+	if (player && player_input_component) {
 		condition.on_ground = player->is_on_floor();
 		condition.can_jump = player->is_on_floor() /* || other  */;
 		condition.velocity = player->get_velocity();
-
-		FiniteStateMachineComponent::on_process(p_delta);
 	}
 }

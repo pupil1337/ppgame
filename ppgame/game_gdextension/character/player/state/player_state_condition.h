@@ -6,10 +6,16 @@
 using namespace godot;
 
 struct PlayerStateCondition {
+	// ------------------------------------------
+	// logic
+	// ------------------------------------------
 	// input
 	int8_t input_sign_x = 0;
-	bool juest_pressed_jump = false;
+	bool just_pressed_jump = false;
 
+	// ------------------------------------------
+	// physics
+	// ------------------------------------------
 	// state
 	bool on_ground = false;
 	bool can_jump = false;

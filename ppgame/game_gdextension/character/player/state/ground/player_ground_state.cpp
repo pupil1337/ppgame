@@ -10,7 +10,7 @@ StringName PlayerGroundState::on_process(double delta) {
 	if (condition) {
 		// air state
 		// jump
-		if (condition->juest_pressed_jump && condition->can_jump) {
+		if (condition->just_pressed_jump && condition->can_jump) {
 			return PlayerAirJumpState::get_class_static();
 		}
 		// fall

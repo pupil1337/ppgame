@@ -16,6 +16,11 @@ class PlayerFiniteStateMachineComponent : public FiniteStateMachineComponent {
 
 public:
 	virtual void on_process(double p_delta) override;
+	virtual void on_physics_process(double p_delta) override;
+
+private:
+	void _update_logic_condition();
+	void _update_physics_condition();
 
 private:
 	Player* player = nullptr;

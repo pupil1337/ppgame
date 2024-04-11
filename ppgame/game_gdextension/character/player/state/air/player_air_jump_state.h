@@ -1,7 +1,6 @@
 #ifndef PLAYER_AIR_JUMP_STATE_H
 #define PLAYER_AIR_JUMP_STATE_H
 
-#include <cstdint>
 #include <godot_cpp/classes/wrapped.hpp>
 #include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
@@ -18,7 +17,7 @@ public:
 	virtual void exit() override;
 
 private:
-	int8_t jump_count;
+	bool desire_jump = false;
 
 	// ------------------------------------------
 

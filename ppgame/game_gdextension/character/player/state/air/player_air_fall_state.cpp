@@ -1,19 +1,20 @@
 #include "player_air_fall_state.h"
+
+#include <godot_cpp/core/defs.hpp>
+#include <godot_cpp/variant/string_name.hpp>
+
 #include "character/player/player.h"
 #include "character/player/state/air/player_air_jump_state.h"
 #include "character/player/state/air/player_air_state.h"
 #include "character/player/state/player_state_condition.h"
-#include "godot_cpp/core/defs.hpp"
 #include "utils/math_utils.h"
-
-#include <godot_cpp/variant/string_name.hpp>
 
 void PlayerAirFallState::enter() {
 }
 
 StringName PlayerAirFallState::on_process(double delta) {
 	// jump
-	if (condition->juest_pressed_jump && condition->can_jump) {
+	if (condition->just_pressed_jump && condition->can_jump) {
 		return PlayerAirJumpState::get_class_static();
 	}
 
