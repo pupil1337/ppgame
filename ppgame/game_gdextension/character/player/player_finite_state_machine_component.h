@@ -14,6 +14,9 @@ class PlayerInputComponent;
 class PlayerFiniteStateMachineComponent : public FiniteStateMachineComponent {
 	GDCLASS(PlayerFiniteStateMachineComponent, FiniteStateMachineComponent)
 
+public:
+	virtual void on_process(double p_delta) override;
+
 private:
 	Player* player = nullptr;
 	PlayerInputComponent* player_input_component = nullptr;
@@ -24,7 +27,6 @@ private:
 
 public:
 	virtual void _ready() override;
-	virtual void _process(double p_delta) override;
 
 protected:
 	static void _bind_methods() {}

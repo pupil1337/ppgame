@@ -2,6 +2,7 @@
 
 #include <godot_cpp/variant/string_name.hpp>
 
+#include "character/player/state/ground/player_ground_run_state.h"
 #include "character/player/state/ground/player_ground_state.h"
 #include "character/player/state/player_state_condition.h"
 
@@ -9,15 +10,15 @@ void PlayerGroundIdleState::enter() {
 }
 
 StringName PlayerGroundIdleState::on_process(double delta) {
-	if (condition && condition->input_sign_x == 0.0) {
-		return StringName();
+	// run
+	if (condition->on_ground && condition->input_sign_x != 0.0) {
+		return PlayerGroundRunState::get_class_static();
 	}
 
 	return PlayerGroundState::on_process(delta);
 }
 
-StringName PlayerGroundIdleState::on_physics_process(double delta) {
-	return StringName();
+void PlayerGroundIdleState::on_physics_process(double delta) {
 }
 
 void PlayerGroundIdleState::exit() {

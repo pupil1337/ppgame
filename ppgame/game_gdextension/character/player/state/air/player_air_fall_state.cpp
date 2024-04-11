@@ -1,6 +1,10 @@
 #include "player_air_fall_state.h"
+#include "character/player/player.h"
+#include "character/player/state/air/player_air_jump_state.h"
 #include "character/player/state/air/player_air_state.h"
 #include "character/player/state/player_state_condition.h"
+#include "godot_cpp/core/defs.hpp"
+#include "utils/math_utils.h"
 
 #include <godot_cpp/variant/string_name.hpp>
 
@@ -8,15 +12,21 @@ void PlayerAirFallState::enter() {
 }
 
 StringName PlayerAirFallState::on_process(double delta) {
-	if (condition && !condition->on_ground && !condition->juest_pressed_jump) {
-		return StringName();
+	// jump
+	if (condition->juest_pressed_jump && condition->can_jump) {
+		return PlayerAirJumpState::get_class_static();
 	}
 
 	return PlayerAirState::on_process(delta);
 }
 
-StringName PlayerAirFallState::on_physics_process(double delta) {
-	return StringName();
+void PlayerAirFallState::on_physics_process(double delta) {
+	if (player && condition) {
+		real_t gravity = Utils::calculate_fall_gravity(96.0, 0.4, 2.0);
+		Vector2 new_velocity = Utils::air_move(delta, condition->input_sign_x, condition->velocity, gravity);
+		player->set_velocity(new_velocity);
+		player->move_and_slide();
+	}
 }
 
 void PlayerAirFallState::exit() {

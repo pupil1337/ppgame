@@ -42,9 +42,6 @@ void FiniteStateMachineComponent::on_process(double p_delta) {
 
 void FiniteStateMachineComponent::on_physics_process(double p_delta) {
 	if (curr_state) {
-		StringName new_state_name = curr_state->on_physics_process(p_delta);
-		if (!new_state_name.is_empty()) {
-			_change_state(new_state_name);
-		}
+		curr_state->on_physics_process(p_delta);
 	}
 }

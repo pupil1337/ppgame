@@ -12,7 +12,6 @@ class PlayerGroundState : public PlayerState {
 
 public:
 	virtual StringName on_process(double delta) override;
-	virtual StringName on_physics_process(double delta) override;
 
 	// ------------------------------------------
 

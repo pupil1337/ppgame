@@ -13,7 +13,7 @@ class PlayerAirFallState : public PlayerAirState {
 public:
 	virtual void enter() override;
 	virtual StringName on_process(double delta) override;
-	virtual StringName on_physics_process(double delta) override;
+	virtual void on_physics_process(double delta) override;
 	virtual void exit() override;
 
 	// ------------------------------------------

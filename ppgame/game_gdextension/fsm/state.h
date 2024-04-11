@@ -12,7 +12,7 @@ class State : public Node {
 public:
 	virtual void enter() = 0;
 	virtual StringName on_process(double delta) = 0;
-	virtual StringName on_physics_process(double delta) = 0;
+	virtual void on_physics_process(double delta) = 0;
 	virtual void exit() = 0;
 
 	// ------------------------------------------

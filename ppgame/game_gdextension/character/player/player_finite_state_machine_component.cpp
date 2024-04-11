@@ -30,15 +30,15 @@ void PlayerFiniteStateMachineComponent::_ready() {
 	}
 }
 
-void PlayerFiniteStateMachineComponent::_process(double p_delta) {
+void PlayerFiniteStateMachineComponent::on_process(double p_delta) {
 	if (player && player_input_component) {
 		Vector2 input_motion = player_input_component->get_motion();
 		condition.input_sign_x = Math::sign(player_input_component->get_motion().x);
 		condition.juest_pressed_jump = player_input_component->get_just_pressed_jump();
 		condition.on_ground = player->is_on_floor();
-		condition.can_jump = player->is_on_floor();
+		condition.can_jump = player->is_on_floor() /* || other  */;
 		condition.velocity = player->get_velocity();
 
-		FiniteStateMachineComponent::_process(p_delta);
+		FiniteStateMachineComponent::on_process(p_delta);
 	}
 }

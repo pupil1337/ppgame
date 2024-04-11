@@ -11,10 +11,7 @@ class PlayerAirState : public PlayerState {
 	GDCLASS(PlayerAirState, PlayerState)
 
 public:
-	virtual void enter() override;
 	virtual StringName on_process(double delta) override;
-	virtual StringName on_physics_process(double delta) override;
-	virtual void exit() override;
 
 	// ------------------------------------------
 

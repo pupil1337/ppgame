@@ -1,15 +1,15 @@
 #ifndef MATH_UTILS_H
 #define MATH_UTILS_H
 
-#include "godot_cpp/variant/vector2.hpp"
 #include <cstdint>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/core/math.hpp>
+#include <godot_cpp/variant/vector2.hpp>
 using namespace godot;
 
 namespace Utils {
 
-Vector2 ground_move(double delta, int8_t input_sign_x, Vector2 curr_velocity, real_t max_speed_x, real_t acceleration_x, real_t deceleration_x, real_t turn_speed_x) {
+inline Vector2 ground_move(double delta, int8_t input_sign_x, Vector2 curr_velocity, real_t max_speed_x, real_t acceleration_x, real_t deceleration_x, real_t turn_speed_x) {
 	real_t walk_speed_change = 0.0;
 	if (input_sign_x != 0) {
 		if (Math::sign(input_sign_x) != Math::sign(curr_velocity.x)) {
@@ -25,20 +25,25 @@ Vector2 ground_move(double delta, int8_t input_sign_x, Vector2 curr_velocity, re
 	return { new_velocity_x, curr_velocity.y };
 }
 
-real_t calculate_jump_speed(real_t jump_height, real_t jump_duration) {
-	return (2.0 * jump_height) / jump_duration;
+inline real_t calculate_jump_speed_y(real_t jump_height, real_t jump_duration) {
+	return (2.0 * (-jump_height)) / jump_duration;
 }
 
-real_t calculate_jump_gravity(real_t jump_height, real_t jump_duration) {
+inline real_t calculate_jump_gravity(real_t jump_height, real_t jump_duration) {
 	return -(2.0 * (-jump_height)) / (jump_duration * jump_duration + 0.01);
 }
 
-real_t calculate_fall_gravity(real_t jump_height, real_t jump_duration, real_t fall_gravity_multiplier) {
+inline real_t calculate_fall_gravity(real_t jump_height, real_t jump_duration, real_t fall_gravity_multiplier) {
 	return calculate_jump_gravity(jump_height, jump_duration) * fall_gravity_multiplier;
 }
 
-Vector2 air_move(double delta) {
-	return {};
+inline Vector2 air_move(double delta, int8_t input_sign_x, Vector2 curr_velocity, real_t gravity) {
+	Vector2 new_velocity;
+
+	new_velocity.x = curr_velocity.x;
+	new_velocity.y = curr_velocity.y + gravity * delta;
+
+	return new_velocity;
 }
 
 } //namespace Utils
