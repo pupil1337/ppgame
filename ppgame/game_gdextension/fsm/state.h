@@ -8,6 +8,7 @@ using namespace godot;
 
 class State : public Node {
 	GDCLASS(State, Node)
+	typedef Node super;
 
 public:
 	virtual void enter() = 0;

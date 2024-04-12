@@ -9,6 +9,7 @@ class Actor;
 
 class Component : public Node {
 	GDCLASS(Component, Node)
+	typedef Node super;
 
 protected:
 	Actor* actor = nullptr;

@@ -14,11 +14,11 @@ class State;
 
 class FiniteStateMachineComponent : public Component {
 	GDCLASS(FiniteStateMachineComponent, Component)
+	typedef Component super;
 
 	friend State;
 
 public:
-	void on_start();
 	virtual void on_process(double p_delta);
 	virtual void on_physics_process(double p_delta);
 
@@ -27,14 +27,17 @@ private:
 	void _change_state(const StringName& p_new_state_name);
 
 protected:
-	StringName start_state_name;
 	State* curr_state = nullptr;
 	HashMap<StringName, State*> states;
 
 	// ------------------------------------------
 
+private:
+	void set_curr_state(State* p_curr_state);
+	State* get_curr_state();
+
 protected:
-	static void _bind_methods() {}
+	static void _bind_methods();
 };
 
 #endif // FINITE_STATE_MACHINE_COMPONENT_H

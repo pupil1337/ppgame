@@ -9,6 +9,7 @@ using namespace godot;
 
 class Player : public CharacterBody2D, public Actor {
 	GDCLASS(Player, CharacterBody2D)
+	typedef CharacterBody2D super;
 
 	// ------------------------------------------
 

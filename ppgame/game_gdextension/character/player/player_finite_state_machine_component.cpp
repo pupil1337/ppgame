@@ -8,14 +8,13 @@
 
 #include "character/player/player.h"
 #include "character/player/player_input_component.h"
-#include "character/player/state/ground/player_ground_idle_state.h"
 #include "character/player/state/player_state.h"
 #include "character/player/state/player_state_condition.h"
 #include "fsm/finite_state_machine_component.h"
 #include "fsm/state.h"
 
 void PlayerFiniteStateMachineComponent::_ready() {
-	start_state_name = PlayerGroundIdleState::get_class_static();
+	super::_ready();
 
 	if (actor) {
 		player = static_cast<Player*>(actor);
@@ -28,16 +27,17 @@ void PlayerFiniteStateMachineComponent::_ready() {
 			player_state->condition = &condition;
 		}
 	}
+
+	_update_physics_condition();
 }
 
 void PlayerFiniteStateMachineComponent::on_process(double p_delta) {
 	_update_logic_condition();
-	FiniteStateMachineComponent::on_process(p_delta);
+	super::on_process(p_delta);
 }
 
 void PlayerFiniteStateMachineComponent::on_physics_process(double p_delta) {
-	_update_physics_condition();
-	FiniteStateMachineComponent::on_physics_process(p_delta);
+	super::on_physics_process(p_delta);
 	_update_physics_condition();
 }
 

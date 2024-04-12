@@ -3,7 +3,6 @@
 #include <godot_cpp/variant/string_name.hpp>
 
 #include "character/player/state/ground/player_ground_run_state.h"
-#include "character/player/state/ground/player_ground_state.h"
 #include "character/player/state/player_state_condition.h"
 
 void PlayerGroundIdleState::enter() {
@@ -15,7 +14,7 @@ StringName PlayerGroundIdleState::on_process(double delta) {
 		return PlayerGroundRunState::get_class_static();
 	}
 
-	return PlayerGroundState::on_process(delta);
+	return super::on_process(delta);
 }
 
 void PlayerGroundIdleState::on_physics_process(double delta) {

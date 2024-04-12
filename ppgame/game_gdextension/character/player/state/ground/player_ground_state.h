@@ -9,6 +9,7 @@ using namespace godot;
 
 class PlayerGroundState : public PlayerState {
 	GDCLASS(PlayerGroundState, PlayerState)
+	typedef PlayerState super;
 
 public:
 	virtual StringName on_process(double delta) override;

@@ -14,6 +14,7 @@ struct PlayerStateCondition;
 
 class PlayerState : public State {
 	GDCLASS(PlayerState, State)
+	typedef State super;
 
 	friend PlayerFiniteStateMachineComponent;
 

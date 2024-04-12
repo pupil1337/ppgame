@@ -9,6 +9,7 @@ using namespace godot;
 
 class PlayerAirState : public PlayerState {
 	GDCLASS(PlayerAirState, PlayerState)
+	typedef PlayerState super;
 
 public:
 	virtual StringName on_process(double delta) override;

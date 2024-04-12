@@ -5,7 +5,6 @@
 
 #include "character/player/player.h"
 #include "character/player/state/air/player_air_jump_state.h"
-#include "character/player/state/air/player_air_state.h"
 #include "character/player/state/player_state_condition.h"
 #include "utils/math_utils.h"
 
@@ -18,13 +17,21 @@ StringName PlayerAirFallState::on_process(double delta) {
 		return PlayerAirJumpState::get_class_static();
 	}
 
-	return PlayerAirState::on_process(delta);
+	return super::on_process(delta);
 }
 
 void PlayerAirFallState::on_physics_process(double delta) {
 	if (player && condition) {
-		real_t gravity = Utils::calculate_fall_gravity(96.0, 0.4, 2.0);
-		Vector2 new_velocity = Utils::air_move(delta, condition->input_sign_x, condition->velocity, gravity);
+		real_t gravity = MathUtils::calculate_fall_gravity(96.0, 0.4, 2.0);
+		Vector2 new_velocity = MathUtils::input_move(
+				delta,
+				condition->velocity,
+				condition->input_sign_x,
+				600.0,
+				600.0,
+				1800.0,
+				gravity,
+				400.0);
 		player->set_velocity(new_velocity);
 		player->move_and_slide();
 	}

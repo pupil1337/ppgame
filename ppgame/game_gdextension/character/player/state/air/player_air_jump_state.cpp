@@ -6,7 +6,6 @@
 
 #include "character/player/player.h"
 #include "character/player/state/air/player_air_fall_state.h"
-#include "character/player/state/air/player_air_state.h"
 #include "character/player/state/player_state_condition.h"
 #include "utils/math_utils.h"
 
@@ -15,12 +14,6 @@ void PlayerAirJumpState::enter() {
 }
 
 StringName PlayerAirJumpState::on_process(double delta) {
-	// TODO 删除PlayerAirJumpDashState例子
-	// if (condition->can_jump /* can jump dash */) {
-	// 	return PlayerAirJumpDashState::get_class_static();
-	// }
-	// end
-
 	if (desire_jump) {
 		return StringName();
 	}
@@ -30,14 +23,14 @@ StringName PlayerAirJumpState::on_process(double delta) {
 		return PlayerAirFallState::get_class_static();
 	}
 
-	return PlayerAirState::on_process(delta);
+	return super::on_process(delta);
 }
 
 void PlayerAirJumpState::on_physics_process(double delta) {
 	if (player && condition) {
 		if (desire_jump) {
 			Vector2 new_velocity = condition->velocity;
-			new_velocity.y = Utils::calculate_jump_speed_y(96.0, 0.4);
+			new_velocity.y = MathUtils::calculate_jump_speed_y(96.0, 0.4);
 			player->set_velocity(new_velocity);
 			player->move_and_slide();
 
@@ -45,8 +38,16 @@ void PlayerAirJumpState::on_physics_process(double delta) {
 			return;
 		}
 
-		real_t gravity = Utils::calculate_jump_gravity(96.0, 0.4);
-		Vector2 new_velocity = Utils::air_move(delta, condition->input_sign_x, condition->velocity, gravity);
+		real_t gravity = MathUtils::calculate_jump_gravity(96.0, 0.4);
+		Vector2 new_velocity = MathUtils::input_move(
+				delta,
+				condition->velocity,
+				condition->input_sign_x,
+				600.0,
+				600.0,
+				1800.0,
+				gravity,
+				400.0);
 		player->set_velocity(new_velocity);
 		player->move_and_slide();
 	}

@@ -6,7 +6,7 @@
 #include "framework/actor.h"
 
 void Component::_enter_tree() {
-	Node::_enter_tree();
+	super::_enter_tree();
 
 	std::function<void(Node * p_node)> _register_component;
 	_register_component = [&_register_component, this](Node* p_node) -> void {
