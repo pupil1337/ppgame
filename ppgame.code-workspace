@@ -36,6 +36,7 @@
 			"ppgame/game_gdextension/bin": true,
 			"ppgame/project/bin/windows": true
 		},
+		"search.useIgnoreFiles": false,
 		// clang-format
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "xaver.clang-format",
