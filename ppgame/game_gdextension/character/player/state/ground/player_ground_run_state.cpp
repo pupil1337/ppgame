@@ -1,6 +1,5 @@
 #include "player_ground_run_state.h"
 
-#include <godot_cpp/classes/animation_player.hpp>
 #include <godot_cpp/variant/string_name.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 
@@ -10,11 +9,7 @@
 #include "character/player/state/player_state_condition.h"
 
 void PlayerGroundRunState::enter() {
-	if (player) {
-		if (AnimationPlayer* animation_player = player->get_animation_player()) {
-			animation_player->play("Run");
-		}
-	}
+	play_animation("Run");
 }
 
 StringName PlayerGroundRunState::on_process(double delta) {

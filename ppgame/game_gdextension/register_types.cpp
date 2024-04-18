@@ -6,6 +6,7 @@
 #include <godot_cpp/godot.hpp>
 
 #include "character/player/player.h"
+#include "character/player/player_camera_component.h"
 #include "character/player/player_finite_state_machine_component.h"
 #include "character/player/player_input_component.h"
 #include "character/player/player_movement_component.h"
@@ -44,6 +45,7 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_RUNTIME_CLASS(PlayerAirJumpState)
 	GDREGISTER_RUNTIME_CLASS(PlayerAirFallState)
 	GDREGISTER_RUNTIME_CLASS(PlayerMovementComponent)
+	GDREGISTER_RUNTIME_CLASS(PlayerCameraComponent)
 }
 
 void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {

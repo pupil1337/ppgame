@@ -10,6 +10,7 @@
 #include "utils/math_utils.h"
 
 void PlayerAirFallState::enter() {
+	play_animation("Fall");
 }
 
 StringName PlayerAirFallState::on_process(double delta) {

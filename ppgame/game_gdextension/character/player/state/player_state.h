@@ -2,6 +2,8 @@
 #define PLAYER_STATE_H
 
 #include <godot_cpp/classes/wrapped.hpp>
+#include <godot_cpp/variant/string.hpp>
+#include <godot_cpp/variant/string_name.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 using namespace godot;
 
@@ -21,6 +23,9 @@ class PlayerState : public State {
 protected:
 	Player* player = nullptr;
 	const PlayerStateCondition* condition = nullptr;
+
+protected:
+	void play_animation(const StringName& name = String(), double custom_blend = -1, double custom_speed = 1.0, bool from_end = false);
 
 	// ------------------------------------------
 

@@ -8,7 +8,6 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/core/object.hpp>
 #include <godot_cpp/core/property_info.hpp>
-#include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/variant/variant.hpp>
 
 #include "character/player/player_finite_state_machine_component.h"
@@ -20,7 +19,6 @@ void Player::_ready() {
 void Player::_process(double delta) {
 	super::_process(delta);
 
-	UtilityFunctions::print("process: ", 1.0 / delta);
 	if (PlayerFiniteStateMachineComponent* player_fsm = get_component<PlayerFiniteStateMachineComponent>()) {
 		player_fsm->on_process(delta);
 	}
@@ -29,7 +27,6 @@ void Player::_process(double delta) {
 void Player::_physics_process(double delta) {
 	super::_physics_process(delta);
 
-	UtilityFunctions::print("physics_process: ", 1.0 / delta);
 	if (PlayerFiniteStateMachineComponent* player_fsm = get_component<PlayerFiniteStateMachineComponent>()) {
 		player_fsm->on_physics_process(delta);
 	}

@@ -12,6 +12,8 @@
 
 void PlayerAirJumpState::enter() {
 	desire_jump = true;
+
+	play_animation("Jump");
 }
 
 StringName PlayerAirJumpState::on_process(double delta) {
