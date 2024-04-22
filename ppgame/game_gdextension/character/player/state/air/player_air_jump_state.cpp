@@ -31,26 +31,26 @@ StringName PlayerAirJumpState::on_process(double delta) {
 
 void PlayerAirJumpState::on_physics_process(double delta) {
 	if (player && condition) {
-		if (desire_jump) {
-			Vector2 new_velocity = condition->velocity;
-			new_velocity.y = MathUtils::calculate_jump_speed_y(96.0, 0.4);
-			player->set_velocity(new_velocity);
-			player->move_and_slide();
-
-			desire_jump = false;
-			return;
-		}
-
 		if (PlayerMovementComponent* player_movement_component = player->get_component<PlayerMovementComponent>()) {
-			real_t gravity = MathUtils::calculate_jump_gravity(96.0, 0.4);
+			if (desire_jump) {
+				Vector2 new_velocity = condition->velocity;
+				new_velocity.y = MathUtils::calculate_jump_speed_y(player_movement_component->get_jump_height(), player_movement_component->get_jump_duration());
+				player->set_velocity(new_velocity);
+				player->move_and_slide();
+
+				desire_jump = false;
+				return;
+			}
+
+			real_t gravity = MathUtils::calculate_jump_gravity(player_movement_component->get_jump_height(), player_movement_component->get_jump_duration());
 			player_movement_component->input_move(
 					delta,
 					condition->velocity,
 					condition->input_sign_x,
-					600.0,
-					600.0,
-					1800.0,
-					400.0,
+					player_movement_component->get_walk_acceleration(),
+					player_movement_component->get_walk_acceleration(),
+					player_movement_component->get_walk_turn_speed(),
+					player_movement_component->get_walk_max_speed(),
 					gravity);
 		}
 	}

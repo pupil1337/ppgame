@@ -25,15 +25,15 @@ StringName PlayerAirFallState::on_process(double delta) {
 void PlayerAirFallState::on_physics_process(double delta) {
 	if (player && condition) {
 		if (PlayerMovementComponent* player_movement_component = player->get_component<PlayerMovementComponent>()) {
-			real_t gravity = MathUtils::calculate_fall_gravity(96.0, 0.4, 2.0);
+			real_t gravity = MathUtils::calculate_fall_gravity(player_movement_component->get_jump_height(), player_movement_component->get_jump_duration(), player_movement_component->get_fall_gravity_multiplayer());
 			player_movement_component->input_move(
 					delta,
 					condition->velocity,
 					condition->input_sign_x,
-					600.0,
-					600.0,
-					1800.0,
-					400.0,
+					player_movement_component->get_walk_acceleration(),
+					player_movement_component->get_walk_acceleration(),
+					player_movement_component->get_walk_turn_speed(),
+					player_movement_component->get_walk_max_speed(),
 					gravity);
 		}
 	}

@@ -27,10 +27,10 @@ void PlayerGroundRunState::on_physics_process(double delta) {
 			player_movement_component->input_move(delta,
 					condition->velocity,
 					condition->input_sign_x,
-					600.0,
-					5000.0,
-					1200.0,
-					400.0,
+					player_movement_component->get_walk_acceleration(),
+					player_movement_component->get_walk_deceleration(),
+					player_movement_component->get_walk_turn_speed(),
+					player_movement_component->get_walk_max_speed(),
 					0.0);
 		}
 	}

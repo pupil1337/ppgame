@@ -9,11 +9,13 @@ using namespace godot;
 class MathUtils {
 public:
 	static _FORCE_INLINE_ real_t calculate_jump_speed_y(real_t jump_height, real_t jump_duration) {
-		return (2.0 * (-jump_height)) / jump_duration;
+		jump_duration = jump_duration == 0.0 ? (real_t)0.01 : jump_duration;
+		return ((real_t)2.0 * (-jump_height)) / jump_duration;
 	}
 
 	static _FORCE_INLINE_ real_t calculate_jump_gravity(real_t jump_height, real_t jump_duration) {
-		return -(2.0 * (-jump_height)) / (jump_duration * jump_duration + 0.01);
+		jump_duration = jump_duration == 0.0 ? (real_t)0.01 : jump_duration;
+		return (real_t)-2.0 * (-jump_height) / (jump_duration * jump_duration);
 	}
 
 	static _FORCE_INLINE_ real_t calculate_fall_gravity(real_t jump_height, real_t jump_duration, real_t fall_gravity_multiplier) {
