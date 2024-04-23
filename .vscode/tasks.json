@@ -1,6 +1,22 @@
 {
 	"version": "2.0.0",
 	"tasks": [
+		// editor & game
+		{
+			"label": "editor&game [debug]",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"editor [debug]",
+				"update gdextension api",
+				"game [debug]"
+			],
+			"problemMatcher": []
+		},
+
+		// -----------------------------------------------------------------
+		// Editor
+		// -----------------------------------------------------------------
+
 		// editor
 		{
 			"label": "editor [debug]",
@@ -21,6 +37,66 @@
 			"group": "build",
 			"problemMatcher": "$msCompile"
 		},
+
+		// -----------------------------------------------------------------
+		// GDExtension API
+		// -----------------------------------------------------------------
+
+		// generate gdextension api
+		{
+			"label": "generate gdextension api",
+			"options": {
+				"cwd": "${workspaceFolder}/godot/bin"
+			},
+			"type": "shell",
+			"command": "./godot.windows.editor.dev.x86_64.exe",
+			"args": [
+				"--dump-extension-api",
+				"--dump-gdextension-interface"
+			],
+			"hide": true,
+			"problemMatcher": []
+		},
+		// copy extension extension_api.json
+		{
+			"label": "copy extension_api.json",
+			"type": "shell",
+			"command": "copy",
+			"args": [
+				"${workspaceFolder}/godot/bin/extension_api.json",
+				"${workspaceFolder}/godot-cpp/gdextension"
+			],
+			"hide": true,
+			"problemMatcher": []
+		},
+		// copy extension gdextension_interface.h
+		{
+			"label": "copy gdextension_interface.h",
+			"type": "shell",
+			"command": "copy",
+			"args": [
+				"${workspaceFolder}/godot/bin/gdextension_interface.h",
+				"${workspaceFolder}/godot-cpp/gdextension"
+			],
+			"hide": true,
+			"problemMatcher": []
+		},
+		// update extension api
+		{
+			"label": "update gdextension api",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"generate gdextension api",
+				"copy extension_api.json",
+				"copy gdextension_interface.h"
+			],
+			"problemMatcher": []
+		},
+
+		// -----------------------------------------------------------------
+		// Game
+		// -----------------------------------------------------------------
+
 		// game-1: gdextension
 		{
 			"label": "game-1 [debug]",
@@ -83,16 +159,6 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"problemMatcher": []
-		},
-		// editor & game
-		{
-			"label": "editor&game [debug]",
-			"dependsOrder": "sequence",
-			"dependsOn": [
-				"editor [debug]",
-				"game [debug]"
-			],
 			"problemMatcher": []
 		}
 	]
