@@ -49,7 +49,7 @@
 				"cwd": "${workspaceFolder}/godot/bin"
 			},
 			"type": "shell",
-			"command": "./godot.windows.editor.dev.x86_64.exe",
+			"command": "./godot.windows.editor.dev.x86_64.console.exe",
 			"args": [
 				"--dump-extension-api",
 				"--dump-gdextension-interface"
