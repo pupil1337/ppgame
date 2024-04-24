@@ -53,7 +53,7 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_RUNTIME_CLASS(World)
 
 	// level
-	GDREGISTER_RUNTIME_CLASS(Level)
+	GDREGISTER_CLASS(Level)
 }
 
 void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {
