@@ -52,7 +52,9 @@
 			"command": "./godot.windows.editor.dev.x86_64.console.exe",
 			"args": [
 				"--dump-extension-api",
-				"--dump-gdextension-interface"
+				"--dump-gdextension-interface",
+				"--headless",
+				"--script"
 			],
 			"hide": true,
 			"problemMatcher": []
