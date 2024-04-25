@@ -13,6 +13,7 @@ class World : public Node {
 
 public:
 	virtual void _ready() override;
+	virtual void _process(double delta) override;
 
 protected:
 	static void _bind_methods() {}
