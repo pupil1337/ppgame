@@ -12,6 +12,8 @@ class World : public Node {
 	// ------------------------------------------
 
 public:
+	virtual void _enter_tree() override;
+	virtual void _exit_tree() override;
 	virtual void _ready() override;
 	virtual void _process(double delta) override;
 
