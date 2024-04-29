@@ -11,7 +11,6 @@ using namespace godot;
 
 class Level : public Node2D {
 	GDCLASS(Level, Node2D)
-	typedef Node super;
 
 public:
 	int32_t get_camera_limit(Side p_side);

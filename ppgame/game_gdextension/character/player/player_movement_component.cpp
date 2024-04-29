@@ -13,7 +13,7 @@
 #include "character/player/player.h"
 
 void PlayerMovementComponent::_ready() {
-	super::_ready();
+	parent_type::_ready();
 
 	if (actor) {
 		player = static_cast<Player*>(actor);

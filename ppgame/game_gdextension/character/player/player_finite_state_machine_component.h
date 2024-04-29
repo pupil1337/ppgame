@@ -13,7 +13,6 @@ class PlayerInputComponent;
 
 class PlayerFiniteStateMachineComponent : public FiniteStateMachineComponent {
 	GDCLASS(PlayerFiniteStateMachineComponent, FiniteStateMachineComponent)
-	typedef FiniteStateMachineComponent super;
 
 public:
 	virtual void on_process(double p_delta) override;

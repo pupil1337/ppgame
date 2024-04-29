@@ -1,7 +1,6 @@
 #ifndef RESOURCE_LOADER_HELPER_H
 #define RESOURCE_LOADER_HELPER_H
 
-#include <functional>
 #include <godot_cpp/classes/global_constants.hpp>
 #include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/classes/ref.hpp>
@@ -29,10 +28,6 @@ public:
 	Ref<Resource> load(const String& path, const String& type_hint = String(), ResourceLoader::CacheMode cache_mode = ResourceLoader::CacheMode::CACHE_MODE_REUSE);
 
 	Error load_threaded_request(const String& path, ResourceLoadedCallback callback = nullptr, const String& type_hint = String(), bool use_sub_threads = false, ResourceLoader::CacheMode cache_mode = ResourceLoader::CacheMode::CACHE_MODE_REUSE);
-
-	std::function<void()> testfunc;
-	ResourceLoadedCallback testfunc2;
-	void AAA(std::function<void(Ref<Resource>)> callback);
 
 	void flush_queries();
 

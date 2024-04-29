@@ -29,22 +29,18 @@ void FiniteStateMachineComponent::_change_state(const StringName& p_new_state_na
 }
 
 void FiniteStateMachineComponent::on_process(double p_delta) {
-	ERR_FAIL_COND_EDMSG(curr_state == nullptr, "FSM: on_process curr_state == nullptr");
+	ERR_FAIL_NULL_EDMSG(curr_state, "FSM: on_process curr_state == nullptr");
 
-	if (curr_state) {
-		StringName new_state_name = curr_state->on_process(p_delta);
-		if (!new_state_name.is_empty()) {
-			_change_state(new_state_name);
-		}
+	StringName new_state_name = curr_state->on_process(p_delta);
+	if (!new_state_name.is_empty()) {
+		_change_state(new_state_name);
 	}
 }
 
 void FiniteStateMachineComponent::on_physics_process(double p_delta) {
-	ERR_FAIL_COND_EDMSG(curr_state == nullptr, "FSM: on_physics_process curr_state == nullptr");
+	ERR_FAIL_NULL_EDMSG(curr_state, "FSM: on_physics_process curr_state == nullptr");
 
-	if (curr_state) {
-		curr_state->on_physics_process(p_delta);
-	}
+	curr_state->on_physics_process(p_delta);
 }
 
 // ----------------------------------------------------------------------------

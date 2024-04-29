@@ -9,7 +9,6 @@ using namespace godot;
 
 class PlayerGroundIdleState : public PlayerGroundState {
 	GDCLASS(PlayerGroundIdleState, PlayerGroundState)
-	typedef PlayerGroundState super;
 
 public:
 	virtual void enter() override;

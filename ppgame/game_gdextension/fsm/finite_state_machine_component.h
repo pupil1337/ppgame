@@ -14,7 +14,6 @@ class State;
 
 class FiniteStateMachineComponent : public Component {
 	GDCLASS(FiniteStateMachineComponent, Component)
-	typedef Component super;
 
 	friend State;
 

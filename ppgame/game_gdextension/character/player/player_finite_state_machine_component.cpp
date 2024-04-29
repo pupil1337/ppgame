@@ -14,7 +14,7 @@
 #include "fsm/state.h"
 
 void PlayerFiniteStateMachineComponent::_ready() {
-	super::_ready();
+	parent_type::_ready();
 
 	if (actor) {
 		player = static_cast<Player*>(actor);
@@ -33,11 +33,11 @@ void PlayerFiniteStateMachineComponent::_ready() {
 
 void PlayerFiniteStateMachineComponent::on_process(double p_delta) {
 	_update_logic_condition();
-	super::on_process(p_delta);
+	parent_type::on_process(p_delta);
 }
 
 void PlayerFiniteStateMachineComponent::on_physics_process(double p_delta) {
-	super::on_physics_process(p_delta);
+	parent_type::on_physics_process(p_delta);
 	_update_physics_condition();
 }
 

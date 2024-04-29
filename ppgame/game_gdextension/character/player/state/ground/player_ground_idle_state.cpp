@@ -15,7 +15,7 @@ StringName PlayerGroundIdleState::on_process(double delta) {
 		return PlayerGroundRunState::get_class_static();
 	}
 
-	return super::on_process(delta);
+	return parent_type::on_process(delta);
 }
 
 void PlayerGroundIdleState::on_physics_process(double delta) {

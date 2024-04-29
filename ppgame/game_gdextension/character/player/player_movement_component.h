@@ -14,7 +14,6 @@ class Player;
 
 class PlayerMovementComponent : public Component {
 	GDCLASS(PlayerMovementComponent, Component)
-	typedef Component super;
 
 public:
 	void input_move(double delta, Vector2 curr_velocity, int8_t input_sign_x, real_t acceleration_x, real_t deceleration_x, real_t turn_speed_x, real_t max_speed_x, real_t gravity);

@@ -9,7 +9,6 @@ using namespace godot;
 
 class PlayerAirFallState : public PlayerAirState {
 	GDCLASS(PlayerAirFallState, PlayerAirState)
-	typedef PlayerAirState super;
 
 public:
 	virtual void enter() override;

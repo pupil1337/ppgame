@@ -8,13 +8,15 @@ using namespace godot;
 
 class State : public Node {
 	GDCLASS(State, Node)
-	typedef Node super;
 
 public:
 	virtual void enter() = 0;
 	virtual StringName on_process(double delta) = 0;
 	virtual void on_physics_process(double delta) = 0;
 	virtual void exit() = 0;
+
+private:
+	void _register_state(Node* p_node);
 
 	// ------------------------------------------
 

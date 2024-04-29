@@ -12,7 +12,6 @@ using namespace godot;
 
 class PlayerInputComponent : public Component {
 	GDCLASS(PlayerInputComponent, Component)
-	typedef Component super;
 
 public:
 	Vector2 get_motion();

@@ -26,7 +26,7 @@ StringName PlayerAirJumpState::on_process(double delta) {
 		return PlayerAirFallState::get_class_static();
 	}
 
-	return super::on_process(delta);
+	return parent_type::on_process(delta);
 }
 
 void PlayerAirJumpState::on_physics_process(double delta) {

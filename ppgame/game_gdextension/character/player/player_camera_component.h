@@ -9,7 +9,6 @@ using namespace godot;
 
 class PlayerCameraComponent : public Component {
 	GDCLASS(PlayerCameraComponent, Component)
-	typedef Component super;
 
 private:
 	Camera2D* camera = nullptr;
