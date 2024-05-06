@@ -7,7 +7,6 @@ using namespace godot;
 
 class World : public Node {
 	GDCLASS(World, Node)
-	typedef Node super;
 
 	// ------------------------------------------
 

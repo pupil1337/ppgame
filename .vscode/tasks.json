@@ -32,7 +32,8 @@
 				"custom_modules=../ppgame/game_module",
 				"dev_build=yes",
 				"debug_symbols=yes",
-				"compiledb=yes"
+				"compiledb=yes",
+				"deprecated=no",
 			],
 			"group": "build",
 			"problemMatcher": "$msCompile"

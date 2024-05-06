@@ -21,6 +21,7 @@
 #include "fsm/finite_state_machine_component.h"
 #include "fsm/state.h"
 #include "level/level.h"
+#include "world/resource_loader_helper.h"
 #include "world/world.h"
 
 void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
@@ -51,6 +52,7 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 
 	// world
 	GDREGISTER_RUNTIME_CLASS(World)
+	GDREGISTER_RUNTIME_CLASS(ResourceLoaderHelper)
 
 	// level
 	GDREGISTER_CLASS(Level)

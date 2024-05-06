@@ -1,11 +1,15 @@
 #include "resource_loader_helper.h"
+#include "godot_cpp/variant/array.hpp"
 
+#include <functional>
 #include <godot_cpp/classes/global_constants.hpp>
 #include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/resource.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
+#include <godot_cpp/core/error_macros.hpp>
 #include <godot_cpp/templates/hash_map.hpp>
 #include <godot_cpp/templates/hash_set.hpp>
+#include <godot_cpp/templates/vector.hpp>
 #include <godot_cpp/variant/string.hpp>
 
 ResourceLoaderHelper* ResourceLoaderHelper::singleton = nullptr;
@@ -24,43 +28,60 @@ ResourceLoaderHelper* ResourceLoaderHelper::get_singleton() {
 	return singleton;
 }
 
-Ref<Resource> ResourceLoaderHelper::load(const String& path, const String& type_hint /* = String() */, ResourceLoader::CacheMode cache_mode /* = ResourceLoader::CacheMode::CACHE_MODE_REUSE */) {
+Ref<Resource> ResourceLoaderHelper::load(const String& path, const String& type_hint, ResourceLoader::CacheMode cache_mode /* = ResourceLoader::CacheMode::CACHE_MODE_REUSE */) {
 	return loader->load(path, type_hint, cache_mode);
 }
 
-Error ResourceLoaderHelper::load_threaded_request(const String& path, ResourceLoadedCallback callback /* = nullptr */, const String& type_hint /* = String() */, bool use_sub_threads /* = false */, ResourceLoader::CacheMode cache_mode /* = ResourceLoader::CacheMode::CACHE_MODE_REUSE */) {
-	if (callback != nullptr) {
-		if (!loading_paths.has(path)) {
-			loading_paths.insert(path, HashSet<ResourceLoadedCallback>());
-		}
-
-		HashSet<ResourceLoadedCallback>& callbacks = loading_paths.get(path);
-		if (!callbacks.has(callback)) {
-			callbacks.insert(callback);
+void ResourceLoaderHelper::load_threaded_request(const String& path, const String& type_hint, const ResourceLoaderCallback& callback, bool use_sub_threads /* = false */, ResourceLoader::CacheMode cache_mode /* = ResourceLoader::CacheMode::CACHE_MODE_REUSE */) {
+	if (!loading.has(path)) {
+		if (loader->load_threaded_request(path, type_hint, use_sub_threads, cache_mode) == Error::OK) {
+			loading.insert(path, Vector<ResourceLoaderCallback>());
+		} else {
+			callback(ResourceLoader::ThreadLoadStatus::THREAD_LOAD_FAILED, Ref<Resource>(), 0.0);
+			ERR_FAIL_EDMSG("load_threaded_request:: !token.is_valid()");
 		}
 	}
 
-	return loader->load_threaded_request(path, type_hint, use_sub_threads, cache_mode);
+	Vector<ResourceLoaderCallback>& callbacks = loading.get(path);
+	callbacks.push_back(callback);
 }
 
 void ResourceLoaderHelper::flush_queries() {
-	for (HashMap<String, HashSet<ResourceLoadedCallback>>::Iterator it = loading_paths.begin(); it != loading_paths.end(); ++it) {
+	Vector<String> need_delete_paths;
+	for (HashMap<String, Vector<ResourceLoaderCallback>>::ConstIterator it = loading.begin(); it != loading.end(); ++it) {
 		const String& path = it->key;
-		const HashSet<ResourceLoadedCallback>& callbacks = it->value;
+		const Vector<ResourceLoaderCallback>& callbacks = it->value;
 
-		ResourceLoader::ThreadLoadStatus load_status = loader->load_threaded_get_status(path);
+		Array progress;
+		ResourceLoader::ThreadLoadStatus load_status = loader->load_threaded_get_status(path, progress);
 		switch (load_status) {
 			case ResourceLoader::ThreadLoadStatus::THREAD_LOAD_INVALID_RESOURCE:
+			case ResourceLoader::ThreadLoadStatus::THREAD_LOAD_FAILED:
+				for (int i = 0; i < callbacks.size(); ++i) {
+					callbacks[i](load_status, Ref<Resource>(), 0.0);
+				}
+				need_delete_paths.push_back(path);
 				break;
 			case ResourceLoader::ThreadLoadStatus::THREAD_LOAD_IN_PROGRESS:
-				break;
-			case ResourceLoader::ThreadLoadStatus::THREAD_LOAD_FAILED:
-				break;
-			case ResourceLoader::ThreadLoadStatus::THREAD_LOAD_LOADED:
-				for (HashSet<ResourceLoadedCallback>::Iterator callback = callbacks.begin(); callback != callbacks.end(); ++callback) {
-					(*callback)(loader->load_threaded_get(path));
+				for (int i = 0; i < callbacks.size(); ++i) {
+					callbacks[i](load_status, Ref<Resource>(), progress[0]);
 				}
 				break;
+			case ResourceLoader::ThreadLoadStatus::THREAD_LOAD_LOADED:
+				for (int i = 0; i < callbacks.size(); ++i) {
+					Ref<Resource> resource = loader->load_threaded_get(path);
+					if (resource.is_valid()) {
+						callbacks[i](load_status, resource, progress[0]);
+					} else {
+						callbacks[i](ResourceLoader::ThreadLoadStatus::THREAD_LOAD_FAILED, resource, 0.0);
+					}
+				}
+				need_delete_paths.push_back(path);
+				break;
 		}
+	}
+
+	for (int i = 0; i < need_delete_paths.size(); ++i) {
+		loading.erase(need_delete_paths[i]);
 	}
 }
