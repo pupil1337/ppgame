@@ -2,6 +2,7 @@
 
 #include <godot_cpp/classes/animation_player.hpp>
 #include <godot_cpp/classes/character_body2d.hpp>
+#include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/global_constants.hpp>
 #include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/core/class_db.hpp>
@@ -19,16 +20,20 @@ void Player::_ready() {
 void Player::_process(double delta) {
 	parent_type::_process(delta);
 
-	if (PlayerFiniteStateMachineComponent* player_fsm = get_component<PlayerFiniteStateMachineComponent>()) {
-		player_fsm->on_process(delta);
+	if (!Engine::get_singleton()->is_editor_hint()) {
+		if (PlayerFiniteStateMachineComponent* player_fsm = get_component<PlayerFiniteStateMachineComponent>()) {
+			player_fsm->on_process(delta);
+		}
 	}
 }
 
 void Player::_physics_process(double delta) {
 	parent_type::_physics_process(delta);
 
-	if (PlayerFiniteStateMachineComponent* player_fsm = get_component<PlayerFiniteStateMachineComponent>()) {
-		player_fsm->on_physics_process(delta);
+	if (!Engine::get_singleton()->is_editor_hint()) {
+		if (PlayerFiniteStateMachineComponent* player_fsm = get_component<PlayerFiniteStateMachineComponent>()) {
+			player_fsm->on_physics_process(delta);
+		}
 	}
 }
 

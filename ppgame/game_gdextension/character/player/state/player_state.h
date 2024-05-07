@@ -11,7 +11,6 @@ using namespace godot;
 
 class PlayerFiniteStateMachineComponent;
 class Player;
-
 struct PlayerStateCondition;
 
 class PlayerState : public State {

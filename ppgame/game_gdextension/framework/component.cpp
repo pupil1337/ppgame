@@ -1,5 +1,6 @@
 #include "component.h"
 
+#include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/node.hpp>
 
 #include "framework/actor.h"
@@ -7,7 +8,9 @@
 void Component::_enter_tree() {
 	parent_type::_enter_tree();
 
-	_register_component(this);
+	if (!Engine::get_singleton()->is_editor_hint()) {
+		_register_component(this);
+	}
 }
 
 void Component::_register_component(Node* p_node) {

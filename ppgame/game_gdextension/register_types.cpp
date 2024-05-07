@@ -20,6 +20,7 @@
 #include "framework/component.h"
 #include "fsm/finite_state_machine_component.h"
 #include "fsm/state.h"
+#include "level/door.h"
 #include "level/level.h"
 #include "world/resource_loader_helper.h"
 #include "world/world.h"
@@ -37,25 +38,26 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_ABSTRACT_CLASS(State)
 
 	// player
-	GDREGISTER_RUNTIME_CLASS(Player)
-	GDREGISTER_RUNTIME_CLASS(PlayerFiniteStateMachineComponent)
-	GDREGISTER_RUNTIME_CLASS(PlayerInputComponent)
+	GDREGISTER_CLASS(Player)
+	GDREGISTER_CLASS(PlayerFiniteStateMachineComponent)
+	GDREGISTER_CLASS(PlayerInputComponent)
 	GDREGISTER_ABSTRACT_CLASS(PlayerState)
 	GDREGISTER_ABSTRACT_CLASS(PlayerGroundState)
-	GDREGISTER_RUNTIME_CLASS(PlayerGroundIdleState)
-	GDREGISTER_RUNTIME_CLASS(PlayerGroundRunState)
+	GDREGISTER_CLASS(PlayerGroundIdleState)
+	GDREGISTER_CLASS(PlayerGroundRunState)
 	GDREGISTER_ABSTRACT_CLASS(PlayerAirState)
-	GDREGISTER_RUNTIME_CLASS(PlayerAirJumpState)
-	GDREGISTER_RUNTIME_CLASS(PlayerAirFallState)
-	GDREGISTER_RUNTIME_CLASS(PlayerMovementComponent)
-	GDREGISTER_RUNTIME_CLASS(PlayerCameraComponent)
+	GDREGISTER_CLASS(PlayerAirJumpState)
+	GDREGISTER_CLASS(PlayerAirFallState)
+	GDREGISTER_CLASS(PlayerMovementComponent)
+	GDREGISTER_CLASS(PlayerCameraComponent)
 
 	// world
-	GDREGISTER_RUNTIME_CLASS(World)
-	GDREGISTER_RUNTIME_CLASS(ResourceLoaderHelper)
+	GDREGISTER_CLASS(World)
+	GDREGISTER_CLASS(ResourceLoaderHelper)
 
 	// level
 	GDREGISTER_CLASS(Level)
+	GDREGISTER_CLASS(Door)
 }
 
 void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {

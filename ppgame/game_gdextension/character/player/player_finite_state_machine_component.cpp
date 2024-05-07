@@ -1,5 +1,6 @@
 #include "player_finite_state_machine_component.h"
 
+#include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/core/math.hpp>
 #include <godot_cpp/templates/hash_map.hpp>
@@ -16,19 +17,21 @@
 void PlayerFiniteStateMachineComponent::_ready() {
 	parent_type::_ready();
 
-	if (actor) {
-		player = static_cast<Player*>(actor);
-		player_input_component = actor->get_component<PlayerInputComponent>();
-	}
-
-	for (HashMap<StringName, State*>::Iterator it = states.begin(); it != states.end(); ++it) {
-		if (PlayerState* player_state = Object::cast_to<PlayerState>(it->value)) {
-			player_state->player = player;
-			player_state->condition = &condition;
+	if (!Engine::get_singleton()->is_editor_hint()) {
+		if (actor) {
+			player = static_cast<Player*>(actor);
+			player_input_component = actor->get_component<PlayerInputComponent>();
 		}
-	}
 
-	_update_physics_condition();
+		for (HashMap<StringName, State*>::Iterator it = states.begin(); it != states.end(); ++it) {
+			if (PlayerState* player_state = Object::cast_to<PlayerState>(it->value)) {
+				player_state->player = player;
+				player_state->condition = &condition;
+			}
+		}
+
+		_update_physics_condition();
+	}
 }
 
 void PlayerFiniteStateMachineComponent::on_process(double p_delta) {

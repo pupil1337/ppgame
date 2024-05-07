@@ -1,6 +1,7 @@
 #include "player_movement_component.h"
 
 #include <cstdint>
+#include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
@@ -15,9 +16,11 @@
 void PlayerMovementComponent::_ready() {
 	parent_type::_ready();
 
-	if (actor) {
-		player = static_cast<Player*>(actor);
-		player_sprite = player->get_sprite();
+	if (!Engine::get_singleton()->is_editor_hint()) {
+		if (actor) {
+			player = static_cast<Player*>(actor);
+			player_sprite = player->get_sprite();
+		}
 	}
 }
 

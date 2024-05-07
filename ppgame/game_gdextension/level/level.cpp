@@ -1,12 +1,9 @@
 #include "level.h"
-#include "godot_cpp/classes/object.hpp"
 
 #include <cstdint>
 #include <godot_cpp/classes/global_constants.hpp>
 #include <godot_cpp/classes/marker2d.hpp>
 #include <godot_cpp/core/error_macros.hpp>
-#include <godot_cpp/variant/packed_string_array.hpp>
-#include <godot_cpp/variant/transform2d.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 
 int32_t Level::get_camera_limit(Side p_side) {
@@ -29,18 +26,4 @@ int32_t Level::get_camera_limit(Side p_side) {
 	} else {
 		return origin.y;
 	}
-}
-
-PackedStringArray Level::_get_configuration_warnings() const {
-	PackedStringArray ret;
-
-	if (Object::cast_to<Marker2D>(get_node_or_null("CameraLT")) == nullptr) {
-		ret.push_back("not set CameraLT(Marker2D) Node");
-	}
-
-	if (Object::cast_to<Marker2D>(get_node_or_null("CameraRB")) == nullptr) {
-		ret.push_back("not set CameraRB(Marker2D) Node");
-	}
-
-	return ret;
 }

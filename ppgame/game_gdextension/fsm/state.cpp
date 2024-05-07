@@ -1,5 +1,6 @@
 #include "state.h"
 
+#include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/object.hpp>
 
@@ -8,7 +9,9 @@
 void State::_enter_tree() {
 	parent_type::_enter_tree();
 
-	_register_state(this);
+	if (!Engine::get_singleton()->is_editor_hint()) {
+		_register_state(this);
+	}
 }
 
 void State::_register_state(Node* p_node) {

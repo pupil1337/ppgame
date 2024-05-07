@@ -17,9 +17,6 @@ public:
 
 	// ------------------------------------------
 
-public:
-	virtual PackedStringArray _get_configuration_warnings() const override;
-
 protected:
 	static void _bind_methods() {}
 };
