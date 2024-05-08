@@ -27,7 +27,7 @@ void World::_ready() {
 
 	if (!Engine::get_singleton()->is_editor_hint()) {
 		// Test Level
-		ResourceLoaderHelper::get_singleton()->load_threaded_request("res://level/level0.tscn", PackedScene::get_class_static(), [this](ResourceLoader::ThreadLoadStatus p_status, Ref<Resource> p_resource, float p_progress) {
+		ResourceLoaderHelper::get_singleton()->load_threaded_request("res://level/level_0.tscn", PackedScene::get_class_static(), [this](ResourceLoader::ThreadLoadStatus p_status, Ref<Resource> p_resource, float p_progress) {
 			if (p_status == ResourceLoader::ThreadLoadStatus::THREAD_LOAD_LOADED) {
 				PackedScene* packed_level = Object::cast_to<PackedScene>(*p_resource);
 				Level* level = Object::cast_to<Level>(packed_level->instantiate());

@@ -68,8 +68,8 @@ void ResourceLoaderHelper::flush_queries() {
 				}
 				break;
 			case ResourceLoader::ThreadLoadStatus::THREAD_LOAD_LOADED:
+				Ref<Resource> resource = loader->load_threaded_get(path);
 				for (int i = 0; i < callbacks.size(); ++i) {
-					Ref<Resource> resource = loader->load_threaded_get(path);
 					if (resource.is_valid()) {
 						callbacks[i](load_status, resource, progress[0]);
 					} else {
