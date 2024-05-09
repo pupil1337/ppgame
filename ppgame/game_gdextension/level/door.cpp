@@ -3,6 +3,7 @@
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/file_access.hpp>
 #include <godot_cpp/classes/node2d.hpp>
+#include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/core/object.hpp>
@@ -18,6 +19,10 @@ void Door::_enter_tree() {
 	parent_type::_enter_tree();
 
 	if (!Engine::get_singleton()->is_editor_hint()) {
+		if (Level* level = Object::cast_to<Level>(get_parent())) {
+			level->doors.push_back(this);
+		}
+
 		connect("body_entered", callable_mp(this, &self_type::_body_entered));
 		connect("body_exited", callable_mp(this, &self_type::_body_exited));
 	}
@@ -31,6 +36,14 @@ void Door::_body_exited(Node2D* p_body) {
 	UtilityFunctions::print("door::_body_exited: ", p_body->get_name());
 }
 
+String Door::get_link_level_path() {
+	return link_level_path;
+}
+
+String Door::get_link_level_player_start_name() {
+	return link_level_player_start_name;
+}
+
 // ----------------------------------------------------------------------------
 
 void Door::set_link_level_path(const String& p_link_level_path) {
@@ -39,18 +52,10 @@ void Door::set_link_level_path(const String& p_link_level_path) {
 	update_configuration_warnings();
 }
 
-String Door::get_link_level_path() {
-	return link_level_path;
-}
-
 void Door::set_link_level_player_start_name(const String& p_link_level_player_start_name) {
 	link_level_player_start_name = p_link_level_player_start_name;
 
 	update_configuration_warnings();
-}
-
-String Door::get_link_level_player_start_name() {
-	return link_level_player_start_name;
 }
 
 PackedStringArray Door::_get_configuration_warnings() const {

@@ -1,10 +1,24 @@
 #include "level.h"
 
 #include <cstdint>
+#include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/global_constants.hpp>
 #include <godot_cpp/classes/marker2d.hpp>
+#include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/core/error_macros.hpp>
+#include <godot_cpp/templates/vector.hpp>
+#include <godot_cpp/variant/packed_string_array.hpp>
+#include <godot_cpp/variant/string.hpp>
 #include <godot_cpp/variant/vector2.hpp>
+
+#include "level/door.h"
+
+void Level::_ready() {
+	parent_type::_ready();
+
+	if (!Engine::get_singleton()->is_editor_hint()) {
+	}
+}
 
 int32_t Level::get_camera_limit(Side p_side) {
 	Marker2D* camera_marker = nullptr;
@@ -26,4 +40,30 @@ int32_t Level::get_camera_limit(Side p_side) {
 	} else {
 		return origin.y;
 	}
+}
+
+Vector<String> Level::get_link_level_paths() {
+	Vector<String> res;
+	for (int i = 0; i < doors.size(); ++i) {
+		String path = doors[i]->get_link_level_path();
+		if (!res.has(path)) {
+			res.push_back(path);
+		}
+	}
+
+	return res;
+}
+
+// ----------------------------------------------------------------------------
+
+PackedStringArray Level::_get_configuration_warnings() const {
+	PackedStringArray warnings = parent_type::_get_configuration_warnings();
+	if (!Object::cast_to<Marker2D>(get_node_or_null("CameraLT"))) {
+		warnings.push_back("Not has Node CameraLT (type:Marker2D)");
+	}
+	if (!Object::cast_to<Marker2D>(get_node_or_null("CameraRB"))) {
+		warnings.push_back("Not has Node CameraRB (type:Marker2D)");
+	}
+
+	return warnings;
 }

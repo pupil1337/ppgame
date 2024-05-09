@@ -5,6 +5,9 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
+#include "async_loader/async_loader.h"
+#include "async_loader/scene_instancer.h"
+#include "async_loader/scene_loader.h"
 #include "character/player/player.h"
 #include "character/player/player_camera_component.h"
 #include "character/player/player_finite_state_machine_component.h"
@@ -22,7 +25,6 @@
 #include "fsm/state.h"
 #include "level/door.h"
 #include "level/level.h"
-#include "world/resource_loader_helper.h"
 #include "world/world.h"
 
 void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
@@ -53,11 +55,15 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 
 	// world
 	GDREGISTER_CLASS(World)
-	GDREGISTER_CLASS(ResourceLoaderHelper)
 
 	// level
 	GDREGISTER_CLASS(Level)
 	GDREGISTER_CLASS(Door)
+
+	// async_loader
+	GDREGISTER_CLASS(AsyncLoader)
+	GDREGISTER_CLASS(SceneLoader)
+	GDREGISTER_CLASS(SceneInstancer)
 }
 
 void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {
