@@ -5,11 +5,11 @@
 
 #include "framework/actor.h"
 
-void Component::_enter_tree() {
-	parent_type::_enter_tree();
-
+void Component::_notification(int p_what) {
 	if (!Engine::get_singleton()->is_editor_hint()) {
-		_register_component(this);
+		if (p_what == NOTIFICATION_PARENTED) {
+			_register_component(this);
+		}
 	}
 }
 

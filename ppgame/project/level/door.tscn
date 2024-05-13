@@ -3,6 +3,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jvwxi"]
 
 [node name="Door" type="Door"]
+input_pickable = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jvwxi")

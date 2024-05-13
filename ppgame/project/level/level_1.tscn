@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://b635rcpyjfalv"]
+[gd_scene load_steps=10 format=4 uid="uid://b635rcpyjfalv"]
 
 [ext_resource type="TileSet" uid="uid://bf4ihtt8jh5e7" path="res://level/tile_set.tres" id="1_1twj8"]
 [ext_resource type="PackedScene" uid="uid://cub0ekyo2vrbf" path="res://level/air_wall.tscn" id="2_uykgy"]
 [ext_resource type="PackedScene" uid="uid://bbqlbaokh6put" path="res://level/door.tscn" id="3_dyyde"]
+[ext_resource type="PackedScene" uid="uid://bxewgbjp2m03f" path="res://level/player_start.tscn" id="4_w5um7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_xykix"]
 a = Vector2(-10, 0)
@@ -16,10 +17,10 @@ b = Vector2(1162, 112)
 a = Vector2(0, -10)
 b = Vector2(1161, -10)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_028pf"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a6nb8"]
 size = Vector2(5, 400)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rduir"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_16fss"]
 size = Vector2(5, 110)
 
 [node name="Level_1" type="Level"]
@@ -65,7 +66,7 @@ position = Vector2(-5, 200)
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" parent="Door1" index="0"]
-shape = SubResource("RectangleShape2D_028pf")
+shape = SubResource("RectangleShape2D_a6nb8")
 metadata/_edit_lock_ = true
 
 [node name="Door2" parent="." instance=ExtResource("3_dyyde")]
@@ -75,15 +76,15 @@ position = Vector2(1157, 56)
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" parent="Door2" index="0"]
-shape = SubResource("RectangleShape2D_rduir")
+shape = SubResource("RectangleShape2D_16fss")
 metadata/_edit_lock_ = true
 
-[node name="PlayerStart1" type="Marker2D" parent="."]
-position = Vector2(21, 400)
+[node name="PlayerStart1" parent="." instance=ExtResource("4_w5um7")]
+position = Vector2(23, 384)
 metadata/_edit_lock_ = true
 
-[node name="PlayerStart2" type="Marker2D" parent="."]
-position = Vector2(1124, 112)
+[node name="PlayerStart2" parent="." instance=ExtResource("4_w5um7")]
+position = Vector2(1127, 97)
 metadata/_edit_lock_ = true
 
 [editable path="AirWallL"]

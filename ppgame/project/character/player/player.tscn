@@ -96,9 +96,7 @@ _data = {
 "Run": SubResource("Animation_nqajv")
 }
 
-[node name="Player" type="Player" node_paths=PackedStringArray("sprite", "animation_player")]
-sprite = NodePath("PlayerSprite")
-animation_player = NodePath("AnimationPlayer")
+[node name="Player" type="Player"]
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_myrph")

@@ -6,11 +6,11 @@
 
 #include "fsm/finite_state_machine_component.h"
 
-void State::_enter_tree() {
-	parent_type::_enter_tree();
-
+void State::_notification(int p_what) {
 	if (!Engine::get_singleton()->is_editor_hint()) {
-		_register_state(this);
+		if (p_what == NOTIFICATION_PARENTED) {
+			_register_state(this);
+		}
 	}
 }
 

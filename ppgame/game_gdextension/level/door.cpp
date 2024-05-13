@@ -6,6 +6,7 @@
 #include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
+#include <godot_cpp/core/memory.hpp>
 #include <godot_cpp/core/object.hpp>
 #include <godot_cpp/core/property_info.hpp>
 #include <godot_cpp/variant/callable_method_pointer.hpp>
@@ -13,35 +14,41 @@
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/variant/variant.hpp>
 
+#include "async_loader/async_loader.h"
+#include "character/player/player.h"
 #include "level/level.h"
+#include "world/world.h"
 
-void Door::_enter_tree() {
-	parent_type::_enter_tree();
-
+void Door::_notification(int p_what) {
 	if (!Engine::get_singleton()->is_editor_hint()) {
-		if (Level* level = Object::cast_to<Level>(get_parent())) {
-			level->doors.push_back(this);
+		if (p_what == NOTIFICATION_POSTINITIALIZE) {
+			connect("body_entered", callable_mp(this, &self_type::_body_entered));
+			connect("body_exited", callable_mp(this, &self_type::_body_exited));
 		}
-
-		connect("body_entered", callable_mp(this, &self_type::_body_entered));
-		connect("body_exited", callable_mp(this, &self_type::_body_exited));
 	}
 }
 
 void Door::_body_entered(Node2D* p_body) {
-	UtilityFunctions::print("door::_body_entered: ", p_body->get_name());
+	UtilityFunctions::print(get_parent()->get_name(), "->", get_name(), " _body_entered:", p_body->get_name());
+	if (Player* player = Object::cast_to<Player>(p_body)) {
+		call_deferred(_STR(set_monitoring), false);
+		AsyncLoader::get_singleton()->instance(link_level_path, callable_mp(this, &self_type::_link_level_instanced));
+	}
 }
 
 void Door::_body_exited(Node2D* p_body) {
-	UtilityFunctions::print("door::_body_exited: ", p_body->get_name());
+	UtilityFunctions::print(get_parent()->get_name(), "->", get_name(), " _body_exited:", p_body->get_name());
 }
 
-String Door::get_link_level_path() {
-	return link_level_path;
-}
+void Door::_link_level_instanced(Node* p_node) {
+	if (Level* level = Object::cast_to<Level>(p_node)) {
+		if (World* world = World::get_world(this)) {
+			world->add_level_and_player_tp(level, link_level_player_start_name);
+			return;
+		}
+	}
 
-String Door::get_link_level_player_start_name() {
-	return link_level_player_start_name;
+	memdelete(p_node);
 }
 
 // ----------------------------------------------------------------------------
@@ -52,10 +59,18 @@ void Door::set_link_level_path(const String& p_link_level_path) {
 	update_configuration_warnings();
 }
 
+String Door::get_link_level_path() {
+	return link_level_path;
+}
+
 void Door::set_link_level_player_start_name(const String& p_link_level_player_start_name) {
 	link_level_player_start_name = p_link_level_player_start_name;
 
 	update_configuration_warnings();
+}
+
+String Door::get_link_level_player_start_name() {
+	return link_level_player_start_name;
 }
 
 PackedStringArray Door::_get_configuration_warnings() const {

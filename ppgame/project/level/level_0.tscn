@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://b0f7fw7yb6fyn"]
+[gd_scene load_steps=9 format=4 uid="uid://b0f7fw7yb6fyn"]
 
 [ext_resource type="TileSet" uid="uid://bf4ihtt8jh5e7" path="res://level/tile_set.tres" id="1_7xh4g"]
 [ext_resource type="PackedScene" uid="uid://cub0ekyo2vrbf" path="res://level/air_wall.tscn" id="3_cwmwo"]
 [ext_resource type="PackedScene" uid="uid://bbqlbaokh6put" path="res://level/door.tscn" id="3_pm8h4"]
+[ext_resource type="PackedScene" uid="uid://bxewgbjp2m03f" path="res://level/player_start.tscn" id="4_44y7o"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ciil6"]
 b = Vector2(0, 400)
@@ -64,8 +65,8 @@ metadata/_edit_lock_ = true
 shape = SubResource("RectangleShape2D_cl2ob")
 metadata/_edit_lock_ = true
 
-[node name="PlayerStart1" type="Marker2D" parent="."]
-position = Vector2(1133, 400)
+[node name="PlayerStart1" parent="." instance=ExtResource("4_44y7o")]
+position = Vector2(1129, 384)
 metadata/_edit_lock_ = true
 
 [editable path="AirWallL"]

@@ -13,6 +13,10 @@
 
 #include "character/player/player_finite_state_machine_component.h"
 
+void Player::_enter_tree() {
+	parent_type::_enter_tree();
+}
+
 void Player::_ready() {
 	parent_type::_ready();
 }
@@ -37,30 +41,14 @@ void Player::_physics_process(double delta) {
 	}
 }
 
-void Player::set_sprite(Sprite2D* p_sprite) {
-	sprite = p_sprite;
+void Player::_exit_tree() {
+	parent_type::_exit_tree();
 }
 
 Sprite2D* Player::get_sprite() {
-	return sprite;
-}
-
-void Player::set_animation_player(AnimationPlayer* p_animation_player) {
-	animation_player = p_animation_player;
+	return get_node<Sprite2D>("PlayerSprite");
 }
 
 AnimationPlayer* Player::get_animation_player() {
-	return animation_player;
-}
-
-void Player::_bind_methods() {
-	// sprite
-	ClassDB::bind_method(D_METHOD(_STR(set_sprite), _STR(sprite)), &self_type::set_sprite);
-	ClassDB::bind_method(D_METHOD(_STR(get_sprite)), &self_type::get_sprite);
-	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, _STR(sprite), PROPERTY_HINT_NODE_TYPE, "Sprite2D"), _STR(set_sprite), _STR(get_sprite));
-
-	// animation_player
-	ClassDB::bind_method(D_METHOD(_STR(set_animation_player), _STR(animation_player)), &self_type::set_animation_player);
-	ClassDB::bind_method(D_METHOD(_STR(get_animation_player)), &self_type::get_animation_player);
-	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, _STR(animation_player), PROPERTY_HINT_NODE_TYPE, "AnimationPlayer"), _STR(set_animation_player), _STR(get_animation_player));
+	return get_node<AnimationPlayer>("AnimationPlayer");
 }
