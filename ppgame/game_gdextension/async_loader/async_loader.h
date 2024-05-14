@@ -24,6 +24,7 @@ private:
 public:
 	static AsyncLoader* get_singleton();
 
+	Node* instance(const String& p_path);
 	void instance(const String& p_path, const Callable& p_callback);
 
 private:

@@ -10,6 +10,9 @@
 
 #include "async_loader/scene_instancer.h"
 #include "async_loader/scene_loader.h"
+#include "godot_cpp/classes/node.hpp"
+#include "godot_cpp/classes/object.hpp"
+#include "godot_cpp/classes/resource_loader.hpp"
 
 AsyncLoader* AsyncLoader::singleton = nullptr;
 
@@ -31,6 +34,18 @@ AsyncLoader* AsyncLoader::get_singleton() {
 	return singleton;
 }
 
+Node* AsyncLoader::instance(const String& p_path) {
+	Node* res = nullptr;
+
+	// TODO 使用scene_cache
+	Ref<PackedScene> packed_scene = ResourceLoader::get_singleton()->load(p_path, PackedScene::get_class_static());
+	if (packed_scene.is_valid()) {
+		res = packed_scene->instantiate();
+	}
+
+	return res;
+}
+
 void AsyncLoader::instance(const String& p_path, const Callable& p_callback) {
 	if (!path2callbacks.has(p_path)) {
 		path2callbacks.insert(p_path, Vector<Callable>());
@@ -45,13 +60,13 @@ void AsyncLoader::_load_callback(Ref<PackedScene> p_packed_scene) {
 }
 
 void AsyncLoader::_instance_callback(Node* p_node) {
-	const String node_path = p_node->get_scene_file_path();
+	const String& node_path = p_node->get_scene_file_path();
 	if (path2callbacks.has(node_path)) {
 		const Vector<Callable>& callbacks = path2callbacks.get(node_path);
 		for (int i = 0; i < callbacks.size(); ++i) {
 			const Callable& callback = callbacks[i];
 			if (callback.is_valid()) {
-				callback.call(p_node);
+				callback.call_deferred(p_node);
 			}
 		}
 

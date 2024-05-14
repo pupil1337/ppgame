@@ -1,6 +1,7 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include "godot_cpp/variant/vector2.hpp"
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 #include <godot_cpp/templates/vector.hpp>
@@ -15,11 +16,11 @@ class World : public Node {
 
 public:
 	static World* get_world(Node* p_inside_node);
-	void add_level_and_player_tp(Level* p_level, const String& p_player_start);
+	void change_level(const String& p_level, const String& p_player_start);
 
 private:
-	void _level_instanced_callback(Node* p_node);
-	void _player_instanced_callback(Node* p_node);
+	void _change_level_internal(const String& p_level, const String& p_player_start);
+	void _level_instanced_callback(Node* p_node, const String& p_player_start);
 
 private:
 	Level* curr_level = nullptr;
@@ -32,7 +33,7 @@ public:
 
 protected:
 	void _notification(int p_what);
-	static void _bind_methods() {}
+	static void _bind_methods();
 };
 
 #endif // WORLD_H

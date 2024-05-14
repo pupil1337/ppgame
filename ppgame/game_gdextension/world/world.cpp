@@ -2,16 +2,21 @@
 
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/marker2d.hpp>
+#include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/classes/packed_scene.hpp>
+#include <godot_cpp/classes/physics_server2d.hpp>
 #include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/resource.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/classes/window.hpp>
+#include <godot_cpp/core/class_db.hpp>
+#include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/core/memory.hpp>
 #include <godot_cpp/variant/callable_method_pointer.hpp>
 #include <godot_cpp/variant/string.hpp>
+#include <godot_cpp/variant/transform2d.hpp>
 
 #include "async_loader/async_loader.h"
 #include "character/player/player.h"
@@ -36,20 +41,9 @@ void World::_ready() {
 	parent_type::_ready();
 
 	if (!Engine::get_singleton()->is_editor_hint()) {
-		AsyncLoader::get_singleton()->instance("res://level/level_0.tscn", callable_mp(this, &self_type::_level_instanced_callback));
+		player = Object::cast_to<Player>(AsyncLoader::get_singleton()->instance("res://character/player/player.tscn"));
+		change_level("res://level/level_0.tscn", "PlayerStart1");
 	}
-}
-
-void World::_level_instanced_callback(Node* p_node) {
-	curr_level = Object::cast_to<Level>(p_node);
-	add_child(curr_level);
-
-	AsyncLoader::get_singleton()->instance("res://character/player/player.tscn", callable_mp(this, &self_type::_player_instanced_callback));
-}
-
-void World::_player_instanced_callback(Node* p_node) {
-	player = Object::cast_to<Player>(p_node);
-	curr_level->add_child(player);
 }
 
 World* World::get_world(Node* p_inside_node) {
@@ -60,16 +54,41 @@ World* World::get_world(Node* p_inside_node) {
 	return nullptr;
 }
 
-void World::add_level_and_player_tp(Level* p_level, const String& p_player_start) {
-	if (player) {
+void World::change_level(const String& p_level, const String& p_player_start) {
+	call_deferred(_STR(_change_level_internal), p_level, p_player_start);
+}
+
+void World::_change_level_internal(const String& p_level, const String& p_player_start) {
+	AsyncLoader::get_singleton()->instance(p_level, callable_mp(this, &self_type::_level_instanced_callback).bind(p_player_start));
+}
+
+void World::_level_instanced_callback(Node* p_node, const String& p_player_start) {
+	if (Level* level = Object::cast_to<Level>(p_node)) {
+		// 删除当前关卡
 		if (curr_level) {
+			curr_level->remove_child(player);
+			curr_level->set_process_mode(Node::PROCESS_MODE_DISABLED);
+			remove_child(curr_level);
 			curr_level->queue_free();
 		}
-		curr_level = p_level;
+
+		// 切换关卡
+		curr_level = level;
 		add_child(curr_level);
 
-		player->reparent(curr_level, false);
+		// player传送
+		curr_level->add_child(player);
 		Marker2D* player_start = curr_level->get_node<Marker2D>(p_player_start);
-		player->set_position(player_start->get_position());
+		const Transform2D& player_start_x = player_start->get_transform();
+		player->set_transform(player_start_x);
+		PhysicsServer2D::get_singleton()->body_set_mode(player->get_rid(), PhysicsServer2D::BODY_MODE_STATIC);
+		PhysicsServer2D::get_singleton()->body_set_state(player->get_rid(), PhysicsServer2D::BODY_STATE_TRANSFORM, player_start_x);
+		PhysicsServer2D::get_singleton()->body_set_mode(player->get_rid(), PhysicsServer2D::BODY_MODE_KINEMATIC);
 	}
+}
+
+// ----------------------------------------------------------------------------
+
+void World::_bind_methods() {
+	ClassDB::bind_method(D_METHOD(_STR(_change_level_internal), _STR(level), _STR(player_start)), &self_type::_change_level_internal);
 }

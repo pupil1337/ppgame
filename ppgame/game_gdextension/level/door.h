@@ -16,8 +16,6 @@ private:
 	void _body_entered(Node2D* p_body);
 	void _body_exited(Node2D* p_body);
 
-	void _link_level_instanced(Node* p_node);
-
 private:
 	bool auto_door = true;
 

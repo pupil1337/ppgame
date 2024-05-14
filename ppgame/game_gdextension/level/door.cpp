@@ -14,7 +14,6 @@
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/variant/variant.hpp>
 
-#include "async_loader/async_loader.h"
 #include "character/player/player.h"
 #include "level/level.h"
 #include "world/world.h"
@@ -32,23 +31,14 @@ void Door::_body_entered(Node2D* p_body) {
 	UtilityFunctions::print(get_parent()->get_name(), "->", get_name(), " _body_entered:", p_body->get_name());
 	if (Player* player = Object::cast_to<Player>(p_body)) {
 		call_deferred(_STR(set_monitoring), false);
-		AsyncLoader::get_singleton()->instance(link_level_path, callable_mp(this, &self_type::_link_level_instanced));
+		if (World* world = World::get_world(this)) {
+			world->change_level(link_level_path, link_level_player_start_name);
+		}
 	}
 }
 
 void Door::_body_exited(Node2D* p_body) {
 	UtilityFunctions::print(get_parent()->get_name(), "->", get_name(), " _body_exited:", p_body->get_name());
-}
-
-void Door::_link_level_instanced(Node* p_node) {
-	if (Level* level = Object::cast_to<Level>(p_node)) {
-		if (World* world = World::get_world(this)) {
-			world->add_level_and_player_tp(level, link_level_player_start_name);
-			return;
-		}
-	}
-
-	memdelete(p_node);
 }
 
 // ----------------------------------------------------------------------------
