@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <godot_cpp/classes/animation_player.hpp>
+#include <godot_cpp/classes/camera2d.hpp>
 #include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
@@ -15,6 +16,7 @@ class Player : public CharacterBody2D, public Actor {
 public:
 	Sprite2D* get_sprite();
 	AnimationPlayer* get_animation_player();
+	Camera2D* get_camera();
 
 	// ------------------------------------------
 

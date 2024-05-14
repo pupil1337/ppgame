@@ -42,7 +42,7 @@ void World::_ready() {
 
 	if (!Engine::get_singleton()->is_editor_hint()) {
 		player = Object::cast_to<Player>(AsyncLoader::get_singleton()->instance("res://character/player/player.tscn"));
-		change_level("res://level/level_0.tscn", "PlayerStart1");
+		change_level("res://level/level_0.tscn", "PlayerStart0");
 	}
 }
 
