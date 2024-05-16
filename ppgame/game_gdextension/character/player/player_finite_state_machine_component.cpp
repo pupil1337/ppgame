@@ -47,6 +47,7 @@ void PlayerFiniteStateMachineComponent::on_physics_process(double p_delta) {
 void PlayerFiniteStateMachineComponent::_update_logic_condition() {
 	if (player && player_input_component) {
 		condition.input_sign_x = player_input_component->get_sign_x();
+		condition.input_sign_y = player_input_component->get_sign_y();
 		condition.just_pressed_jump = player_input_component->get_just_pressed_jump();
 	}
 }

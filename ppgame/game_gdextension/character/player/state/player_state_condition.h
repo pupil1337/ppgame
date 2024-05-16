@@ -11,6 +11,7 @@ struct PlayerStateCondition {
 	// ------------------------------------------
 	// input
 	int8_t input_sign_x = 0;
+	int8_t input_sign_y = 0;
 	bool just_pressed_jump = false;
 
 	// ------------------------------------------
