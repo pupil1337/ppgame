@@ -16,9 +16,12 @@ class PlayerMovementComponent : public Component {
 	GDCLASS(PlayerMovementComponent, Component)
 
 public:
-	void input_move(double delta, Vector2 curr_velocity, int8_t input_sign_x, real_t acceleration_x, real_t deceleration_x, real_t turn_speed_x, real_t max_speed_x, real_t gravity);
+	void input_move(double delta, const Vector2& curr_velocity, int8_t input_sign_x, real_t acceleration_x, real_t deceleration_x, real_t turn_speed_x, real_t max_speed_x, real_t gravity);
 
-public:
+	void jump(const Vector2& p_new_velocity);
+
+	bool down_jump();
+
 	real_t get_walk_acceleration();
 	real_t get_walk_deceleration();
 	real_t get_walk_turn_speed();
@@ -28,6 +31,8 @@ public:
 	real_t get_fall_gravity_multiplayer();
 
 private:
+	void _move_and_slide();
+
 	Player* player = nullptr;
 	Sprite2D* player_sprite = nullptr;
 	bool sprite_face_to_input = true;

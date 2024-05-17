@@ -3,6 +3,7 @@
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_86ckm"]
 
 [node name="AirWall" type="StaticBody2D"]
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_86ckm")

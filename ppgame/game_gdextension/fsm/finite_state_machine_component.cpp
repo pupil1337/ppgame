@@ -12,6 +12,7 @@
 #include <godot_cpp/core/object.hpp>
 #include <godot_cpp/core/property_info.hpp>
 #include <godot_cpp/variant/string_name.hpp>
+#include <godot_cpp/variant/utility_functions.hpp>
 
 #include "fsm/state.h"
 
@@ -26,6 +27,7 @@ void FiniteStateMachineComponent::_change_state(const StringName& p_new_state_na
 
 	ERR_FAIL_COND_EDMSG(!states.has(p_new_state_name), "FSM: not has this state: " + p_new_state_name);
 	curr_state = states.get(p_new_state_name);
+	UtilityFunctions::print(get_parent()->get_name(), " state->", p_new_state_name);
 	curr_state->enter();
 }
 

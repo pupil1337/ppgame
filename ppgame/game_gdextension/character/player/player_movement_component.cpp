@@ -2,6 +2,8 @@
 
 #include <cstdint>
 #include <godot_cpp/classes/engine.hpp>
+#include <godot_cpp/classes/rectangle_shape2d.hpp>
+#include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
@@ -12,6 +14,8 @@
 #include <godot_cpp/variant/vector2.hpp>
 
 #include "character/player/player.h"
+#include "utils/physics_utils.h"
+#include "utils/types.h"
 
 void PlayerMovementComponent::_ready() {
 	parent_type::_ready();
@@ -24,7 +28,7 @@ void PlayerMovementComponent::_ready() {
 	}
 }
 
-void PlayerMovementComponent::input_move(double delta, Vector2 curr_velocity, int8_t input_sign_x, real_t acceleration_x, real_t deceleration_x, real_t turn_speed_x, real_t max_speed_x, real_t gravity) {
+void PlayerMovementComponent::input_move(double delta, const Vector2& curr_velocity, int8_t input_sign_x, real_t acceleration_x, real_t deceleration_x, real_t turn_speed_x, real_t max_speed_x, real_t gravity) {
 	// x
 	real_t speed_change_x = 0.0;
 	if (input_sign_x != 0) {
@@ -51,6 +55,46 @@ void PlayerMovementComponent::input_move(double delta, Vector2 curr_velocity, in
 	// move
 	if (player) {
 		player->set_velocity({ new_velocity_x, new_velocity_y });
+		_move_and_slide();
+	}
+}
+
+void PlayerMovementComponent::jump(const Vector2& p_new_velocity) {
+	if (player) {
+		player->set_velocity(p_new_velocity);
+		_move_and_slide();
+	}
+}
+
+bool PlayerMovementComponent::down_jump() {
+	if (player) {
+		Ref<RectangleShape2D> shape = player->shape_owner_get_shape(0, 0);
+		if (shape.is_valid()) {
+			RayResult ray_result;
+			if (PhysicsUtils::ray_cast(
+						player,
+						player->get_position(),
+						player->get_position() + Vector2(0.0, shape->get_size().y * 2),
+						ray_result,
+						{ CollisionLayer::OneWay },
+						{ player->get_rid() },
+						true,
+						false,
+						true)) {
+				player->set_collision_mask(player->get_collision_mask() & ~(uint32_t)CollisionLayer::OneWay);
+				player->translate(Vector2(0.0, player->get_floor_snap_length() * 2));
+				player->move_and_slide();
+				player->set_collision_mask(player->get_collision_mask() | (uint32_t)CollisionLayer::OneWay);
+				return !player->is_on_floor();
+			}
+		}
+	}
+
+	return false;
+}
+
+void PlayerMovementComponent::_move_and_slide() {
+	if (player) {
 		player->move_and_slide();
 	}
 }

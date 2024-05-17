@@ -35,8 +35,7 @@ void PlayerAirJumpState::on_physics_process(double delta) {
 			if (desire_jump) {
 				Vector2 new_velocity = condition->velocity;
 				new_velocity.y = MathUtils::calculate_jump_speed_y(player_movement_component->get_jump_height(), player_movement_component->get_jump_duration());
-				player->set_velocity(new_velocity);
-				player->move_and_slide();
+				player_movement_component->jump(new_velocity);
 
 				desire_jump = false;
 				return;
