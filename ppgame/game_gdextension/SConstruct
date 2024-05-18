@@ -50,9 +50,20 @@ env.Alias("compiledb", compilation_db)
 
 env = SConscript("../../godot-cpp/SConstruct", {"env": env, "customs": customs})
 
-# 添加供编译器查看的包含目录
+# 添加include path
 env.Append(CPPPATH=["."])
-# 添加'src'目录下所有.cpp文件
+env.Append(CPPPATH=["./thirdpart/glfw/include"])
+
+# 添加lib依赖
+ # glfw3、opengl32
+env.Append(LIBS = ["glfw3"], LIBPATH = ["./thirdpart/glfw/lib"])
+env.Append(LIBS = ["opengl32.lib"])
+env.Append(LIBS = ["msvcrt.lib"])
+env.Append(LIBS = ["gdi32.lib"])
+env.Append(LIBS = ["shell32.lib"])
+env.Append(LIBS = ["libcmt.lib"])
+
+# 编译'game_gdextension'目录下所有.cpp文件
 sources = []
 for root, dirs, files in os.walk('.'):
     for f in files:

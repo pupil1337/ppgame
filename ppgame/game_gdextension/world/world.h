@@ -8,6 +8,9 @@
 #include <godot_cpp/variant/string.hpp>
 using namespace godot;
 
+// TODO Delete
+#include <GLFW/glfw3.h>
+
 class Level;
 class Player;
 
@@ -26,10 +29,16 @@ private:
 	Level* curr_level = nullptr;
 	Player* player = nullptr;
 
+	// TODO Delete
+	GLFWwindow* window = nullptr;
+
 	// ------------------------------------------
 
 public:
+	virtual void _enter_tree() override;
 	virtual void _ready() override;
+	virtual void _process(double delta) override;
+	virtual void _exit_tree() override;
 
 protected:
 	void _notification(int p_what);
