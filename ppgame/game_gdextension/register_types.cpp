@@ -23,6 +23,7 @@
 #include "framework/component.h"
 #include "fsm/finite_state_machine_component.h"
 #include "fsm/state.h"
+#include "gm/gm.h"
 #include "level/door.h"
 #include "level/level.h"
 #include "world/world.h"
@@ -64,6 +65,9 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_CLASS(AsyncLoader)
 	GDREGISTER_CLASS(SceneLoader)
 	GDREGISTER_CLASS(SceneInstancer)
+
+	// gm
+	GDREGISTER_CLASS(GM)
 }
 
 void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {

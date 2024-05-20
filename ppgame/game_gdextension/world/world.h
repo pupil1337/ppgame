@@ -8,10 +8,6 @@
 #include <godot_cpp/variant/string.hpp>
 using namespace godot;
 
-// TODO Delete
-#include <GLFW/glfw3.h>
-#include <thirdpart/imgui/imgui.h>
-
 class Level;
 class Player;
 
@@ -29,13 +25,6 @@ private:
 private:
 	Level* curr_level = nullptr;
 	Player* player = nullptr;
-
-	// TODO Delete
-	GLFWwindow* window = nullptr;
-	// Our state
-	bool show_demo_window = true;
-	bool show_another_window = false;
-	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 	// ------------------------------------------
 
