@@ -1,7 +1,10 @@
 #include "async_loader.h"
 
+#include <godot_cpp/classes/node.hpp>
+#include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/classes/packed_scene.hpp>
 #include <godot_cpp/classes/ref.hpp>
+#include <godot_cpp/classes/resource_loader.hpp>
 #include <godot_cpp/core/memory.hpp>
 #include <godot_cpp/templates/vector.hpp>
 #include <godot_cpp/variant/callable.hpp>
@@ -10,9 +13,6 @@
 
 #include "async_loader/scene_instancer.h"
 #include "async_loader/scene_loader.h"
-#include "godot_cpp/classes/node.hpp"
-#include "godot_cpp/classes/object.hpp"
-#include "godot_cpp/classes/resource_loader.hpp"
 
 AsyncLoader* AsyncLoader::singleton = nullptr;
 

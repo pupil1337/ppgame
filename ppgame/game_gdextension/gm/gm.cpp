@@ -1,5 +1,7 @@
 #include "gm.h"
 
+#include <thirdpart/imgui/imgui.h>
+#include <thirdpart/imgui/imgui_internal.h>
 #include <godot_cpp/classes/canvas_item.hpp>
 #include <godot_cpp/classes/collision_shape2d.hpp>
 #include <godot_cpp/classes/engine.hpp>
@@ -8,9 +10,6 @@
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/classes/window.hpp>
 #include <godot_cpp/variant/typed_array.hpp>
-
-#include <thirdpart/imgui/imgui.h>
-#include <thirdpart/imgui/imgui_internal.h>
 
 GM* GM::singleton = nullptr;
 
