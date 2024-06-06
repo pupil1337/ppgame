@@ -4,6 +4,8 @@
 #include <thirdpart/imgui/imgui.h>
 #include <thirdpart/imgui/imgui_impl_glfw.h>
 #include <godot_cpp/classes/object.hpp>
+#include <godot_cpp/classes/ref.hpp>
+#include <godot_cpp/classes/thread.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 using namespace godot;
 
@@ -12,9 +14,6 @@ class World;
 class GM : public Object {
 	GDCLASS(GM, Object)
 
-	friend World;
-
-private:
 	static GM* singleton;
 
 public:
@@ -22,7 +21,7 @@ public:
 
 private:
 	void _imgui_backend_initialize();
-	void flush();
+	void _imgui_thread();
 	void _imgui_backend_flush_begin();
 	void _flush_impl();
 	void _imgui_backend_flush_end();
@@ -33,12 +32,16 @@ public:
 	~GM();
 
 private:
+	bool running = false;
+	Ref<Thread> thread;
+
 	GLFWwindow* window = nullptr;
 	bool show_demo_window = false;
 
 	// ------------------------------------------
 
 protected:
+	void _notification(int p_what);
 	static void _bind_methods() {}
 };
 

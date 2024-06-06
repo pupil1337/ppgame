@@ -58,10 +58,6 @@ void World::_ready() {
 
 void World::_process(double delta) {
 	parent_type::_process(delta);
-
-	if (!Engine::get_singleton()->is_editor_hint()) {
-		GM::get_singleton()->flush();
-	}
 }
 
 void World::_exit_tree() {
