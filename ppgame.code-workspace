@@ -50,12 +50,19 @@
 		],
 		// ppgame-vscode-extension
 		"ppgame.launch_args": [
-			"--debug-collisions",
-			"--debug-paths",
-			"--debug-navigation",
-			"--debug-avoidance",
-			"--debug-canvas-item-redraw",
-			"--debug-stringnames"
-		]
+			{
+				"launchs": [
+					"game [debug]"
+				],
+				"args": [
+					"--debug-collisions",
+					"--debug-paths",
+					"--debug-navigation",
+					"--debug-avoidance",
+					"--debug-canvas-item-redraw",
+					"--debug-stringnames"
+				]
+			}
+		],
 	}
 }
