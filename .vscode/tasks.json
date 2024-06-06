@@ -24,19 +24,39 @@
 				"cwd": "${workspaceFolder}/godot"
 			},
 			"type": "shell",
-			"command": "scons",
-			"args": [
-				"platform=windows",
-				"bits=64",
-				"target=editor",
-				"custom_modules=../ppgame/game_module",
-				"dev_build=yes",
-				"debug_symbols=yes",
-				"compiledb=yes",
-				"deprecated=no",
-			],
 			"group": "build",
-			"problemMatcher": "$msCompile"
+
+			"windows": {
+				"command": "scons",
+				"args": [
+					"platform=windows",
+					"bits=64",
+					"target=editor",
+					"custom_modules=../ppgame/game_module",
+					"dev_build=yes",
+					"debug_symbols=yes",
+					"compiledb=yes",
+					"deprecated=no",
+				],
+				"problemMatcher": "$msCompile"
+			},
+
+			"linux": {
+				"command": "pyston-scons",
+				"args": [
+					"platform=linuxbsd",
+					"bits=64",
+					"target=editor",
+					"custom_modules=../ppgame/game_module",
+					"use_llvm=yes",
+					"linker=mold",
+					"dev_build=yes",
+					"debug_symbols=yes",
+					"compiledb=yes",
+					"deprecated=no",
+				],
+				"problemMatcher": "$gcc"
+			}
 		},
 
 		// -----------------------------------------------------------------
@@ -50,7 +70,15 @@
 				"cwd": "${workspaceFolder}/godot/bin"
 			},
 			"type": "shell",
-			"command": "./godot.windows.editor.dev.x86_64.console.exe",
+			
+			"windows": {
+				"command": "./godot.windows.editor.dev.x86_64.console.exe"
+			},
+
+			"linux": {
+				"command": "./godot.linuxbsd.editor.dev.x86_64.llvm"
+			},
+
 			"args": [
 				"--dump-extension-api",
 				"--dump-gdextension-interface",
@@ -64,7 +92,15 @@
 		{
 			"label": "copy extension_api.json",
 			"type": "shell",
-			"command": "copy",
+
+			"windows": {
+				"command": "copy"
+			},
+
+			"linux": {
+				"command": "cp"
+			},
+
 			"args": [
 				"${workspaceFolder}/godot/bin/extension_api.json",
 				"${workspaceFolder}/godot-cpp/gdextension"
@@ -76,7 +112,15 @@
 		{
 			"label": "copy gdextension_interface.h",
 			"type": "shell",
-			"command": "copy",
+
+			"windows": {
+				"command": "copy"
+			},
+
+			"linux": {
+				"command": "cp"
+			},
+
 			"args": [
 				"${workspaceFolder}/godot/bin/gdextension_interface.h",
 				"${workspaceFolder}/godot-cpp/gdextension"
@@ -107,15 +151,32 @@
 				"cwd": "${workspaceFolder}/ppgame/game_gdextension"
 			},
 			"type": "shell",
-			"command": "scons",
-			"args": [
-				"platform=windows",
-				"bits=64",
-				"target=editor",
-				"dev_build=yes",
-				"debug_symbols=yes",
-				"compiledb=yes"
-			],
+
+			"windows": {
+				"command": "scons",
+				"args": [
+					"platform=windows",
+					"bits=64",
+					"target=editor",
+					"dev_build=yes",
+					"debug_symbols=yes",
+					"compiledb=yes"
+				],
+			},
+
+			"linux": {
+				"command": "pyston-scons",
+				"args": [
+					"platform=linux",
+					"bits=64",
+					"target=editor",
+					"use_llvm=yes",
+					"dev_build=yes",
+					"debug_symbols=yes",
+					"compiledb=yes"
+				]
+			},
+
 			"group": "build",
 			"hide": true,
 			"problemMatcher": "$msCompile"
@@ -127,18 +188,34 @@
 				"cwd": "${workspaceFolder}"
 			},
 			"type": "shell",
-			"command": "./jq.exe",
-			"args": [
-				"-s",
-				"\"add\"",
-				"godot/compile_commands.json",
-				"ppgame/game_gdextension/compile_commands.json",
-				"|",
-				"Out-File",
-				"-Encoding",
-				"ascii",
-				"compile_commands.json"
-			],
+			
+			"windows": {
+				"command": "./jq.exe",
+				"args": [
+					"-s",
+					"\"add\"",
+					"godot/compile_commands.json",
+					"ppgame/game_gdextension/compile_commands.json",
+					"|",
+					"Out-File",
+					"-Encoding",
+					"ascii",
+					"compile_commands.json"
+				],
+			},
+
+			"linux": {
+				"command": "jq",
+				"args": [
+					"--slurp",
+					"'add'",
+					"godot/compile_commands.json",
+					"ppgame/game_gdextension/compile_commands.json",
+					">",
+					"compile_commands.json"
+				]
+			},
+			
 			"hide": true,
 			"problemMatcher": []
 		},

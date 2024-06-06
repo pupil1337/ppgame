@@ -1,7 +1,11 @@
 #include "gm.h"
 
 #include <GLFW/glfw3.h>
+#ifdef WIN32
 #include <gl/gl.h>
+#else
+#include <GL/gl.h>
+#endif
 #include <thirdpart/imgui/imgui.h>
 #include <thirdpart/imgui/imgui_impl_glfw.h>
 #include <thirdpart/imgui/imgui_impl_opengl3.h>

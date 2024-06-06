@@ -54,14 +54,19 @@ env = SConscript("../../godot-cpp/SConstruct", {"env": env, "customs": customs})
 env.Append(CPPPATH=["."])
 env.Append(CPPPATH=["./thirdpart/glfw/include"])
 
-# 添加lib依赖
- # glfw3、opengl32
-env.Append(LIBS = ["glfw3"], LIBPATH = ["./thirdpart/glfw/lib"])
-env.Append(LIBS = ["opengl32.lib"])
-env.Append(LIBS = ["msvcrt.lib"])
-env.Append(LIBS = ["gdi32.lib"])
-env.Append(LIBS = ["shell32.lib"])
-env.Append(LIBS = ["libcmt.lib"])
+# 添加库依赖
+if env["platform"] == "windows":
+    # glfw3、opengl32
+    env.Append(LIBS = ["glfw3"], LIBPATH = ["./thirdpart/glfw/lib"])
+    env.Append(LIBS = ["opengl32.lib"])
+    env.Append(LIBS = ["msvcrt.lib"])
+    env.Append(LIBS = ["gdi32.lib"])
+    env.Append(LIBS = ["shell32.lib"])
+    env.Append(LIBS = ["libcmt.lib"])
+elif env["platform"] == "linux":
+    # libglfw3 gl
+    env.Append(LIBS = ["glfw3.a"])
+    env.Append(LIBS = ["GL.so"])
 
 # 编译'game_gdextension'目录下所有.cpp文件
 sources = []
@@ -71,10 +76,6 @@ for root, dirs, files in os.walk('.'):
             sources.append(root + '/' + f)
 
 file = "{}{}{}".format(libname, env["suffix"], env["SHLIBSUFFIX"])
-
-if env["platform"] == "macos":
-    platlibname = "{}.{}.{}".format(libname, env["platform"], env["target"])
-    file = "{}.framework/{}".format(env["platform"], platlibname, platlibname)
 
 libraryfile = "bin/{}/{}".format(env["platform"], file)
 library = env.SharedLibrary(
