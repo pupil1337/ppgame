@@ -26,12 +26,15 @@
 #include "gm/gm.h"
 #include "level/door.h"
 #include "level/level.h"
+#include "utils/input_string_names.h"
 #include "world/world.h"
 
 void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
+
+	InputStringNames::create();
 
 	// framework
 	GDREGISTER_ABSTRACT_CLASS(Component)
@@ -74,6 +77,8 @@ void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
+
+	InputStringNames::free();
 }
 
 extern "C" {
