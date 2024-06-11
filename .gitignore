@@ -3,6 +3,7 @@
 
 # custom
 imgui.ini
+doc/doxygen/html
 
 # ??? not in godot/.gitignore
 *.exp
