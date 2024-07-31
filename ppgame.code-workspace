@@ -54,7 +54,8 @@
 		"ppgame.launch_args": [
 			{
 				"launchs": [
-					"game [debug]"
+					"game [debug] - lldb",
+					"game [debug] - cppvsdbg"
 				],
 				"args": [
 					"--debug-collisions",
