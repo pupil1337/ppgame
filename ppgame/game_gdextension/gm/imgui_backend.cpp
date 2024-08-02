@@ -1,7 +1,7 @@
 #include "gm.h"
 
 #include <GLFW/glfw3.h>
-#ifdef WIN32
+#ifdef WINDOWS_ENABLED
 #include <gl/gl.h>
 #else
 #include <GL/gl.h>
@@ -23,7 +23,7 @@ void GM::_imgui_backend_initialize() {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
 		// glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // 3.0+ only (Mac OS X)
-#ifdef WIN32
+#ifdef WINDOWS_ENABLED
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 #endif
 
@@ -40,11 +40,11 @@ void GM::_imgui_backend_initialize() {
 			(void)io;
 			io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
 			// io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad; // Enable Gamepad Controls
-#ifdef WIN32
-			// io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
-			// io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable; // Enable Multi-Viewport / Platform Windows
-			// io.ConfigViewportsNoAutoMerge = true;
-			// io.ConfigViewportsNoTaskBarIcon = true;
+#ifdef WINDOWS_ENABLED
+			io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
+			io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable; // Enable Multi-Viewport / Platform Windows
+			io.ConfigViewportsNoAutoMerge = true;
+			io.ConfigViewportsNoTaskBarIcon = true;
 #endif
 
 			// Setup Dear ImGui style
