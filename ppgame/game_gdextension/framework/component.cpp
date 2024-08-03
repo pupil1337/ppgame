@@ -18,7 +18,7 @@ void Component::_register_component(Node* p_node) {
 		if (Node* parent = p_node->get_parent()) {
 			if (parent != p_node) {
 				actor = dynamic_cast<Actor*>(parent);
-				if (actor) {
+				if (actor != nullptr) {
 					actor->add_component(this);
 				} else {
 					_register_component(parent);

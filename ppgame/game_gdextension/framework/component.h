@@ -7,13 +7,21 @@ using namespace godot;
 
 class Actor;
 
+//! 继承自Node
+/*!
+ * 在Component中实现抽象的业务逻辑，本质是一个godot::Node节点
+ */
 class Component : public Node {
 	GDCLASS(Component, Node)
 
 protected:
-	Actor* actor = nullptr;
+	Actor* actor = nullptr; //!< 拥有者
 
 private:
+	//! 注册此组件
+	/*!
+	 * _notification()->NOTIFICATION_PARENTED 时自动调用
+	 */
 	void _register_component(Node* p_node);
 
 	// ------------------------------------------
