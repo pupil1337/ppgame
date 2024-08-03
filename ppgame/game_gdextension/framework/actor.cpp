@@ -8,8 +8,10 @@
 
 #include "framework/component.h"
 
-void Actor::add_component(Component* p_component) {
+bool Actor::add_component(Component* p_component) {
+	ERR_FAIL_NULL_V_EDMSG(p_component, false, "Actor add a nullptr component");
 	StringName component_name = p_component->get_class();
-	ERR_FAIL_COND_EDMSG(components.has(component_name), "Try to re-add component");
+	ERR_FAIL_COND_V_EDMSG(components.has(component_name), false, "Actor try to re-add component");
 	components.insert(component_name, p_component);
+	return true;
 }

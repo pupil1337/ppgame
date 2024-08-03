@@ -11,20 +11,31 @@
 #include <godot_cpp/variant/callable.hpp>
 using namespace godot;
 
-struct InstancerData {
-	Ref<PackedScene> packed_scene;
-	Callable callback;
-};
-
 class AsyncLoader;
 
+//! 场景实例化器
+/*!
+ * 开一个线程，将PackedScene实例化为Node
+ */
 class SceneInstancer : public Object {
 	GDCLASS(SceneInstancer, Object)
 
 	friend AsyncLoader;
 
+	struct InstancerData {
+		Ref<PackedScene> packed_scene;
+		Callable callback;
+	};
+
 private:
+	//! 增加需要实例化的PackedScene
+	/*!
+	 * \param p_packed_scene 需要实例化的PackedScene
+	 * \param p_callback 实例化完成回调, 参数:Node
+	 */
 	void add_instancer_data(Ref<PackedScene> p_packed_scene, const Callable& p_callback);
+
+	//! 实例化-线程
 	void _instancer_thread();
 
 public:

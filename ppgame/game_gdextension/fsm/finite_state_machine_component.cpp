@@ -16,8 +16,11 @@
 
 #include "fsm/state.h"
 
-void FiniteStateMachineComponent::add_state(State* p_state) {
+bool FiniteStateMachineComponent::add_state(State* p_state) {
+	ERR_FAIL_NULL_V_EDMSG(p_state, false, get_class() + " add a nullptr state");
+	ERR_FAIL_COND_V_EDMSG(states.has(p_state->get_class()), false, get_class() + " try re-add state->" + p_state->get_class());
 	states.insert(p_state->get_class(), p_state);
+	return true;
 }
 
 void FiniteStateMachineComponent::_change_state(const StringName& p_new_state_name) {

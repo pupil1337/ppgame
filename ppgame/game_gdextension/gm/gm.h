@@ -11,6 +11,7 @@ using namespace godot;
 
 class World;
 
+//! ImGui实现的GM
 class GM : public Object {
 	GDCLASS(GM, Object)
 
@@ -20,11 +21,17 @@ public:
 	static GM* get_singleton();
 
 private:
-	void _imgui_backend_initialize();
+	//! ImGui-线程
 	void _imgui_thread();
+	//! ImGui初始化
+	void _imgui_backend_initialize();
+	//! ImGui刷新begin
 	void _imgui_backend_flush_begin();
+	//! ImGui刷新GM
 	void _flush_impl();
+	//! ImGui刷新end
 	void _imgui_backend_flush_end();
+	//! ImGui终止
 	void _imgui_backend_terminate();
 
 public:

@@ -73,14 +73,10 @@ World* World::get_world(Node* p_inside_node) {
 }
 
 void World::change_level(const String& p_level, const String& p_player_start) {
-	call_deferred(_STR(_change_level_internal), p_level, p_player_start);
+	AsyncLoader::get_singleton()->instance(p_level, callable_mp(this, &self_type::_change_level_implement).bind(p_player_start));
 }
 
-void World::_change_level_internal(const String& p_level, const String& p_player_start) {
-	AsyncLoader::get_singleton()->instance(p_level, callable_mp(this, &self_type::_level_instanced_callback).bind(p_player_start));
-}
-
-void World::_level_instanced_callback(Node* p_node, const String& p_player_start) {
+void World::_change_level_implement(Node* p_node, const String& p_player_start) {
 	if (Level* level = Object::cast_to<Level>(p_node)) {
 		// 删除当前关卡
 		if (curr_level) {
@@ -103,10 +99,4 @@ void World::_level_instanced_callback(Node* p_node, const String& p_player_start
 		PhysicsServer2D::get_singleton()->body_set_state(player->get_rid(), PhysicsServer2D::BODY_STATE_TRANSFORM, player_start_x);
 		PhysicsServer2D::get_singleton()->body_set_mode(player->get_rid(), PhysicsServer2D::BODY_MODE_KINEMATIC);
 	}
-}
-
-// ----------------------------------------------------------------------------
-
-void World::_bind_methods() {
-	ClassDB::bind_method(D_METHOD(_STR(_change_level_internal), _STR(level), _STR(player_start)), &self_type::_change_level_internal);
 }

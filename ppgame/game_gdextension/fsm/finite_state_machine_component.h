@@ -22,7 +22,7 @@ public:
 	virtual void on_physics_process(double p_delta);
 
 private:
-	void add_state(State* p_state);
+	bool add_state(State* p_state);
 	void _change_state(const StringName& p_new_state_name);
 
 protected:

@@ -9,6 +9,7 @@
 #include <godot_cpp/variant/string.hpp>
 using namespace godot;
 
+//! 场景缓存器 (待实现)
 class SceneCache : public Object {
 	GDCLASS(SceneCache, Object)
 
