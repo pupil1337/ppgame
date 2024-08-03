@@ -10,10 +10,15 @@ using namespace godot;
 
 class Door;
 
+//! 关卡
 class Level : public Node {
 	GDCLASS(Level, Node)
 
 public:
+	//! 获取摄像机视野限制
+	/*!
+	 * \param p_side 方向
+	 */
 	int32_t get_camera_limit(Side p_side);
 
 	// ------------------------------------------

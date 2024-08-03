@@ -13,17 +13,25 @@ class PlayerFiniteStateMachineComponent;
 class Player;
 struct PlayerStateCondition;
 
+//! 角色状态基类
 class PlayerState : public State {
 	GDCLASS(PlayerState, State)
 
 	friend PlayerFiniteStateMachineComponent;
 
 protected:
-	Player* player = nullptr;
-	const PlayerStateCondition* condition = nullptr;
+	Player* player = nullptr; //!< 角色
+	const PlayerStateCondition* condition = nullptr; //!< 状态条件
 
 protected:
-	void play_animation(const StringName& name = String(), double custom_blend = -1, double custom_speed = 1.0, bool from_end = false);
+	//! 播放动画
+	/*!
+	 * \param p_name 动画名
+	 * \param p_custom_blend 自定义混合时间
+	 * \param p_custom_speed 自定义播放速度
+	 * \param p_from_end 是否倒着播放
+	 */
+	void play_animation(const StringName& p_name = String(), double p_custom_blend = -1, double p_custom_speed = 1.0, bool p_from_end = false);
 
 	// ------------------------------------------
 

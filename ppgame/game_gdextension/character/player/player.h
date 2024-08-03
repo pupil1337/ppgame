@@ -10,12 +10,16 @@ using namespace godot;
 
 #include "framework/actor.h"
 
+//! 角色
 class Player : public CharacterBody2D, public Actor {
 	GDCLASS(Player, CharacterBody2D)
 
 public:
+	//! 获取角色精灵
 	Sprite2D* get_sprite();
+	//! 获取角色动画播放器
 	AnimationPlayer* get_animation_player();
+	//! 获取角色摄像机
 	Camera2D* get_camera();
 
 	// ------------------------------------------

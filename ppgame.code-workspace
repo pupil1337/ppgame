@@ -35,6 +35,7 @@
 			"**/.cache/": true,
 			"**/*.os": true,
 			"**/*.so": true,
+			"**/*.o": true,
 			"ppgame/game_gdextension/bin": true,
 			"ppgame/project/bin/windows": true
 		},

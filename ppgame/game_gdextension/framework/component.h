@@ -7,9 +7,9 @@ using namespace godot;
 
 class Actor;
 
-//! 继承自Node
+//! Component类
 /*!
- * 在Component中实现抽象的业务逻辑，本质是一个godot::Node节点
+ * 用于实现抽象的业务逻辑: 本质是一个Node节点用于附加, 在其中实现业务逻辑
  */
 class Component : public Node {
 	GDCLASS(Component, Node)
@@ -20,9 +20,12 @@ protected:
 private:
 	//! 注册此组件
 	/*!
+	 * 将此组件注册到Actor上
 	 * _notification()->NOTIFICATION_PARENTED 时自动调用
+	 * \param p_node 需要找到父节点为Actor类的Node. 初始值为this, 如果父节点不是Actor则递归父节点查找
+	 * \return 是否注册成功
 	 */
-	void _register_component(Node* p_node);
+	bool _register_component(Node* p_node);
 
 	// ------------------------------------------
 

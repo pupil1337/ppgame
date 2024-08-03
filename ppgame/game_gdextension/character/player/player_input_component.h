@@ -11,6 +11,7 @@ using namespace godot;
 
 #include "framework/component.h"
 
+//! 角色输入组件
 class PlayerInputComponent : public Component {
 	GDCLASS(PlayerInputComponent, Component)
 
@@ -21,10 +22,10 @@ public:
 	_FORCE_INLINE_ bool get_just_pressed_jump() { return just_pressed_jump; }
 
 private:
-	Vector2 motion;
-	int8_t sign_x = 0;
-	int8_t sign_y = 0;
-	bool just_pressed_jump = false;
+	Vector2 motion; //!< 输入数值
+	int8_t sign_x = 0; //!< x轴输入方向正负
+	int8_t sign_y = 0; //!< y轴输入方向正负
+	bool just_pressed_jump = false; //!< 刚刚按下跳跃键
 
 	// ------------------------------------------
 

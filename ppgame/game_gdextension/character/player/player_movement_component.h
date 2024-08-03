@@ -12,14 +12,33 @@ using namespace godot;
 
 class Player;
 
+//! 角色移动组件
 class PlayerMovementComponent : public Component {
 	GDCLASS(PlayerMovementComponent, Component)
 
 public:
-	void input_move(double delta, const Vector2& curr_velocity, int8_t input_sign_x, real_t acceleration_x, real_t deceleration_x, real_t turn_speed_x, real_t max_speed_x, real_t gravity);
+	//! 移动输入
+	/*!
+	 * \param p_delta DeltaTime
+	 * \param p_curr_velocity 当前角色速度
+	 * \param p_input_sign_x x轴输入方向正负
+	 * \param p_acceleration_x x轴输入加速度
+	 * \param p_deceleration_x x轴不输入时减速度
+	 * \param p_turn_speed_x x轴转向速度
+	 * \param p_max_speed_x x轴最大速度
+	 * \param p_gravity y轴重力
+	 */
+	void input_move(double p_delta, const Vector2& p_curr_velocity, int8_t p_input_sign_x, real_t p_acceleration_x, real_t p_deceleration_x, real_t p_turn_speed_x, real_t p_max_speed_x, real_t p_gravity);
 
-	void jump(const Vector2& p_new_velocity);
+	//! 向上跳跃
+	/*!
+	 * \param p_curr_velocity 当前角色速度
+	 * \param p_jump_height 向上跳跃高度
+	 * \param p_jump_duration 向上跳跃持续时间
+	 */
+	void jump(const Vector2& p_curr_velocity, real_t p_jump_height, real_t p_jump_duration);
 
+	//! 向下跳跃(单向平台)
 	bool down_jump();
 
 	real_t get_walk_acceleration();
@@ -33,24 +52,27 @@ public:
 private:
 	void _move_and_slide();
 
-	Player* player = nullptr;
-	Sprite2D* player_sprite = nullptr;
-	bool sprite_face_to_input = true;
+	Player* player = nullptr; //!< 角色
+	Sprite2D* player_sprite = nullptr; //!< 角色-精灵
+	bool sprite_face_to_input = true; //!< 精灵朝向输入方向
 
+	//! 步行参数
 	struct WalkSetting {
-		real_t acceleration = 600.0;
-		real_t deceleration = 5000.0;
-		real_t turn_speed = 1200.0;
-		real_t max_speed = 400.0;
+		real_t acceleration = 600.0; //!< 加速度
+		real_t deceleration = 5000.0; //!< 减速度
+		real_t turn_speed = 1200.0; //!< 转向速度
+		real_t max_speed = 400.0; //!< 最大速度
 	} walk_setting;
 
+	//! 跳跃参数
 	struct JumpSetting {
-		real_t height = 96.0;
-		real_t duration = 0.4;
+		real_t height = 96.0; //!< 高度
+		real_t duration = 0.4; //!< 持续时间
 	} jump_setting;
 
+	//! 下坠参数
 	struct FallSetting {
-		real_t gravity_multiplayer = 2.0;
+		real_t gravity_multiplayer = 2.0; //!< 与跳跃相比重力系数
 	} fall_setting;
 
 	// ------------------------------------------

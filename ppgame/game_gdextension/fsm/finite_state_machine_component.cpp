@@ -16,8 +16,11 @@
 
 #include "fsm/state.h"
 
-void FiniteStateMachineComponent::add_state(State* p_state) {
+bool FiniteStateMachineComponent::add_state(State* p_state) {
+	ERR_FAIL_NULL_V_EDMSG(p_state, false, get_class() + " add a nullptr state");
+	ERR_FAIL_COND_V_EDMSG(states.has(p_state->get_class()), false, get_class() + " try re-add state->" + p_state->get_class());
 	states.insert(p_state->get_class(), p_state);
+	return true;
 }
 
 void FiniteStateMachineComponent::_change_state(const StringName& p_new_state_name) {
@@ -52,17 +55,17 @@ void FiniteStateMachineComponent::on_physics_process(double p_delta) {
 
 // ----------------------------------------------------------------------------
 
-void FiniteStateMachineComponent::set_curr_state(State* p_curr_state) {
-	curr_state = p_curr_state;
+void FiniteStateMachineComponent::set_init_state(State* p_init_state) {
+	curr_state = p_init_state;
 }
 
-State* FiniteStateMachineComponent::get_curr_state() {
+State* FiniteStateMachineComponent::get_init_state() {
 	return curr_state;
 }
 
 void FiniteStateMachineComponent::_bind_methods() {
-	// curr_state
-	ClassDB::bind_method(D_METHOD(_STR(set_curr_state), _STR(state)), &self_type::set_curr_state);
-	ClassDB::bind_method(D_METHOD(_STR(get_curr_state)), &self_type::get_curr_state);
-	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, _STR(default_state), PROPERTY_HINT_NODE_TYPE, "State"), _STR(set_curr_state), _STR(get_curr_state));
+	// init_state
+	ClassDB::bind_method(D_METHOD(_STR(set_init_state), _STR(state)), &self_type::set_init_state);
+	ClassDB::bind_method(D_METHOD(_STR(get_init_state)), &self_type::get_init_state);
+	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, _STR(default_state), PROPERTY_HINT_NODE_TYPE, "State"), _STR(set_init_state), _STR(get_init_state));
 }

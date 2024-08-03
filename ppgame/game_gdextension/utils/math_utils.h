@@ -10,24 +10,46 @@ using namespace godot;
 
 #include "utils/types.h"
 
+//! Math工具
 class MathUtils {
 public:
 	// ------------------------------------------
-	_FORCE_INLINE_ static real_t calculate_jump_speed_y(real_t jump_height, real_t jump_duration) {
-		jump_duration = jump_duration == 0.0 ? (real_t)0.01 : jump_duration;
-		return ((real_t)2.0 * (-jump_height)) / jump_duration;
+	//! 向上跳跃-计算速度y
+	/*!
+	 * \param p_jump_height 跳跃高度
+	 * \param p_jump_duration 跳跃时间
+	 */
+	_FORCE_INLINE_ static real_t calculate_jump_speed_y(real_t p_jump_height, real_t p_jump_duration) {
+		p_jump_duration = p_jump_duration == 0.0 ? (real_t)0.01 : p_jump_duration;
+		return ((real_t)2.0 * (-p_jump_height)) / p_jump_duration;
 	}
 
-	_FORCE_INLINE_ static real_t calculate_jump_gravity(real_t jump_height, real_t jump_duration) {
-		jump_duration = jump_duration == 0.0 ? (real_t)0.01 : jump_duration;
-		return (real_t)-2.0 * (-jump_height) / (jump_duration * jump_duration);
+	//! 向上跳跃-计算重力
+	/*!
+	 * \param p_jump_height 跳跃高度
+	 * \param p_jump_duration 跳跃时间
+	 */
+	_FORCE_INLINE_ static real_t calculate_jump_gravity(real_t p_jump_height, real_t p_jump_duration) {
+		p_jump_duration = p_jump_duration == 0.0 ? (real_t)0.01 : p_jump_duration;
+		return (real_t)-2.0 * (-p_jump_height) / (p_jump_duration * p_jump_duration);
 	}
 
-	_FORCE_INLINE_ static real_t calculate_fall_gravity(real_t jump_height, real_t jump_duration, real_t fall_gravity_multiplier) {
-		return calculate_jump_gravity(jump_height, jump_duration) * fall_gravity_multiplier;
+	//! 下坠-计算重力
+	/*!
+	 * \param p_jump_height 向上跳跃高度
+	 * \param p_jump_duration 向上跳跃时间
+	 * \param p_fall_gravity_multiplier 下坠重力相对于向上重力缩放
+	 * \sa calculate_jump_gravity() * p_fall_gravity_multiplier
+	 */
+	_FORCE_INLINE_ static real_t calculate_fall_gravity(real_t p_jump_height, real_t p_jump_duration, real_t p_fall_gravity_multiplier) {
+		return calculate_jump_gravity(p_jump_height, p_jump_duration) * p_fall_gravity_multiplier;
 	}
 
 	// ------------------------------------------
+	//! 获取方向-枚举
+	/*!
+	 * \param p_vector 目标位置相对于自己的坐标
+	 */
 	_FORCE_INLINE_ static Direction get_direction(const Vector2& p_vector) {
 		if (p_vector.length() == 0.0) {
 			return Direction::None;
@@ -59,10 +81,22 @@ public:
 		ERR_FAIL_V_EDMSG(Direction::None, "Calcu direction error through vector2");
 	}
 
+	//! 获取方向-正负
+	/*!
+	 * \param p_vector 目标位置相对于自己的坐标
+	 * \param[out] out_sign_x x轴
+	 * \param[out] out_sign_y y轴
+	 */
 	_FORCE_INLINE_ static void get_direction_sign(const Vector2& p_vector, int8_t& out_sign_x, int8_t& out_sign_y) {
 		get_direction_sign(get_direction(p_vector), out_sign_x, out_sign_y);
 	}
 
+	//! 获取方向-正负
+	/*!
+	 * \param p_dir 方向枚举
+	 * \param[out] out_sign_x x轴
+	 * \param[out] out_sign_y y轴
+	 */
 	_FORCE_INLINE_ static void get_direction_sign(Direction p_dir, int8_t& out_sign_x, int8_t& out_sign_y) {
 		switch (p_dir) {
 			case Direction::None:

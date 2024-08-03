@@ -5,10 +5,10 @@
 
 #include "character/player/player.h"
 
-void PlayerState::play_animation(const StringName& name /* = String() */, double custom_blend /* = -1 */, double custom_speed /* = 1.0 */, bool from_end /* = false */) {
+void PlayerState::play_animation(const StringName& p_name /* = String() */, double p_custom_blend /* = -1 */, double p_custom_speed /* = 1.0 */, bool p_from_end /* = false */) {
 	if (player) {
 		if (AnimationPlayer* animation_player = player->get_animation_player()) {
-			animation_player->play(name, custom_blend, custom_speed, from_end);
+			animation_player->play(p_name, p_custom_blend, p_custom_speed, p_from_end);
 		}
 	}
 }

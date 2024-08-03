@@ -43,12 +43,14 @@ void SceneInstancer::_instancer_thread() {
 		to_instances.clear();
 		to_instances_mutex->unlock();
 
+		Node* node = nullptr;
 		for (int i = 0; i < instancer_data.size(); ++i) {
 			const InstancerData& data = instancer_data[i];
-			Node* node = data.packed_scene->instantiate();
-			if (data.callback.is_valid()) {
-				data.callback.call_deferred(node);
+			node = nullptr;
+			if (data.packed_scene != nullptr) {
+				node = data.packed_scene->instantiate();
 			}
+			data.callback.call_deferred(node);
 		}
 
 		OS::get_singleton()->delay_msec(16);

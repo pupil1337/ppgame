@@ -47,9 +47,7 @@ void SceneLoader::_loader_thread() {
 			const LoaderData& data = load_datas[i];
 			// TODO 使用scene_cache
 			Ref<PackedScene> packed_scene = ResourceLoader::get_singleton()->load(data.path, PackedScene::get_class_static());
-			if (data.callback.is_valid()) {
-				data.callback.call_deferred(packed_scene);
-			}
+			data.callback.call_deferred(packed_scene);
 		}
 
 		OS::get_singleton()->delay_msec(16);

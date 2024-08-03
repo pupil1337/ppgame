@@ -23,6 +23,9 @@ void Door::_notification(int p_what) {
 		if (p_what == NOTIFICATION_POSTINITIALIZE) {
 			connect("body_entered", callable_mp(this, &self_type::_body_entered));
 			connect("body_exited", callable_mp(this, &self_type::_body_exited));
+		} else if (p_what == NOTIFICATION_PREDELETE) {
+			disconnect("body_entered", callable_mp(this, &self_type::_body_entered));
+			disconnect("body_exited", callable_mp(this, &self_type::_body_exited));
 		}
 	}
 }

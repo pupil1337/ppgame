@@ -8,6 +8,7 @@
 #include <godot_cpp/variant/vector2.hpp>
 using namespace godot;
 
+//! 方向
 enum class Direction {
 	Right,
 	Left,
@@ -22,6 +23,7 @@ enum class Direction {
 
 // clang-format off
 
+//! 碰撞层
 enum class CollisionLayer : uint32_t {
 	World   = 0b00000000000000000000000000000001,
 	Player  = 0b00000000000000000000000000000010,
@@ -33,6 +35,7 @@ enum class CollisionLayer : uint32_t {
 
 // clang-format on
 
+//! 射线检测结果
 struct RayResult {
 	Vector2 position;
 	Vector2 normal;

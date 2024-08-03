@@ -14,6 +14,7 @@
 #include <godot_cpp/variant/vector2.hpp>
 
 #include "character/player/player.h"
+#include "utils/math_utils.h"
 #include "utils/physics_utils.h"
 #include "utils/types.h"
 
@@ -28,27 +29,27 @@ void PlayerMovementComponent::_ready() {
 	}
 }
 
-void PlayerMovementComponent::input_move(double delta, const Vector2& curr_velocity, int8_t input_sign_x, real_t acceleration_x, real_t deceleration_x, real_t turn_speed_x, real_t max_speed_x, real_t gravity) {
+void PlayerMovementComponent::input_move(double p_delta, const Vector2& p_curr_velocity, int8_t p_input_sign_x, real_t p_acceleration_x, real_t p_deceleration_x, real_t p_turn_speed_x, real_t p_max_speed_x, real_t p_gravity) {
 	// x
 	real_t speed_change_x = 0.0;
-	if (input_sign_x != 0) {
-		if (Math::sign(input_sign_x) != Math::sign(curr_velocity.x)) {
-			speed_change_x = turn_speed_x * delta;
+	if (p_input_sign_x != 0) {
+		if (Math::sign(p_input_sign_x) != Math::sign(p_curr_velocity.x)) {
+			speed_change_x = p_turn_speed_x * p_delta;
 		} else {
-			speed_change_x = acceleration_x * delta;
+			speed_change_x = p_acceleration_x * p_delta;
 		}
 	} else {
-		speed_change_x = deceleration_x * delta;
+		speed_change_x = p_deceleration_x * p_delta;
 	}
-	real_t new_velocity_x = Math::move_toward(curr_velocity.x, input_sign_x * max_speed_x, speed_change_x);
+	real_t new_velocity_x = Math::move_toward(p_curr_velocity.x, p_input_sign_x * p_max_speed_x, speed_change_x);
 
 	// y
-	real_t new_velocity_y = curr_velocity.y + gravity * delta;
+	real_t new_velocity_y = p_curr_velocity.y + p_gravity * p_delta;
 
 	// sprite_face_to_input
-	if (sprite_face_to_input && input_sign_x != 0) {
+	if (sprite_face_to_input && p_input_sign_x != 0) {
 		if (player_sprite) {
-			player_sprite->set_flip_h(input_sign_x < 0);
+			player_sprite->set_flip_h(p_input_sign_x < 0);
 		}
 	}
 
@@ -59,9 +60,12 @@ void PlayerMovementComponent::input_move(double delta, const Vector2& curr_veloc
 	}
 }
 
-void PlayerMovementComponent::jump(const Vector2& p_new_velocity) {
+void PlayerMovementComponent::jump(const Vector2& p_curr_velocity, real_t p_jump_height, real_t p_jump_duration) {
 	if (player) {
-		player->set_velocity(p_new_velocity);
+		real_t new_velocity_y;
+		new_velocity_y = MathUtils::calculate_jump_speed_y(p_jump_height, p_jump_duration);
+
+		player->set_velocity({ p_curr_velocity.x, new_velocity_y });
 		_move_and_slide();
 	}
 }

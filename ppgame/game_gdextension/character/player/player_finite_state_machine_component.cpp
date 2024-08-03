@@ -30,15 +30,22 @@ void PlayerFiniteStateMachineComponent::_ready() {
 			}
 		}
 
+		_update_logic_condition();
 		_update_physics_condition();
 	}
 }
 
+/*!
+ * 先更新逻辑条件, 再更新逻辑帧
+ */
 void PlayerFiniteStateMachineComponent::on_process(double p_delta) {
 	_update_logic_condition();
 	parent_type::on_process(p_delta);
 }
 
+/*!
+ * 先更新物理帧, 再更新物理条件
+ */
 void PlayerFiniteStateMachineComponent::on_physics_process(double p_delta) {
 	parent_type::on_physics_process(p_delta);
 	_update_physics_condition();

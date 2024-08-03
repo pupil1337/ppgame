@@ -9,9 +9,9 @@ using namespace godot;
 
 class Component;
 
-//! 无父类
+//! Actor类
 /*!
- * 游戏中某个实体godot::Node将会多继承自Actor，用于管理Component
+ * 游戏中某个实体将会多继承自Actor，用于管理Component
  */
 class Actor {
 	friend Component;
@@ -32,14 +32,16 @@ public:
 	}
 
 private:
-	HashMap<StringName, Component*> components; //!< 组件映射：StringName -> Component*
-
-private:
 	//! 添加组件
 	/*!
 	 * 仅在Component被附加到Actor上时，从Component中自动调用
+	 * \param p_component 新组件
+	 * \return 是否添加成功
 	 */
-	void add_component(Component* p_component);
+	bool add_component(Component* p_component);
+
+private:
+	HashMap<StringName, Component*> components; //!< 拥有的组件: StringName -> Component*
 };
 
 #endif // ACTOR_H

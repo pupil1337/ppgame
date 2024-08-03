@@ -7,6 +7,7 @@
 #include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
 
+//! Input的StringNames单例
 class InputStringNames {
 	friend void initialize_game_gdextension_types(ModuleInitializationLevel p_level);
 	friend void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level);
@@ -24,14 +25,15 @@ class InputStringNames {
 public:
 	_FORCE_INLINE_ static InputStringNames* get_singleton() { return singleton; }
 
-	StringName Left;
-	StringName Right;
-	StringName Up;
-	StringName Down;
-	StringName Jump;
-	StringName Attack;
+	StringName Left; //!< "Left"
+	StringName Right; //!< "Right"
+	StringName Up; //!< "Up"
+	StringName Down; //!< "Down"
+	StringName Jump; //!< "Jump"
+	StringName Attack; //!< "Attack"
 };
 
+//! 获取InputStringName
 #define InputStringName(m_name) InputStringNames::get_singleton()->m_name
 
 #endif // INPUT_STRING_NAMES_H

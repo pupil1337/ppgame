@@ -9,18 +9,19 @@
 #include <godot_cpp/variant/string.hpp>
 using namespace godot;
 
+//! 关卡传送门
 class Door : public Area2D {
 	GDCLASS(Door, Area2D)
 
 private:
+	//! body_entered信号
 	void _body_entered(Node2D* p_body);
+	//! body_exited信号
 	void _body_exited(Node2D* p_body);
 
 private:
-	bool auto_door = true;
-
-	String link_level_path;
-	String link_level_player_start_name;
+	String link_level_path; //!< 连接关卡
+	String link_level_player_start_name; //!< 连接关卡的角色生成点
 
 	// ------------------------------------------
 

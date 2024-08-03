@@ -18,10 +18,11 @@ static void glfw_error_callback(int error, const char* description) {
 void GM::_imgui_backend_initialize() {
 	glfwSetErrorCallback(glfw_error_callback);
 	if (glfwInit()) {
+		// GL 3.0 + GLSL 130
 		const char* glsl_version = "#version 130";
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+		// glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
 		// glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // 3.0+ only (Mac OS X)
 #ifdef WINDOWS_ENABLED
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
@@ -60,7 +61,6 @@ void GM::_imgui_backend_initialize() {
 
 			// Setup Platform/Renderer backends
 			ImGui_ImplGlfw_InitForOpenGL(window, true);
-
 			ImGui_ImplOpenGL3_Init(glsl_version);
 		}
 	}
