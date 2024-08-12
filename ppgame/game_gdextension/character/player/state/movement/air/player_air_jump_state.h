@@ -1,15 +1,15 @@
-#ifndef PLAYER_GROUND_IDLE_STATE_H
-#define PLAYER_GROUND_IDLE_STATE_H
+#ifndef PLAYER_AIR_JUMP_STATE_H
+#define PLAYER_AIR_JUMP_STATE_H
 
 #include <godot_cpp/classes/wrapped.hpp>
 #include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
 
-#include "character/player/state/ground/player_ground_state.h"
+#include "character/player/state/movement/air/player_air_state.h"
 
-//! 角色静止状态
-class PlayerGroundIdleState : public PlayerGroundState {
-	GDCLASS(PlayerGroundIdleState, PlayerGroundState)
+//! 角色跳跃状态
+class PlayerAirJumpState : public PlayerAirState {
+	GDCLASS(PlayerAirJumpState, PlayerAirState)
 
 public:
 	virtual void enter() override;
@@ -17,10 +17,13 @@ public:
 	virtual void on_physics_process(double delta) override;
 	virtual void exit() override;
 
+private:
+	bool desire_jump = false;
+
 	// ------------------------------------------
 
 protected:
 	static void _bind_methods() {}
 };
 
-#endif // PLAYER_GROUND_IDLE_STATE_H
+#endif // PLAYER_AIR_JUMP_STATE_H

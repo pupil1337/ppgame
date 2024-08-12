@@ -6,8 +6,8 @@
 
 #include "character/player/player.h"
 #include "character/player/player_movement_component.h"
-#include "character/player/state/air/player_air_fall_state.h"
-#include "character/player/state/air/player_air_jump_state.h"
+#include "character/player/state/movement/air/player_air_fall_state.h"
+#include "character/player/state/movement/air/player_air_jump_state.h"
 #include "character/player/state/player_state_condition.h"
 
 StringName PlayerGroundState::on_process(double delta) {

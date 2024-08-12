@@ -116,20 +116,27 @@ autoplay = "Idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="PlayerFiniteStateMachineComponent" type="PlayerFiniteStateMachineComponent" parent="." node_paths=PackedStringArray("default_state")]
+[node name="PlayerFiniteStateMachineComponent" type="PlayerFiniteStateMachineComponent" parent="."]
+
+[node name="PlayerMovementFiniteStateMachineComponent" type="PlayerMovementFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent" node_paths=PackedStringArray("default_state")]
 default_state = NodePath("Ground/Idle")
 
-[node name="Ground" type="Node" parent="PlayerFiniteStateMachineComponent"]
+[node name="Ground" type="Node" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
 
-[node name="Idle" type="PlayerGroundIdleState" parent="PlayerFiniteStateMachineComponent/Ground"]
+[node name="Idle" type="PlayerGroundIdleState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Ground"]
 
-[node name="Run" type="PlayerGroundRunState" parent="PlayerFiniteStateMachineComponent/Ground"]
+[node name="Run" type="PlayerGroundRunState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Ground"]
 
-[node name="Air" type="Node" parent="PlayerFiniteStateMachineComponent"]
+[node name="Air" type="Node" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
 
-[node name="Jump" type="PlayerAirJumpState" parent="PlayerFiniteStateMachineComponent/Air"]
+[node name="Jump" type="PlayerAirJumpState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Air"]
 
-[node name="Fall" type="PlayerAirFallState" parent="PlayerFiniteStateMachineComponent/Air"]
+[node name="Fall" type="PlayerAirFallState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Air"]
+
+[node name="PlayerWeaponFiniteStateMachineComponent" type="PlayerWeaponFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent" node_paths=PackedStringArray("default_state")]
+default_state = NodePath("None")
+
+[node name="None" type="PlayerWeaponNoneState" parent="PlayerFiniteStateMachineComponent/PlayerWeaponFiniteStateMachineComponent"]
 
 [node name="PlayerInputComponent" type="PlayerInputComponent" parent="."]
 

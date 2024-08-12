@@ -14,7 +14,6 @@
 #include <godot_cpp/core/property_info.hpp>
 #include <godot_cpp/variant/variant.hpp>
 
-#include "character/player/player_finite_state_machine_component.h"
 #include "level/level.h"
 
 void Player::_enter_tree() {
@@ -40,22 +39,10 @@ void Player::_ready() {
 
 void Player::_process(double delta) {
 	parent_type::_process(delta);
-
-	if (!Engine::get_singleton()->is_editor_hint()) {
-		if (PlayerFiniteStateMachineComponent* player_fsm = get_component<PlayerFiniteStateMachineComponent>()) {
-			player_fsm->on_process(delta);
-		}
-	}
 }
 
 void Player::_physics_process(double delta) {
 	parent_type::_physics_process(delta);
-
-	if (!Engine::get_singleton()->is_editor_hint()) {
-		if (PlayerFiniteStateMachineComponent* player_fsm = get_component<PlayerFiniteStateMachineComponent>()) {
-			player_fsm->on_physics_process(delta);
-		}
-	}
 }
 
 void Player::_exit_tree() {

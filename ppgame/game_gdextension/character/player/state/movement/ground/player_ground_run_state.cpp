@@ -5,7 +5,7 @@
 
 #include "character/player/player.h"
 #include "character/player/player_movement_component.h"
-#include "character/player/state/ground/player_ground_idle_state.h"
+#include "character/player/state/movement/ground/player_ground_idle_state.h"
 #include "character/player/state/player_state_condition.h"
 
 void PlayerGroundRunState::enter() {

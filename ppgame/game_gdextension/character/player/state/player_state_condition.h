@@ -14,6 +14,7 @@ struct PlayerStateCondition {
 	int8_t input_sign_x = 0; //!< x轴输入方向
 	int8_t input_sign_y = 0; //!< y轴输入方向
 	bool just_pressed_jump = false; //!< 刚刚输入jump
+	bool just_pressed_attack = false; //!< 刚刚输入attack
 
 	// ------------------------------------------
 	// physics

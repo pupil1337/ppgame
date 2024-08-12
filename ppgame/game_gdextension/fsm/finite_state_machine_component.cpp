@@ -1,6 +1,5 @@
 #include "finite_state_machine_component.h"
 
-#include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/global_constants.hpp>
 #include <godot_cpp/classes/input_event.hpp>
 #include <godot_cpp/classes/node.hpp>
@@ -30,27 +29,23 @@ void FiniteStateMachineComponent::_change_state(const StringName& p_new_state_na
 
 	ERR_FAIL_COND_EDMSG(!states.has(p_new_state_name), "FSM: not has this state: " + p_new_state_name);
 	curr_state = states.get(p_new_state_name);
-	UtilityFunctions::print(get_parent()->get_name(), " state->", p_new_state_name);
+	UtilityFunctions::print(get_class(), " state->", p_new_state_name);
 	curr_state->enter();
 }
 
 void FiniteStateMachineComponent::on_process(double p_delta) {
-	if (!Engine::get_singleton()->is_editor_hint()) {
-		ERR_FAIL_NULL_EDMSG(curr_state, "FSM: on_process curr_state == nullptr");
+	ERR_FAIL_NULL_EDMSG(curr_state, "FSM: on_process curr_state == nullptr");
 
-		StringName new_state_name = curr_state->on_process(p_delta);
-		if (!new_state_name.is_empty()) {
-			_change_state(new_state_name);
-		}
+	StringName new_state_name = curr_state->on_process(p_delta);
+	if (!new_state_name.is_empty()) {
+		_change_state(new_state_name);
 	}
 }
 
 void FiniteStateMachineComponent::on_physics_process(double p_delta) {
-	if (!Engine::get_singleton()->is_editor_hint()) {
-		ERR_FAIL_NULL_EDMSG(curr_state, "FSM: on_physics_process curr_state == nullptr");
+	ERR_FAIL_NULL_EDMSG(curr_state, "FSM: on_physics_process curr_state == nullptr");
 
-		curr_state->on_physics_process(p_delta);
-	}
+	curr_state->on_physics_process(p_delta);
 }
 
 // ----------------------------------------------------------------------------

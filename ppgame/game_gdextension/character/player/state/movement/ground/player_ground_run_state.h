@@ -1,15 +1,15 @@
-#ifndef PLAYER_AIR_FALL_STATE_H
-#define PLAYER_AIR_FALL_STATE_H
+#ifndef PLAYER_GROUND_RUN_STATE_H
+#define PLAYER_GROUND_RUN_STATE_H
 
 #include <godot_cpp/classes/wrapped.hpp>
 #include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
 
-#include "character/player/state/air/player_air_state.h"
+#include "character/player/state/movement/ground/player_ground_state.h"
 
-//! 角色下坠状态
-class PlayerAirFallState : public PlayerAirState {
-	GDCLASS(PlayerAirFallState, PlayerAirState)
+//! 角色奔跑状态
+class PlayerGroundRunState : public PlayerGroundState {
+	GDCLASS(PlayerGroundRunState, PlayerGroundState)
 
 public:
 	virtual void enter() override;
@@ -23,4 +23,4 @@ protected:
 	static void _bind_methods() {}
 };
 
-#endif // PLAYER_AIR_FALL_STATE_H
+#endif // PLAYER_GROUND_RUN_STATE_H

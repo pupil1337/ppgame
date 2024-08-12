@@ -20,5 +20,8 @@ void PlayerInputComponent::_process(double delta) {
 
 		// just_pressed_jump
 		just_pressed_jump = input->is_action_just_pressed(InputStringName(Jump));
+
+		// just_pressed_attack
+		just_pressed_attack = input->is_action_just_pressed(InputStringName(Attack));
 	}
 }

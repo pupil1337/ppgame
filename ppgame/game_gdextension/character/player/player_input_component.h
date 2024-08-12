@@ -20,12 +20,14 @@ public:
 	_FORCE_INLINE_ int8_t get_sign_x() { return sign_x; }
 	_FORCE_INLINE_ int8_t get_sign_y() { return sign_y; }
 	_FORCE_INLINE_ bool get_just_pressed_jump() { return just_pressed_jump; }
+	_FORCE_INLINE_ bool get_just_pressed_attack() { return just_pressed_attack; }
 
 private:
 	Vector2 motion; //!< 输入数值
 	int8_t sign_x = 0; //!< x轴输入方向正负
 	int8_t sign_y = 0; //!< y轴输入方向正负
 	bool just_pressed_jump = false; //!< 刚刚按下跳跃键
+	bool just_pressed_attack = false; //!< 刚刚按下攻击键
 
 	// ------------------------------------------
 

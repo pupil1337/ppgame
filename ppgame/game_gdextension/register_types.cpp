@@ -13,13 +13,16 @@
 #include "character/player/player_finite_state_machine_component.h"
 #include "character/player/player_input_component.h"
 #include "character/player/player_movement_component.h"
-#include "character/player/state/air/player_air_fall_state.h"
-#include "character/player/state/air/player_air_jump_state.h"
-#include "character/player/state/air/player_air_state.h"
-#include "character/player/state/ground/player_ground_idle_state.h"
-#include "character/player/state/ground/player_ground_run_state.h"
-#include "character/player/state/ground/player_ground_state.h"
+#include "character/player/state/movement/air/player_air_fall_state.h"
+#include "character/player/state/movement/air/player_air_jump_state.h"
+#include "character/player/state/movement/air/player_air_state.h"
+#include "character/player/state/movement/ground/player_ground_idle_state.h"
+#include "character/player/state/movement/ground/player_ground_run_state.h"
+#include "character/player/state/movement/ground/player_ground_state.h"
+#include "character/player/state/movement/player_movement_finite_state_machine_component.h"
 #include "character/player/state/player_state.h"
+#include "character/player/state/weapon/player_weapon_finite_state_machine_component.h"
+#include "character/player/state/weapon/player_weapon_none.h"
 #include "framework/component.h"
 #include "fsm/finite_state_machine_component.h"
 #include "fsm/state.h"
@@ -45,17 +48,20 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 
 	// player
 	GDREGISTER_CLASS(Player)
-	GDREGISTER_CLASS(PlayerFiniteStateMachineComponent)
 	GDREGISTER_CLASS(PlayerInputComponent)
+	GDREGISTER_CLASS(PlayerMovementComponent)
+	GDREGISTER_CLASS(PlayerCameraComponent)
+	GDREGISTER_CLASS(PlayerFiniteStateMachineComponent)
 	GDREGISTER_ABSTRACT_CLASS(PlayerState)
+	GDREGISTER_CLASS(PlayerMovementFiniteStateMachineComponent)
 	GDREGISTER_ABSTRACT_CLASS(PlayerGroundState)
 	GDREGISTER_CLASS(PlayerGroundIdleState)
 	GDREGISTER_CLASS(PlayerGroundRunState)
 	GDREGISTER_ABSTRACT_CLASS(PlayerAirState)
 	GDREGISTER_CLASS(PlayerAirJumpState)
 	GDREGISTER_CLASS(PlayerAirFallState)
-	GDREGISTER_CLASS(PlayerMovementComponent)
-	GDREGISTER_CLASS(PlayerCameraComponent)
+	GDREGISTER_CLASS(PlayerWeaponFiniteStateMachineComponent)
+	GDREGISTER_CLASS(PlayerWeaponNoneState)
 
 	// world
 	GDREGISTER_CLASS(World)
