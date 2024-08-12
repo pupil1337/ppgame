@@ -4,4 +4,5 @@ Diagnostics:
   MissingIncludes: Strict
 ...
 
-# FIXME: "" or <>    https://github.com/llvm/llvm-project/pull/67749
+# FIXME: "" or <>					https://github.com/llvm/llvm-project/pull/67749
+# FIXME: Hover doxygen		https://github.com/clangd/clangd/issues/529

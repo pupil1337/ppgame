@@ -7,8 +7,9 @@
 	"extensions": {
 		"recommendations": [
 			"ms-vscode.cpptools",
-			"llvm-vs-code-extensions.vscode-clangd",
 			"xaver.clang-format",
+			"llvm-vs-code-extensions.vscode-clangd",
+			"vadimcn.vscode-lldb",
 			"editorconfig.editorconfig",
 			"ms-python.python",
 			"gruntfuggly.todo-tree"
