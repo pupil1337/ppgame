@@ -52,8 +52,8 @@ private:
 	PlayerInputComponent* player_input_component = nullptr; //!< 角色-输入组件
 
 	PlayerStateCondition condition; //!< 状态条件
-	PlayerMovementFiniteStateMachineComponent* player_movement_fsm; //!< 角色-移动状态机
-	PlayerWeaponFiniteStateMachineComponent* player_weapon_fsm; //!< 角色-武器状态机
+	PlayerMovementFiniteStateMachineComponent* player_movement_fsm = nullptr; //!< 角色-移动状态机
+	PlayerWeaponFiniteStateMachineComponent* player_weapon_fsm = nullptr; //!< 角色-武器状态机
 
 	// ------------------------------------------
 

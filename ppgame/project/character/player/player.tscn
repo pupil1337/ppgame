@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://use87fyg025a"]
+[gd_scene load_steps=12 format=3 uid="uid://use87fyg025a"]
 
 [ext_resource type="Texture2D" uid="uid://dfh0slxhoj0px" path="res://art/player/player-sheet.png" id="1_myrph"]
 
@@ -87,13 +87,68 @@ tracks/0/keys = {
 "values": [10, 11, 12, 13, 14, 15, 16, 17]
 }
 
+[sub_resource type="Animation" id="Animation_b1s0s"]
+resource_name = "Weapon_Idle"
+length = 2.0
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
+}
+
+[sub_resource type="Animation" id="Animation_qqm8p"]
+resource_name = "Weapon_Run"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 43, 44, 45, 46, 47]
+}
+
+[sub_resource type="Animation" id="Animation_baknt"]
+resource_name = "Weapon_Attack0"
+length = 0.6
+step = 0.166
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [50, 51, 52, 53, 54, 55]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2el4c"]
 _data = {
 "Fall": SubResource("Animation_5tyo3"),
 "Idle": SubResource("Animation_hsopb"),
 "Jump": SubResource("Animation_o3css"),
 "RESET": SubResource("Animation_jn2eg"),
-"Run": SubResource("Animation_nqajv")
+"Run": SubResource("Animation_nqajv"),
+"Weapon_Attack0": SubResource("Animation_baknt"),
+"Weapon_Idle": SubResource("Animation_b1s0s"),
+"Weapon_Run": SubResource("Animation_qqm8p")
 }
 
 [node name="Player" type="Player"]
@@ -103,7 +158,7 @@ collision_mask = 5
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_myrph")
 hframes = 10
-vframes = 3
+vframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6oi2g")
