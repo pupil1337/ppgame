@@ -8,6 +8,7 @@ using namespace godot;
 
 class PlayerFiniteStateMachineComponent;
 
+//! 角色移动状态机
 class PlayerMovementFiniteStateMachineComponent : public FiniteStateMachineComponent {
 	GDCLASS(PlayerMovementFiniteStateMachineComponent, FiniteStateMachineComponent)
 

@@ -8,6 +8,7 @@ using namespace godot;
 
 class PlayerFiniteStateMachineComponent;
 
+//! 角色武器状态机
 class PlayerWeaponFiniteStateMachineComponent : public FiniteStateMachineComponent {
 	GDCLASS(PlayerWeaponFiniteStateMachineComponent, FiniteStateMachineComponent)
 

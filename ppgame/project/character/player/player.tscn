@@ -116,7 +116,9 @@ autoplay = "Idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="PlayerFiniteStateMachineComponent" type="PlayerFiniteStateMachineComponent" parent="."]
+[node name="PlayerFiniteStateMachineComponent" type="PlayerFiniteStateMachineComponent" parent="." node_paths=PackedStringArray("player_movement_fsm", "player_weapon_fsm")]
+player_movement_fsm = NodePath("PlayerMovementFiniteStateMachineComponent")
+player_weapon_fsm = NodePath("PlayerWeaponFiniteStateMachineComponent")
 
 [node name="PlayerMovementFiniteStateMachineComponent" type="PlayerMovementFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent" node_paths=PackedStringArray("default_state")]
 default_state = NodePath("Ground/Idle")
