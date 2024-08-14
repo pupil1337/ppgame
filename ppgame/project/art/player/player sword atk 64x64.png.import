@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfh0slxhoj0px"
-path="res://.godot/imported/player-sheet.png-f991a5108eec6d0f2bcc341c49d0c01b.ctex"
+uid="uid://ifynw8erw63j"
+path="res://.godot/imported/player sword atk 64x64.png-09889b18ad62c785a9652e37f8da1525.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/player/player-sheet.png"
-dest_files=["res://.godot/imported/player-sheet.png-f991a5108eec6d0f2bcc341c49d0c01b.ctex"]
+source_file="res://art/player/player sword atk 64x64.png"
+dest_files=["res://.godot/imported/player sword atk 64x64.png-09889b18ad62c785a9652e37f8da1525.ctex"]
 
 [params]
 
