@@ -40,6 +40,9 @@ private:
 	 */
 	void _change_level_implement(Node* p_node, const String& p_player_start);
 
+public:
+	World() {}
+
 private:
 	Level* curr_level = nullptr; //!< 当前关卡
 	Player* player = nullptr; //!< 角色

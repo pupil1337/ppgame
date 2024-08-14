@@ -14,9 +14,6 @@ class Actor;
 class Component : public Node {
 	GDCLASS(Component, Node)
 
-protected:
-	Actor* actor = nullptr; //!< 拥有者
-
 private:
 	//! 注册此组件
 	/*!
@@ -26,6 +23,12 @@ private:
 	 * \return 是否注册成功
 	 */
 	bool _register_component(Node* p_node);
+
+public:
+	Component() {}
+
+protected:
+	Actor* actor = nullptr; //!< 拥有者
 
 	// ------------------------------------------
 

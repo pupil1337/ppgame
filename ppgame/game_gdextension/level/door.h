@@ -19,6 +19,9 @@ private:
 	//! body_exited信号
 	void _body_exited(Node2D* p_body);
 
+public:
+	Door() {}
+
 private:
 	String link_level_path; //!< 连接关卡
 	String link_level_player_start_name; //!< 连接关卡的角色生成点

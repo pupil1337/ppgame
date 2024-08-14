@@ -7,6 +7,8 @@ using namespace godot;
 
 //! 角色状态条件
 struct PlayerStateCondition {
+	PlayerStateCondition() {}
+
 	// ------------------------------------------
 	// logic
 	// ------------------------------------------

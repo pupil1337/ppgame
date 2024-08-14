@@ -13,6 +13,9 @@ using namespace godot;
 class SceneCache : public Object {
 	GDCLASS(SceneCache, Object)
 
+public:
+	SceneCache() {}
+
 private:
 	HashMap<String, Ref<PackedScene>> cache;
 

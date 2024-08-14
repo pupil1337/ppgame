@@ -30,6 +30,9 @@ private:
 	//! 切换状态
 	void _change_state(const StringName& p_new_state_name);
 
+public:
+	FiniteStateMachineComponent() {}
+
 protected:
 	State* curr_state = nullptr; //!< 当前状态
 	HashMap<StringName, State*> states; //!< 状态名->状态节点

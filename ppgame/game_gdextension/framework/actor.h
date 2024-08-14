@@ -40,6 +40,9 @@ private:
 	 */
 	bool add_component(Component* p_component);
 
+public:
+	Actor() {}
+
 private:
 	HashMap<StringName, Component*> components; //!< 拥有的组件: StringName -> Component*
 };

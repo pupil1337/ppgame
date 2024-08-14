@@ -17,6 +17,9 @@ public:
 	virtual void on_physics_process(double delta) override;
 	virtual void exit() override;
 
+public:
+	PlayerAirJumpState() {}
+
 private:
 	bool desire_jump = false;
 

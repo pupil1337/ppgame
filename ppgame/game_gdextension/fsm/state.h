@@ -33,6 +33,9 @@ private:
 	 */
 	bool _register_state(Node* p_node);
 
+public:
+	State() {}
+
 	// ------------------------------------------
 
 protected:

@@ -16,6 +16,9 @@ public:
 	virtual void on_physics_process(double delta) override {}
 	virtual void exit() override {}
 
+public:
+	PlayerWeaponNoneState() {}
+
 	// ------------------------------------------
 
 protected:

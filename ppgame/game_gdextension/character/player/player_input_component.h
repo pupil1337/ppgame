@@ -22,6 +22,9 @@ public:
 	_FORCE_INLINE_ bool get_just_pressed_jump() { return just_pressed_jump; }
 	_FORCE_INLINE_ bool get_just_pressed_attack() { return just_pressed_attack; }
 
+public:
+	PlayerInputComponent() {}
+
 private:
 	Vector2 motion; //!< 输入数值
 	int8_t sign_x = 0; //!< x轴输入方向正负

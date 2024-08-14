@@ -33,6 +33,9 @@ protected:
 	 */
 	void play_animation(const StringName& p_name = String(), double p_custom_blend = -1, double p_custom_speed = 1.0, bool p_from_end = false);
 
+public:
+	PlayerState() {}
+
 	// ------------------------------------------
 
 protected:

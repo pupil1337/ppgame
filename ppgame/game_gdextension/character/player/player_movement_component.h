@@ -52,6 +52,10 @@ public:
 private:
 	void _move_and_slide();
 
+public:
+	PlayerMovementComponent() {}
+
+private:
 	Player* player = nullptr; //!< 角色
 	Sprite2D* player_sprite = nullptr; //!< 角色-精灵
 	bool sprite_face_to_input = true; //!< 精灵朝向输入方向

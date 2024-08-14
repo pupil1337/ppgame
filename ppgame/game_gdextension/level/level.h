@@ -21,6 +21,9 @@ public:
 	 */
 	int32_t get_camera_limit(Side p_side);
 
+public:
+	Level() {}
+
 	// ------------------------------------------
 
 public:

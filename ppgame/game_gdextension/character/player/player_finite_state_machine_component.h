@@ -47,6 +47,9 @@ private:
 	//! 更新物理条件
 	void _update_physics_condition();
 
+public:
+	PlayerFiniteStateMachineComponent() {}
+
 private:
 	Player* player = nullptr; //!< 角色
 	PlayerInputComponent* player_input_component = nullptr; //!< 角色-输入组件

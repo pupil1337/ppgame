@@ -14,6 +14,9 @@ class PlayerMovementFiniteStateMachineComponent : public FiniteStateMachineCompo
 
 	friend PlayerFiniteStateMachineComponent;
 
+public:
+	PlayerMovementFiniteStateMachineComponent() {}
+
 	// ------------------------------------------
 
 protected:

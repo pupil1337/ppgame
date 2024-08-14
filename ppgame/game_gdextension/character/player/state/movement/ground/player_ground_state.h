@@ -14,6 +14,9 @@ class PlayerGroundState : public PlayerState {
 public:
 	virtual StringName on_process(double delta) override;
 
+public:
+	PlayerGroundState() {}
+
 	// ------------------------------------------
 
 protected:

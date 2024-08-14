@@ -14,6 +14,9 @@ class PlayerWeaponFiniteStateMachineComponent : public FiniteStateMachineCompone
 
 	friend PlayerFiniteStateMachineComponent;
 
+public:
+	PlayerWeaponFiniteStateMachineComponent() {}
+
 	// ------------------------------------------
 
 protected:

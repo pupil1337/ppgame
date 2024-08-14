@@ -22,6 +22,9 @@ public:
 	//! 获取角色摄像机
 	Camera2D* get_camera();
 
+public:
+	Player() {}
+
 	// ------------------------------------------
 
 public:
