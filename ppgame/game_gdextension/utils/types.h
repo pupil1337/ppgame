@@ -45,4 +45,12 @@ struct RayResult {
 	int shape;
 };
 
+//! 形状检测结果
+struct ShapeResult {
+	RID rid;
+	ObjectID collider_id;
+	Object* collider = nullptr;
+	int shape = 0;
+};
+
 #endif // PP_TYPES_H

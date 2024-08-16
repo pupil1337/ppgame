@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <godot_cpp/classes/engine.hpp>
+#include <godot_cpp/classes/physics_server2d.hpp>
 #include <godot_cpp/classes/rectangle_shape2d.hpp>
 #include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/sprite2d.hpp>
@@ -10,6 +11,9 @@
 #include <godot_cpp/core/math.hpp>
 #include <godot_cpp/core/object.hpp>
 #include <godot_cpp/core/property_info.hpp>
+#include <godot_cpp/templates/vector.hpp>
+#include <godot_cpp/variant/array.hpp>
+#include <godot_cpp/variant/transform2d.hpp>
 #include <godot_cpp/variant/variant.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 
@@ -72,24 +76,40 @@ void PlayerMovementComponent::jump(const Vector2& p_curr_velocity, real_t p_jump
 
 bool PlayerMovementComponent::down_jump() {
 	if (player) {
-		Ref<RectangleShape2D> shape = player->shape_owner_get_shape(0, 0);
-		if (shape.is_valid()) {
-			RayResult ray_result;
-			if (PhysicsUtils::ray_cast(
-						player,
-						player->get_position(),
-						player->get_position() + Vector2(0.0, shape->get_size().y * 2),
-						ray_result,
-						{ CollisionLayer::OneWay },
-						{ player->get_rid() },
-						true,
-						false,
-						true)) {
-				player->set_collision_mask(player->get_collision_mask() & ~(uint32_t)CollisionLayer::OneWay);
-				player->translate(Vector2(0.0, player->get_floor_snap_length() * 2));
-				player->move_and_slide();
-				player->set_collision_mask(player->get_collision_mask() | (uint32_t)CollisionLayer::OneWay);
-				return !player->is_on_floor();
+		uint32_t player_collision_mask = player->get_collision_mask();
+		double player_snap_length = player->get_floor_snap_length();
+		if (player_collision_mask & (uint32_t)CollisionLayer::OneWay) {
+			Ref<RectangleShape2D> shape = player->shape_owner_get_shape(0, 0);
+			if (shape.is_valid()) {
+				Vector<ShapeResult> shape_results;
+				if (PhysicsUtils::shape_cast<PhysicsServer2D::ShapeType::SHAPE_RECTANGLE>(
+							player,
+							shape_results,
+							shape->get_size() / 2.0,
+							player->get_global_transform(),
+							Vector2(0.0, player_snap_length * 2),
+							player_collision_mask,
+							32,
+							Array::make(player->get_rid()),
+							true,
+							false,
+							0.0)) {
+					bool has_oneway = false;
+					for (int i = 0; i < shape_results.size(); ++i) {
+						uint32_t collided_layer = PhysicsServer2D::get_singleton()->body_get_collision_layer(shape_results[i].rid);
+						if (collided_layer & ~(uint32_t)CollisionLayer::OneWay) {
+							return false;
+						}
+						has_oneway = true;
+					}
+					if (has_oneway) {
+						player->set_collision_mask(player_collision_mask & ~(uint32_t)CollisionLayer::OneWay);
+						player->global_translate(Vector2(0.0, player_snap_length * 2));
+						player->move_and_slide();
+						player->set_collision_mask(player_collision_mask);
+						return !player->is_on_floor();
+					}
+				}
 			}
 		}
 	}

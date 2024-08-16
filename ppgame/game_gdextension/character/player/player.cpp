@@ -3,6 +3,7 @@
 #include <godot_cpp/classes/animation_player.hpp>
 #include <godot_cpp/classes/camera2d.hpp>
 #include <godot_cpp/classes/character_body2d.hpp>
+#include <godot_cpp/classes/collision_shape2d.hpp>
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/global_constants.hpp>
 #include <godot_cpp/classes/object.hpp>
@@ -50,7 +51,7 @@ void Player::_exit_tree() {
 }
 
 Sprite2D* Player::get_sprite() {
-	return get_node<Sprite2D>("PlayerSprite");
+	return get_node<Sprite2D>("Sprite2D");
 }
 
 AnimationPlayer* Player::get_animation_player() {
@@ -59,4 +60,8 @@ AnimationPlayer* Player::get_animation_player() {
 
 Camera2D* Player::get_camera() {
 	return get_node<Camera2D>("Camera2D");
+}
+
+CollisionShape2D* Player::get_collision_shape() {
+	return get_node<CollisionShape2D>("CollisionShape2D");
 }

@@ -21,4 +21,4 @@ CheckOptions:
   modernize-use-default-member-init.UseAssignment: true
 ...
 
-# copy from godot. diff: 1.AnalyzeTemporaryDtors
+# copy from godot.

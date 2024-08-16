@@ -4,6 +4,7 @@
 #include <godot_cpp/classes/animation_player.hpp>
 #include <godot_cpp/classes/camera2d.hpp>
 #include <godot_cpp/classes/character_body2d.hpp>
+#include <godot_cpp/classes/collision_shape2d.hpp>
 #include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 using namespace godot;
@@ -21,6 +22,8 @@ public:
 	AnimationPlayer* get_animation_player();
 	//! 获取角色摄像机
 	Camera2D* get_camera();
+	//! 获取碰撞形状
+	CollisionShape2D* get_collision_shape();
 
 public:
 	Player() {}
@@ -35,7 +38,7 @@ public:
 	virtual void _exit_tree() override;
 
 protected:
-	static void _bind_methods(){};
+	static void _bind_methods() {};
 };
 
 #endif // PLAYER_H
