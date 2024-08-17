@@ -33,6 +33,8 @@
 					"target=editor",
 					"custom_modules=../ppgame/game_module",
 					"dev_build=yes",
+					"dev_mode=yes",
+					"verbose=no",
 					"debug_symbols=yes",
 					"compiledb=yes",
 					"deprecated=no",
@@ -50,6 +52,8 @@
 					"use_llvm=yes",
 					"linker=mold",
 					"dev_build=yes",
+					"dev_mode=yes",
+					"verbose=no",
 					"debug_symbols=yes",
 					"compiledb=yes",
 					"deprecated=no",
@@ -155,7 +159,6 @@
 				"command": "scons",
 				"args": [
 					"platform=windows",
-					"bits=64",
 					"target=editor",
 					"dev_build=yes",
 					"debug_symbols=yes",
@@ -167,7 +170,6 @@
 				"command": "pyston-scons",
 				"args": [
 					"platform=linux",
-					"bits=64",
 					"target=editor",
 					"use_llvm=yes",
 					"dev_build=yes",

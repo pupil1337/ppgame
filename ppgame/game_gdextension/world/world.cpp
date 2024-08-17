@@ -22,23 +22,31 @@
 #include "character/player/player.h"
 #include "gm/gm.h"
 #include "level/level.h"
+#include "utils/debug_draw_utils.h"
 
 static AsyncLoader* async_loader = nullptr;
 static GM* gm = nullptr;
+static DebugDrawUtils* debug_draw_utils = nullptr;
 
 void World::_notification(int p_what) {
 	if (!Engine::get_singleton()->is_editor_hint()) {
-		if (p_what == NOTIFICATION_POSTINITIALIZE) {
-			async_loader = memnew(AsyncLoader);
-			gm = memnew(GM);
-		}
-		if (p_what == NOTIFICATION_PREDELETE) {
-			if (async_loader) {
-				memdelete(async_loader);
-			}
-			if (gm) {
-				memdelete(gm);
-			}
+		switch (p_what) {
+			case NOTIFICATION_POSTINITIALIZE: {
+				async_loader = memnew(AsyncLoader);
+				gm = memnew(GM);
+			} break;
+			case NOTIFICATION_SCENE_INSTANTIATED: {
+				debug_draw_utils = memnew(DebugDrawUtils);
+				add_child(debug_draw_utils);
+			} break;
+			case NOTIFICATION_PREDELETE: {
+				if (async_loader) {
+					memdelete(async_loader);
+				}
+				if (gm) {
+					memdelete(gm);
+				}
+			} break;
 		}
 	}
 }

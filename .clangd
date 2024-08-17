@@ -2,6 +2,13 @@
 Diagnostics:
   UnusedIncludes: Strict
   MissingIncludes: Strict
+
+# FIXME: fix in ppgame.SConstruct
+CompileFlags:
+  Add: [
+    -Wunused-variable,
+		-Wunused-parameter
+  ]
 ...
 
 # FIXME: "" or <>					https://github.com/llvm/llvm-project/pull/67749

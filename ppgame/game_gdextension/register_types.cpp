@@ -29,6 +29,7 @@
 #include "gm/gm.h"
 #include "level/door.h"
 #include "level/level.h"
+#include "utils/debug_draw_utils.h"
 #include "utils/input_string_names.h"
 #include "world/world.h"
 
@@ -77,6 +78,9 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 
 	// gm
 	GDREGISTER_CLASS(GM)
+
+	// utils
+	GDREGISTER_CLASS(DebugDrawUtils)
 }
 
 void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {

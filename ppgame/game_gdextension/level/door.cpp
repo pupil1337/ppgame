@@ -20,12 +20,15 @@
 
 void Door::_notification(int p_what) {
 	if (!Engine::get_singleton()->is_editor_hint()) {
-		if (p_what == NOTIFICATION_POSTINITIALIZE) {
-			connect("body_entered", callable_mp(this, &self_type::_body_entered));
-			connect("body_exited", callable_mp(this, &self_type::_body_exited));
-		} else if (p_what == NOTIFICATION_PREDELETE) {
-			disconnect("body_entered", callable_mp(this, &self_type::_body_entered));
-			disconnect("body_exited", callable_mp(this, &self_type::_body_exited));
+		switch (p_what) {
+			case NOTIFICATION_POSTINITIALIZE: {
+				connect("body_entered", callable_mp(this, &self_type::_body_entered));
+				connect("body_exited", callable_mp(this, &self_type::_body_exited));
+			} break;
+			case NOTIFICATION_PREDELETE: {
+				disconnect("body_entered", callable_mp(this, &self_type::_body_entered));
+				disconnect("body_exited", callable_mp(this, &self_type::_body_exited));
+			} break;
 		}
 	}
 }

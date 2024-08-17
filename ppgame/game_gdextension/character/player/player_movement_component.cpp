@@ -13,11 +13,14 @@
 #include <godot_cpp/core/property_info.hpp>
 #include <godot_cpp/templates/vector.hpp>
 #include <godot_cpp/variant/array.hpp>
+#include <godot_cpp/variant/color.hpp>
+#include <godot_cpp/variant/rect2.hpp>
 #include <godot_cpp/variant/transform2d.hpp>
 #include <godot_cpp/variant/variant.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 
 #include "character/player/player.h"
+#include "utils/debug_draw_utils.h"
 #include "utils/math_utils.h"
 #include "utils/physics_utils.h"
 #include "utils/types.h"
@@ -82,6 +85,7 @@ bool PlayerMovementComponent::down_jump() {
 			Ref<RectangleShape2D> shape = player->shape_owner_get_shape(0, 0);
 			if (shape.is_valid()) {
 				Vector<ShapeResult> shape_results;
+				DebugDrawUtils::draw_debug_rectangle(Rect2(player->get_global_position() - shape->get_size() / 2.0 + Vector2(0.0, player_snap_length * 2), shape->get_size()), Color(1.0, 0.0, 0.0), 3.0);
 				if (PhysicsUtils::shape_cast<PhysicsServer2D::ShapeType::SHAPE_RECTANGLE>(
 							player,
 							shape_results,
