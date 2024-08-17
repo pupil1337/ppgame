@@ -56,8 +56,8 @@ public:
 	virtual void _exit_tree() override;
 
 protected:
-	void _notification(int p_what);
 	static void _bind_methods() {}
+	void _notification(int p_what);
 };
 
 #endif // WORLD_H

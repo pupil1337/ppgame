@@ -52,8 +52,8 @@ private:
 	// ------------------------------------------
 
 protected:
-	void _notification(int p_what);
 	static void _bind_methods() {}
+	void _notification(int p_what);
 };
 
 #endif // SCENE_INSTANCER_H
