@@ -37,7 +37,7 @@
 					"verbose=no",
 					"debug_symbols=yes",
 					"compiledb=yes",
-					"deprecated=no",
+					"deprecated=no"
 				],
 				"problemMatcher": "$msCompile"
 			},
@@ -56,7 +56,7 @@
 					"verbose=no",
 					"debug_symbols=yes",
 					"compiledb=yes",
-					"deprecated=no",
+					"deprecated=no"
 				],
 				"problemMatcher": "$gcc"
 			}
@@ -162,8 +162,11 @@
 					"target=editor",
 					"dev_build=yes",
 					"debug_symbols=yes",
-					"compiledb=yes"
+					"compiledb=yes",
+					"warnings=extra",
+					"werror=yes"
 				],
+				"problemMatcher": "$msCompile"
 			},
 
 			"linux": {
@@ -174,12 +177,14 @@
 					"use_llvm=yes",
 					"dev_build=yes",
 					"debug_symbols=yes",
-					"compiledb=yes"
-				]
+					"compiledb=yes",
+					"warnings=extra",
+					"werror=yes"
+				],
+				"problemMatcher": "$gcc"
 			},
 
-			"hide": true,
-			"problemMatcher": "$msCompile"
+			"hide": true
 		},
 		// game-2: merge compile_commands.json
 		{

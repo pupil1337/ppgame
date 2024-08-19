@@ -2,14 +2,19 @@
 Diagnostics:
   UnusedIncludes: Strict
   MissingIncludes: Strict
+...
 
-# FIXME: fix in ppgame.SConstruct
+---
+# FIXME: those disable or not-enable by godot-cpp
+If:
+  PathMatch: ppgame/.*
+
 CompileFlags:
   Add: [
-    -Wunused-variable,
-		-Wunused-parameter
+    -Wordered-compare-function-pointers,
+    -Wunused-parameter
   ]
 ...
 
-# FIXME: "" or <>					https://github.com/llvm/llvm-project/pull/67749
-# FIXME: Hover doxygen		https://github.com/clangd/clangd/issues/529
+# FIXME: "" or <>         https://github.com/llvm/llvm-project/pull/67749
+# FIXME: Hover doxygen    https://github.com/clangd/clangd/issues/529

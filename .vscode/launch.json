@@ -2,7 +2,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		// ====================================================================
-		// Linux
+		// lldb
 		// ====================================================================
 		// editor
 		{
@@ -15,9 +15,9 @@
 				"${workspaceFolder}/ppgame/project",
 				"--editor"
 			],
-			"stopOnEntry": false,
-			"cwd": "${workspaceFolder}",
-			"console": "internalConsole",
+			"presentation": {
+				"group": "lldb"
+			}
 		},
 
 		// game
@@ -30,9 +30,9 @@
 				"--path",
 				"${workspaceFolder}/ppgame/project",
 			],
-			"stopOnEntry": false,
-			"cwd": "${workspaceFolder}",
-			"console": "internalConsole",
+			"presentation": {
+				"group": "lldb"
+			}
 		},
 
 		// attach
@@ -40,11 +40,14 @@
 			"name": "attach - lldb",
 			"type": "lldb",
 			"request": "attach",
-			"pid": "${command:pickMyProcess}"
+			"pid": "${command:pickMyProcess}",
+			"presentation": {
+				"group": "lldb"
+			}
 		},
 
 		// ====================================================================
-		// Windows
+		// cppvsdbg
 		// ====================================================================
 		// editor
 		{
@@ -57,11 +60,11 @@
 				"${workspaceFolder}/ppgame/project",
 				"--editor"
 			],
-			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"console": "internalConsole",
-			"visualizerFile": "${workspaceFolder}/godot/platform/windows/godot.natvis"
+			"visualizerFile": "${workspaceFolder}/godot/platform/windows/godot.natvis",
+			"presentation": {
+				"group": "cppvsdbg"
+			}
 		},
 		// game
 		{
@@ -73,11 +76,11 @@
 				"--path",
 				"${workspaceFolder}/ppgame/project"
 			],
-			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"console": "internalConsole",
-			"visualizerFile": "${workspaceFolder}/godot/platform/windows/godot.natvis"
+			"visualizerFile": "${workspaceFolder}/godot/platform/windows/godot.natvis",
+			"presentation": {
+				"group": "cppvsdbg"
+			}
 		},
 		// attach
 		{
@@ -85,7 +88,10 @@
 			"type": "cppvsdbg",
 			"request": "attach",
 			"processId": "${command:pickProcess}",
-			"visualizerFile": "${workspaceFolder}/godot/platform/windows/godot.natvis"
+			"visualizerFile": "${workspaceFolder}/godot/platform/windows/godot.natvis",
+			"presentation": {
+				"group": "cppvsdbg"
+			}
 		}
 	]
 }

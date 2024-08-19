@@ -6,9 +6,9 @@
 #else
 #include <GL/gl.h>
 #endif
-#include <thirdpart/imgui/imgui.h>
-#include <thirdpart/imgui/imgui_impl_glfw.h>
-#include <thirdpart/imgui/imgui_impl_opengl3.h>
+#include <thirdparty/imgui/imgui.h>
+#include <thirdparty/imgui/imgui_impl_glfw.h>
+#include <thirdparty/imgui/imgui_impl_opengl3.h>
 #include <cstdio>
 
 static void glfw_error_callback(int error, const char* description) {

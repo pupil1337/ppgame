@@ -1,8 +1,8 @@
 #ifndef GM_H
 #define GM_H
 
-#include <thirdpart/imgui/imgui.h>
-#include <thirdpart/imgui/imgui_impl_glfw.h>
+#include <thirdparty/imgui/imgui.h>
+#include <thirdparty/imgui/imgui_impl_glfw.h>
 #include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/thread.hpp>

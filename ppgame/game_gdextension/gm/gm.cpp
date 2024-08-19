@@ -1,7 +1,7 @@
 #include "gm.h"
 
-#include <thirdpart/imgui/imgui.h>
-#include <thirdpart/imgui/imgui_internal.h>
+#include <thirdparty/imgui/imgui.h>
+#include <thirdparty/imgui/imgui_internal.h>
 #include <godot_cpp/classes/os.hpp>
 #include <godot_cpp/classes/performance.hpp>
 #include <godot_cpp/variant/callable_method_pointer.hpp>
@@ -48,8 +48,6 @@ void GM::_imgui_thread() {
 }
 
 void GM::_flush_impl() {
-	ImGuiIO& io = ImGui::GetIO();
-
 	if (show_demo_window) {
 		ImGui::ShowDemoWindow(&show_demo_window);
 	}

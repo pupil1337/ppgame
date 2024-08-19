@@ -137,6 +137,11 @@
 #pragma GCC diagnostic ignored "-Wunknown-warning-option"   // warning: unknown warning group 'xxx'
 #pragma GCC diagnostic ignored "-Wcast-function-type"       // warning: cast between incompatible function types (for loader)
 #endif
+// ppgame begin
+#if defined(_MSC_VER)
+#pragma warning(disable: 4701)
+#endif
+// ppgame end
 
 // GL includes
 #if defined(IMGUI_IMPL_OPENGL_ES2)
@@ -991,5 +996,10 @@ static void ImGui_ImplOpenGL3_ShutdownPlatformInterface()
 #if defined(__clang__)
 #pragma clang diagnostic pop
 #endif
+// ppgame begin
+#if defined(_MSC_VER)
+#pragma warning(default: 4701)
+#endif
+// ppgame end
 
 #endif // #ifndef IMGUI_DISABLE

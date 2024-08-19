@@ -37,6 +37,8 @@
 			"**/*.os": true,
 			"**/*.so": true,
 			"**/*.o": true,
+			"**/*.a": true,
+			"**/*.llvm.a": true,
 			"ppgame/game_gdextension/bin": true,
 			"ppgame/project/bin/windows": true
 		},
@@ -68,6 +70,6 @@
 					"--debug-stringnames"
 				]
 			}
-		],
+		]
 	}
 }

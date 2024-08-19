@@ -2,62 +2,78 @@
 import os
 
 
-def normalize_path(val, env):
-    return val if os.path.isabs(val) else os.path.join(env.Dir("#").abspath, val)
-
-
-def validate_parent_dir(key, val, env):
-    if not os.path.isdir(normalize_path(os.path.dirname(val), env)):
-        raise UserError("'%s' is not a directory: %s" % (key, os.path.dirname(val)))
-
-
 libname = "game_gdextension"
 projectdir = "../project"
 
+# =================================================================================
+# localEnv
 localEnv = Environment(tools=["default"], PLATFORM="")
-
 customs = ["custom.py"]
 customs = [os.path.abspath(path) for path in customs]
-
 opts = Variables(customs, ARGUMENTS)
-opts.Add(
-    BoolVariable(
-        key="compiledb",
-        help="Generate compilation DB (`compile_commands.json`) for external tools",
-        default=localEnv.get("compiledb", False),
-    )
-)
-opts.Add(
-    PathVariable(
-        key="compiledb_file",
-        help="Path to a custom `compile_commands.json` file",
-        default=localEnv.get("compiledb_file", "compile_commands.json"),
-        validator=validate_parent_dir,
-    )
-)
+# example:
+# opts.Add(
+#     BoolVariable(
+#         key="compiledb",
+#         help="Generate compilation DB (`compile_commands.json`) for external tools",
+#         default=env.get("compiledb", False),
+#     )
+# )
 opts.Update(localEnv)
-
 Help(opts.GenerateHelpText(localEnv))
 
+# =================================================================================
+# 拷贝godot-cpp构建, 并与其共享env
 env = localEnv.Clone()
-env["compiledb"] = False
-
-env.Tool("compilation_db")
-compilation_db = env.CompilationDatabase(
-    normalize_path(localEnv["compiledb_file"], localEnv)
-)
-env.Alias("compiledb", compilation_db)
-
 env = SConscript("../../godot-cpp/SConstruct", {"env": env, "customs": customs})
 
+# =================================================================================
+# 自定义methods
+import SConstruct_compiler_warning
+# example: 
+# env.__class__.disable_warnings = SConstruct_compiler_warning.disable_warnings
+
+# =================================================================================
 # 添加include path
 env.Append(CPPPATH=["."])
-env.Append(CPPPATH=["./thirdpart/glfw/include"])
+env.Append(CPPPATH=["./thirdparty/glfw/include"])
 
-# 添加库依赖
+# =================================================================================
+# 编译'game_gdextension'目录下所有.cpp文件
+sources = []
+for root, dirs, files in os.walk('.'):
+    dirs[:] = [d for d in dirs if d != 'thirdparty'] # 排除thirdparty文件夹
+    for f in files:
+        if f.endswith('.cpp'):
+            sources.append(root + '/' + f)
+
+# =================================================================================
+# compiler warnings
+# FIXME: https://github.com/godotengine/godot-cpp/pull/1007
+opts.Add(EnumVariable("warnings", "Level of compilation warnings", "all", ("extra", "all", "moderate", "no")))
+opts.Add(BoolVariable("werror", "Treat compiler warnings as errors", False))
+opts.Update(env)
+SConstruct_compiler_warning.set_compiler_warnings(env)
+
+# =================================================================================
+# doc
+# if env["target"] in ["editor", "template_debug"]:
+#     try:
+#         doc_data = env.GodotCPPDocData("gen/doc_data.gen.cpp", source=Glob("doc_classes/*.xml"))
+#         sources.append(doc_data)
+#     except AttributeError:
+#         print("Not including class reference as we're targeting a pre-4.3 baseline.")
+
+# =================================================================================
+# thirdparty 
+# 注: 第三方库随着脚本一起编译 没有编译成库 所以没法设置warning等级等
+Export("env")
+env.thirdparty_sources = []
+SConscript("thirdparty/imgui/SCsub")
+
 if env["platform"] == "windows":
     # glfw3、opengl32
-    env.Append(LIBS = ["glfw3"], LIBPATH = ["./thirdpart/glfw/lib"])
+    env.Append(LIBS = ["glfw3"], LIBPATH = ["./thirdparty/glfw/lib"])
     env.Append(LIBS = ["opengl32.lib"])
     env.Append(LIBS = ["msvcrt.lib"])
     env.Append(LIBS = ["gdi32.lib"])
@@ -68,24 +84,22 @@ elif env["platform"] == "linux":
     env.Append(LIBS = ["glfw3.a"])
     env.Append(LIBS = ["GL.so"])
 
-# 编译'game_gdextension'目录下所有.cpp文件
-sources = []
-for root, dirs, files in os.walk('.'):
-    for f in files:
-        if f.endswith('.cpp'):
-            sources.append(root + '/' + f)
-
+# =================================================================================
+# library
 file = "{}{}{}".format(libname, env["suffix"], env["SHLIBSUFFIX"])
+
+# macos/ios
+# if env["platform"] == "macos" or env["platform"] == "ios":
+#     platlibname = "{}.{}.{}".format(libname, env["platform"], env["target"])
+#     file = "{}.framework/{}".format(env["platform"], platlibname, platlibname)
 
 libraryfile = "bin/{}/{}".format(env["platform"], file)
 library = env.SharedLibrary(
     libraryfile,
-    source=sources,
+    source=sources + env.thirdparty_sources,
 )
 
 copy = env.InstallAs("{}/bin/{}/{}".format(projectdir, env["platform"], file), library)
 
 default_args = [library, copy]
-if localEnv.get("compiledb", False):
-    default_args += [compilation_db]
-Default(*default_args)
+env.Default(*default_args)
