@@ -1,13 +1,21 @@
+# 头文件include
 ---
 Diagnostics:
   UnusedIncludes: Strict
   MissingIncludes: Strict
 ...
 
+# 错误太多停止
+---
+CompileFlags:
+  Add: -ferror-limit=0
+...
+
+# 增加额外的编辑期warning(非编译期的warning)
 ---
 # FIXME: those disable or not-enable by godot-cpp
 If:
-  PathMatch: ppgame/.*
+  PathMatch: ppgame/.*.cpp
 
 CompileFlags:
   Add: [
