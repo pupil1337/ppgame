@@ -23,6 +23,7 @@
 #include "character/player/state/player_state.h"
 #include "character/player/state/weapon/player_weapon_finite_state_machine_component.h"
 #include "character/player/state/weapon/player_weapon_none.h"
+#include "character/player/state/weapon/sword/player_sword_attack.h"
 #include "framework/component.h"
 #include "fsm/finite_state_machine_component.h"
 #include "fsm/state.h"
@@ -63,6 +64,7 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_CLASS(PlayerAirFallState)
 	GDREGISTER_CLASS(PlayerWeaponFiniteStateMachineComponent)
 	GDREGISTER_CLASS(PlayerWeaponNoneState)
+	GDREGISTER_CLASS(PlayerSwordAttack)
 
 	// world
 	GDREGISTER_CLASS(World)

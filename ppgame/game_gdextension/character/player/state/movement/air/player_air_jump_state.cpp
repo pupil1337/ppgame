@@ -12,7 +12,6 @@
 
 void PlayerAirJumpState::enter() {
 	desire_jump = true;
-
 	play_animation("Jump");
 }
 

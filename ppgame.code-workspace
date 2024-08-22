@@ -40,9 +40,12 @@
 			"**/*.a": true,
 			"**/*.llvm.a": true,
 			"ppgame/game_gdextension/bin": true,
-			"ppgame/project/bin/windows": true
+			"ppgame/project/bin": true
 		},
 		"search.useIgnoreFiles": false,
+		"search.exclude": {
+			"ppgame/game_gdextension/thirdparty": true
+		},
 		// clang-format
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "xaver.clang-format",

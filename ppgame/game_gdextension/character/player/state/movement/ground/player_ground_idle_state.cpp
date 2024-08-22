@@ -19,6 +19,7 @@ StringName PlayerGroundIdleState::on_process(double delta) {
 }
 
 void PlayerGroundIdleState::on_physics_process(double delta) {
+	(void)delta;
 }
 
 void PlayerGroundIdleState::exit() {

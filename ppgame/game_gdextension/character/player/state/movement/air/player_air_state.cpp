@@ -7,6 +7,8 @@
 #include "character/player/state/player_state_condition.h"
 
 StringName PlayerAirState::on_process(double delta) {
+	(void)delta;
+
 	if (condition) {
 		// ground state
 		// idle
@@ -18,5 +20,6 @@ StringName PlayerAirState::on_process(double delta) {
 			return PlayerGroundRunState::get_class_static();
 		}
 	}
+
 	return StringName();
 }

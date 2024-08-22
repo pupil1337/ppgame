@@ -11,6 +11,8 @@
 #include "character/player/state/player_state_condition.h"
 
 StringName PlayerGroundState::on_process(double delta) {
+	(void)delta;
+
 	if (condition) {
 		// air state
 		// down jump
