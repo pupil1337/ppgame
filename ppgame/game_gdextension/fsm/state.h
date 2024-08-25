@@ -23,6 +23,9 @@ public:
 	//! 退出状态
 	virtual void exit() = 0;
 
+	//! 输入
+	virtual StringName on_input(int p_fsm_input, const Variant& p_variant) { return StringName(); }
+
 private:
 	//! 注册状态
 	/*!

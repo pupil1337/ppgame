@@ -20,8 +20,6 @@ public:
 	Sprite2D* get_sprite();
 	//! 获取角色动画播放器
 	AnimationPlayer* get_animation_player();
-	//! 获取角色摄像机
-	Camera2D* get_camera();
 	//! 获取碰撞形状
 	CollisionShape2D* get_collision_shape();
 
@@ -38,7 +36,7 @@ public:
 	virtual void _exit_tree() override;
 
 protected:
-	static void _bind_methods() {};
+	static void _bind_methods(){};
 };
 
 #endif // PLAYER_H

@@ -10,7 +10,9 @@
 #include "utils/math_utils.h"
 
 void PlayerAirFallState::enter() {
-	play_animation("Fall");
+	if (animation_player && !condition->ban_movement_enter_anim) {
+		animation_player->play("Fall");
+	}
 }
 
 StringName PlayerAirFallState::on_process(double delta) {

@@ -9,7 +9,9 @@
 #include "character/player/state/player_state_condition.h"
 
 void PlayerGroundRunState::enter() {
-	play_animation("Run");
+	if (animation_player && !condition->ban_movement_enter_anim) {
+		animation_player->play("Run");
+	}
 }
 
 StringName PlayerGroundRunState::on_process(double delta) {

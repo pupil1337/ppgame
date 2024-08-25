@@ -6,7 +6,9 @@
 #include "character/player/state/player_state_condition.h"
 
 void PlayerGroundIdleState::enter() {
-	play_animation("Idle");
+	if (animation_player && !condition->ban_movement_enter_anim) {
+		animation_player->play("Idle");
+	}
 }
 
 StringName PlayerGroundIdleState::on_process(double delta) {

@@ -1,10 +1,9 @@
 #ifndef PLAYER_STATE_H
 #define PLAYER_STATE_H
 
+#include <godot_cpp/classes/animation_player.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
-#include <godot_cpp/variant/string.hpp>
 #include <godot_cpp/variant/string_name.hpp>
-#include <godot_cpp/variant/vector2.hpp>
 using namespace godot;
 
 #include "fsm/state.h"
@@ -20,18 +19,13 @@ class PlayerState : public State {
 	friend PlayerFiniteStateMachineComponent;
 
 protected:
-	Player* player = nullptr; //!< 角色
-	const PlayerStateCondition* condition = nullptr; //!< 状态条件
+	virtual void on_animation_finished(const StringName& p_anim_name) {}
 
 protected:
-	//! 播放动画
-	/*!
-	 * \param p_name 动画名
-	 * \param p_custom_blend 自定义混合时间
-	 * \param p_custom_speed 自定义播放速度
-	 * \param p_from_end 是否倒着播放
-	 */
-	void play_animation(const StringName& p_name = String(), double p_custom_blend = -1, double p_custom_speed = 1.0, bool p_from_end = false);
+	Player* player = nullptr; //!< 角色
+	AnimationPlayer* animation_player = nullptr; //!< 动画播放器
+	PlayerFiniteStateMachineComponent* player_fsm_component = nullptr; //!< 状态机组件
+	const PlayerStateCondition* condition = nullptr; //!< 状态条件
 
 public:
 	PlayerState() {}

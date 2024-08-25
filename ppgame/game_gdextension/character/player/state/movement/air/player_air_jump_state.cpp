@@ -12,7 +12,9 @@
 
 void PlayerAirJumpState::enter() {
 	desire_jump = true;
-	play_animation("Jump");
+	if (animation_player && !condition->ban_movement_enter_anim) {
+		animation_player->play("Jump");
+	}
 }
 
 StringName PlayerAirJumpState::on_process(double delta) {

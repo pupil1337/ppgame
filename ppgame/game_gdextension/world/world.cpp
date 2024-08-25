@@ -20,6 +20,8 @@
 
 #include "async_loader/async_loader.h"
 #include "character/player/player.h"
+#include "character/player/player_finite_state_machine_component.h"
+#include "character/player/state/player_fsm_input_types.h"
 #include "gm/gm.h"
 #include "level/level.h"
 #include "utils/debug_draw_utils.h"
@@ -53,13 +55,18 @@ void World::_notification(int p_what) {
 
 void World::_enter_tree() {
 	parent_type::_enter_tree();
+
+	if (!Engine::get_singleton()->is_editor_hint()) {
+		player = Object::cast_to<Player>(AsyncLoader::get_singleton()->instance("res://character/player/player.tscn"));
+		add_child(player);
+	}
 }
 
 void World::_ready() {
 	parent_type::_ready();
 
 	if (!Engine::get_singleton()->is_editor_hint()) {
-		player = Object::cast_to<Player>(AsyncLoader::get_singleton()->instance("res://character/player/player.tscn"));
+		remove_child(player);
 		change_level("res://level/level_0.tscn", "PlayerStart0");
 	}
 }
@@ -86,6 +93,12 @@ void World::change_level(const String& p_level, const String& p_player_start) {
 
 void World::_change_level_implement(Node* p_node, const String& p_player_start) {
 	if (Level* level = Object::cast_to<Level>(p_node)) {
+		// 传送前处理 --------------------------------------
+		// player状态改变
+		if (PlayerFiniteStateMachineComponent* player_fsm_component = player->get_component<PlayerFiniteStateMachineComponent>()) {
+			player_fsm_component->on_input(PlayerFSMInput::To_Movement_None_State, 1);
+			player_fsm_component->on_input(PlayerFSMInput::To_Weapon_None_State, 1);
+		}
 		// 删除当前关卡
 		if (curr_level) {
 			curr_level->remove_child(player);
@@ -94,6 +107,7 @@ void World::_change_level_implement(Node* p_node, const String& p_player_start) 
 			curr_level->queue_free();
 		}
 
+		// 传送 ------------------------------------------
 		// 切换关卡
 		curr_level = level;
 		add_child(curr_level);
@@ -106,5 +120,12 @@ void World::_change_level_implement(Node* p_node, const String& p_player_start) 
 		PhysicsServer2D::get_singleton()->body_set_mode(player->get_rid(), PhysicsServer2D::BODY_MODE_STATIC);
 		PhysicsServer2D::get_singleton()->body_set_state(player->get_rid(), PhysicsServer2D::BODY_STATE_TRANSFORM, player_start_x);
 		PhysicsServer2D::get_singleton()->body_set_mode(player->get_rid(), PhysicsServer2D::BODY_MODE_KINEMATIC);
+
+		// 传送后处理 --------------------------------------
+		// player状态改变
+		if (PlayerFiniteStateMachineComponent* player_fsm_component = player->get_component<PlayerFiniteStateMachineComponent>()) {
+			player_fsm_component->on_input(PlayerFSMInput::To_Movement_None_State, -1);
+			player_fsm_component->on_input(PlayerFSMInput::To_Weapon_None_State, -1);
+		}
 	}
 }

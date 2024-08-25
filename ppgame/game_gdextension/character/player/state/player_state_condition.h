@@ -18,6 +18,12 @@ struct PlayerStateCondition {
 	bool just_pressed_jump = false; //!< 刚刚输入jump
 	bool just_pressed_attack = false; //!< 刚刚输入attack
 
+	// state mutex
+	int movement_none_state = 0; //!< 到MovementNoneState
+	int weapon_none_state = 0; //!< 到WeaponNoneState
+	int ban_movement_enter_anim = 0; //!< 禁用进入移动时播放动画
+	int ban_movement_input = 0; //!< 禁用移动输入
+
 	// ------------------------------------------
 	// physics
 	// ------------------------------------------

@@ -415,7 +415,7 @@ player_movement_fsm = NodePath("PlayerMovementFiniteStateMachineComponent")
 player_weapon_fsm = NodePath("PlayerWeaponFiniteStateMachineComponent")
 
 [node name="PlayerMovementFiniteStateMachineComponent" type="PlayerMovementFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent" node_paths=PackedStringArray("default_state")]
-default_state = NodePath("Ground/Idle")
+default_state = NodePath("None")
 
 [node name="Ground" type="Node" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
 
@@ -429,10 +429,16 @@ default_state = NodePath("Ground/Idle")
 
 [node name="Fall" type="PlayerAirFallState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Air"]
 
+[node name="None" type="PlayerMovementNoneState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
+
 [node name="PlayerWeaponFiniteStateMachineComponent" type="PlayerWeaponFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent" node_paths=PackedStringArray("default_state")]
 default_state = NodePath("None")
 
 [node name="None" type="PlayerWeaponNoneState" parent="PlayerFiniteStateMachineComponent/PlayerWeaponFiniteStateMachineComponent"]
+
+[node name="Sword" type="Node" parent="PlayerFiniteStateMachineComponent/PlayerWeaponFiniteStateMachineComponent"]
+
+[node name="PlayerSwordAttack" type="PlayerSwordAttack" parent="PlayerFiniteStateMachineComponent/PlayerWeaponFiniteStateMachineComponent/Sword"]
 
 [node name="PlayerInputComponent" type="PlayerInputComponent" parent="."]
 
