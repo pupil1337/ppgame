@@ -52,9 +52,7 @@
 		// clangd
 		"C_Cpp.intelliSenseEngine": "disabled",
 		"clangd.arguments": [
-			"--compile-commands-dir=${workspaceFolder}",
-			"--background-index",
-			"--clang-tidy",
+			// 参考: clangd --help or https://github.com/llvm/llvm-project/blob/main/clang-tools-extra/clangd/tool/ClangdMain.cpp
 			"--header-insertion=iwyu"
 		],
 		// ppgame-vscode-extension
