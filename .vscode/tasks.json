@@ -91,43 +91,30 @@
 			"hide": true,
 			"problemMatcher": []
 		},
-		// copy extension extension_api.json
+		// copy extension header and API
 		{
-			"label": "copy extension_api.json",
+			"label": "copy extension_api.json and gdextension_interface.h",
 			"type": "shell",
 
 			"windows": {
-				"command": "copy"
+				"command": "copy",
+				"args": [
+					"${workspaceFolder}/godot/bin/extension_api.json",
+					",",
+					"${workspaceFolder}/godot/bin/gdextension_interface.h",
+					"${workspaceFolder}/godot-cpp/gdextension"
+				]
 			},
 
 			"linux": {
-				"command": "cp"
+				"command": "cp",
+				"args": [
+					"${workspaceFolder}/godot/bin/extension_api.json",
+					"${workspaceFolder}/godot/bin/gdextension_interface.h",
+					"${workspaceFolder}/godot-cpp/gdextension"
+				]
 			},
 
-			"args": [
-				"${workspaceFolder}/godot/bin/extension_api.json",
-				"${workspaceFolder}/godot-cpp/gdextension"
-			],
-			"hide": true,
-			"problemMatcher": []
-		},
-		// copy extension gdextension_interface.h
-		{
-			"label": "copy gdextension_interface.h",
-			"type": "shell",
-
-			"windows": {
-				"command": "copy"
-			},
-
-			"linux": {
-				"command": "cp"
-			},
-
-			"args": [
-				"${workspaceFolder}/godot/bin/gdextension_interface.h",
-				"${workspaceFolder}/godot-cpp/gdextension"
-			],
 			"hide": true,
 			"problemMatcher": []
 		},
@@ -137,8 +124,7 @@
 			"dependsOrder": "sequence",
 			"dependsOn": [
 				"generate gdextension api",
-				"copy extension_api.json",
-				"copy gdextension_interface.h"
+				"copy extension_api.json and gdextension_interface.h"
 			],
 			"problemMatcher": []
 		},

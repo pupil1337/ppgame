@@ -7,6 +7,7 @@ using namespace godot;
 
 #include "character/player/state/player_state.h"
 
+//! 移动状态None
 class PlayerMovementNoneState : public PlayerState {
 	GDCLASS(PlayerMovementNoneState, PlayerState)
 
