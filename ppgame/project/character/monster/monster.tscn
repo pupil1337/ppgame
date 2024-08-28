@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc7fyjssvfwo3"]
+
+[ext_resource type="Texture2D" uid="uid://b3r3s2u73k78r" path="res://icon.svg" id="1_4o1nx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yh5i1"]
+
+[node name="Monster" type="Monster" node_paths=PackedStringArray("nav_agent")]
+nav_agent = NodePath("NavigationAgent2D")
+collision_layer = 8
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yh5i1")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_4o1nx")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

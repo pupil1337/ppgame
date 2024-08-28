@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://b0f7fw7yb6fyn"]
+[gd_scene load_steps=12 format=4 uid="uid://b0f7fw7yb6fyn"]
 
 [ext_resource type="TileSet" uid="uid://bf4ihtt8jh5e7" path="res://level/tile_set.tres" id="1_7xh4g"]
 [ext_resource type="PackedScene" uid="uid://cub0ekyo2vrbf" path="res://level/air_wall.tscn" id="3_cwmwo"]
 [ext_resource type="PackedScene" uid="uid://bbqlbaokh6put" path="res://level/door.tscn" id="3_pm8h4"]
 [ext_resource type="PackedScene" uid="uid://bxewgbjp2m03f" path="res://level/player_start.tscn" id="4_44y7o"]
+[ext_resource type="PackedScene" uid="uid://dc7fyjssvfwo3" path="res://character/monster/monster.tscn" id="5_nlcp0"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ciil6"]
 b = Vector2(0, 400)
@@ -21,6 +22,11 @@ size = Vector2(8, 400)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0evob"]
 size = Vector2(62, 20)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_jt016"]
+vertices = PackedVector2Array(1621.07, 391.992, 10.9688, 391, 10.0234, 8.99219, 1623.92, 8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, -1, 1, 401, 1631, 402, 1634, -2)])
 
 [node name="Level_0" type="Level"]
 metadata/_edit_lock_ = true
@@ -83,6 +89,12 @@ collision_mask = 0
 position = Vector2(411, 370)
 shape = SubResource("RectangleShape2D_0evob")
 one_way_collision = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_jt016")
+
+[node name="Monster" parent="." instance=ExtResource("5_nlcp0")]
+position = Vector2(564, 155)
 
 [editable path="AirWallL"]
 [editable path="AirWallR"]

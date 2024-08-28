@@ -3,6 +3,7 @@
 
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
+#include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/templates/vector.hpp>
 #include <godot_cpp/variant/string.hpp>
 using namespace godot;
@@ -31,6 +32,8 @@ public:
 	 * \param p_player_start 关卡中角色生成点
 	 */
 	void change_level(const String& p_level, const String& p_player_start);
+
+	_FORCE_INLINE_ Player* get_player() { return player; }
 
 private:
 	//! 切换关卡的具体实现

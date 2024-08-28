@@ -8,6 +8,7 @@
 #include "async_loader/async_loader.h"
 #include "async_loader/scene_instancer.h"
 #include "async_loader/scene_loader.h"
+#include "character/monster/monster.h"
 #include "character/player/player.h"
 #include "character/player/player_camera_component.h"
 #include "character/player/player_finite_state_machine_component.h"
@@ -67,6 +68,9 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_CLASS(PlayerWeaponFiniteStateMachineComponent)
 	GDREGISTER_CLASS(PlayerWeaponNoneState)
 	GDREGISTER_CLASS(PlayerSwordAttack)
+
+	// monster
+	GDREGISTER_CLASS(Monster)
 
 	// world
 	GDREGISTER_CLASS(World)

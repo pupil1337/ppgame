@@ -415,7 +415,7 @@ player_movement_fsm = NodePath("PlayerMovementFiniteStateMachineComponent")
 player_weapon_fsm = NodePath("PlayerWeaponFiniteStateMachineComponent")
 
 [node name="PlayerMovementFiniteStateMachineComponent" type="PlayerMovementFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent" node_paths=PackedStringArray("default_state")]
-default_state = NodePath("None")
+default_state = NodePath("Ground/Idle")
 
 [node name="Ground" type="Node" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
 
