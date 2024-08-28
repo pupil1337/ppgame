@@ -38,6 +38,12 @@ void PlayerMovementFiniteStateMachineComponent::on_input(int p_fsm_input, const 
 			_change_state(PlayerGroundIdleState::get_class_static());
 		} break;
 
+		case PlayerFSMInput::Ban_Movement_Input: {
+			if (player_fsm_component) {
+				player_fsm_component->condition_add_ban_movement_input(p_variant);
+			}
+		} break;
+
 		default:
 			break;
 	}

@@ -12,11 +12,11 @@ StringName PlayerAirState::on_process(double delta) {
 	if (condition) {
 		// ground state
 		// idle
-		if (condition->on_ground && condition->input_sign_x == 0 && condition->velocity.x == 0.0) {
+		if (condition->on_ground && (condition->ban_movement_input || condition->input_sign_x == 0) && condition->velocity.x == 0.0) {
 			return PlayerGroundIdleState::get_class_static();
 		}
 		// run
-		if (condition->on_ground && (condition->input_sign_x != 0 || condition->velocity.x != 0.0)) {
+		if (condition->on_ground && ((!condition->ban_movement_input && condition->input_sign_x != 0) || condition->velocity.x != 0.0)) {
 			return PlayerGroundRunState::get_class_static();
 		}
 	}

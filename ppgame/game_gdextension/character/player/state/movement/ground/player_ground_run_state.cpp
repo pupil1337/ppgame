@@ -16,7 +16,7 @@ void PlayerGroundRunState::enter() {
 
 StringName PlayerGroundRunState::on_process(double delta) {
 	// idle
-	if (condition->on_ground && condition->input_sign_x == 0 && condition->velocity.x == 0.0) {
+	if (condition->on_ground && (condition->ban_movement_input || condition->input_sign_x == 0) && condition->velocity.x == 0.0) {
 		return PlayerGroundIdleState::get_class_static();
 	}
 
@@ -28,7 +28,7 @@ void PlayerGroundRunState::on_physics_process(double delta) {
 		if (PlayerMovementComponent* player_movement_component = player->get_component<PlayerMovementComponent>()) {
 			player_movement_component->input_move(delta,
 					condition->velocity,
-					condition->input_sign_x,
+					condition->ban_movement_input ? 0 : condition->input_sign_x,
 					player_movement_component->get_walk_acceleration(),
 					player_movement_component->get_walk_deceleration(),
 					player_movement_component->get_walk_turn_speed(),

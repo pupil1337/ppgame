@@ -17,7 +17,7 @@ void PlayerAirFallState::enter() {
 
 StringName PlayerAirFallState::on_process(double delta) {
 	// jump
-	if (condition->just_pressed_jump && condition->can_jump) {
+	if (!condition->ban_movement_input && condition->just_pressed_jump && condition->can_jump) {
 		return PlayerAirJumpState::get_class_static();
 	}
 
@@ -31,7 +31,7 @@ void PlayerAirFallState::on_physics_process(double delta) {
 			player_movement_component->input_move(
 					delta,
 					condition->velocity,
-					condition->input_sign_x,
+					condition->ban_movement_input ? 0 : condition->input_sign_x,
 					player_movement_component->get_walk_acceleration(),
 					player_movement_component->get_walk_acceleration(),
 					player_movement_component->get_walk_turn_speed(),

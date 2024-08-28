@@ -45,7 +45,11 @@ class PlayerWeaponFiniteStateMachineComponent;
 class PlayerFiniteStateMachineComponent : public Component {
 	GDCLASS(PlayerFiniteStateMachineComponent, Component)
 
+	friend PlayerMovementFiniteStateMachineComponent;
+	friend PlayerWeaponFiniteStateMachineComponent;
+
 public:
+	//! 状态机输入
 	void on_input(PlayerFSMInput p_fsm_input, const Variant& p_variant);
 
 private:
@@ -57,7 +61,7 @@ private:
 	//! 动画结束信号
 	void _animation_finished(const StringName& p_anim_name);
 
-public:
+private:
 	//! 更新进入MovementNoneState
 	void condition_add_movement_none_state(int p_count);
 	//! 更新进入WeaponNoneState

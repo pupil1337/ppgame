@@ -13,6 +13,7 @@ void PlayerSwordAttack::enter() {
 
 	if (player_fsm_component) {
 		player_fsm_component->on_input(PlayerFSMInput::Ban_Movement_Enter_Anim, 1);
+		player_fsm_component->on_input(PlayerFSMInput::Ban_Movement_Input, 1);
 	}
 }
 
@@ -37,6 +38,7 @@ StringName PlayerSwordAttack::on_input(int p_fsm_input, const Variant& p_variant
 void PlayerSwordAttack::exit() {
 	if (player_fsm_component) {
 		player_fsm_component->on_input(PlayerFSMInput::Ban_Movement_Enter_Anim, -1);
+		player_fsm_component->on_input(PlayerFSMInput::Ban_Movement_Input, -1);
 		player_fsm_component->on_input(PlayerFSMInput::Reset_Movement_To_Idle, nullptr);
 	}
 }

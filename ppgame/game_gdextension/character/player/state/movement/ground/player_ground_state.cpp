@@ -16,7 +16,7 @@ StringName PlayerGroundState::on_process(double delta) {
 	if (condition) {
 		// air state
 		// down jump
-		if (condition->input_sign_y > 0 && condition->just_pressed_jump) {
+		if (!condition->ban_movement_input && condition->input_sign_y > 0 && condition->just_pressed_jump) {
 			if (PlayerMovementComponent* player_movement_component = player->get_component<PlayerMovementComponent>()) {
 				if (player_movement_component->down_jump()) {
 					return PlayerAirFallState::get_class_static();
@@ -24,7 +24,7 @@ StringName PlayerGroundState::on_process(double delta) {
 			}
 		}
 		// jump
-		if (condition->just_pressed_jump && condition->can_jump) {
+		if (!condition->ban_movement_input && condition->just_pressed_jump && condition->can_jump) {
 			return PlayerAirJumpState::get_class_static();
 		}
 		// fall

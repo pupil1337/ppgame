@@ -13,7 +13,7 @@ void PlayerGroundIdleState::enter() {
 
 StringName PlayerGroundIdleState::on_process(double delta) {
 	// run
-	if (condition->on_ground && condition->input_sign_x != 0.0) {
+	if (condition->on_ground && !condition->ban_movement_input && condition->input_sign_x != 0.0) {
 		return PlayerGroundRunState::get_class_static();
 	}
 

@@ -5,6 +5,5 @@
 void PlayerMovementNoneState::enter() {
 	if (player) {
 		player->set_velocity({ 0.0, 0.0 });
-		player->move_and_slide();
 	}
 }
