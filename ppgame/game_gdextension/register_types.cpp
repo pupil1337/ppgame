@@ -33,6 +33,7 @@
 #include "level/door.h"
 #include "level/level.h"
 #include "utils/debug_draw_utils.h"
+#include "utils/debug_test_node.h"
 #include "utils/input_string_names.h"
 #include "world/world.h"
 
@@ -89,6 +90,7 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 
 	// utils
 	GDREGISTER_CLASS(DebugDrawUtils)
+	GDREGISTER_CLASS(DebugTestNode)
 }
 
 void uninitialize_game_gdextension_types(ModuleInitializationLevel p_level) {
