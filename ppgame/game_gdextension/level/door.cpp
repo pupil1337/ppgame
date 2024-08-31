@@ -89,10 +89,10 @@ void Door::_bind_methods() {
 	// link_level_path
 	ClassDB::bind_method(D_METHOD(_STR(set_link_level_path), _STR(link_level_path)), &self_type::set_link_level_path);
 	ClassDB::bind_method(D_METHOD(_STR(get_link_level_path)), &self_type::get_link_level_path);
-	ADD_PROPERTY(PropertyInfo(Variant::STRING, _STR(link_level_path)), _STR(set_link_level_path), _STR(get_link_level_path));
+	ADD_PROPERTY(PropertyInfo(Variant::Type::STRING, _STR(link_level_path)), _STR(set_link_level_path), _STR(get_link_level_path));
 
 	// link_level_player_start_name
 	ClassDB::bind_method(D_METHOD(_STR(set_link_level_player_start_name), _STR(link_level_player_start_name)), &self_type::set_link_level_player_start_name);
 	ClassDB::bind_method(D_METHOD(_STR(get_link_level_player_start_name)), &self_type::get_link_level_player_start_name);
-	ADD_PROPERTY(PropertyInfo(Variant::STRING, _STR(link_level_player_start_name)), _STR(set_link_level_player_start_name), _STR(get_link_level_player_start_name));
+	ADD_PROPERTY(PropertyInfo(Variant::Type::STRING, _STR(link_level_player_start_name)), _STR(set_link_level_player_start_name), _STR(get_link_level_player_start_name));
 }

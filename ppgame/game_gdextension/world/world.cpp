@@ -38,6 +38,8 @@ void World::_notification(int p_what) {
 				gm = memnew(GM);
 			} break;
 			case NOTIFICATION_SCENE_INSTANTIATED: {
+				// 在PackedScene::instantiate()中会调用_add_child_nocheck(), instantiate()结束后会立即调用此notify
+				// 所以在此notify中add_child()即可
 				debug_draw_utils = memnew(DebugDrawUtils);
 				add_child(debug_draw_utils);
 			} break;

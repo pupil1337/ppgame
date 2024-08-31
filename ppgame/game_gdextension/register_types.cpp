@@ -22,6 +22,7 @@
 #include "character/player/state/movement/ground/player_ground_state.h"
 #include "character/player/state/movement/player_movement_finite_state_machine_component.h"
 #include "character/player/state/movement/player_movement_none_state.h"
+#include "character/player/state/player_finite_state_machine_base_component.h"
 #include "character/player/state/player_state.h"
 #include "character/player/state/weapon/player_weapon_finite_state_machine_component.h"
 #include "character/player/state/weapon/player_weapon_none_state.h"
@@ -58,6 +59,7 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_CLASS(PlayerCameraComponent)
 	GDREGISTER_CLASS(PlayerFiniteStateMachineComponent)
 	GDREGISTER_ABSTRACT_CLASS(PlayerState)
+	GDREGISTER_ABSTRACT_CLASS(PlayerFiniteStateMachineBaseComponent)
 	GDREGISTER_CLASS(PlayerMovementFiniteStateMachineComponent)
 	GDREGISTER_CLASS(PlayerMovementNoneState)
 	GDREGISTER_ABSTRACT_CLASS(PlayerGroundState)

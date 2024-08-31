@@ -410,12 +410,12 @@ autoplay = "Idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="PlayerFiniteStateMachineComponent" type="PlayerFiniteStateMachineComponent" parent="." node_paths=PackedStringArray("player_movement_fsm", "player_weapon_fsm")]
-player_movement_fsm = NodePath("PlayerMovementFiniteStateMachineComponent")
-player_weapon_fsm = NodePath("PlayerWeaponFiniteStateMachineComponent")
+[node name="PlayerFiniteStateMachineComponent" type="PlayerFiniteStateMachineComponent" parent="."]
 
 [node name="PlayerMovementFiniteStateMachineComponent" type="PlayerMovementFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent" node_paths=PackedStringArray("default_state")]
 default_state = NodePath("Ground/Idle")
+
+[node name="None" type="PlayerMovementNoneState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
 
 [node name="Ground" type="Node" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
 
@@ -428,8 +428,6 @@ default_state = NodePath("Ground/Idle")
 [node name="Jump" type="PlayerAirJumpState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Air"]
 
 [node name="Fall" type="PlayerAirFallState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Air"]
-
-[node name="None" type="PlayerMovementNoneState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
 
 [node name="PlayerWeaponFiniteStateMachineComponent" type="PlayerWeaponFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent" node_paths=PackedStringArray("default_state")]
 default_state = NodePath("None")

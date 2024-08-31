@@ -5,26 +5,17 @@
 #include <godot_cpp/variant/variant.hpp>
 using namespace godot;
 
-#include "fsm/finite_state_machine_component.h"
-
-class PlayerFiniteStateMachineComponent;
-struct PlayerStateCondition;
+#include "character/player/state/player_finite_state_machine_base_component.h"
 
 //! 角色武器状态机
-class PlayerWeaponFiniteStateMachineComponent : public FiniteStateMachineComponent {
-	GDCLASS(PlayerWeaponFiniteStateMachineComponent, FiniteStateMachineComponent)
-
-	friend PlayerFiniteStateMachineComponent;
+class PlayerWeaponFiniteStateMachineComponent : public PlayerFiniteStateMachineBaseComponent {
+	GDCLASS(PlayerWeaponFiniteStateMachineComponent, PlayerFiniteStateMachineBaseComponent)
 
 public:
 	virtual void on_input(int p_fsm_input, const Variant& p_variant) override;
 
 public:
 	PlayerWeaponFiniteStateMachineComponent() {}
-
-protected:
-	const PlayerStateCondition* condition = nullptr; //!< 状态条件
-	PlayerFiniteStateMachineComponent* player_fsm_component = nullptr; //!< 状态机组件
 
 	// ------------------------------------------
 

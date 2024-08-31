@@ -1,10 +1,6 @@
 #include "finite_state_machine_component.h"
 
 #include <godot_cpp/classes/global_constants.hpp>
-#include <godot_cpp/classes/input_event.hpp>
-#include <godot_cpp/classes/node.hpp>
-#include <godot_cpp/classes/object.hpp>
-#include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/core/error_macros.hpp>
@@ -73,7 +69,7 @@ void FiniteStateMachineComponent::_bind_methods() {
 	// init_state
 	ClassDB::bind_method(D_METHOD(_STR(set_init_state), _STR(state)), &self_type::set_init_state);
 	ClassDB::bind_method(D_METHOD(_STR(get_init_state)), &self_type::get_init_state);
-	ADD_PROPERTY(PropertyInfo(Variant::OBJECT, _STR(default_state), PROPERTY_HINT_NODE_TYPE, "State"), _STR(set_init_state), _STR(get_init_state));
+	ADD_PROPERTY(PropertyInfo(Variant::Type::OBJECT, _STR(default_state), PropertyHint::PROPERTY_HINT_NODE_TYPE, "State"), _STR(set_init_state), _STR(get_init_state));
 }
 
 PackedStringArray FiniteStateMachineComponent::_get_configuration_warnings() const {

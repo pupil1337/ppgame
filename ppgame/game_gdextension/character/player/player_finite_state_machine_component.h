@@ -3,6 +3,7 @@
 
 #include <godot_cpp/classes/animation_player.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
+#include <godot_cpp/templates/vector.hpp>
 #include <godot_cpp/variant/packed_string_array.hpp>
 #include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
@@ -13,6 +14,7 @@ using namespace godot;
 
 class Player;
 class PlayerInputComponent;
+class PlayerFiniteStateMachineBaseComponent;
 class PlayerMovementFiniteStateMachineComponent;
 class PlayerWeaponFiniteStateMachineComponent;
 
@@ -45,6 +47,7 @@ class PlayerWeaponFiniteStateMachineComponent;
 class PlayerFiniteStateMachineComponent : public Component {
 	GDCLASS(PlayerFiniteStateMachineComponent, Component)
 
+	friend PlayerFiniteStateMachineBaseComponent;
 	friend PlayerMovementFiniteStateMachineComponent;
 	friend PlayerWeaponFiniteStateMachineComponent;
 
@@ -80,16 +83,9 @@ private:
 	AnimationPlayer* animation_player = nullptr; //!< 角色-动画播放器
 
 	PlayerStateCondition condition; //!< 状态条件
-	PlayerMovementFiniteStateMachineComponent* player_movement_fsm = nullptr; //!< 角色-移动状态机
-	PlayerWeaponFiniteStateMachineComponent* player_weapon_fsm = nullptr; //!< 角色-武器状态机
+	Vector<PlayerFiniteStateMachineBaseComponent*> player_fsms; //!< 角色-状态机
 
 	// ------------------------------------------
-
-private:
-	void set_player_movement_fsm(PlayerMovementFiniteStateMachineComponent* p_player_movement_fsm);
-	void set_player_weapon_fsm(PlayerWeaponFiniteStateMachineComponent* p_player_weapon_fsm);
-	PlayerMovementFiniteStateMachineComponent* get_player_movement_fsm();
-	PlayerWeaponFiniteStateMachineComponent* get_player_weapon_fsm();
 
 public:
 	virtual PackedStringArray _get_configuration_warnings() const override;

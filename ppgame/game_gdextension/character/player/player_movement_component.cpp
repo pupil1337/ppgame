@@ -191,22 +191,22 @@ void PlayerMovementComponent::_bind_methods() {
 		// acceleration
 		ClassDB::bind_method(D_METHOD(_STR(set_walk_acceleration), _STR(acceleration)), &self_type::set_walk_acceleration);
 		ClassDB::bind_method(D_METHOD(_STR(get_walk_acceleration)), &self_type::get_walk_acceleration);
-		ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(acceleration)), _STR(set_walk_acceleration), _STR(get_walk_acceleration));
+		ADD_PROPERTY(PropertyInfo(Variant::Type::INT, _STR(acceleration)), _STR(set_walk_acceleration), _STR(get_walk_acceleration));
 
 		// deceleration
 		ClassDB::bind_method(D_METHOD(_STR(set_walk_deceleration), _STR(deceleration)), &self_type::set_walk_deceleration);
 		ClassDB::bind_method(D_METHOD(_STR(get_walk_deceleration)), &self_type::get_walk_deceleration);
-		ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(deceleration)), _STR(set_walk_deceleration), _STR(get_walk_deceleration));
+		ADD_PROPERTY(PropertyInfo(Variant::Type::INT, _STR(deceleration)), _STR(set_walk_deceleration), _STR(get_walk_deceleration));
 
 		// turn_speed
 		ClassDB::bind_method(D_METHOD(_STR(set_walk_turn_speed), _STR(turn_speed)), &self_type::set_walk_turn_speed);
 		ClassDB::bind_method(D_METHOD(_STR(get_walk_turn_speed)), &self_type::get_walk_turn_speed);
-		ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(turn_speed)), _STR(set_walk_turn_speed), _STR(get_walk_turn_speed));
+		ADD_PROPERTY(PropertyInfo(Variant::Type::INT, _STR(turn_speed)), _STR(set_walk_turn_speed), _STR(get_walk_turn_speed));
 
 		// max_speed
 		ClassDB::bind_method(D_METHOD(_STR(set_walk_max_speed), _STR(max_speed)), &self_type::set_walk_max_speed);
 		ClassDB::bind_method(D_METHOD(_STR(get_walk_max_speed)), &self_type::get_walk_max_speed);
-		ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(max_speed)), _STR(set_walk_max_speed), _STR(get_walk_max_speed));
+		ADD_PROPERTY(PropertyInfo(Variant::Type::INT, _STR(max_speed)), _STR(set_walk_max_speed), _STR(get_walk_max_speed));
 	}
 
 	ADD_GROUP("jump", "");
@@ -214,12 +214,12 @@ void PlayerMovementComponent::_bind_methods() {
 		// height
 		ClassDB::bind_method(D_METHOD(_STR(set_jump_height), _STR(height)), &self_type::set_jump_height);
 		ClassDB::bind_method(D_METHOD(_STR(get_jump_height)), &self_type::get_jump_height);
-		ADD_PROPERTY(PropertyInfo(Variant::INT, _STR(height)), _STR(set_jump_height), _STR(get_jump_height));
+		ADD_PROPERTY(PropertyInfo(Variant::Type::INT, _STR(height)), _STR(set_jump_height), _STR(get_jump_height));
 
 		// duration
 		ClassDB::bind_method(D_METHOD(_STR(set_jump_duration), _STR(duration)), &self_type::set_jump_duration);
 		ClassDB::bind_method(D_METHOD(_STR(get_jump_duration)), &self_type::get_jump_duration);
-		ADD_PROPERTY(PropertyInfo(Variant::FLOAT, _STR(duration)), _STR(set_jump_duration), _STR(get_jump_duration));
+		ADD_PROPERTY(PropertyInfo(Variant::Type::FLOAT, _STR(duration)), _STR(set_jump_duration), _STR(get_jump_duration));
 	}
 
 	ADD_GROUP("fall", "");
@@ -227,6 +227,6 @@ void PlayerMovementComponent::_bind_methods() {
 		// gravity_multiplayer
 		ClassDB::bind_method(D_METHOD(_STR(set_fall_gravity_multiplayer), _STR(multiplayer)), &self_type::set_fall_gravity_multiplayer);
 		ClassDB::bind_method(D_METHOD(_STR(get_fall_gravity_multiplayer)), &self_type::get_fall_gravity_multiplayer);
-		ADD_PROPERTY(PropertyInfo(Variant::FLOAT, _STR(gravity_multiplayer)), _STR(set_fall_gravity_multiplayer), _STR(get_fall_gravity_multiplayer));
+		ADD_PROPERTY(PropertyInfo(Variant::Type::FLOAT, _STR(gravity_multiplayer)), _STR(set_fall_gravity_multiplayer), _STR(get_fall_gravity_multiplayer));
 	}
 }

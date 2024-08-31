@@ -48,7 +48,7 @@
 			"// $1",
 			"ClassDB::bind_method(D_METHOD(_STR(set_$1), _STR($1)), &self_type::set_$1);",
 			"ClassDB::bind_method(D_METHOD(_STR(get_$1)), &self_type::get_$1);",
-			"ADD_PROPERTY(PropertyInfo(Variant::$2, _STR($1)$3), _STR(set_$1), _STR(get_$1));"
+			"ADD_PROPERTY(PropertyInfo(Variant::Type::$2, _STR($1)$3), _STR(set_$1), _STR(get_$1));"
 		],
 		"description": "创建property反射绑定"
 	},
