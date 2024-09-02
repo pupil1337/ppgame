@@ -1,10 +1,13 @@
 #include "player_finite_state_machine_component.h"
 
 #include <godot_cpp/classes/engine.hpp>
+#include <godot_cpp/classes/node2d.hpp>
 #include <godot_cpp/classes/object.hpp>
+#include <godot_cpp/classes/shape2d.hpp>
 #include <godot_cpp/core/math.hpp>
 #include <godot_cpp/templates/hash_map.hpp>
 #include <godot_cpp/variant/callable_method_pointer.hpp>
+#include <godot_cpp/variant/color.hpp>
 #include <godot_cpp/variant/packed_string_array.hpp>
 
 #include "character/player/player.h"
@@ -25,6 +28,11 @@ void PlayerFiniteStateMachineComponent::_ready() {
 			if ((animation_player = player->get_animation_player())) {
 				animation_player->connect("animation_finished", callable_mp(this, &self_type::_animation_finished));
 			}
+			if ((player_melee_attack_area = player->get_melee_attack_area())) {
+				player_melee_attack_area->connect("body_entered", callable_mp(this, &self_type ::_body_enter_melee_attack));
+				player_melee_attack_area->connect("body_exited", callable_mp(this, &self_type ::_body_exit_melee_attack));
+			}
+			player_melee_attack_shape = player->get_melee_attack_shape();
 
 			for (int i = 0; i < player_fsms.size(); ++i) {
 				if (player_fsms[i]) {
@@ -33,6 +41,8 @@ void PlayerFiniteStateMachineComponent::_ready() {
 						if (PlayerState* player_state = Object::cast_to<PlayerState>(it->value)) {
 							player_state->player = player;
 							player_state->animation_player = animation_player;
+							player_state->player_melee_attack_area = player_melee_attack_area;
+							player_state->player_melee_attack_shape = player_melee_attack_shape;
 							player_state->player_fsm_component = this;
 							player_state->condition = &condition;
 						}
@@ -43,18 +53,6 @@ void PlayerFiniteStateMachineComponent::_ready() {
 
 		_update_logic_condition();
 		_update_physics_condition();
-	}
-}
-
-void PlayerFiniteStateMachineComponent::_notification(int p_what) {
-	if (!Engine::get_singleton()->is_editor_hint()) {
-		switch (p_what) {
-			case NOTIFICATION_PREDELETE: {
-				if (animation_player) {
-					animation_player->disconnect("animation_finished", callable_mp(this, &self_type::_animation_finished));
-				}
-			} break;
-		}
 	}
 }
 
@@ -138,6 +136,28 @@ void PlayerFiniteStateMachineComponent::_animation_finished(const StringName& p_
 	for (int i = 0; i < player_fsms.size(); ++i) {
 		if (player_fsms[i]) {
 			player_fsms[i]->on_input((int)PlayerFSMInput::Animation_Finished, p_anim_name);
+		}
+	}
+}
+
+void PlayerFiniteStateMachineComponent::_body_enter_melee_attack(Node2D* p_body) {
+	if (player_melee_attack_shape) {
+		player_melee_attack_shape->set_debug_color(Color(1, 0, 0, 0.067));
+	}
+	for (int i = 0; i < player_fsms.size(); ++i) {
+		if (player_fsms[i]) {
+			player_fsms[i]->on_input((int)PlayerFSMInput::Body_Enter_Melee_Attack, p_body);
+		}
+	}
+}
+
+void PlayerFiniteStateMachineComponent::_body_exit_melee_attack(Node2D* p_body) {
+	if (player_melee_attack_shape) {
+		player_melee_attack_shape->set_debug_color(Color(1, 1, 0, 0.067));
+	}
+	for (int i = 0; i < player_fsms.size(); ++i) {
+		if (player_fsms[i]) {
+			player_fsms[i]->on_input((int)PlayerFSMInput::Body_Exit_Melee_Attack, p_body);
 		}
 	}
 }

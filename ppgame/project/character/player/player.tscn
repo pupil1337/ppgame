@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://use87fyg025a"]
+[gd_scene load_steps=20 format=3 uid="uid://use87fyg025a"]
 
 [ext_resource type="Texture2D" uid="uid://cy1o0f1ov1cly" path="res://art/player/Player Idle 48x48.png" id="1_mo6eh"]
 [ext_resource type="Texture2D" uid="uid://dmoxoprpwxur3" path="res://art/player/player jump 48x48.png" id="2_7vmj3"]
@@ -171,6 +171,42 @@ tracks/2/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeleeAttackArea/CollisionShape2D:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, 20)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeleeAttackArea/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MeleeAttackArea/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_nqajv"]
 resource_name = "Run"
@@ -252,6 +288,42 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeleeAttackArea/CollisionShape2D:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(23, 21), Vector2(35, 9), Vector2(27, 40), Vector2(15, 4)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeleeAttackArea/CollisionShape2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-10.5, -7.5), Vector2(-3.5, -13.5), Vector2(15.5, -4), Vector2(16.5, 14)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MeleeAttackArea/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_dt0ff"]
@@ -391,6 +463,8 @@ _data = {
 "Weapon_Run": SubResource("Animation_qqm8p")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gidb5"]
+
 [node name="Player" type="Player"]
 collision_layer = 2
 collision_mask = 5
@@ -412,8 +486,7 @@ autoplay = "Idle"
 
 [node name="PlayerFiniteStateMachineComponent" type="PlayerFiniteStateMachineComponent" parent="."]
 
-[node name="PlayerMovementFiniteStateMachineComponent" type="PlayerMovementFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent" node_paths=PackedStringArray("default_state")]
-default_state = NodePath("Ground/Idle")
+[node name="PlayerMovementFiniteStateMachineComponent" type="PlayerMovementFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent"]
 
 [node name="None" type="PlayerMovementNoneState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
 
@@ -429,8 +502,7 @@ default_state = NodePath("Ground/Idle")
 
 [node name="Fall" type="PlayerAirFallState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Air"]
 
-[node name="PlayerWeaponFiniteStateMachineComponent" type="PlayerWeaponFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent" node_paths=PackedStringArray("default_state")]
-default_state = NodePath("None")
+[node name="PlayerWeaponFiniteStateMachineComponent" type="PlayerWeaponFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent"]
 
 [node name="None" type="PlayerWeaponNoneState" parent="PlayerFiniteStateMachineComponent/PlayerWeaponFiniteStateMachineComponent"]
 
@@ -442,5 +514,14 @@ default_state = NodePath("None")
 
 [node name="PlayerMovementComponent" type="PlayerMovementComponent" parent="."]
 
-[node name="PlayerCameraComponent" type="PlayerCameraComponent" parent="." node_paths=PackedStringArray("camera")]
-camera = NodePath("../Camera2D")
+[node name="PlayerCameraComponent" type="PlayerCameraComponent" parent="."]
+
+[node name="MeleeAttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeAttackArea"]
+position = Vector2(20, 0)
+shape = SubResource("RectangleShape2D_gidb5")
+disabled = true
+debug_color = Color(1, 1, 0, 0.0666667)

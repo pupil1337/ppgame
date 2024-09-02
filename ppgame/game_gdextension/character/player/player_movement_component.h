@@ -2,6 +2,7 @@
 #define PLAYER_MOVEMENT_COMPONENT_H
 
 #include <cstdint>
+#include <godot_cpp/classes/area2d.hpp>
 #include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 #include <godot_cpp/core/defs.hpp>
@@ -58,6 +59,7 @@ public:
 private:
 	Player* player = nullptr; //!< 角色
 	Sprite2D* player_sprite = nullptr; //!< 角色-精灵
+	Area2D* player_melee_attack_area = nullptr; //!< 角色-近战攻击区域
 	bool sprite_face_to_input = true; //!< 精灵朝向输入方向
 
 	//! 步行参数

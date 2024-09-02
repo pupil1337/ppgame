@@ -39,18 +39,18 @@
 					"compiledb=yes",
 					"deprecated=no"
 				],
-				"problemMatcher": "$msCompile"
+				"problemMatcher": []
 			},
 
 			"linux": {
-				"command": "pyston-scons",
+				"command": "scons",
 				"args": [
 					"platform=linuxbsd",
 					"bits=64",
 					"target=editor",
 					"custom_modules=../ppgame/game_module",
 					"use_llvm=yes",
-					"linker=mold",
+					"linker=lld", // in ArchLinxu: Fix `libatomic` https://github.com/godotengine/godot/issues/46375#issuecomment-1373075734
 					"dev_build=yes",
 					"dev_mode=yes",
 					"verbose=no",
@@ -58,7 +58,7 @@
 					"compiledb=yes",
 					"deprecated=no"
 				],
-				"problemMatcher": "$gcc"
+				"problemMatcher": []
 			}
 		},
 
@@ -152,11 +152,11 @@
 					"warnings=extra",
 					"werror=yes"
 				],
-				"problemMatcher": "$msCompile"
+				"problemMatcher": []
 			},
 
 			"linux": {
-				"command": "pyston-scons",
+				"command": "scons",
 				"args": [
 					"platform=linux",
 					"target=editor",
@@ -167,7 +167,7 @@
 					"warnings=extra",
 					"werror=yes"
 				],
-				"problemMatcher": "$gcc"
+				"problemMatcher": []
 			},
 
 			"hide": true

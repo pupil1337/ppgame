@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <godot_cpp/classes/animation_player.hpp>
+#include <godot_cpp/classes/area2d.hpp>
 #include <godot_cpp/classes/camera2d.hpp>
 #include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/collision_shape2d.hpp>
@@ -22,6 +23,10 @@ public:
 	AnimationPlayer* get_animation_player();
 	//! 获取碰撞形状
 	CollisionShape2D* get_collision_shape();
+	//! 获取近战攻击区域
+	Area2D* get_melee_attack_area();
+	//! 获取近战攻击形状
+	CollisionShape2D* get_melee_attack_shape();
 
 public:
 	Player() {}

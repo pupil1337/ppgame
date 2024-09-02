@@ -18,7 +18,7 @@ public:
 	virtual void exit() override;
 
 public:
-	PlayerGroundIdleState() {}
+	PlayerGroundIdleState();
 
 	// ------------------------------------------
 

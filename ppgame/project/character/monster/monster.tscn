@@ -4,10 +4,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yh5i1"]
 
-[node name="Monster" type="Monster" node_paths=PackedStringArray("nav_agent")]
-nav_agent = NodePath("NavigationAgent2D")
+[node name="Monster" type="Monster"]
 collision_layer = 8
-collision_mask = 7
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_yh5i1")

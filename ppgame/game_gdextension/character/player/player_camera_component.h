@@ -1,7 +1,6 @@
 #ifndef PLAYER_CAMERA_COMPONENT_H
 #define PLAYER_CAMERA_COMPONENT_H
 
-#include "godot_cpp/variant/packed_string_array.hpp"
 #include <godot_cpp/classes/camera2d.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 using namespace godot;
@@ -13,23 +12,19 @@ class PlayerCameraComponent : public Component {
 	GDCLASS(PlayerCameraComponent, Component)
 
 public:
-	PlayerCameraComponent() {}
+	//! 获取摄像机
+	Camera2D* get_camera();
 
-private:
-	Camera2D* camera = nullptr; // !< 角色-摄像机
+public:
+	PlayerCameraComponent() {}
 
 	// ------------------------------------------
 
 public:
 	virtual void _enter_tree() override;
-	virtual PackedStringArray _get_configuration_warnings() const override;
-
-private:
-	void set_camera(Camera2D* p_camera);
-	Camera2D* get_camera();
 
 protected:
-	static void _bind_methods();
+	static void _bind_methods() {}
 };
 
 #endif // PLAYER_CAMERA_COMPONENT_H

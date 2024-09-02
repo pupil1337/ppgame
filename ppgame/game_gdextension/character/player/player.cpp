@@ -1,6 +1,7 @@
 #include "player.h"
 
 #include <godot_cpp/classes/animation_player.hpp>
+#include <godot_cpp/classes/area2d.hpp>
 #include <godot_cpp/classes/collision_shape2d.hpp>
 #include <godot_cpp/classes/sprite2d.hpp>
 
@@ -34,4 +35,12 @@ AnimationPlayer* Player::get_animation_player() {
 
 CollisionShape2D* Player::get_collision_shape() {
 	return get_node<CollisionShape2D>("CollisionShape2D");
+}
+
+Area2D* Player::get_melee_attack_area() {
+	return get_node<Area2D>("MeleeAttackArea");
+}
+
+CollisionShape2D* Player::get_melee_attack_shape() {
+	return get_node<CollisionShape2D>("MeleeAttackArea/CollisionShape2D");
 }

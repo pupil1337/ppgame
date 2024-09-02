@@ -1,11 +1,8 @@
 #ifndef FINITE_STATE_MACHINE_COMPONENT_H
 #define FINITE_STATE_MACHINE_COMPONENT_H
 
-#include <godot_cpp/classes/input_event.hpp>
-#include <godot_cpp/classes/ref.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 #include <godot_cpp/templates/hash_map.hpp>
-#include <godot_cpp/variant/packed_string_array.hpp>
 #include <godot_cpp/variant/string_name.hpp>
 #include <godot_cpp/variant/variant.hpp>
 using namespace godot;
@@ -45,15 +42,8 @@ protected:
 
 	// ------------------------------------------
 
-public:
-	virtual PackedStringArray _get_configuration_warnings() const override;
-
-private:
-	void set_init_state(State* p_init_state);
-	State* get_init_state();
-
 protected:
-	static void _bind_methods();
+	static void _bind_methods() {}
 };
 
 #endif // FINITE_STATE_MACHINE_COMPONENT_H

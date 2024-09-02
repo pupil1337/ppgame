@@ -25,10 +25,6 @@ void Door::_notification(int p_what) {
 				connect("body_entered", callable_mp(this, &self_type::_body_entered));
 				connect("body_exited", callable_mp(this, &self_type::_body_exited));
 			} break;
-			case NOTIFICATION_PREDELETE: {
-				disconnect("body_entered", callable_mp(this, &self_type::_body_entered));
-				disconnect("body_exited", callable_mp(this, &self_type::_body_exited));
-			} break;
 		}
 	}
 }

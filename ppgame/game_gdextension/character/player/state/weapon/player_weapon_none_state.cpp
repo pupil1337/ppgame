@@ -5,6 +5,10 @@
 #include "character/player/state/player_state_condition.h"
 #include "sword/player_sword_attack.h"
 
+PlayerWeaponNoneState::PlayerWeaponNoneState() {
+	is_default_state = true;
+}
+
 StringName PlayerWeaponNoneState::on_process(double delta) {
 	(void)delta;
 

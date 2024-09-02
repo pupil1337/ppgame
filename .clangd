@@ -37,18 +37,23 @@ CompileFlags:
 # 额外特殊项
 ---
 # 编辑期warning(非编译期的warning)
-# FIXME: those disable or not-enable by godot-cpp
+# FIXME: those disable by godot-cpp or not-enable
 If:
   PathMatch: ppgame/.*.cpp
 
 CompileFlags:
   Remove: [
+		# disable by godot-cpp
     -Wno-ordered-compare-function-pointers,
     -Wno-unused-parameter
   ]
   Add: [
+		# disable by godot-cpp
     -Wordered-compare-function-pointers,
-    -Wunused-parameter
+    -Wunused-parameter,
+
+		# not-enable
+		-Wunreachable-code
   ]
 ...
 

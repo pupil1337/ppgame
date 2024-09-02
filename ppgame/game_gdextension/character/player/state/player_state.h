@@ -2,6 +2,8 @@
 #define PLAYER_STATE_H
 
 #include <godot_cpp/classes/animation_player.hpp>
+#include <godot_cpp/classes/area2d.hpp>
+#include <godot_cpp/classes/collision_shape2d.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 #include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
@@ -24,6 +26,8 @@ protected:
 protected:
 	Player* player = nullptr; //!< 角色
 	AnimationPlayer* animation_player = nullptr; //!< 动画播放器
+	Area2D* player_melee_attack_area = nullptr; //!< 近战攻击区域
+	CollisionShape2D* player_melee_attack_shape = nullptr; //!< 近战攻击形状
 	PlayerFiniteStateMachineComponent* player_fsm_component = nullptr; //!< 状态机组件
 	const PlayerStateCondition* condition = nullptr; //!< 状态条件
 

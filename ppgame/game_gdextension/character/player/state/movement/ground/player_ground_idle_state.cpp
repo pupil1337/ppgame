@@ -5,6 +5,10 @@
 #include "character/player/state/movement/ground/player_ground_run_state.h"
 #include "character/player/state/player_state_condition.h"
 
+PlayerGroundIdleState::PlayerGroundIdleState() {
+	is_default_state = true;
+}
+
 void PlayerGroundIdleState::enter() {
 	if (animation_player && !condition->ban_movement_enter_anim) {
 		animation_player->play("Idle");

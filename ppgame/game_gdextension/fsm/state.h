@@ -6,12 +6,16 @@
 #include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
 
+class FiniteStateMachineComponent;
+
 //! State类
 /*!
  * 状态机中的状态
  */
 class State : public Node {
 	GDCLASS(State, Node)
+
+	friend FiniteStateMachineComponent;
 
 public:
 	//! 进入状态
@@ -38,6 +42,9 @@ private:
 
 public:
 	State() {}
+
+protected:
+	bool is_default_state = false; // !< 是否是默认状态
 
 	// ------------------------------------------
 

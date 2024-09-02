@@ -2,6 +2,9 @@
 #define PLAYER_FINITE_STATE_MACHINE_COMPONENT_H
 
 #include <godot_cpp/classes/animation_player.hpp>
+#include <godot_cpp/classes/area2d.hpp>
+#include <godot_cpp/classes/collision_shape2d.hpp>
+#include <godot_cpp/classes/node2d.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 #include <godot_cpp/templates/vector.hpp>
 #include <godot_cpp/variant/packed_string_array.hpp>
@@ -63,6 +66,10 @@ private:
 
 	//! 动画结束信号
 	void _animation_finished(const StringName& p_anim_name);
+	//! 实体进入近战攻击区域
+	void _body_enter_melee_attack(Node2D* p_body);
+	//! 实体退出近战攻击区域
+	void _body_exit_melee_attack(Node2D* p_body);
 
 private:
 	//! 更新进入MovementNoneState
@@ -81,7 +88,8 @@ private:
 	Player* player = nullptr; //!< 角色
 	PlayerInputComponent* player_input_component = nullptr; //!< 角色-输入组件
 	AnimationPlayer* animation_player = nullptr; //!< 角色-动画播放器
-
+	Area2D* player_melee_attack_area = nullptr; //!< 角色-近战攻击区域
+	CollisionShape2D* player_melee_attack_shape = nullptr; //!< 角色-近战攻击形状
 	PlayerStateCondition condition; //!< 状态条件
 	Vector<PlayerFiniteStateMachineBaseComponent*> player_fsms; //!< 角色-状态机
 
@@ -95,7 +103,6 @@ public:
 
 protected:
 	static void _bind_methods();
-	void _notification(int p_what);
 };
 
 #endif // PLAYER_FINITE_STATE_MACHINE_COMPONENT_H

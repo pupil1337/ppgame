@@ -32,6 +32,7 @@ void PlayerMovementComponent::_ready() {
 		if (actor) {
 			player = static_cast<Player*>(actor);
 			player_sprite = player->get_sprite();
+			player_melee_attack_area = player->get_melee_attack_area();
 		}
 	}
 }
@@ -57,6 +58,9 @@ void PlayerMovementComponent::input_move(double p_delta, const Vector2& p_curr_v
 	if (sprite_face_to_input && p_input_sign_x != 0) {
 		if (player_sprite) {
 			player_sprite->set_flip_h(p_input_sign_x < 0);
+		}
+		if (player_melee_attack_area) {
+			player_melee_attack_area->set_scale(Vector2(p_input_sign_x, 1));
 		}
 	}
 

@@ -40,11 +40,13 @@
 			"**/*.a": true,
 			"**/*.llvm.a": true,
 			"ppgame/game_gdextension/bin": true,
-			"ppgame/project/bin": true
+			"ppgame/project/bin": true,
+			"doc/doxygen/html": true
 		},
 		"search.useIgnoreFiles": false,
 		"search.exclude": {
-			"ppgame/game_gdextension/thirdparty": true
+			"ppgame/game_gdextension/thirdparty": true,
+			"ppgame/project/.godot": true
 		},
 		// clang-format
 		"editor.formatOnSave": true,
