@@ -5,11 +5,11 @@
 #include <godot_cpp/variant/variant.hpp>
 using namespace godot;
 
-#include "character/player/state/player_finite_state_machine_base_component.h"
+#include "fsm/finite_state_machine_component.h"
 
-//! 角色武器状态机
-class PlayerWeaponFiniteStateMachineComponent : public PlayerFiniteStateMachineBaseComponent {
-	GDCLASS(PlayerWeaponFiniteStateMachineComponent, PlayerFiniteStateMachineBaseComponent)
+//! 玩家武器状态机
+class PlayerWeaponFiniteStateMachineComponent : public FiniteStateMachineComponent {
+	GDCLASS(PlayerWeaponFiniteStateMachineComponent, FiniteStateMachineComponent)
 
 public:
 	virtual void on_input(int p_fsm_input, const Variant& p_variant) override;

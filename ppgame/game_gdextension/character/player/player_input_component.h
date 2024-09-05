@@ -11,7 +11,7 @@ using namespace godot;
 
 #include "framework/component.h"
 
-//! 角色输入组件
+//! 玩家输入组件
 class PlayerInputComponent : public Component {
 	GDCLASS(PlayerInputComponent, Component)
 

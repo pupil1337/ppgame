@@ -5,8 +5,10 @@
 #include <godot_cpp/variant/vector2.hpp>
 using namespace godot;
 
-//! 角色状态条件
-struct PlayerStateCondition {
+#include "fsm/state_condition.h"
+
+//! 玩家状态条件
+struct PlayerStateCondition : StateCondition {
 	PlayerStateCondition() {}
 
 	// ------------------------------------------
@@ -30,7 +32,7 @@ struct PlayerStateCondition {
 	// state
 	bool on_ground = false; //!< 是否在地面上
 	bool can_jump = false; //!< 是否可以跳跃
-	Vector2 velocity; //!< 角色速度
+	Vector2 velocity; //!< 玩家速度
 };
 
 #endif // PLAYER_STATE_CONDITION_H

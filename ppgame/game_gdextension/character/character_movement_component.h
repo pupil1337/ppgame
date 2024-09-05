@@ -1,9 +1,7 @@
-#ifndef PLAYER_MOVEMENT_COMPONENT_H
-#define PLAYER_MOVEMENT_COMPONENT_H
+#ifndef CHARACTER_MOVEMENT_COMPONENT_H
+#define CHARACTER_MOVEMENT_COMPONENT_H
 
 #include <cstdint>
-#include <godot_cpp/classes/area2d.hpp>
-#include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/variant/vector2.hpp>
@@ -11,11 +9,9 @@ using namespace godot;
 
 #include "framework/component.h"
 
-class Player;
-
 //! 角色移动组件
-class PlayerMovementComponent : public Component {
-	GDCLASS(PlayerMovementComponent, Component)
+class CharacterMovementComponent : public Component {
+	GDCLASS(CharacterMovementComponent, Component)
 
 public:
 	//! 移动输入
@@ -54,14 +50,9 @@ private:
 	void _move_and_slide();
 
 public:
-	PlayerMovementComponent() {}
+	CharacterMovementComponent() {}
 
 private:
-	Player* player = nullptr; //!< 角色
-	Sprite2D* player_sprite = nullptr; //!< 角色-精灵
-	Area2D* player_melee_attack_area = nullptr; //!< 角色-近战攻击区域
-	bool sprite_face_to_input = true; //!< 精灵朝向输入方向
-
 	//! 步行参数
 	struct WalkSetting {
 		real_t acceleration = 600.0; //!< 加速度
@@ -92,11 +83,8 @@ private:
 	void set_jump_duration(real_t p_duration);
 	void set_fall_gravity_multiplayer(real_t p_multiplayer);
 
-public:
-	virtual void _ready() override;
-
 protected:
 	static void _bind_methods();
 };
 
-#endif // PLAYER_MOVEMENT_COMPONENT_H
+#endif // CHARACTER_MOVEMENT_COMPONENT_H

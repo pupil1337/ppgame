@@ -7,7 +7,7 @@ using namespace godot;
 
 #include "character/player/state/movement/air/player_air_state.h"
 
-//! 角色跳跃状态
+//! 玩家跳跃状态
 class PlayerAirJumpState : public PlayerAirState {
 	GDCLASS(PlayerAirJumpState, PlayerAirState)
 

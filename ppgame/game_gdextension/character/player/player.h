@@ -1,28 +1,22 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <godot_cpp/classes/animation_player.hpp>
+#include <cstdint>
 #include <godot_cpp/classes/area2d.hpp>
-#include <godot_cpp/classes/camera2d.hpp>
-#include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/collision_shape2d.hpp>
-#include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 using namespace godot;
 
-#include "framework/actor.h"
+#include "character/character.h"
 
-//! 角色
-class Player : public CharacterBody2D, public Actor {
-	GDCLASS(Player, CharacterBody2D)
+//! 玩家
+class Player : public Character {
+	GDCLASS(Player, Character)
 
 public:
-	//! 获取角色精灵
-	Sprite2D* get_sprite();
-	//! 获取角色动画播放器
-	AnimationPlayer* get_animation_player();
-	//! 获取碰撞形状
-	CollisionShape2D* get_collision_shape();
+	virtual void face_to_input(int8_t p_input_sign_x) override;
+
+public:
 	//! 获取近战攻击区域
 	Area2D* get_melee_attack_area();
 	//! 获取近战攻击形状
@@ -41,7 +35,7 @@ public:
 	virtual void _exit_tree() override;
 
 protected:
-	static void _bind_methods(){};
+	static void _bind_methods() {};
 };
 
 #endif // PLAYER_H

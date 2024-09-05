@@ -10,25 +10,22 @@ using namespace godot;
 
 #include "fsm/state.h"
 
-class PlayerFiniteStateMachineComponent;
+class PlayerConcurrentStateMachineComponent;
 class Player;
 struct PlayerStateCondition;
 
-//! 角色状态基类
+//! 玩家状态基类
 class PlayerState : public State {
 	GDCLASS(PlayerState, State)
 
-	friend PlayerFiniteStateMachineComponent;
+	friend PlayerConcurrentStateMachineComponent;
 
 protected:
-	virtual void on_animation_finished(const StringName& p_anim_name) {}
-
-protected:
-	Player* player = nullptr; //!< 角色
+	Player* player = nullptr; //!< 玩家
 	AnimationPlayer* animation_player = nullptr; //!< 动画播放器
 	Area2D* player_melee_attack_area = nullptr; //!< 近战攻击区域
 	CollisionShape2D* player_melee_attack_shape = nullptr; //!< 近战攻击形状
-	PlayerFiniteStateMachineComponent* player_fsm_component = nullptr; //!< 状态机组件
+	PlayerConcurrentStateMachineComponent* player_csm_component = nullptr; //!< 并发状态机组件
 	const PlayerStateCondition* condition = nullptr; //!< 状态条件
 
 public:

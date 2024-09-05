@@ -7,7 +7,7 @@ using namespace godot;
 
 #include "character/player/state/player_state.h"
 
-//! 角色空中状态基类
+//! 玩家空中状态基类
 class PlayerAirState : public PlayerState {
 	GDCLASS(PlayerAirState, PlayerState)
 

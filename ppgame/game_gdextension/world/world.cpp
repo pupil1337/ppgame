@@ -20,7 +20,7 @@
 
 #include "async_loader/async_loader.h"
 #include "character/player/player.h"
-#include "character/player/player_finite_state_machine_component.h"
+#include "character/player/player_concurrent_state_machine_component.h"
 #include "character/player/state/player_fsm_input_types.h"
 #include "gm/gm.h"
 #include "level/level.h"
@@ -97,9 +97,9 @@ void World::_change_level_implement(Node* p_node, const String& p_player_start) 
 	if (Level* level = Object::cast_to<Level>(p_node)) {
 		// 传送前处理 --------------------------------------
 		// player状态改变
-		if (PlayerFiniteStateMachineComponent* player_fsm_component = player->get_component<PlayerFiniteStateMachineComponent>()) {
-			player_fsm_component->on_input(PlayerFSMInput::To_Movement_None_State, 1);
-			player_fsm_component->on_input(PlayerFSMInput::To_Weapon_None_State, 1);
+		if (PlayerConcurrentStateMachineComponent* player_csm_component = player->get_component<PlayerConcurrentStateMachineComponent>()) {
+			player_csm_component->on_input((int)PlayerFSMInput::To_Movement_None_State, 1);
+			player_csm_component->on_input((int)PlayerFSMInput::To_Weapon_None_State, 1);
 		}
 		// 删除当前关卡
 		if (curr_level) {
@@ -125,9 +125,9 @@ void World::_change_level_implement(Node* p_node, const String& p_player_start) 
 
 		// 传送后处理 --------------------------------------
 		// player状态改变
-		if (PlayerFiniteStateMachineComponent* player_fsm_component = player->get_component<PlayerFiniteStateMachineComponent>()) {
-			player_fsm_component->on_input(PlayerFSMInput::To_Movement_None_State, -1);
-			player_fsm_component->on_input(PlayerFSMInput::To_Weapon_None_State, -1);
+		if (PlayerConcurrentStateMachineComponent* player_csm_component = player->get_component<PlayerConcurrentStateMachineComponent>()) {
+			player_csm_component->on_input((int)PlayerFSMInput::To_Movement_None_State, -1);
+			player_csm_component->on_input((int)PlayerFSMInput::To_Weapon_None_State, -1);
 		}
 	}
 }

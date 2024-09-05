@@ -7,7 +7,7 @@ using namespace godot;
 
 #include "character/player/state/movement/ground/player_ground_state.h"
 
-//! 角色静止状态
+//! 玩家静止状态
 class PlayerGroundIdleState : public PlayerGroundState {
 	GDCLASS(PlayerGroundIdleState, PlayerGroundState)
 

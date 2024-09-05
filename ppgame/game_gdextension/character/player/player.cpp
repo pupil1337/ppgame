@@ -1,9 +1,9 @@
 #include "player.h"
 
-#include <godot_cpp/classes/animation_player.hpp>
+#include <cstdint>
 #include <godot_cpp/classes/area2d.hpp>
 #include <godot_cpp/classes/collision_shape2d.hpp>
-#include <godot_cpp/classes/sprite2d.hpp>
+#include <godot_cpp/variant/vector2.hpp>
 
 void Player::_enter_tree() {
 	parent_type::_enter_tree();
@@ -25,17 +25,17 @@ void Player::_exit_tree() {
 	parent_type::_exit_tree();
 }
 
-Sprite2D* Player::get_sprite() {
-	return get_node<Sprite2D>("Sprite2D");
+void Player::face_to_input(int8_t p_input_sign_x) {
+	parent_type::face_to_input(p_input_sign_x);
+
+	if (p_input_sign_x != 0) {
+		if (Area2D* melee_attack_area = get_melee_attack_area()) {
+			melee_attack_area->set_scale(get_scale() * Vector2(p_input_sign_x, 1.0));
+		}
+	}
 }
 
-AnimationPlayer* Player::get_animation_player() {
-	return get_node<AnimationPlayer>("AnimationPlayer");
-}
-
-CollisionShape2D* Player::get_collision_shape() {
-	return get_node<CollisionShape2D>("CollisionShape2D");
-}
+// ----------------------------------------------------------------------------
 
 Area2D* Player::get_melee_attack_area() {
 	return get_node<Area2D>("MeleeAttackArea");

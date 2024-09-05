@@ -7,7 +7,7 @@ using namespace godot;
 
 #include "framework/component.h"
 
-//! 角色摄像机组件
+//! 玩家摄像机组件
 class PlayerCameraComponent : public Component {
 	GDCLASS(PlayerCameraComponent, Component)
 

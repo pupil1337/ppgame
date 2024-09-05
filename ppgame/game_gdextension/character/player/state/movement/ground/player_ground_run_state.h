@@ -7,7 +7,7 @@ using namespace godot;
 
 #include "character/player/state/movement/ground/player_ground_state.h"
 
-//! 角色奔跑状态
+//! 玩家奔跑状态
 class PlayerGroundRunState : public PlayerGroundState {
 	GDCLASS(PlayerGroundRunState, PlayerGroundState)
 

@@ -1,11 +1,9 @@
-#include "player_movement_component.h"
+#include "character_movement_component.h"
 
 #include <cstdint>
-#include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/physics_server2d.hpp>
 #include <godot_cpp/classes/rectangle_shape2d.hpp>
 #include <godot_cpp/classes/ref.hpp>
-#include <godot_cpp/classes/sprite2d.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/core/math.hpp>
@@ -15,29 +13,15 @@
 #include <godot_cpp/variant/array.hpp>
 #include <godot_cpp/variant/color.hpp>
 #include <godot_cpp/variant/rect2.hpp>
-#include <godot_cpp/variant/transform2d.hpp>
-#include <godot_cpp/variant/variant.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 
-#include "character/player/player.h"
+#include "character.h"
 #include "utils/debug_draw_utils.h"
 #include "utils/math_utils.h"
 #include "utils/physics_utils.h"
 #include "utils/types.h"
 
-void PlayerMovementComponent::_ready() {
-	parent_type::_ready();
-
-	if (!Engine::get_singleton()->is_editor_hint()) {
-		if (actor) {
-			player = static_cast<Player*>(actor);
-			player_sprite = player->get_sprite();
-			player_melee_attack_area = player->get_melee_attack_area();
-		}
-	}
-}
-
-void PlayerMovementComponent::input_move(double p_delta, const Vector2& p_curr_velocity, int8_t p_input_sign_x, real_t p_acceleration_x, real_t p_deceleration_x, real_t p_turn_speed_x, real_t p_max_speed_x, real_t p_gravity) {
+void CharacterMovementComponent::input_move(double p_delta, const Vector2& p_curr_velocity, int8_t p_input_sign_x, real_t p_acceleration_x, real_t p_deceleration_x, real_t p_turn_speed_x, real_t p_max_speed_x, real_t p_gravity) {
 	// x
 	real_t speed_change_x = 0.0;
 	if (p_input_sign_x != 0) {
@@ -54,51 +38,46 @@ void PlayerMovementComponent::input_move(double p_delta, const Vector2& p_curr_v
 	// y
 	real_t new_velocity_y = p_curr_velocity.y + p_gravity * p_delta;
 
-	// sprite_face_to_input
-	if (sprite_face_to_input && p_input_sign_x != 0) {
-		if (player_sprite) {
-			player_sprite->set_flip_h(p_input_sign_x < 0);
+	if (Character* character = static_cast<Character*>(actor)) {
+		// sprite_face_to_input
+		if (p_input_sign_x != 0) {
+			character->face_to_input(p_input_sign_x);
 		}
-		if (player_melee_attack_area) {
-			player_melee_attack_area->set_scale(Vector2(p_input_sign_x, 1));
-		}
-	}
 
-	// move
-	if (player) {
-		player->set_velocity({ new_velocity_x, new_velocity_y });
+		// move
+		character->set_velocity({ new_velocity_x, new_velocity_y });
 		_move_and_slide();
 	}
 }
 
-void PlayerMovementComponent::jump(const Vector2& p_curr_velocity, real_t p_jump_height, real_t p_jump_duration) {
-	if (player) {
+void CharacterMovementComponent::jump(const Vector2& p_curr_velocity, real_t p_jump_height, real_t p_jump_duration) {
+	if (Character* character = static_cast<Character*>(actor)) {
 		real_t new_velocity_y;
 		new_velocity_y = MathUtils::calculate_jump_speed_y(p_jump_height, p_jump_duration);
 
-		player->set_velocity({ p_curr_velocity.x, new_velocity_y });
+		character->set_velocity({ p_curr_velocity.x, new_velocity_y });
 		_move_and_slide();
 	}
 }
 
-bool PlayerMovementComponent::down_jump() {
-	if (player) {
-		uint32_t player_collision_mask = player->get_collision_mask();
-		double player_snap_length = player->get_floor_snap_length();
-		if (player_collision_mask & (uint32_t)CollisionLayer::OneWay) {
-			Ref<RectangleShape2D> shape = player->shape_owner_get_shape(0, 0);
+bool CharacterMovementComponent::down_jump() {
+	if (Character* character = static_cast<Character*>(actor)) {
+		uint32_t character_collision_mask = character->get_collision_mask();
+		double character_snap_length = character->get_floor_snap_length();
+		if (character_collision_mask & (uint32_t)CollisionLayer::OneWay) {
+			Ref<RectangleShape2D> shape = character->shape_owner_get_shape(0, 0);
 			if (shape.is_valid()) {
 				Vector<ShapeResult> shape_results;
-				DebugDrawUtils::draw_debug_rectangle(Rect2(player->get_global_position() - shape->get_size() / 2.0 + Vector2(0.0, player_snap_length * 2), shape->get_size()), Color(1.0, 0.0, 0.0), 3.0);
+				DebugDrawUtils::draw_debug_rectangle(Rect2(character->get_global_position() - shape->get_size() / 2.0 + Vector2(0.0, character_snap_length * 2), shape->get_size()), Color(1.0, 0.0, 0.0), 3.0);
 				if (PhysicsUtils::shape_cast<PhysicsServer2D::ShapeType::SHAPE_RECTANGLE>(
-							player,
+							character,
 							shape_results,
 							shape->get_size() / 2.0,
-							player->get_global_transform(),
-							Vector2(0.0, player_snap_length * 2),
-							player_collision_mask,
+							character->get_global_transform(),
+							Vector2(0.0, character_snap_length * 2),
+							character_collision_mask,
 							32,
-							Array::make(player->get_rid()),
+							Array::make(character->get_rid()),
 							true,
 							false,
 							0.0)) {
@@ -111,11 +90,11 @@ bool PlayerMovementComponent::down_jump() {
 						has_oneway = true;
 					}
 					if (has_oneway) {
-						player->set_collision_mask(player_collision_mask & ~(uint32_t)CollisionLayer::OneWay);
-						player->global_translate(Vector2(0.0, player_snap_length * 2));
-						player->move_and_slide();
-						player->set_collision_mask(player_collision_mask);
-						return !player->is_on_floor();
+						character->set_collision_mask(character_collision_mask & ~(uint32_t)CollisionLayer::OneWay);
+						character->global_translate(Vector2(0.0, character_snap_length * 2));
+						character->move_and_slide();
+						character->set_collision_mask(character_collision_mask);
+						return !character->is_on_floor();
 					}
 				}
 			}
@@ -125,71 +104,71 @@ bool PlayerMovementComponent::down_jump() {
 	return false;
 }
 
-void PlayerMovementComponent::_move_and_slide() {
-	if (player) {
-		player->move_and_slide();
+void CharacterMovementComponent::_move_and_slide() {
+	if (Character* character = static_cast<Character*>(actor)) {
+		character->move_and_slide();
 	}
 }
 
-real_t PlayerMovementComponent::get_walk_acceleration() {
+real_t CharacterMovementComponent::get_walk_acceleration() {
 	return walk_setting.acceleration;
 }
 
-real_t PlayerMovementComponent::get_walk_deceleration() {
+real_t CharacterMovementComponent::get_walk_deceleration() {
 	return walk_setting.deceleration;
 }
 
-real_t PlayerMovementComponent::get_walk_turn_speed() {
+real_t CharacterMovementComponent::get_walk_turn_speed() {
 	return walk_setting.turn_speed;
 }
 
-real_t PlayerMovementComponent::get_walk_max_speed() {
+real_t CharacterMovementComponent::get_walk_max_speed() {
 	return walk_setting.max_speed;
 }
 
-real_t PlayerMovementComponent::get_jump_height() {
+real_t CharacterMovementComponent::get_jump_height() {
 	return jump_setting.height;
 }
 
-real_t PlayerMovementComponent::get_jump_duration() {
+real_t CharacterMovementComponent::get_jump_duration() {
 	return jump_setting.duration;
 }
 
-real_t PlayerMovementComponent::get_fall_gravity_multiplayer() {
+real_t CharacterMovementComponent::get_fall_gravity_multiplayer() {
 	return fall_setting.gravity_multiplayer;
 }
 
 // ----------------------------------------------------------------------------
 
-void PlayerMovementComponent::set_walk_acceleration(real_t p_acceleration) {
+void CharacterMovementComponent::set_walk_acceleration(real_t p_acceleration) {
 	walk_setting.acceleration = p_acceleration;
 }
 
-void PlayerMovementComponent::set_walk_deceleration(real_t p_deceleration) {
+void CharacterMovementComponent::set_walk_deceleration(real_t p_deceleration) {
 	walk_setting.deceleration = p_deceleration;
 }
 
-void PlayerMovementComponent::set_walk_turn_speed(real_t p_turn_speed) {
+void CharacterMovementComponent::set_walk_turn_speed(real_t p_turn_speed) {
 	walk_setting.turn_speed = p_turn_speed;
 }
 
-void PlayerMovementComponent::set_walk_max_speed(real_t p_max_speed) {
+void CharacterMovementComponent::set_walk_max_speed(real_t p_max_speed) {
 	walk_setting.max_speed = p_max_speed;
 }
 
-void PlayerMovementComponent::set_jump_height(real_t p_height) {
+void CharacterMovementComponent::set_jump_height(real_t p_height) {
 	jump_setting.height = p_height;
 }
 
-void PlayerMovementComponent::set_jump_duration(real_t p_duration) {
+void CharacterMovementComponent::set_jump_duration(real_t p_duration) {
 	jump_setting.duration = p_duration;
 }
 
-void PlayerMovementComponent::set_fall_gravity_multiplayer(real_t p_multiplayer) {
+void CharacterMovementComponent::set_fall_gravity_multiplayer(real_t p_multiplayer) {
 	fall_setting.gravity_multiplayer = p_multiplayer;
 }
 
-void PlayerMovementComponent::_bind_methods() {
+void CharacterMovementComponent::_bind_methods() {
 	ADD_GROUP("walk", "");
 	{
 		// acceleration

@@ -29,7 +29,7 @@ public:
 	//! 切换关卡
 	/*!
 	 * \param p_level 关卡路径
-	 * \param p_player_start 关卡中角色生成点
+	 * \param p_player_start 关卡中玩家生成点
 	 */
 	void change_level(const String& p_level, const String& p_player_start);
 
@@ -39,7 +39,7 @@ private:
 	//! 切换关卡的具体实现
 	/*!
 	 * \param p_node 加载并实例化后的关卡
-	 * \param p_player_start 关卡中角色生成点
+	 * \param p_player_start 关卡中玩家生成点
 	 */
 	void _change_level_implement(Node* p_node, const String& p_player_start);
 
@@ -48,7 +48,7 @@ public:
 
 private:
 	Level* curr_level = nullptr; //!< 当前关卡
-	Player* player = nullptr; //!< 角色
+	Player* player = nullptr; //!< 玩家
 
 	// ------------------------------------------
 

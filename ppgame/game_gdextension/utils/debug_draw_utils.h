@@ -43,6 +43,17 @@ private:
 			utils->draw_rect(rect, color, filled, width, antialiased);
 		}
 	};
+	struct DrawCircleData : DrawBaseData {
+		Vector2 position;
+		double radius = 3.0;
+		Color color;
+		bool filled = true;
+		double width = -1.0;
+		bool antialiased = false;
+		void draw(DebugDrawUtils* utils) {
+			utils->draw_circle(position, radius, color, filled, width, antialiased);
+		}
+	};
 
 public:
 	//! 绘制线条
@@ -67,6 +78,18 @@ public:
 	 */
 	static void draw_debug_rectangle(const Rect2& p_rect, const Color& p_color, float p_time = 0.0, bool p_filled = true, double p_width = -1.0, bool p_antialiased = false);
 
+	//! 绘制圆形
+	/*!
+	 * \param p_position 位置
+	 * \param p_radius 半径
+	 * \param p_color 颜色
+	 * \param p_time 绘制时长, <= 0.0 则一直存在
+	 * \param p_filled 是否填充
+	 * \param p_width 如果为负, 则将绘制两点图元而不是四点图元. 这意味着当缩放CanvasItem时, 线条将保持细长. 如果不需要此行为, 请传递一个正的width, 如 1.0.
+	 * \param p_antialiased 是否抗锯齿
+	 */
+	static void draw_debug_circle(const Vector2& p_position, double p_radius, const Color& p_color, float p_time = 0.0, bool p_filled = true, double p_width = -1.0, bool p_antialiased = false);
+
 public:
 	DebugDrawUtils();
 	~DebugDrawUtils();
@@ -75,6 +98,7 @@ private:
 	double curr_time = 0.0;
 	Vector<DrawLineData> lines; //!< 线条
 	Vector<DrawRectangleData> rectangles; //!< 矩形
+	Vector<DrawCircleData> circles; //!< 圆形
 
 	// ------------------------------------------
 
@@ -84,6 +108,7 @@ public:
 
 protected:
 	static void _bind_methods() {}
+	void _notification(int p_what);
 };
 
 #endif // DEBUG_DRAW_UTILS_H

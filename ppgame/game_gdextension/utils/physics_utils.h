@@ -2,7 +2,7 @@
 #define PHYSICS_UTILS_H
 
 #include <cstdint>
-#include <godot_cpp/classes/node2d.hpp>
+#include <godot_cpp/classes/canvas_item.hpp>
 #include <godot_cpp/classes/physics_direct_space_state2d.hpp>
 #include <godot_cpp/classes/physics_ray_query_parameters2d.hpp>
 #include <godot_cpp/classes/physics_server2d.hpp>
@@ -27,7 +27,7 @@ public:
 	//! 射线检测
 	/*!
 	 * \param p_world_context_2d World Context
-	 * \param out_result 检测结果
+	 * \param[out] out_result 检测结果
 	 * \param p_from 要查询的射线起点, 使用全局坐标.
 	 * \param p_to 要查询的射线终点，使用全局坐标.
 	 * \param p_collision_mask 查询将检测的物理层(作为位掩码)
@@ -37,7 +37,7 @@ public:
 	 * \param p_hit_from_inside 如果为true, 查询会在从形状内部开始时检测到命中. 在此情况下, 碰撞法线将为Vector2(0, 0). 不会影响凹多边形形状.
 	 * \return 是否检测到相交
 	 */
-	_FORCE_INLINE_ static bool ray_cast(Node2D* p_world_context_2d, RayResult& out_result, const Vector2& p_from, const Vector2& p_to, uint32_t p_collision_mask, const TypedArray<RID>& p_excludes = {}, bool p_collide_with_bodies = true, bool p_collide_with_areas = false, bool p_hit_from_inside = false) {
+	_FORCE_INLINE_ static bool ray_cast(CanvasItem* p_world_context_2d, RayResult& out_result, const Vector2& p_from, const Vector2& p_to, uint32_t p_collision_mask, const TypedArray<RID>& p_excludes = {}, bool p_collide_with_bodies = true, bool p_collide_with_areas = false, bool p_hit_from_inside = false) {
 		if (p_world_context_2d) {
 			Ref<World2D> world_2d = p_world_context_2d->get_world_2d();
 			if (world_2d.is_valid()) {
@@ -68,7 +68,7 @@ public:
 	/*!
 	 * \tparam shape_type 形状类型
 	 * \param p_world_context_2d World Context
-	 * \param out_results 检测结果
+	 * \param[out] out_results 检测结果
 	 * \param p_shape_data 形状大小数据
 	 * \param p_transform 被查询形状的变换矩阵
 	 * \param p_motion 正在查询的形状的运动
@@ -81,9 +81,9 @@ public:
 	 * \return 是否检测到相交
 	 */
 	template <PhysicsServer2D::ShapeType shape_type, typename T>
-	_FORCE_INLINE_ static bool shape_cast(Node2D* p_world_context_2d, Vector<ShapeResult>& out_results, const T& p_shape_data, const Transform2D& p_transform, const Vector2& p_motion, uint32_t p_collision_masks, int32_t p_max_results = 32, const TypedArray<RID>& p_excludes = {}, bool p_collide_with_bodies = true, bool p_collide_with_areas = false, double p_margin = 0.0);
+	_FORCE_INLINE_ static bool shape_cast(CanvasItem* p_world_context_2d, Vector<ShapeResult>& out_results, const T& p_shape_data, const Transform2D& p_transform, const Vector2& p_motion, uint32_t p_collision_masks, int32_t p_max_results = 32, const TypedArray<RID>& p_excludes = {}, bool p_collide_with_bodies = true, bool p_collide_with_areas = false, double p_margin = 0.0);
 
-	_FORCE_INLINE_ static bool _shape_cast_internal(Node2D* p_world_context_2d, Vector<ShapeResult>& out_results, const RID& p_shape_rid, const Transform2D& p_transform, const Vector2& p_motion, uint32_t p_collision_masks, int32_t p_max_results, const TypedArray<RID>& p_excludes, bool p_collide_with_bodies, bool p_collide_with_areas, double p_margin) {
+	_FORCE_INLINE_ static bool _shape_cast_internal(CanvasItem* p_world_context_2d, Vector<ShapeResult>& out_results, const RID& p_shape_rid, const Transform2D& p_transform, const Vector2& p_motion, uint32_t p_collision_masks, int32_t p_max_results, const TypedArray<RID>& p_excludes, bool p_collide_with_bodies, bool p_collide_with_areas, double p_margin) {
 		if (p_world_context_2d) {
 			Ref<World2D> world_2d = p_world_context_2d->get_world_2d();
 			if (world_2d.is_valid()) {
@@ -127,7 +127,7 @@ public:
  * \param p_transform 矩形中心矩阵
  */
 template <>
-_FORCE_INLINE_ bool PhysicsUtils::shape_cast<PhysicsServer2D::ShapeType::SHAPE_RECTANGLE, Vector2>(Node2D* p_world_context_2d, Vector<ShapeResult>& out_results, const Vector2& p_shape_data, const Transform2D& p_transform, const Vector2& p_motion, uint32_t p_collision_masks, int32_t p_max_results /* = 32 */, const TypedArray<RID>& p_excludes /* = {} */, bool p_collide_with_bodies /* = true */, bool p_collide_with_areas /* = false */, double p_margin /* = 0.0 */) {
+_FORCE_INLINE_ bool PhysicsUtils::shape_cast<PhysicsServer2D::ShapeType::SHAPE_RECTANGLE, Vector2>(CanvasItem* p_world_context_2d, Vector<ShapeResult>& out_results, const Vector2& p_shape_data, const Transform2D& p_transform, const Vector2& p_motion, uint32_t p_collision_masks, int32_t p_max_results /* = 32 */, const TypedArray<RID>& p_excludes /* = {} */, bool p_collide_with_bodies /* = true */, bool p_collide_with_areas /* = false */, double p_margin /* = 0.0 */) {
 	bool res;
 
 	const RID& shape_rid = PhysicsServer2D::get_singleton()->rectangle_shape_create();

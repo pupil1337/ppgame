@@ -7,7 +7,7 @@ using namespace godot;
 
 #include "character/player/state/movement/air/player_air_state.h"
 
-//! 角色下坠状态
+//! 玩家下坠状态
 class PlayerAirFallState : public PlayerAirState {
 	GDCLASS(PlayerAirFallState, PlayerAirState)
 

@@ -7,7 +7,7 @@ using namespace godot;
 
 #include "character/player/state/player_state.h"
 
-//! 角色地面状态基类
+//! 玩家地面状态基类
 class PlayerGroundState : public PlayerState {
 	GDCLASS(PlayerGroundState, PlayerState)
 

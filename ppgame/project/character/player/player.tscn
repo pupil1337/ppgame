@@ -484,35 +484,35 @@ autoplay = "Idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="PlayerFiniteStateMachineComponent" type="PlayerFiniteStateMachineComponent" parent="."]
+[node name="PlayerConcurrentStateMachineComponent" type="PlayerConcurrentStateMachineComponent" parent="."]
 
-[node name="PlayerMovementFiniteStateMachineComponent" type="PlayerMovementFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent"]
+[node name="PlayerMovementFiniteStateMachineComponent" type="PlayerMovementFiniteStateMachineComponent" parent="PlayerConcurrentStateMachineComponent"]
 
-[node name="None" type="PlayerMovementNoneState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
+[node name="None" type="PlayerMovementNoneState" parent="PlayerConcurrentStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
 
-[node name="Ground" type="Node" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
+[node name="Ground" type="Node" parent="PlayerConcurrentStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
 
-[node name="Idle" type="PlayerGroundIdleState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Ground"]
+[node name="Idle" type="PlayerGroundIdleState" parent="PlayerConcurrentStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Ground"]
 
-[node name="Run" type="PlayerGroundRunState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Ground"]
+[node name="Run" type="PlayerGroundRunState" parent="PlayerConcurrentStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Ground"]
 
-[node name="Air" type="Node" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
+[node name="Air" type="Node" parent="PlayerConcurrentStateMachineComponent/PlayerMovementFiniteStateMachineComponent"]
 
-[node name="Jump" type="PlayerAirJumpState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Air"]
+[node name="Jump" type="PlayerAirJumpState" parent="PlayerConcurrentStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Air"]
 
-[node name="Fall" type="PlayerAirFallState" parent="PlayerFiniteStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Air"]
+[node name="Fall" type="PlayerAirFallState" parent="PlayerConcurrentStateMachineComponent/PlayerMovementFiniteStateMachineComponent/Air"]
 
-[node name="PlayerWeaponFiniteStateMachineComponent" type="PlayerWeaponFiniteStateMachineComponent" parent="PlayerFiniteStateMachineComponent"]
+[node name="PlayerWeaponFiniteStateMachineComponent" type="PlayerWeaponFiniteStateMachineComponent" parent="PlayerConcurrentStateMachineComponent"]
 
-[node name="None" type="PlayerWeaponNoneState" parent="PlayerFiniteStateMachineComponent/PlayerWeaponFiniteStateMachineComponent"]
+[node name="None" type="PlayerWeaponNoneState" parent="PlayerConcurrentStateMachineComponent/PlayerWeaponFiniteStateMachineComponent"]
 
-[node name="Sword" type="Node" parent="PlayerFiniteStateMachineComponent/PlayerWeaponFiniteStateMachineComponent"]
+[node name="Sword" type="Node" parent="PlayerConcurrentStateMachineComponent/PlayerWeaponFiniteStateMachineComponent"]
 
-[node name="PlayerSwordAttack" type="PlayerSwordAttack" parent="PlayerFiniteStateMachineComponent/PlayerWeaponFiniteStateMachineComponent/Sword"]
+[node name="PlayerSwordAttack" type="PlayerSwordAttack" parent="PlayerConcurrentStateMachineComponent/PlayerWeaponFiniteStateMachineComponent/Sword"]
 
 [node name="PlayerInputComponent" type="PlayerInputComponent" parent="."]
 
-[node name="PlayerMovementComponent" type="PlayerMovementComponent" parent="."]
+[node name="CharacterMovementComponent" type="CharacterMovementComponent" parent="."]
 
 [node name="PlayerCameraComponent" type="PlayerCameraComponent" parent="."]
 

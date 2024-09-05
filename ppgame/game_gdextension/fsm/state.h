@@ -6,7 +6,7 @@
 #include <godot_cpp/variant/string_name.hpp>
 using namespace godot;
 
-class FiniteStateMachineComponent;
+#include "fsm/finite_state_machine_component.h"
 
 //! State类
 /*!
@@ -30,21 +30,23 @@ public:
 	//! 输入
 	virtual StringName on_input(int p_fsm_input, const Variant& p_variant) { return StringName(); }
 
-private:
-	//! 注册状态
-	/*!
-	 * 将此状态注册到FiniteStateMachineComponent上
-	 * _notification->NOTIFICATION_PARENTED时自动调用
-	 * \param p_node 需要找到父节点为FiniteStateMachineComponent的节点. 初始值为this, 如果父节点不是FiniteStateMachineComponent则递归父节点查找
-	 * \return 是否注册成功
-	 */
-	bool _register_state(Node* p_node);
+public:
+	//! 获取条件
+	template <typename T>
+	const T* get_condition() const {
+		if (owner_fsm) {
+			return static_cast<T*>(owner_fsm->get_condition<T>());
+		}
+
+		return nullptr;
+	}
 
 public:
 	State() {}
 
 protected:
-	bool is_default_state = false; // !< 是否是默认状态
+	bool is_default_state = false; //!< 是否是默认状态
+	FiniteStateMachineComponent* owner_fsm = nullptr; //!< 拥有此状态的状态机
 
 	// ------------------------------------------
 

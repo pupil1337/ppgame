@@ -3,20 +3,20 @@
 #include <godot_cpp/variant/string_name.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 
+#include "character/character_movement_component.h"
 #include "character/player/player.h"
-#include "character/player/player_movement_component.h"
 #include "character/player/state/movement/ground/player_ground_idle_state.h"
 #include "character/player/state/player_state_condition.h"
 
 void PlayerGroundRunState::enter() {
-	if (animation_player && !condition->ban_movement_enter_anim) {
+	if (animation_player && condition && !condition->ban_movement_enter_anim) {
 		animation_player->play("Run");
 	}
 }
 
 StringName PlayerGroundRunState::on_process(double delta) {
 	// idle
-	if (condition->on_ground && (condition->ban_movement_input || condition->input_sign_x == 0) && condition->velocity.x == 0.0) {
+	if (condition && condition->on_ground && (condition->ban_movement_input || condition->input_sign_x == 0) && condition->velocity.x == 0.0) {
 		return PlayerGroundIdleState::get_class_static();
 	}
 
@@ -25,14 +25,14 @@ StringName PlayerGroundRunState::on_process(double delta) {
 
 void PlayerGroundRunState::on_physics_process(double delta) {
 	if (player && condition) {
-		if (PlayerMovementComponent* player_movement_component = player->get_component<PlayerMovementComponent>()) {
-			player_movement_component->input_move(delta,
+		if (CharacterMovementComponent* character_movement_component = player->get_component<CharacterMovementComponent>()) {
+			character_movement_component->input_move(delta,
 					condition->velocity,
 					condition->ban_movement_input ? 0 : condition->input_sign_x,
-					player_movement_component->get_walk_acceleration(),
-					player_movement_component->get_walk_deceleration(),
-					player_movement_component->get_walk_turn_speed(),
-					player_movement_component->get_walk_max_speed(),
+					character_movement_component->get_walk_acceleration(),
+					character_movement_component->get_walk_deceleration(),
+					character_movement_component->get_walk_turn_speed(),
+					character_movement_component->get_walk_max_speed(),
 					0.0);
 		}
 	}

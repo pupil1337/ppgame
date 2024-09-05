@@ -10,14 +10,14 @@ PlayerGroundIdleState::PlayerGroundIdleState() {
 }
 
 void PlayerGroundIdleState::enter() {
-	if (animation_player && !condition->ban_movement_enter_anim) {
+	if (animation_player && condition && !condition->ban_movement_enter_anim) {
 		animation_player->play("Idle");
 	}
 }
 
 StringName PlayerGroundIdleState::on_process(double delta) {
 	// run
-	if (condition->on_ground && !condition->ban_movement_input && condition->input_sign_x != 0.0) {
+	if (condition && condition->on_ground && !condition->ban_movement_input && condition->input_sign_x != 0.0) {
 		return PlayerGroundRunState::get_class_static();
 	}
 

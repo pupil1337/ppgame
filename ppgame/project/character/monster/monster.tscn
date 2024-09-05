@@ -8,11 +8,24 @@
 collision_layer = 8
 collision_mask = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_yh5i1")
-
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_4o1nx")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yh5i1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="CharacterMovementComponent" type="CharacterMovementComponent" parent="."]
+max_speed = 50.0
+
+[node name="MonsterConcurrentStateMachineComponent" type="MonsterConcurrentStateMachineComponent" parent="."]
+
+[node name="MonsterBehaviorFiniteStateMachineComponent" type="MonsterBehaviorFiniteStateMachineComponent" parent="MonsterConcurrentStateMachineComponent"]
+
+[node name="None" type="MonsterBehaviorNoneState" parent="MonsterConcurrentStateMachineComponent/MonsterBehaviorFiniteStateMachineComponent"]
+
+[node name="Patrol" type="MonsterPatrolState" parent="MonsterConcurrentStateMachineComponent/MonsterBehaviorFiniteStateMachineComponent"]

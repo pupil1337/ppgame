@@ -1,6 +1,7 @@
 #include "debug_draw_utils.h"
 
 #include <godot_cpp/classes/engine.hpp>
+#include <godot_cpp/classes/rendering_server.hpp>
 #include <godot_cpp/templates/vector.hpp>
 #include <godot_cpp/variant/color.hpp>
 #include <godot_cpp/variant/rect2.hpp>
@@ -20,6 +21,14 @@ DebugDrawUtils* DebugDrawUtils::get_singleton() {
 	return singleton;
 }
 
+void DebugDrawUtils::_notification(int p_what) {
+	if (!Engine::get_singleton()->is_editor_hint()) {
+		if (p_what == NOTIFICATION_POSTINITIALIZE) {
+			set_z_index(RenderingServer::CANVAS_ITEM_Z_MAX);
+		}
+	}
+}
+
 void DebugDrawUtils::_process(double p_delta) {
 	parent_type::_process(p_delta);
 
@@ -33,8 +42,8 @@ void DebugDrawUtils::_process(double p_delta) {
 	Vector<T> new_##list;                                        \
 	for (int i = 0; i < list.size(); ++i) {                      \
 		T data = list[i];                                        \
+		data.draw(this);                                         \
 		if (data.end_time <= 0.0 || data.end_time > curr_time) { \
-			data.draw(this);                                     \
 			new_##list.push_back(data);                          \
 		}                                                        \
 	}                                                            \
@@ -45,6 +54,7 @@ void DebugDrawUtils::_draw() {
 
 	CallDrawFunc(DrawLineData, lines);
 	CallDrawFunc(DrawRectangleData, rectangles);
+	CallDrawFunc(DrawCircleData, circles);
 }
 
 void DebugDrawUtils::draw_debug_line(const Vector2& p_from, const Vector2& p_to, const Color& p_color, float p_time /* = 0.0 */, double p_width /* = -1.0 */, bool p_antialiased /* = false */) {
@@ -71,4 +81,18 @@ void DebugDrawUtils::draw_debug_rectangle(const Rect2& p_rect, const Color& p_co
 	data.antialiased = p_antialiased;
 	data.end_time = p_time <= 0.0 ? p_time : utils->curr_time + p_time;
 	utils->rectangles.append(data);
+}
+
+void DebugDrawUtils::draw_debug_circle(const Vector2& p_position, double p_radius, const Color& p_color, float p_time /* = 0.0 */, bool p_filled /* = true */, double p_width /* = -1.0 */, bool p_antialiased /* = false */) {
+	DebugDrawUtils* utils = get_singleton();
+
+	DrawCircleData data;
+	data.position = p_position;
+	data.radius = p_radius;
+	data.color = p_color;
+	data.filled = p_filled;
+	data.width = p_width;
+	data.antialiased = p_antialiased;
+	data.end_time = p_time <= 0.0 ? p_time : utils->curr_time + p_time;
+	utils->circles.append(data);
 }

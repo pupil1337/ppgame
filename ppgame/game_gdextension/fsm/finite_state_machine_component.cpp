@@ -1,10 +1,23 @@
 #include "finite_state_machine_component.h"
 
+#include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/core/error_macros.hpp>
 #include <godot_cpp/variant/string_name.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
+#include "concurrent_state_machine_component.h"
 #include "fsm/state.h"
+#include "utils/node_utils.h"
+
+void FiniteStateMachineComponent::_notification(int p_what) {
+	if (!Engine::get_singleton()->is_editor_hint()) {
+		if (p_what == NOTIFICATION_PARENTED) {
+			if ((owner_csm_component = NodeUtils::get_parent_node<ConcurrentStateMachineComponent>(this))) {
+				owner_csm_component->fsms.push_back(this);
+			}
+		}
+	}
+}
 
 bool FiniteStateMachineComponent::add_state(State* p_state) {
 	ERR_FAIL_NULL_V_EDMSG(p_state, false, get_class() + " add a nullptr state");
@@ -18,6 +31,12 @@ bool FiniteStateMachineComponent::add_state(State* p_state) {
 		}
 	}
 	return true;
+}
+
+void FiniteStateMachineComponent::on_start() {
+	ERR_FAIL_NULL_EDMSG(curr_state, "FSM: on_start curr_state == nullptr");
+
+	curr_state->enter();
 }
 
 void FiniteStateMachineComponent::_change_state(const StringName& p_new_state_name) {

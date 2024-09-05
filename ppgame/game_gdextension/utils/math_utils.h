@@ -5,6 +5,7 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/core/error_macros.hpp>
 #include <godot_cpp/core/math.hpp>
+#include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 using namespace godot;
 
@@ -136,6 +137,18 @@ public:
 				out_sign_y = 1;
 				break;
 		}
+	}
+
+	// ------------------------------------------
+	//! 圆内随机找一点
+	/*!
+	 * \param p_position 圆心坐标
+	 * \param p_radius 半径
+	 */
+	_FORCE_INLINE_ static Vector2 random_point_in_circle(const Vector2& p_position, float p_radius) {
+		float radian = UtilityFunctions::randf_range(0.0, 2.0 * Math_PI);
+		float radius = UtilityFunctions::randf_range(0.0, p_radius);
+		return Vector2(p_position.x + radius * Math::cos(radian), p_position.y - radius * Math::sin(radian));
 	}
 };
 

@@ -24,7 +24,7 @@ public:
 
 private:
 	String link_level_path; //!< 连接关卡
-	String link_level_player_start_name; //!< 连接关卡的角色生成点
+	String link_level_player_start_name; //!< 连接关卡的玩家生成点
 
 	// ------------------------------------------
 

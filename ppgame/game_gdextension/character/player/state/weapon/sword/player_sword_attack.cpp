@@ -3,7 +3,7 @@
 #include <godot_cpp/variant/string_name.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
-#include "character/player/player_finite_state_machine_component.h"
+#include "character/player/player_concurrent_state_machine_component.h"
 #include "character/player/state/player_fsm_input_types.h"
 #include "character/player/state/weapon/player_weapon_none_state.h"
 
@@ -12,9 +12,9 @@ void PlayerSwordAttack::enter() {
 		animation_player->play("Weapon_Attack0");
 	}
 
-	if (player_fsm_component) {
-		player_fsm_component->on_input(PlayerFSMInput::Ban_Movement_Enter_Anim, 1);
-		player_fsm_component->on_input(PlayerFSMInput::Ban_Movement_Input, 1);
+	if (player_csm_component) {
+		player_csm_component->on_input((int)PlayerFSMInput::Ban_Movement_Enter_Anim, 1);
+		player_csm_component->on_input((int)PlayerFSMInput::Ban_Movement_Input, 1);
 	}
 }
 
@@ -39,10 +39,10 @@ StringName PlayerSwordAttack::on_input(int p_fsm_input, const Variant& p_variant
 }
 
 void PlayerSwordAttack::exit() {
-	if (player_fsm_component) {
-		player_fsm_component->on_input(PlayerFSMInput::Ban_Movement_Enter_Anim, -1);
-		player_fsm_component->on_input(PlayerFSMInput::Ban_Movement_Input, -1);
-		player_fsm_component->on_input(PlayerFSMInput::Reset_Movement_To_Idle, nullptr);
+	if (player_csm_component) {
+		player_csm_component->on_input((int)PlayerFSMInput::Ban_Movement_Enter_Anim, -1);
+		player_csm_component->on_input((int)PlayerFSMInput::Ban_Movement_Input, -1);
+		player_csm_component->on_input((int)PlayerFSMInput::Reset_Movement_To_Idle, nullptr);
 	}
 
 	if (player_melee_attack_shape) {
