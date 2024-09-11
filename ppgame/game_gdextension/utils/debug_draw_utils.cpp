@@ -38,15 +38,15 @@ void DebugDrawUtils::_process(double p_delta) {
 	}
 }
 
-#define CallDrawFunc(T, list)                                    \
-	Vector<T> new_##list;                                        \
-	for (int i = 0; i < list.size(); ++i) {                      \
-		T data = list[i];                                        \
-		data.draw(this);                                         \
-		if (data.end_time <= 0.0 || data.end_time > curr_time) { \
-			new_##list.push_back(data);                          \
-		}                                                        \
-	}                                                            \
+#define CallDrawFunc(T, list)                                            \
+	Vector<T> new_##list;                                                \
+	for (int i = 0; i < list.size(); ++i) {                              \
+		T data = list[i];                                                \
+		data.draw(this);                                                 \
+		if (data.end_time <= 0.0 || data.end_time - curr_time > 0.001) { \
+			new_##list.push_back(data);                                  \
+		}                                                                \
+	}                                                                    \
 	list = new_##list;
 
 void DebugDrawUtils::_draw() {

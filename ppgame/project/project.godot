@@ -24,6 +24,10 @@ settings/stdout/verbose_stdout=true
 
 window/stretch/mode="viewport"
 
+[global_group]
+
+navigation_polygon_source_geometry_group=""
+
 [input]
 
 Right={

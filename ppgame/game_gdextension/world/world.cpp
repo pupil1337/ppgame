@@ -25,10 +25,25 @@
 #include "gm/gm.h"
 #include "level/level.h"
 #include "utils/debug_draw_utils.h"
+#include "world/skynet.h"
 
+World* World::singleton = nullptr;
 static AsyncLoader* async_loader = nullptr;
 static GM* gm = nullptr;
 static DebugDrawUtils* debug_draw_utils = nullptr;
+static Skynet* skynet = nullptr;
+
+World::World() {
+	singleton = this;
+}
+
+World::~World() {
+	singleton = nullptr;
+}
+
+World* World::get_singleton() {
+	return singleton;
+}
 
 void World::_notification(int p_what) {
 	if (!Engine::get_singleton()->is_editor_hint()) {
@@ -36,6 +51,7 @@ void World::_notification(int p_what) {
 			case NOTIFICATION_POSTINITIALIZE: {
 				async_loader = memnew(AsyncLoader);
 				gm = memnew(GM);
+				skynet = memnew(Skynet);
 			} break;
 			case NOTIFICATION_SCENE_INSTANTIATED: {
 				// 在PackedScene::instantiate()中会调用_add_child_nocheck(), instantiate()结束后会立即调用此notify
@@ -49,6 +65,9 @@ void World::_notification(int p_what) {
 				}
 				if (gm) {
 					memdelete(gm);
+				}
+				if (skynet) {
+					memdelete(skynet);
 				}
 			} break;
 		}
@@ -79,14 +98,6 @@ void World::_process(double delta) {
 
 void World::_exit_tree() {
 	parent_type::_exit_tree();
-}
-
-World* World::get_world(Node* p_inside_node) {
-	if (p_inside_node->is_inside_tree()) {
-		return p_inside_node->get_tree()->get_root()->get_node<World>("World");
-	}
-
-	return nullptr;
 }
 
 void World::change_level(const String& p_level, const String& p_player_start) {
@@ -129,5 +140,7 @@ void World::_change_level_implement(Node* p_node, const String& p_player_start) 
 			player_csm_component->on_input((int)PlayerFSMInput::To_Movement_None_State, -1);
 			player_csm_component->on_input((int)PlayerFSMInput::To_Weapon_None_State, -1);
 		}
+		// 重新生成导航几何数据
+		skynet->parse_source_geometry(curr_level);
 	}
 }

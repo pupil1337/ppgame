@@ -5,8 +5,10 @@
 #include <godot_cpp/classes/global_constants.hpp>
 #include <godot_cpp/classes/marker2d.hpp>
 #include <godot_cpp/classes/object.hpp>
+#include <godot_cpp/classes/polygon2d.hpp>
 #include <godot_cpp/core/error_macros.hpp>
 #include <godot_cpp/variant/packed_string_array.hpp>
+#include <godot_cpp/variant/packed_vector2_array.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 
 #include "world/world.h"
@@ -31,6 +33,14 @@ int32_t Level::get_camera_limit(Side p_side) {
 	} else {
 		return origin.y;
 	}
+}
+
+PackedVector2Array Level::get_navigation_mesh_polygon() {
+	if (Polygon2D* nav_polygon = Object::cast_to<Polygon2D>(get_node_or_null("NavigationMeshPolygon"))) {
+		return nav_polygon->get_polygon();
+	}
+
+	return PackedVector2Array();
 }
 
 // ----------------------------------------------------------------------------

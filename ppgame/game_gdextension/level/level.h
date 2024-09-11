@@ -6,6 +6,7 @@
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/wrapped.hpp>
 #include <godot_cpp/variant/packed_string_array.hpp>
+#include <godot_cpp/variant/packed_vector2_array.hpp>
 using namespace godot;
 
 class Door;
@@ -20,6 +21,9 @@ public:
 	 * \param p_side 方向
 	 */
 	int32_t get_camera_limit(Side p_side);
+
+	//! 获取导航形状
+	PackedVector2Array get_navigation_mesh_polygon();
 
 public:
 	Level() {}

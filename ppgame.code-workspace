@@ -39,7 +39,9 @@
 			"**/*.o": true,
 			"**/*.a": true,
 			"**/*.llvm.a": true,
+			"**/*.tmp": true,
 			"ppgame/game_gdextension/bin": true,
+			"ppgame/project/imgui.ini": true,
 			"ppgame/project/bin": true,
 			"doc/doxygen/html": true
 		},

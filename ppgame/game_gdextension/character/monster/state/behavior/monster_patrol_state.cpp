@@ -40,7 +40,7 @@ void MonsterPatrolState::enter() {
 
 bool MonsterPatrolState::_check_player_in_view() {
 	// 检测玩家仇恨
-	if (World* world = World::get_world(this)) {
+	if (World* world = World::get_singleton()) {
 		if (Player* player = world->get_player()) {
 			const Vector2& vfrom = monster->get_global_position();
 			const Vector2& vmonster2player = player->get_global_position() - vfrom;

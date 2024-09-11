@@ -18,14 +18,9 @@ class Player;
 class World : public Node {
 	GDCLASS(World, Node)
 
-public:
-	//! 获取World
-	/*!
-	 * \param p_inside_node 树上的某节点
-	 * \return 得到的World
-	 */
-	static World* get_world(Node* p_inside_node);
+	static World* singleton;
 
+public:
 	//! 切换关卡
 	/*!
 	 * \param p_level 关卡路径
@@ -44,7 +39,9 @@ private:
 	void _change_level_implement(Node* p_node, const String& p_player_start);
 
 public:
-	World() {}
+	World();
+	~World();
+	static World* get_singleton();
 
 private:
 	Level* curr_level = nullptr; //!< 当前关卡
