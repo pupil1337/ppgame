@@ -14,6 +14,7 @@
 #include "character/monster/monster_concurrent_state_machine_component.h"
 #include "character/monster/state/behavior/monster_behavior_finite_state_machine_component.h"
 #include "character/monster/state/behavior/monster_behavior_none_state.h"
+#include "character/monster/state/behavior/monster_chase_state.h"
 #include "character/monster/state/behavior/monster_patrol_state.h"
 #include "character/monster/state/monster_state.h"
 #include "character/player/player.h"
@@ -88,6 +89,7 @@ void initialize_game_gdextension_types(ModuleInitializationLevel p_level) {
 	GDREGISTER_CLASS(MonsterBehaviorFiniteStateMachineComponent)
 	GDREGISTER_CLASS(MonsterBehaviorNoneState)
 	GDREGISTER_CLASS(MonsterPatrolState)
+	GDREGISTER_CLASS(MonsterChaseState)
 
 	// world
 	GDREGISTER_CLASS(World)
