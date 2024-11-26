@@ -1,0 +1,42 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"geequlim.godot-tools",
+			"Gruntfuggly.todo-tree"
+		]
+	},
+	"settings": {
+		"files.exclude": {
+			".godot": true,
+			"bin": true,
+			"**/*.tscn": true,
+			"**/*.svg": true,
+			"**/*.svg.import": true,
+			"**/*.log": true
+		},
+		"editor.formatOnSave": true,
+		"editor.renderWhitespace": "boundary",
+		"editor.trimAutoWhitespace": false,
+		"workbench.editor.enablePreview": false
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "GDScript: Launch Project",
+				"type": "godot",
+				"request": "launch",
+				"project": "${workspaceFolder}",
+				"debug_collisions": false,
+				"debug_paths": false,
+				"debug_navigation": false,
+				"additional_options": ""
+			}
+		]
+	}
+}

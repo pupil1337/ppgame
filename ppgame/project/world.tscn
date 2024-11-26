@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://d01thb6t3n1ur"]
-
-[node name="World" type="World"]
-
-[node name="DebugTestNode" type="DebugTestNode" parent="."]

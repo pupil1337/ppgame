@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bte2hhwj4kifm"]
+
+[ext_resource type="Script" path="res://level/level.gd" id="1_msssf"]
+
+[node name="Level" type="Node"]
+script = ExtResource("1_msssf")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CameraLimitLT" type="Marker2D" parent="."]
+
+[node name="CameraLimitRB" type="Marker2D" parent="."]
+position = Vector2(1152, 648)
