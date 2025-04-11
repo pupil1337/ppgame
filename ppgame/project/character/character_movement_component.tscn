@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://54p8cep4ulb4"]
 
-[ext_resource type="Script" path="res://character/character_movement_component.gd" id="1_pp7qm"]
+[ext_resource type="Script" uid="uid://ysp0vjsgnw4d" path="res://character/character_movement_component.gd" id="1_pp7qm"]
 [ext_resource type="PackedScene" uid="uid://blo8sx68ld5mx" path="res://framework/component.tscn" id="1_qdm4c"]
 
 [node name="CharacterMovementComponent" instance=ExtResource("1_qdm4c")]
