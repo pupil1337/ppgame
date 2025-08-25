@@ -3,6 +3,4 @@
 
 - LLVM: [llvm/llvm-project](https://github.com/llvm/llvm-project)
 
-- jq: [qlang/jq](https://github.com/jqlang/jq)
-
-- imgui: [ocornut/imgui](https://github.com/ocornut/imgui)
+- ~~imgui: [ocornut/imgui](https://github.com/ocornut/imgui)~~

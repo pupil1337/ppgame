@@ -14,10 +14,11 @@
 		"files.exclude": {
 			".godot": true,
 			"bin": true,
-			"**/*.tscn": true,
+			// "**/*.tscn": true,
 			"**/*.svg": true,
 			"**/*.svg.import": true,
-			"**/*.log": true
+			"**/*.log": true,
+			"**/*.gd.uid": true
 		},
 		"editor.formatOnSave": true,
 		"editor.renderWhitespace": "boundary",

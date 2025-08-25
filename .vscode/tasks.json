@@ -176,36 +176,13 @@
 		{
 			"label": "game-2 merge compile_commands.json",
 			"type": "shell",
+			"command": "python",
 			"options": {
 				"cwd": "${workspaceFolder}"
 			},
-			
-			"windows": {
-				"command": "./jq.exe",
-				"args": [
-					"-s",
-					"\"add\"",
-					"godot/compile_commands.json",
-					"ppgame/game_gdextension/compile_commands.json",
-					"|",
-					"Out-File",
-					"-Encoding",
-					"ascii",
-					"compile_commands.json"
-				],
-			},
-
-			"linux": {
-				"command": "jq",
-				"args": [
-					"--slurp",
-					"'add'",
-					"godot/compile_commands.json",
-					"ppgame/game_gdextension/compile_commands.json",
-					">",
-					"compile_commands.json"
-				]
-			},
+			"args": [
+				"merge_compile_commands.py"
+			],
 			
 			"hide": true,
 			"problemMatcher": []

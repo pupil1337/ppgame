@@ -56,6 +56,11 @@
 		"editor.inlayHints.enabled": "offUnlessPressed",
 		"terminal.integrated.scrollback": 10000,
 		"workbench.editor.enablePreview": false,
+		"files.associations": {
+			".clangd": "yaml",
+			".clang-format": "yaml",
+			".clang-tidy": "yaml"
+		},
 		// clang-format
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "xaver.clang-format",
@@ -65,6 +70,7 @@
 			// 参考: clangd --help or https://github.com/llvm/llvm-project/blob/main/clang-tools-extra/clangd/tool/ClangdMain.cpp
 			"--header-insertion=iwyu"
 		],
+		"dotnet.defaultSolution": "disable",
 		// ppgame-vscode-extension
 		"ppgame.launch_args": [
 			{
