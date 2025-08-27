@@ -391,7 +391,7 @@ $RECYCLE.BIN/
 # Copy From project/.gitignore
 
 # Godot 4+ specific ignores
-.godot/
+ppgame/project/.godot/
 ppgame/project/android/
 
 # Copy End

@@ -71,17 +71,14 @@ func jump_down(p_curr_velocity: Vector2) -> void:
 				0.0,
 				32
 		):
-			var only_has_oneway: bool
 			for result: Types.ShapeResult in results:
 				var collider_layer: int = PhysicsServer2D.body_get_collision_layer(result.rid)
 				if collider_layer & ~Types.PhysicsLayer.ONEWAY:
 					return
-				only_has_oneway = true
-			if only_has_oneway:
-				character.collision_mask &= ~Types.PhysicsLayer.ONEWAY
-				character.global_translate(motion)
-				_move_and_slide(p_curr_velocity)
-				character.collision_mask |= Types.PhysicsLayer.ONEWAY
+			character.collision_mask &= ~Types.PhysicsLayer.ONEWAY
+			character.global_translate(motion)
+			_move_and_slide(p_curr_velocity)
+			character.collision_mask |= Types.PhysicsLayer.ONEWAY
 
 
 #region

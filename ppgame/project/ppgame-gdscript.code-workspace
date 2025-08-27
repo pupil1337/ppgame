@@ -14,7 +14,6 @@
 		"files.exclude": {
 			".godot": true,
 			"bin": true,
-			// "**/*.tscn": true,
 			"**/*.svg": true,
 			"**/*.svg.import": true,
 			"**/*.log": true,

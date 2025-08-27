@@ -10,14 +10,14 @@
 			"xaver.clang-format",
 			"llvm-vs-code-extensions.vscode-clangd",
 			"vadimcn.vscode-lldb",
-			"editorconfig.editorconfig",
+			"EditorConfig.EditorConfig",
 			"ms-python.python",
-			"gruntfuggly.todo-tree"
+			"Gruntfuggly.todo-tree"
 		]
 	},
 	"settings": {
 		"files.exclude": {
-			"**/__pycache__": true,
+			"**/__pycache__/": true,
 			"**/.sconsign.dblite": true,
 			"**/.sconf_temp": true,
 			"**/.scons_env.json": true,
@@ -40,11 +40,6 @@
 			"**/*.a": true,
 			"**/*.llvm.a": true,
 			"**/*.tmp": true,
-			"ppgame/project": true,
-			"ppgame-gdscript.code-workspace": true,
-			"ppgame/game_gdextension/bin": true,
-			"ppgame/project/imgui.ini": true,
-			"ppgame/project/bin": true,
 			"doc/doxygen/html": true
 		},
 		"search.useIgnoreFiles": false,
@@ -71,6 +66,8 @@
 			"--header-insertion=iwyu"
 		],
 		"dotnet.defaultSolution": "disable",
+		// godotTools
+		"godotTools.lsp.autoReconnect.enabled": false,
 		// ppgame-vscode-extension
 		"ppgame.launch_args": [
 			{
