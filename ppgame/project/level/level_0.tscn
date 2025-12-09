@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bte2hhwj4kifm" path="res://level/level.tscn" id="1_kwaj3"]
 [ext_resource type="PackedScene" uid="uid://dfuomlqqqejtn" path="res://character/player/player.tscn" id="2_sjpxh"]
-[ext_resource type="Texture2D" uid="uid://moohu4bj2cta" path="res://icon.svg" id="3_thb1t"]
+[ext_resource type="Texture2D" uid="uid://cy6mg0y51fsbl" path="res://Tileset.png" id="3_xqt4m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jkheg"]
 size = Vector2(1239, 135)
@@ -13,24 +13,26 @@ size = Vector2(99.345, 27.08)
 [node name="Level_0" instance=ExtResource("1_kwaj3")]
 
 [node name="Player" parent="." index="3" instance=ExtResource("2_sjpxh")]
+position = Vector2(154, 29)
 
-[node name="Icon" type="Sprite2D" parent="." index="4"]
-position = Vector2(423, 233)
-texture = ExtResource("3_thb1t")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="5"]
-position = Vector2(574, 577)
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="4"]
+position = Vector2(439, 174)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 shape = SubResource("RectangleShape2D_jkheg")
 metadata/_edit_lock_ = true
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="." index="6"]
+[node name="StaticBody2D2" type="StaticBody2D" parent="." index="5"]
 position = Vector2(132, 452)
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" index="0"]
+position = Vector2(-30, -369)
 shape = SubResource("RectangleShape2D_75pci")
 one_way_collision = true
+
+[node name="Tileset" type="Sprite2D" parent="." index="6"]
+position = Vector2(160, 90)
+texture = ExtResource("3_xqt4m")
