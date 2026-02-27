@@ -60,5 +60,3 @@ CompileFlags:
     -Wunreachable-code
   ]
 ...
-
-# FIXME: Hover doxygen    https://github.com/clangd/clangd/issues/529

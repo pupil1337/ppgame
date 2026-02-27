@@ -221,7 +221,6 @@ def set_compiler_warnings(env):
         
         if env["warnings"] == "extra":
             env["WARNLEVEL"] = "/W4"
-            print("extra!!!!!!!!!!!!!")
             env.AppendUnique(CCFLAGS=disabled_warnings)
         elif env["warnings"] == "all":
             env["WARNLEVEL"] = "/W3"

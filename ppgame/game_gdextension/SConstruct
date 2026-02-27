@@ -34,9 +34,8 @@ opts.Update(localEnv)
 Help(opts.GenerateHelpText(localEnv))
 
 # =================================================================================
-# 拷贝godot-cpp构建, 并与其共享env
-env = localEnv.Clone()
-env = SConscript("../../godot-cpp/SConstruct", {"env": env, "customs": customs})
+# 编译godot-cpp, 并且拷贝其env
+env = SConscript("../../godot-cpp/SConstruct").Clone()
 
 # =================================================================================
 # 自定义methods
